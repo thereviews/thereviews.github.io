@@ -192,11 +192,11 @@ a.sidebar-nav-item:focus {
 
 @media (min-width: 48em) {
   .sidebar-item {
-    text-align:center;
+   padding: 1.5rem;
   }
   .sidebar-nav-item {
-    padding-left:  1.5rem;
-    padding-right: 1.5rem;
+    text-align:center;
+    text-align:center;
   }
 }
 
