@@ -195,8 +195,8 @@ a.sidebar-nav-item:focus {
    padding: 1.5rem;
   }
   .sidebar-nav-item {
-    text-align:center;
-    text-align:center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
