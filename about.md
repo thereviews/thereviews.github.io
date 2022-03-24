@@ -4,7 +4,7 @@ title: About
 ---
 
 <p class="message">
-  The reviews is information based affiliate blog which will give you a high quality  and reliable reviews for variety of items Including electronics, accessories, gadgets and much more.
+  The reviews is information based product review blog which will give you a high quality  and reliable reviews for variety of items Including electronics, accessories, gadgets and much more.
 This will give you all the necessary information about the product and how other people who bought and used it are feeling about it and weather it is functioning as it supposed to be.
 </p>
 
