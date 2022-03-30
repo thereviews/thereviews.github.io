@@ -13,10 +13,11 @@ author:
   url:               
   email:             
   
-  title: linkedin
-  verb: Share
-  svg: linkedin.svg
-  url: https://www.linkedin.com/
+  
+  social-network-links:
+  email: "someone@example.com"
+  
+  
 
 # Gems
 plugins:
