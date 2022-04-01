@@ -35,7 +35,7 @@ It works six days before you charge again although it depends on the usage like 
 
 * It has different wallpapers including which let you configure and customize the background and put it any photo you want.
 
-![Watch](public/Watchs.jpg)
+![Watch](public/Fitbitversa.jpg)
 
 ### Health and Exercising 
 
