@@ -50,7 +50,7 @@ It works six days before you charge again although it depends on the usage like 
 
 All those featured discussed above makes fitbit versa 2 unique and one of the best watches for health, exercising and modern home in addition to that it is settig up is very setting up and using it is very simple and straight 
 You can control your smart home devices, use for good sleeping and measuring your heart bits, get calls, messages and emails on it, and use to count your steps while exercising.
-<a target="_blank" href="https://www.amazon.com/s?k=fitbit+versa+2&amp;ref=nb_sb_noss&_encoding=UTF8&tag=18640a-20&linkCode=ur2&linkId=b7ae67c6a135a3d7fc05285cfc00c37c&camp=1789&creative=9325">Check out from here</a>
+### __<a target="_blank" href="https://www.amazon.com/s?k=fitbit+versa+2&amp;ref=nb_sb_noss&_encoding=UTF8&tag=18640a-20&linkCode=ur2&linkId=b7ae67c6a135a3d7fc05285cfc00c37c&camp=1789&creative=9325">Check out from here</a>__
 
 
 
