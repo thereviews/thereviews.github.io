@@ -37,6 +37,7 @@ It works six days before you charge again although it depends on the usage like 
 
 ![Watch](public/Fitbitversa.jpg)
 
+
 ### Health and Exercising 
 
 
