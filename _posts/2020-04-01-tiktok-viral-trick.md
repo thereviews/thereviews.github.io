@@ -1,5 +1,5 @@
 ---
-title:  "Tiktok viral trick 2022 (Best watch to buy)"
+title:  "Tiktok viral trick 2022"
 date:   2022-01-05
 permalink: Tiktok-viral-trick 
 ---
