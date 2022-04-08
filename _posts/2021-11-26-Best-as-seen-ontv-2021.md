@@ -22,7 +22,7 @@ It small and very thing even if it is full with items facing each other.
 It is an inch and have thing thick although it is a little bit larger on the regular wallet but it lighter and thinner which make it out standing you wont feel any pressure or weight while holding it on your pocket
 It is comfortable, made to to suit very body (men) and it is made for your encompass all your unnecessary stuff
 
-![Wallet](public/Wallet.webp)
+![Wallet](public/Wallet.jpg)
 
 ### Aurora A3 Flash Light
 
