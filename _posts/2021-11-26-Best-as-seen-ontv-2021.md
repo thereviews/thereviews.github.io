@@ -8,7 +8,7 @@ permalink: Best-as-seen-ontv
 Take a look at our list of the best performing as seen on tv products world wide we will give you an insight look.
 
 ### Life Fuels
-![Water Bottle](public/Lifefuels.webp)
+![Water Bottle](public/Lifefuels1.jpg)
 
 Lifefuels is a high tech water bottle that has flavour bods in the bottom that allows to mix your drinks with in the bottle and create flavor nutritional drink you can create with lin the bottle it self
 
