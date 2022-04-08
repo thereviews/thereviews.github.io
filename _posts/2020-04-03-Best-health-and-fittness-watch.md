@@ -1,5 +1,5 @@
 ---
-title:  "Best Health and Fitness Watch"
+title:  "Best Health and Fitness Watch (Best Fitness Watch To Buy"
 date:   2021-11-25
 permalink: Best-fittness-watch
 ---
