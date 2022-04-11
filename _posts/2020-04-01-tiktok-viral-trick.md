@@ -1,5 +1,5 @@
 ---
-title:  "<span font-family: 'Bebas Neue'>Tiktok viral trick 2022"
+title:  "Tiktok viral trick 2022"
 date:   2022-01-05
 permalink: Tiktok-viral-trick 
 ---
