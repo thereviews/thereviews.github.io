@@ -20,7 +20,7 @@ best content creator camera which gives you the ability to go live on YouTube fr
 <img src="public/Mark2box.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
   </td>
     </tr>
-      <table>
+      </table>
   
 
   
