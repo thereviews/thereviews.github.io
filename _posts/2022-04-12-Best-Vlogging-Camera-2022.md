@@ -1,6 +1,6 @@
 ---
 title:  "Best Vlogging Camera Cheap (Top 5 Camera To Buy)"
-date:   2021-11-25
+date:   2022-04-12
 permalink: Best-vlogging-camera
 ---
 
