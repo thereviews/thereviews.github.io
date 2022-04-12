@@ -9,13 +9,18 @@ permalink: Best-vlogging-camera
 
 EOS MD50 Mark || is modern camera which is gives you high quality 4k videos and photos. The EOS MD50 Mark || is the
 best content creator camera which gives you the ability to go live on YouTube from your camera to easily interact your YouTube fans in real time. The EOS MD50 Mark || comes with high quality microphone which lets you record clear and high quality sound . it also comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. <br>
-<span>
-
+<table>
+<tr>
+  <td>
 <a href="https://amzn.to/3KBdBcg">
 <img src="public/Mark2.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera" ></a>
+    <td>
+      <td>
 <a href="https://amzn.to/3KBdBcg">
 <img src="public/Mark2box.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
-  
+  <td>
+    <tr>
+      <table>
   
 
   
