@@ -34,7 +34,7 @@ Livestreaming through any platform and taking video calls
   </div>
   
   
-### 2 Passonic lumix dc-zs70k
+### 2 <a href="https://amzn.to/3M6McPT">Passonic lumix dc-zs70k </a>
 
 Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life. It provides you with the best quality 4k videos and photos capturing every detail of the scene
 Passonic lumix dc-zs70k has zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement . it supports selfie photos so you can take 4k selfie photos 
@@ -48,7 +48,7 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
 
   <td>
 
-<a href="https://amzn.to/3KBdBcg">
+<a href="https://amzn.to/3M6McPT">
 
 <img src="public/LUMIX DC1.jpg" width="400" height="200" alt=" Passonic lumix dc-zs70k camera" ></a>
      </td>
