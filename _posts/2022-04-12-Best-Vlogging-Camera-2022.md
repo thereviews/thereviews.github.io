@@ -10,16 +10,14 @@ permalink: Best-vlogging-camera
 EOS MD50 Mark || is modern camera which is gives you anything you might wish for a camera to have
 including
 
-* The EOS MD50 Mark || is the best content creator camera which gives you the ability to go live on YouTube from your camera to easily interact your YouTube fans in real time. 
-
-* The EOS MD50 Mark || comes with high quality microphone which lets you record clear and high quality sound
-* it has comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. 
-
-* EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely
-* it Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start 
-* It has builtin WiFi and Bluetooth technology and you can control recording by touching 
-* Dual pixel sensor which gives you best quality even in cloudy weather
-*  Livestreaming through any platform and taking video calls 
+ The EOS MD50 Mark || is the best content creator camera which gives you the ability to go live on YouTube from your camera to easily interact your YouTube fans in real time. 
+The EOS MD50 Mark || comes with high quality microphone which lets you record clear and high quality sound
+it has comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. 
+ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely
+it Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start 
+It has builtin WiFi and Bluetooth technology and you can control recording by touching 
+Dual pixel sensor which gives you best quality even in cloudy weather
+Livestreaming through any platform and taking video calls 
  Those and other features made  <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a> one of the best vlogging cameras
  <div>
  
