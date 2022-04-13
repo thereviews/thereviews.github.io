@@ -33,6 +33,7 @@ Livestreaming through any platform and taking video calls
       </table>
   </div>
   
+  
 ### 2 Passonic lumix dc-zs70k
 
 Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life. It provides you with the best quality 4k videos and photos capturing every detail of the scene
@@ -41,4 +42,20 @@ The control ring of the camera is customizable which gives you ability to manual
 It supports 180 degree front Philip gives you ability to take 4k selfies and 4k video vlogging ability 
 It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
   
+<table>
 
+<tr>
+
+  <td>
+
+<a href="https://amzn.to/3KBdBcg">
+
+<img src="public/Mark2.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera" ></a>     </td>
+     </td>
+     <td>
+<a href="https://amzn.to/3KBdBcg">
+
+<img src="public/Mark2box.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
+ </td>
+ </tr>
+</table>
