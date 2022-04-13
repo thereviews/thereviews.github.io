@@ -5,7 +5,7 @@ permalink: Best-vlogging-camera
 ---
 
 
-### 1: <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a>
+### 1 <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a>
 
 EOS MD50 Mark || is modern camera which is gives you anything you might wish for a camera to have
 including .
