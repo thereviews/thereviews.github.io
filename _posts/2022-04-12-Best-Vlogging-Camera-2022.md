@@ -113,7 +113,7 @@ Control your camera remotely by passonic image app on smart phone and  Supports 
 
 
 
-### 5. <a href="https://amzn.to/3KElfCx"> Canon eos m200 </a>
+### 5. <a href="https://amzn.to/3uD4get"> Canon eos m200 </a>
 
  canon eos m200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
 It is fast accurate and has dual pixel
@@ -129,7 +129,7 @@ It has se
 
   <td>
 
-<a href="https://amzn.to/3KElfCx">
+<a href="https://amzn.to/3uD4get">
 
 <img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
 
