@@ -55,3 +55,29 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
     
  </tr>
 </table>
+
+
+### 3 Passonic lumix G100
+
+G100 is a light weight camera for one handed recording which gives you high quality 4k photos and videos with 180 degree rotation which enables you the ability to take selfies 
+It has noticeably recording indicator to know you are recording at first glance
+G100 integrates well with your phone you can send images and to your phone a push a bottom 
+It has special audio builtin which has facial recognition technology to adjust audio for maximum quality
+G100 lets you take video calls, video conferences and live-streams by connecting your laptop via USB cable and it is compatible with all Lumix lenses
+it has light weight tripod and come with Frame maker to make sure it competes with your social media 
+
+<table>
+
+<tr>
+
+  <td>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/LUMIX DC1.jpg" width="400" height="200" alt=" Passonic lumix dc-zs70k camera" ></a>
+
+   </td>
+
+  </tr>
+
+</table>
