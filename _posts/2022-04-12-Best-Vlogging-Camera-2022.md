@@ -50,12 +50,12 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
 
 <a href="https://amzn.to/3KBdBcg">
 
-<img src="public/Mark2.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera" ></a>     </td>
+<img src="public/LUMIX DC1.jpg" width="300" height="300" alt=" Passonic lumix dc-zs70k camera" ></a>
      </td>
      <td>
 <a href="https://amzn.to/3KBdBcg">
 
-<img src="public/Mark2box.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
+<img src="public/LUMIX DC.jpg" width="300" height="300" alt="Passonic lumix dc-zs70k camera" ></a>
  </td>
  </tr>
 </table>
