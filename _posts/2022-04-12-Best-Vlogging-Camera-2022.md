@@ -15,7 +15,7 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 it Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting to your laptop though USB cable and download ing the free webcam utility software to start 
 It has builtin WiFi and Bluetooth technology and you can control recording by touching 
 Dual pixel sensor which gives you 
-This and other features made  EOS MD50 Mark || one of the best vlogging cameras
+This and other features made  <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a> one of the best vlogging cameras
 
 <table>
 <tr>
