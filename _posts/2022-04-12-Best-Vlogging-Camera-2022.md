@@ -16,7 +16,9 @@ including .
 * It has builtin WiFi and Bluetooth technology and you can control recording by touching 
 * Dual pixel sensor which gives you best quality even in cloudy weather
 *  Livestreaming through any platform and taking video calls 
- Those and other features made  <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a> one of the best vlogging cameras <br>
+ Those and other features made  <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a> one of the best vlogging cameras
+ 
+ 
 
 <table>
 <tr>
