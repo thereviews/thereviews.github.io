@@ -14,8 +14,7 @@ including
 * The EOS MD50 Mark || comes with high quality microphone which lets you record clear and high quality sound
 * it has comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. 
 * EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely
-* it Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting 
-* to your laptop though USB cable and downloading the free webcam utility software to start 
+* it Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start 
 * It has builtin WiFi and Bluetooth technology and you can control recording by touching 
 * Dual pixel sensor which gives you best quality even in cloudy weather
 *  Livestreaming through any platform and taking video calls 
