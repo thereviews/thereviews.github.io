@@ -74,7 +74,7 @@ it has light weight tripod and come with Frame maker to make sure it competes wi
 
 <a href="https://amzn.to/3M6McPT">
 
-<img src="public/LUMIX G100 1.jpg" width="400" height="200" alt=" Passonic lumix dc-zs70k camera" ></a>
+<img src="public/LUMIX G100 1.jpg" width="300" height="300" alt=" Passonic lumix dc-zs70k camera" ></a>
 
    </td>
 
