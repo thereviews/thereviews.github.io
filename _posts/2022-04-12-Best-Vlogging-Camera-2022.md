@@ -110,7 +110,7 @@ You can control remotely with your phone after installing passonic app
 
 <a href="https://amzn.to/37I1P16">
 
-<img src="public/LUMIX G100 1.jpg" width="300" height="300" alt=" Passonic lumix dc-zs70k camera" ></a>
+<img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Passonic lumix dc-zs70k camera" ></a>
 
    </td>
 
