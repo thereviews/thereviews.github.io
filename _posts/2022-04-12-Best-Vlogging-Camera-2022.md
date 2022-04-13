@@ -83,23 +83,16 @@ it has light weight tripod and come with Frame maker to make sure it competes wi
 </table>
 
 
-### 4 panasonic lumix fz300
+### 4. <a href="https://amzn.to/3KElfCx"> panasonic lumix fz300 </a>
 
 panasonic lumix fz300 is a processional high quality camera with 4k photos and videos altogether.  it has all you need to began filmig and vlogging more such as
-
 Photo technology which Lets you shoot up to 30 frames per secondis 4k ultra and hd videos and extract them as individual photos.
-
 It has has zoom ing ability up to 24x which helps you shoot perfect photos even in low light and cloudy weather
-
 It has 4k photo feature that extracts 8 mega pixel photos out of 4k videos and 
-
 Zooming ability with high accuracy , full range and High speed focus any environment
-
-It has tight seals on every joint Dail and bottom of the camera to with stand the harsh climates
-
+tight seals on every joint Dail and bottom of the camera to with stand the harsh climates
 You can control remotely with your phone after installing passonic app 
-
- Control your camera remotely by passonic image app on smart phone and  Supports external flash
+Control your camera remotely by passonic image app on smart phone and  Supports external flash
  
  
  <table>
@@ -108,7 +101,7 @@ You can control remotely with your phone after installing passonic app
 
   <td>
 
-<a href="https://amzn.to/37I1P16">
+<a href="https://amzn.to/3KElfCx">
 
 <img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
 
