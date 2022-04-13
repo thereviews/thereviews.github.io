@@ -111,3 +111,30 @@ Control your camera remotely by passonic image app on smart phone and  Supports 
 
 </table>
 
+
+
+### 5 canon eos m200 
+
+ canon eos m200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
+It is fast accurate and has dual pixel
+It Supports Vertical camera setting as you can record any angle you like
+It has builtin Builtin WIFI and Bluetooth technology so you can share files and live stream 
+Gives you the ability to creative filters and special effects to images
+With 180 degree you can take selfies and capture every angle
+It has se
+
+<table>
+
+<tr>
+
+  <td>
+
+<a href="https://amzn.to/3KElfCx">
+
+<img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
+
+   </td>
+
+  </tr>
+
+</table>
