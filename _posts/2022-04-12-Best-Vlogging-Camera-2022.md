@@ -17,7 +17,6 @@ It has builtin WiFi and Bluetooth technology and you can control recording by to
 Dual pixel sensor which gives you 
 This and other features made  EOS MD50 Mark || one of the best vlogging cameras
 
-<br>
 <table>
 <tr>
   <td>
