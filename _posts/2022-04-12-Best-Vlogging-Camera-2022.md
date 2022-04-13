@@ -131,7 +131,7 @@ It has se
 
 <a href="https://amzn.to/3uD4get">
 
-<img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
+<img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Canon EOS M200 camera" ></a>
 
    </td>
 
