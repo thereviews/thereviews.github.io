@@ -23,11 +23,11 @@ Livestreaming through any platform and taking video calls
 <tr>
   <td>
 <a href="https://amzn.to/3KBdBcg">
-<img src="public/Mark2.jpg" width="250" height="300" alt="EOS MD50 Mark 2 camera" ></a>
+<img src="public/Mark2.jpg" width="255" height="300" alt="EOS MD50 Mark 2 camera" ></a>
     </td>
       <td>
 <a href="https://amzn.to/3KBdBcg">
-<img src="public/Mark2box.jpg" width="310" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
+<img src="public/Mark2box.jpg" width="307" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
   </td>
     </tr>
       </table>
@@ -74,7 +74,7 @@ it has light weight tripod and come with Frame maker to make sure it competes wi
 
 <a href="https://amzn.to/37I1P16">
 
-<img src="public/LUMIX G100 1.jpg" width="300" height="300" alt=" Passonic lumix dc-zs70k camera" ></a>
+<img src="public/LUMIX G100 1.jpg" width="300" height="310" alt=" Passonic lumix dc-zs70k camera" ></a>
 
    </td>
 
