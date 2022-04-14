@@ -19,9 +19,9 @@ Livestreaming through any platform and taking video calls
  Those and other features made  <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a> one of the best vlogging cameras
  <div>
  
- <table style="border: none;">
+ <table>
 <tr>
-  <td>
+  <td style="border: none;">
 <a href="https://amzn.to/3KBdBcg">
 <img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera" ></a>
     </td>
