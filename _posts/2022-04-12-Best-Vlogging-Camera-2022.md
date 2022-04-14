@@ -23,7 +23,7 @@ Livestreaming through any platform and taking video calls
 <tr>
   <td>
 <a href="https://amzn.to/3KBdBcg">
-<img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera" ></a>
+<img src="public/Mark2.jpg" width="230" height="300" alt="EOS MD50 Mark 2 camera" ></a>
     </td>
       <td>
 <a href="https://amzn.to/3KBdBcg">
