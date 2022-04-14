@@ -34,7 +34,7 @@ Livestreaming through any platform and taking video calls
   </div>
   
   
-### 2 <a href="https://amzn.to/3M6McPT">Passonic lumix dc-zs70k </a>
+### 2 <a href="https://amzn.to/3M6McPT">Passonic Lumix DC-ZS70K </a>
 
 Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life. It provides you with the best quality 4k videos and photos capturing every detail of the scene
 Passonic lumix dc-zs70k has zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement . it supports selfie photos so you can take 4k selfie photos 
@@ -57,7 +57,7 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
 </table>
 
 
-### 3 <a href="https://amzn.to/37I1P16">Passonic lumix G100</a>
+### 3 <a href="https://amzn.to/37I1P16">Passonic Lumix G100</a>
 
 G100 is a light weight camera for one handed recording which gives you high quality 4k photos and videos with 180 degree rotation which enables you the ability to take selfies 
 It has noticeably recording indicator to know you are recording at first glance
@@ -83,7 +83,7 @@ it has light weight tripod and come with Frame maker to make sure it competes wi
 </table>
 
 
-### 4. <a href="https://amzn.to/3KElfCx"> panasonic lumix fz300 </a>
+### 4. <a href="https://amzn.to/3KElfCx"> Panasonic Lumix FZ300 </a>
 
 panasonic lumix fz300 is a processional high quality camera with 4k photos and videos altogether.  it has all you need to began filmig and vlogging more such as
 Photo technology which Lets you shoot up to 30 frames per secondis 4k ultra and hd videos and extract them as individual photos.
@@ -113,7 +113,7 @@ Control your camera remotely by passonic image app on smart phone and  Supports 
 
 
 
-### 5. <a href="https://amzn.to/3uD4get"> Canon eos m200 </a>
+### 5. <a href="https://amzn.to/3uD4get"> Canon EOS M200 </a>
 
  canon eos m200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
 It is fast accurate and has dual pixel
