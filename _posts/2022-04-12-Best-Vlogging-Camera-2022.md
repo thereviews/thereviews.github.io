@@ -20,8 +20,8 @@ Livestreaming through any platform and taking video calls
  <div>
  
  <table>
-<tr>
-  <td markdown="span" style="padding: 0.5vw; border: none; max-width:100%; max-height:10%; background: transparent;">
+<tr style="border: none;">
+  <td>
 <a href="https://amzn.to/3KBdBcg">
 <img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera" ></a>
     </td>
