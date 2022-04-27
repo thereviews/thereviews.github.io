@@ -15,6 +15,8 @@ permalink: Best-Wireless-Earbuds
 
 JBL LIVE 300 is a simple and easy to use high quality wireless earbuds  with Its credible features it is one of the best earbuds 
 
+## Features 
+
 * It has talkthru feature which lets you chat online with ease just swipe the earbuds to activate them
 * Long lasting battery which lasts up to 20 hours so you can listen to your favourite music without worrying about earbuds battery and 14 more ours of case charging  
 * It has powerful sound delivering audio which gives you the best experience
