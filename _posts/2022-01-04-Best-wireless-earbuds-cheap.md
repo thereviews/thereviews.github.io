@@ -1,5 +1,5 @@
 ---
-title:  "Best Wireless Earbuds Cheap (Top 5 Earbuds To Buy 2022"
+title:  "Best Wireless Earbuds Cheap (Top 5 Earbuds To Buy 2022)"
 date:   2022-04-27
 permalink: Best-Wireless-Earbuds
 ---
