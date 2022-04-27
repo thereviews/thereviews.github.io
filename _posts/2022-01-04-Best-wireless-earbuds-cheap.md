@@ -24,3 +24,6 @@ JBL LIVE 300 is a simple and easy to use high quality wireless earbuds  with Its
 * With fast pairing enabled by google which let you can connect it your phone very fast
 * Controlling noise and volume with ease via touch controls for easy user experience
 
+
+
+<img src="public/JBL.jpg" alt="JBL LIVE 300 earbuds">
