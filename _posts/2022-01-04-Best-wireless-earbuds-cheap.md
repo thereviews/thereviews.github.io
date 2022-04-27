@@ -11,7 +11,7 @@ permalink: Best-Wireless-Earbuds
 
 
 
-JBL LIVE 300
+### 1. JBL LIVE 300
 
 JBL LIVE 300 is a simple and easy to use high quality wireless earbuds  with Its credible features it is one of the best earbuds 
 
