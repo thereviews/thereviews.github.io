@@ -18,7 +18,7 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
 
 <a href="https://amzn.to/3M6McPT">
 
-<img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera" ></a>
+<img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera"></a>
     
 
 
