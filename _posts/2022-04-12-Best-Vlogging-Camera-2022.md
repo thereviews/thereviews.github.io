@@ -14,13 +14,15 @@ The control ring of the camera is customizable which gives you ability to manual
 It supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
 It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
   
-
+div>
 
 <a href="https://amzn.to/3M6McPT">
 
 <img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera">
-    
-
+ 
+ </a>
+ 
+</div>
 
 ### 2. <a href="https://amzn.to/37I1P16">Passonic Lumix G100</a>
 
