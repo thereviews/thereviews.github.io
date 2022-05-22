@@ -14,7 +14,7 @@ The control ring of the camera is customizable which gives you ability to manual
 It supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
 It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
   
-div>
+<div>
 
 <a href="https://amzn.to/3M6McPT">
 
