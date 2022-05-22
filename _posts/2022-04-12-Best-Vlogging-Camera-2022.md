@@ -24,6 +24,8 @@ It is easy to take in any where because it fits in your pocket so you don’t ne
  
 </div>
 
+
+
 ### 2. <a href="https://amzn.to/37I1P16">Passonic Lumix G100</a>
 
 G100 is a light weight camera for one handed recording which gives you high quality 4k photos and videos with 180 degree rotation which enables you the ability to take selfies 
@@ -39,7 +41,7 @@ it has light weight tripod and come with Frame maker to make sure it competes wi
 
 <img src="public/LUMIX G100 1.jpg" width="300" height="310" alt=" Passonic lumix dc-zs70k camera" ></a>
 
-</a>
+
 
 </div>
 
@@ -62,7 +64,7 @@ Control your camera remotely by passonic image app on smart phone and  Supports 
 
 <img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
 
-</a> 
+
 
 </div>
 
@@ -84,7 +86,7 @@ It has se
 
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera" ></a>
 
-</a>
+
 
 </div>
    
