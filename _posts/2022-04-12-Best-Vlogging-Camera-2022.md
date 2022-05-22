@@ -32,21 +32,13 @@ It has special audio builtin which has facial recognition technology to adjust a
 G100 lets you take video calls, video conferences and live-streams by connecting your laptop via USB cable and it is compatible with all Lumix lenses
 it has light weight tripod and come with Frame maker to make sure it competes with your social media 
 
-<table>
 
-<tr>
-
-  <td>
 
 <a href="https://amzn.to/37I1P16">
 
 <img src="public/LUMIX G100 1.jpg" width="300" height="310" alt=" Passonic lumix dc-zs70k camera" ></a>
 
-   </td>
-
-  </tr>
-
-</table>
+   
 
 
 ### 3. <a href="https://amzn.to/3KElfCx"> Panasonic Lumix FZ300 </a>
@@ -61,21 +53,13 @@ You can control remotely with your phone after installing passonic app
 Control your camera remotely by passonic image app on smart phone and  Supports external flash
  
  
- <table>
-
-<tr>
-
-  <td>
+ 
 
 <a href="https://amzn.to/3KElfCx">
 
 <img src="public/LUMIX FZ300.jpg" width="300" height="300" alt=" Panasonic LUMIX FZ300 camera" ></a>
 
-   </td>
-
-  </tr>
-
-</table>
+   
 
 
 
@@ -89,21 +73,13 @@ Gives you the ability to creative filters and special effects to images
 With 180 degree you can take selfies and capture every angle
 It has se
 
-<table>
 
-<tr>
-
-  <td>
 
 <a href="https://amzn.to/3uD4get">
 
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera" ></a>
 
-   </td>
-
-  </tr>
-
-</table>
+   
 
 ### 5 <a href="https://amzn.to/3KBdBcg">EOS MD50 Mark || </a>
 
@@ -119,28 +95,16 @@ Livestreaming through any platform and taking video calls
 
 
 
- <div>
-
  
-
- <table style="border:hidden;">
-
-<tr>
-  <td>
 
 <a href="https://amzn.to/3KBdBcg">
 
 <img src="public/Mark2.jpg" width="255" height="300" alt="EOS MD50 Mark 2 camera" ></a>
 
-   </td>
-  <td>
+   
 
 <a href="https://amzn.to/3KBdBcg">
 
 <img src="public/Mark2box.jpg" width="307" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
 
-  </td>
-   </tr>
-    </table>
-
-  </div>
+  
