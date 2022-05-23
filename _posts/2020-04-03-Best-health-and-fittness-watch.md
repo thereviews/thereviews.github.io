@@ -7,7 +7,7 @@ permalink: Best-fittness-watch
 
 Have you heard smart fitness watch which Helps better understand your sleep quality  and gives you better insight your overall health like hurt rate, restlessness and rem sleep stages. 
 
-<br />
+
 
 
 ![Watch](public/Versa2.jpg)
