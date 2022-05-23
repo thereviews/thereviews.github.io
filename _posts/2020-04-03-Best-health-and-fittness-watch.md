@@ -9,7 +9,9 @@ Have you heard smart fitness watch which Helps better understand your sleep qual
 
 <br />
 
+
 ![Watch](public/Versa2.jpg)
+
 
 Fitbit is a smart watch which has also alexa built in allowing access news, weather and control home smart devices Fitbit versa 2 is all of that and much more in today's article we will see all it's different features
 13it can also give an information on your heart rate, rem sleep and sleep analysis.
