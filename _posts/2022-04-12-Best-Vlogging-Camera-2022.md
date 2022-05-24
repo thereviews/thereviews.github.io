@@ -1,5 +1,6 @@
 ---
 title:  "Best Vlogging Camera Cheap (Top 5 Cameras To Buy)"
+description: "this is a review for the best vlogging cameras 2022"
 date:   2022-04-12
 permalink: Best-vlogging-camera
 ---
