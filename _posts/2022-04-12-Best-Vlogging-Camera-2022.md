@@ -1,6 +1,6 @@
 ---
 title:  "Best Vlogging Camera Cheap (Top 5 Cameras To Buy)"
-description: "this is a review for the best vlogging cameras 2022"
+description: "1:Passonic lumix dc-zs70k 2:Passonic Lumix G100 3:Panasonic Lumix FZ300 4:Canon EOS M200 5:EOS MD50 Mark ||"
 date:   2022-04-12
 permalink: Best-vlogging-camera
 ---
