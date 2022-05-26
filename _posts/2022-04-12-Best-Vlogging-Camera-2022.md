@@ -15,22 +15,6 @@ The control ring of the camera is customizable which gives you ability to manual
 It supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
 It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
 
-Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life. It provides you with the best quality 4k videos and photos capturing every detail of the scene.
-
-Passonic lumix dc-zs70k has <strong>zooming ability</strong> which goes up to 30x to a bit closer to anything that interest you. 
-
-detection and maintain movement to better record and capture moving things. 
-
-4k selfie photos so you can take 4k selfie photos 
-
-customizable control ring  which gives you ability to manually control the shutter, speed, and zoom and focus of the camera while shooting.
-
-Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day
-180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
-
-It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
-  
-
 
   
 <div>
