@@ -103,7 +103,7 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 <div>
  <a href="https://amzn.to/3KBdBcg">
 
- <img src="public/Mark2.jpg" width="255" height="300" alt="EOS MD50 Mark 2 camera">
+ <img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera">
  
  </a>
 
