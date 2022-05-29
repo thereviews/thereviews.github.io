@@ -30,8 +30,10 @@ It has a touch panel control feature to you can change the volume or anything el
 Simple to use and powerful in terms of features and capabilities
 
 
+![Tozo T6 earbuds](/public/T6.jpg)
 
-### Tozo t1o
+
+### TOZO T10
 
 
 Tozo 10 are wireless earbuds designed to fit in your ears and keep it relaxing and comfortable while enjoying and listening. Not fearing to fall from your ears as it is perfectly fits in so no matter how much you jump or run it wont fall.
@@ -41,7 +43,7 @@ And water and dust wont worry you after today as Tozo 10 is resistible both of t
 Fast charging as it only takes less than two hours to charge the case to use after that for six hours for a single time charge and up o 30 hours with charge case
 
 
-
+![Tozo T10 earbuds](/public/T10.jpg)
 
 
 ### Tozo A1
@@ -56,7 +58,7 @@ Compatible with any device ios/android so you can use this earbuds no matter whi
 
 
 
-
+![Tozo A1 earbuds](/public/A1.jpg)
 
 
 
@@ -77,6 +79,8 @@ Power beats have sensors to detect while ear pods are in the ear to stop the pla
 It supports both android and ios
 
 
+![Power beats pro earbuds](/public/Powerbeats.jpg)
+
 
 
 ### Skull candy Sesh Evo
@@ -90,7 +94,7 @@ Builtin tile technology which helps you find easily if you misplace it and most 
 
 
 
-
+![skull candy earbuds](/public/Skull.jpg)
 
 
 
