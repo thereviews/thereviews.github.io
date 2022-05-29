@@ -18,18 +18,20 @@ permalink: Best-Wireless-Earbuds
 
 ### TOZO T6
 
-TOZO T6 True Wireless Earbuds Bluetooth Headphones is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear . 
-It has resistant against water and sweet so you don’t need to worry while exercising or drinking water that it may harm, you can even wash your earbuds with water and soap and not having any wories
-
-Tzo T6 is compatible with almost any device so no matter weather you are android user or apple you can enjoy the quality of this earbud 
-It has soft surface to relax the ears and perfectly fitting in size so no matter how much you exercise it will not fall over
-A fast charging that lasts long, as it takes less than an hour to charge the charging case and lasts up to 30 hour with its charging case 
-It has perfect sound transition technology equality which you can customize based on you teste 
-It has a touch panel control feature to you can change the volume or anything else with a simple touch
-Simple to use and powerful in terms of features and capabilities
-
+TOZO T6 True Wireless Earbuds Bluetooth Headphones is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear.
+It has resistant against water and sweet so you don’t need to worry while exercising or drinking water that it may harm, you can even wash your earbuds with water and soap and not having any wories.
 
 ![Tozo T6 earbuds](/public/T6.jpg)
+
+Tzo T6 is compatible with almost any device so no matter weather you are android user or apple you can enjoy the quality of this earbud.
+It has soft surface to relax the ears and perfectly fitting in size so no matter how much you exercise it will not fall over.
+A fast charging that lasts long, as it takes less than an hour to charge the charging case and lasts up to 30 hour with its charging case.
+It has perfect sound transition technology equality which you can customize based on you teste 
+It has a touch panel control feature to you can change the volume or anything else with a simple touch
+Simple to use and powerful in terms of features and capabilities.
+
+
+
 
 
 ### TOZO T10
