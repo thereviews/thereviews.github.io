@@ -102,7 +102,7 @@ EOS MD50 Mark || ability to go live on YouTube from your camera to easily intera
 EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather
 
 
-<div>
+
  
 
 <a href="https://amzn.to/3KBdBcg">
@@ -110,6 +110,4 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 <img src="public/Mark2.jpg" width="255" height="300" alt="EOS MD50 Mark 2 camera" >
 
 
-<img src="public/Mark2box.jpg" width="307" height="300" alt="EOS MD50 Mark 2 camera box" ></a>
 
-  </div>
