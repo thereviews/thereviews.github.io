@@ -80,14 +80,14 @@ It is fast accurate and has dual pixel
 some of the great features of his include the ability to creative filters and special effects to images 
 Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and live stream  With 180 degree you can take selfies and capture every angle
 
-
+<div>
 
 <a href="https://amzn.to/3uD4get">
 
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
 
 
-
+</div>
 
    
 
@@ -102,12 +102,13 @@ EOS MD50 Mark || ability to go live on YouTube from your camera to easily intera
 EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather
 
 
-
+<div>
  
 
 <a href="https://amzn.to/3KBdBcg">
 
 <img src="public/Mark2.jpg" width="255" height="300" alt="EOS MD50 Mark 2 camera"></a>
 
-
+  
+</div>
 
