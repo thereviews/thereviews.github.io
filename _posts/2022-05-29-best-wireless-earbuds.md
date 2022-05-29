@@ -1,6 +1,6 @@
 ---
 title:  "Best Wireless Earbuds Cheap"
-description: "these are top 5 wireless earbuds which are both high quality and cheap"
+description: "1:TOZO T6 True Wireless Earbuds Bluetooth Headphones 2: TOZO T10 Bluetooth 5.3 Wireless Earbuds with Wireless Charging Case 3:TOZO A1 Mini Wireless Earbuds Bluetooth 4:Powerbeats Pro Wireless Earbuds 5:Skullcandy Sesh Evo True Wireless Earbuds"
 date:   2022-5-29
 permalink: Best-Wireless-Earbuds
 ---
@@ -18,8 +18,7 @@ permalink: Best-Wireless-Earbuds
 
 ### TOZO T6
 
-Tzo T6 is one of the best earbuds on the market which can almost any body can buy it as it is very cheap but powerful,
-Tz is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear . 
+TOZO T6 True Wireless Earbuds Bluetooth Headphones is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear . 
 It has resistant against water and sweet so you don’t need to worry while exercising or drinking water that it may harm, you can even wash your earbuds with water and soap and not having any wories
 
 Tzo T6 is compatible with almost any device so no matter weather you are android user or apple you can enjoy the quality of this earbud 
