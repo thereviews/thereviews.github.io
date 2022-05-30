@@ -104,7 +104,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
    
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
 
-<div>
+<p>
   
 EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. 
 
@@ -130,7 +130,7 @@ EOS MD50 Mark || ability to go live on YouTube from your camera to easily intera
 EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather.
 
 
-</div>
+</p>
 
 
 
