@@ -83,7 +83,7 @@ It is fast accurate and has dual pixel
 some of the great features of his include the ability to creative filters and special effects to images 
 Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and live stream  With 180 degree you can take selfies and capture every angle
 
-  <div>
+ 
   
 <a href="https://amzn.to/3uD4get">
 
@@ -91,7 +91,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 
 
 
-  </div>
+ 
 
    
    
