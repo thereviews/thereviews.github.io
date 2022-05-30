@@ -84,6 +84,7 @@ some of the great features of his include the ability to creative filters and sp
 Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and live stream  With 180 degree you can take selfies and capture every angle
 
 <div>
+  
 <a href="https://amzn.to/3uD4get">
 
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
@@ -102,10 +103,10 @@ The EOS MD50 Mark || Gives you the to make calls and and make video conferencing
 
 EOS MD50 Mark || ability to go live on YouTube from your camera to easily interact your YouTube fans in real time and it comes with high quality microphone which lets you  record clear and high quality sound and it comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. 
 
-EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather
-
+EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather.
 
 <div>
+  
 <a href="https://amzn.to/3KBdBcg">
 
 <img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera"></a>
