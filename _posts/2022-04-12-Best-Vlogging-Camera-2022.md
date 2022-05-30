@@ -90,10 +90,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 
 <a href="https://amzn.to/3M6McPT">
 
-<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera">
- 
-
- </a>
+<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
 
  
 
@@ -106,6 +103,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
    
    
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
+
 
 The EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. 
 
