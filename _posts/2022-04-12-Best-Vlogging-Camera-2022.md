@@ -105,9 +105,9 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
 
 
-The EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. 
+EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. 
 
-The EOS MD50 Mark || Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start. making calls and video conferencing from any platform is easy with The EOS MD50 Mark || you can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start 
+EOS MD50 Mark || Gives you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start. making calls and video conferencing from any platform is easy with The EOS MD50 Mark || you can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start 
 
 <div>
 
