@@ -88,6 +88,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
 
+
 </div>
 
    
@@ -105,9 +106,9 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 
 
 <div>
- <a href="https://amzn.to/3KBdBcg">
+<a href="https://amzn.to/3KBdBcg">
 
- <img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera"></a>
+<img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera"></a>
 
   
 </div>
