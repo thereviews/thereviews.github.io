@@ -16,7 +16,7 @@ permalink: Best-Wireless-Earbuds
 
 
 
-### TOZO T6
+### 1: TOZO T6
 
 TOZO T6 True Wireless Earbuds Bluetooth Headphones is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear.
 It has resistant against water and sweet so you don’t need to worry while exercising or drinking water that it may harm, you can even wash your earbuds with water and soap and not having any wories.
@@ -34,7 +34,7 @@ Simple to use and powerful in terms of features and capabilities.
 
 
 
-### TOZO T10
+### 2: TOZO T10
 
 
 Tozo 10 are wireless earbuds designed to fit in your ears and keep it relaxing and comfortable while enjoying and listening. Not fearing to fall from your ears as it is perfectly fits in so no matter how much you jump or run it wont fall.
@@ -47,7 +47,7 @@ Fast charging as it only takes less than two hours to charge the case to use aft
 ![Tozo T10 earbuds](/public/T10.jpg)
 
 
-### Tozo A1
+### 3: Tozo A1
 
 Tozo A10 are very light weight earbuds as one A1 earbuds ha the same weight as the feather which makes it very comfortable and not feeling ay pressure on your ears while wearing it as is is designed to to make less pressure on ears for long wearing without any harm .
 
@@ -66,7 +66,7 @@ Compatible with any device ios/android so you can use this earbuds no matter whi
 
 
 
-### Power beats pro
+### 4: Power beats pro
 
 Power beats pro is small earbuds witth a ton of different feature including super customizable ear tips options To make sure that your earbuds not fall while in the middle of the exercising
 
@@ -84,7 +84,7 @@ It supports both android and ios
 
 
 
-### Skull candy Sesh Evo
+### 5: Skull candy Sesh Evo
 
 Skull candy is wireless Bluetooth earbuds which has alot of features as 24 hour lasting battery that lets you play all day all night. In case you worried that water, sweet or even a dust may ruin your earbuds Skull candy has resistance against any of that.
 
