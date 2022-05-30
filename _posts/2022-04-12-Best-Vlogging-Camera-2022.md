@@ -87,7 +87,9 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
   
 <a href="https://amzn.to/3uD4get">
 
-<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
+<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera">
+
+</a>
 
 
 
