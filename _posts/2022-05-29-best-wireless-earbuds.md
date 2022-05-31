@@ -23,7 +23,7 @@ It has resistant against water and sweet so you don’t need to worry while exer
 
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="[https://amzn.to/3M6McPT](https://amzn.to/3lWOOVt)">
 
 <img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera">
  
