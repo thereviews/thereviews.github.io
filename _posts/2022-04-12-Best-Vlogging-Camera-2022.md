@@ -90,14 +90,7 @@ GO live stream  With 180 degree you can take selfies and capture every angle.
 
  
   
-<div>
 
-<a href="https://amzn.to/3M6McPT">
-
-<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera" ></a>
-
- 
-</div>
 
 
  
