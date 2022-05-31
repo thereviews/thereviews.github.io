@@ -129,7 +129,7 @@ Builtin tile technology which helps you find easily if you misplace it and most 
 
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="[https://amzn.to/3M6McPT](https://amzn.to/3M2Rf3a)">
 
 <img src="public/Skull.jpg" alt=" Passonic lumix dc-zs70k camera">
  
