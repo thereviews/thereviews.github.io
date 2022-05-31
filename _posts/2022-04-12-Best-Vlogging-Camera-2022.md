@@ -81,11 +81,12 @@ Panasonic lumix fz300 tight seals on every joint Dail and bottom of the camera t
 
 ### 4. <a href="https://amzn.to/3uD4get"> Canon EOS M200 </a>
 
- canon eos m200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
+ Canon EOS M200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
 It is fast accurate and has dual pixel.
 
 Some of the great features of his include the ability to creative filters and special effects to images 
-Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and live stream  With 180 degree you can take selfies and capture every angle.
+Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and 
+GO live stream  With 180 degree you can take selfies and capture every angle.
 
  
   
@@ -122,7 +123,7 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 
 <a href="https://amzn.to/3KBdBcg">
 
-<img src="public/Mark2.jpg" alt="EOS MD50 Mark 2 camera"></a>
+<img src="public/Mark2.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera"></a>
 
   
 
