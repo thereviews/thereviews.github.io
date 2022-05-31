@@ -108,7 +108,7 @@ GO live stream  With 180 degree you can take selfies and capture every angle.
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
 <p>
 EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. <br>
-<br
+<br>
 EOS MD50 Mark || lets  you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start. making calls and video conferencing from any platform is easy with The EOS MD50 Mark || you can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start <br>
 <br>
 Go live on YouTube from your camera to easily interact your YouTube fans in real time and it comes with high quality microphone which lets you  record clear and high quality sound and it comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. <br>
