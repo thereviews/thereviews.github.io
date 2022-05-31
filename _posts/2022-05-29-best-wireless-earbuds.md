@@ -23,9 +23,9 @@ It has resistant against water and sweet so you don’t need to worry while exer
 
 <div>
 
-<a href="https://amzn.to/38y6OlM">
+<a href="https://amzn.to/3PUvCFy">
 
-<img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/T6.jpg" alt=" Tozo T6 Wireless Earbuds">
  
  </a>
  
@@ -56,7 +56,7 @@ Fast charging as it only takes less than two hours to charge the case to use aft
 
 <a href="[https://amzn.to/3M6McPT](https://amzn.to/3PPcgl9)">
 
-<img src="public/T10.jpg" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/T10.jpg" alt=" Tozo T10 Wireless Earbuds">
  
  </a>
  
@@ -78,7 +78,7 @@ Compatible with any device ios/android so you can use this earbuds no matter whi
 
 <a href="[https://amzn.to/3M6McPT](https://amzn.to/3x29fq7)">
 
-<img src="public/A1.jpg" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/A1.jpg" alt=" Tozo A1 Wireless Earbuds">
  
  </a>
  
@@ -106,7 +106,7 @@ It supports both android and ios
 
 <a href="https://amzn.to/3M6PNga">
 
-<img src="public/Powerbeats.jpg" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/Powerbeats.jpg" alt=" Power beats pro Wireless Earbuds">
  
  </a>
  
@@ -131,7 +131,7 @@ Builtin tile technology which helps you find easily if you misplace it and most 
 
 <a href="[https://amzn.to/3M6McPT](https://amzn.to/3M2Rf3a)">
 
-<img src="public/Skull.jpg" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/Skull.jpg" alt=" Skull candy Sesh evo Wireless Earbuds">
  
  </a>
  
