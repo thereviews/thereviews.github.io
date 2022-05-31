@@ -44,7 +44,7 @@ And water and dust wont worry you after today as Tozo 10 is resistible both of t
 Fast charging as it only takes less than two hours to charge the case to use after that for six hours for a single time charge and up o 30 hours with charge case
 
 
-![Tozo T10 earbuds](/public/T10.jpg)
+![Tozo T10 earbuds](/public/T10.jpg)https://amzn.to/3zpkeMb
 
 
 ### 3: Tozo A1
