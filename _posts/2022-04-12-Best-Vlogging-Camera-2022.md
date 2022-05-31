@@ -12,13 +12,13 @@ permalink: Best-vlogging-camera
 
 Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life with Passonic lumix dc-zs70k you will get the best quality 4k videos and photos capturing every detail of the scene
 
-Passonic lumix dc-zs70k has outstaning faetures which includes zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement . it supports selfie photos so you can take 4k selfie photos 
+Passonic lumix dc-zs70k has outstaning faetures which includes zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement and supports selfie photos so you can take 4k selfie photos 
 
 Passonic lumix dc-zs70k has super customizable control ring which gives you ability to manually control the shutter, speed, and zoom and focus of the camera while shooting. 
 
-With Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day
-It supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
-It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
+With Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day,
+supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability,
+and easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
 
 
 
@@ -57,12 +57,12 @@ G100 integrates well with your phone you can send images and to your phone a pus
 
 ### 3. <a href="https://amzn.to/3KElfCx"> Panasonic Lumix FZ300 </a>
 
-Panasonic lumix fz300 is a processional high quality camera with 4k photos and videos altogether.  it has all you need to began filmig and vlogging more such as
+Panasonic lumix fz300 is a processional high quality camera with 4k photos and videos all together.  it has all you need to began filmig and vlogging more such as
 Photo technology which Lets you shoot up to 30 frames per secondis 4k ultra and hd videos and extract them as individual photos.
 
 Zooming ability up to 24x which helps you shoot perfect photos even in low light and cloudy weather and 4k photo feature that extracts 8 mega pixel photos out of 4k videos.
 
-Zooming ability with high accuracy , full range and High speed focus any environment
+With high accuracy zooming abillity , full range and High speed focus any environment,
 Panasonic lumix fz300 tight seals on every joint Dail and bottom of the camera to withstand the harsh climates and can be controlled remotely with your phone after installing passonic app 
 
  
