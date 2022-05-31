@@ -54,7 +54,7 @@ Fast charging as it only takes less than two hours to charge the case to use aft
 
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="[https://amzn.to/3M6McPT](https://amzn.to/3PPcgl9)">
 
 <img src="public/T10.jpg" alt=" Passonic lumix dc-zs70k camera">
  
