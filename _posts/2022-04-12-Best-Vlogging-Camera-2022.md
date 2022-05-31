@@ -14,7 +14,9 @@ Passonic lumix dc-zs70k is a small but power full camera which lets you capture 
 
 Passonic lumix dc-zs70k has outstaning faetures which includes zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement . it supports selfie photos so you can take 4k selfie photos 
 
-Passonic lumix dc-zs70k has super customizable control ring which gives you ability to manually control the shutter, speed, and zoom and focus of the camera while shooting. It has Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day
+Passonic lumix dc-zs70k has super customizable control ring which gives you ability to manually control the shutter, speed, and zoom and focus of the camera while shooting. 
+
+With Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day
 It supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability 
 It is easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
 
@@ -87,7 +89,6 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 
  
   
-
 <div>
 
 <a href="https://amzn.to/3M6McPT">
@@ -95,7 +96,6 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 <img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
 
  
-
 </div>
 
 
@@ -106,7 +106,7 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
    
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
 
-<p>
+
   
 EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. <br>
 
@@ -129,7 +129,7 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 </div>
 
 
-</p>
+
 
 
 
