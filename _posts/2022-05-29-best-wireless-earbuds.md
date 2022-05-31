@@ -76,7 +76,7 @@ Compatible with any device ios/android so you can use this earbuds no matter whi
 
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="[https://amzn.to/3M6McPT](https://amzn.to/3x29fq7)">
 
 <img src="public/A1.jpg" alt=" Passonic lumix dc-zs70k camera">
  
