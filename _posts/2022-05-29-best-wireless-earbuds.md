@@ -21,7 +21,15 @@ permalink: Best-Wireless-Earbuds
 TOZO T6 True Wireless Earbuds Bluetooth Headphones is small and very light weight earbuds which make easier to wear it all day without feeling any pressure on your ear.
 It has resistant against water and sweet so you don’t need to worry while exercising or drinking water that it may harm, you can even wash your earbuds with water and soap and not having any wories.
 
-![Tozo T6 earbuds](/public/T6.jpg)
+<div>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/LUMIX DC1.jpg" alt=" Passonic lumix dc-zs70k camera">
+ 
+ </a>
+ 
+</div>
 
 Tzo T6 is compatible with almost any device so no matter weather you are android user or apple you can enjoy the quality of this earbud.
 It has soft surface to relax the ears and perfectly fitting in size so no matter how much you exercise it will not fall over.
@@ -44,7 +52,15 @@ And water and dust wont worry you after today as Tozo 10 is resistible both of t
 Fast charging as it only takes less than two hours to charge the case to use after that for six hours for a single time charge and up o 30 hours with charge case
 
 
-![Tozo T10 earbuds](/public/T10.jpg)https://amzn.to/3zpkeMb
+<div>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/T10.jpg" alt=" Passonic lumix dc-zs70k camera">
+ 
+ </a>
+ 
+</div>
 
 
 ### 3: Tozo A1
@@ -58,8 +74,15 @@ Compatible with any device ios/android so you can use this earbuds no matter whi
 
 
 
+<div>
 
-![Tozo A1 earbuds](/public/A1.jpg)
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/A1.jpg" alt=" Passonic lumix dc-zs70k camera">
+ 
+ </a>
+ 
+</div>
 
 
 
@@ -79,8 +102,16 @@ Activate voice assistant any time you like
 Power beats have sensors to detect while ear pods are in the ear to stop the playing when not on your ear 
 It supports both android and ios
 
+<div>
 
-![Power beats pro earbuds](/public/Powerbeats.jpg)
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/Powerbeats.jpg" alt=" Passonic lumix dc-zs70k camera">
+ 
+ </a>
+ 
+</div>
+
 
 
 
@@ -95,8 +126,16 @@ Builtin tile technology which helps you find easily if you misplace it and most 
 
 
 
-![skull candy earbuds](/public/Skull.jpg)
 
+<div>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/Skull.jpg" alt=" Passonic lumix dc-zs70k camera">
+ 
+ </a>
+ 
+</div>
 
 
 
