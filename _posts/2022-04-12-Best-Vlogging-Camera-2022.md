@@ -89,7 +89,14 @@ Canon EOS M20 Supports Vertical camera setting as you can record any angle you l
 GO live stream  With 180 degree you can take selfies and capture every angle.
 
  
-  
+ <div>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera" ></a>
+
+ 
+</div>
 
 
 
@@ -114,7 +121,7 @@ EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera 
 
 <a href="https://amzn.to/3KBdBcg">
 
-<img src="public/Mark2.jpg" width="300" height="300" alt="EOS MD50 Mark 2 camera"></a>
+<img src="public/Mark2.jpg"  alt="EOS MD50 Mark 2 camera" ></a>
 
   
 
