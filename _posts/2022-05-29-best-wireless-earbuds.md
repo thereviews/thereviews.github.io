@@ -104,7 +104,7 @@ It supports both android and ios
 
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="https://amzn.to/3M6PNga">
 
 <img src="public/Powerbeats.jpg" alt=" Passonic lumix dc-zs70k camera">
  
