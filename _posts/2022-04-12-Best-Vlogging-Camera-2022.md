@@ -94,7 +94,7 @@ GO live stream  With 180 degree you can take selfies and capture every angle.
 
 <a href="https://amzn.to/3M6McPT">
 
-<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera"></a>
+<img src="public/Canon EOS M200.jpg" alt=" Canon EOS M200 camera" ></a>
 
  
 </div>
@@ -106,8 +106,6 @@ GO live stream  With 180 degree you can take selfies and capture every angle.
    
    
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
-
-
   
 EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. <br>
 
