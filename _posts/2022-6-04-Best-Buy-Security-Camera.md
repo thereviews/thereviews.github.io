@@ -5,7 +5,7 @@ date:   2022-06-04
 permalink: Best-vlogging-camera
 ---
 
-### Blink Mini
+## Blink Mini
 
 Blink mini is one of the best indoor security cameras you might encounter because of all features it has which we will take a look some of them
 
@@ -30,4 +30,22 @@ Blink Video Doorbell to be notified anyone who pushes video doorbelll on the rea
    
 
 You will get with on Blink camera with mounting cable to put on the camera, USB cable to connect any device  you want and power adapter.
+
+## Wyze Cam V3
+
+Wyze Cam v3 is a security  camera which can be used both indoor and outdoor that will make easy to keep an eye on your home while away.
+
+Wyze Cam records videos the same quality day and night as it has stratlight sensor that will record full coloured HD video at night 
+
+Wyze can be installed outdoor and indoor no matter how weather out side is wyze can handle it
+
+Use it with any phone you have weather using android or ios you can install wyze
+
+Be alerted when motion or sound is detected, wyze camera captures video anytime sound or movement is detected
+
+Customize motion detection zones to where you want the camera to be alerted when motion or sound is captured and you can completely make this feature off if you want.
+
+24 hour vidoe Recording and has 32 micro sd card
+
+
 
