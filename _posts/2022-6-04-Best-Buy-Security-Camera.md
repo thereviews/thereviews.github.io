@@ -48,4 +48,15 @@ Customize motion detection zones to where you want the camera to be alerted when
 24 hour vidoe Recording and has 32 micro sd card
 
 
+### Ring Indoor Cam
+Ring indoor cam is a home security with HD video quality that lets you keep an eye on your home and lets you see hear and speak anyone in your home from your phone.
+Ring protect a special feature lets check and review recorded videos and save or share if you like. 
+Privacy control with control center dashboard gives you the ability to add and remove authorised clients and devices easily. 
+Compatible with alexa and echo so when ring indoor cam detects motion your echo device will make announcement.
+Connecting multiple ring indoor cam in one app to see all your entire house and monitor it.
+Live view to check what is your house is up to anytime.
+Easily setup and put it a flat surface or mount it to the wall.
+
+
+
 
