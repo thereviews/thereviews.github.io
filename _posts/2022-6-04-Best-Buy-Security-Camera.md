@@ -83,7 +83,7 @@ Customize motion detection zones to where you want the camera to be alerted when
   <br>
   <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="https://amzn.to/3Nm7rxW">
 
 <img src="public/Ringcam.jpg" alt=" Ring indoor cam home security camera">
 
