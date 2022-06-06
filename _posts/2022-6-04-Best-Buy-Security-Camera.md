@@ -7,6 +7,20 @@ permalink: Best-vlogging-camera
 
 ## Blink Mini
 
+<div>
+
+<a href="https://amzn.to/3M6McPT">
+
+<img src="" alt=" Passonic lumix dc-zs70k camera">
+
+ 
+
+ </a>
+
+ 
+
+</div>
+
 Blink mini is one of the best indoor security cameras you might encounter because of all features it has which we will take a look some of them
 
 Blinki mini lets you see inside your house while away with your smart phone anytime anywhere. 
