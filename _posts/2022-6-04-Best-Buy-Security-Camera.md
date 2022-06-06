@@ -60,7 +60,7 @@ You will get with on Blink camera with mounting cable to put on the camera, USB 
  
 
  </a>
- </div?
+ </div>
 
 Wyze Cam v3 is a security  camera which can be used both indoor and outdoor that will make easy to keep an eye on your home while away.
 
@@ -91,7 +91,7 @@ Customize motion detection zones to where you want the camera to be alerted when
  
 
  </a>
- </div?
+ </div>
   
 Ring indoor cam is a home security with HD video quality that lets you keep an eye on your home and lets you see hear and speak anyone in your home from your phone.
 
@@ -121,7 +121,7 @@ Easily setup and put it a flat surface or mount it to the wall.
  
 
  </a>
- </div?   
+ </div>  
 
 Ring vidoe Doorbell  is one of the best security cameras as it is a security camera  with high quality HD video and Doorbell at the same time
 
@@ -152,7 +152,7 @@ Storing up to 60 days recorded videos so you can review or check if messed anyth
  
 
  </a>  
- </div?    
+ </div>    
 
 Kasa indoor is smart camera for both indoor and outdoor which has  a tone of features .
 Scanning the home and detecting any movement and tracking it to the sight and stores the recording in the app so you can take a look any time.
