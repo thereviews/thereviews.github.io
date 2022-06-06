@@ -53,7 +53,7 @@ You will get with on Blink camera with mounting cable to put on the camera, USB 
 <br>
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="[https://amzn.to/3M6McPT](https://amzn.to/3NlZitf)">
 
 <img src="public/Wyze.jpg" alt=" Wyze Came v3 home security camera">
 
