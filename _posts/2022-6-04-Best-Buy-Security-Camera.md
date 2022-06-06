@@ -49,6 +49,8 @@ You will get with on Blink camera with mounting cable to put on the camera, USB 
 
 ## Wyze Cam V3
 
+<br>
+<br>
 <div>
 
 <a href="https://amzn.to/3M6McPT">
@@ -106,6 +108,8 @@ Easily setup and put it a flat surface or mount it to the wall.
 
 ## Ring Vidoe Doorbell 
     
+  <br>
+  <br>
   <div>
 
 <a href="https://amzn.to/3M6McPT">
@@ -135,6 +139,8 @@ Storing up to 60 days recorded videos so you can review or check if messed anyth
 
 ## Kasa Indoor 
       
+  <br>
+  <br>
   <div>
 
 <a href="https://amzn.to/3M6McPT">
