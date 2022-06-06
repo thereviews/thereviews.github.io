@@ -47,6 +47,8 @@ Blink Video Doorbell to be notified anyone who pushes video doorbelll on the rea
 
 You will get with on Blink camera with mounting cable to put on the camera, USB cable to connect any device  you want and power adapter.
 
+
+
 ## Wyze Cam V3
 
 <br>
@@ -75,6 +77,7 @@ Be alerted when motion or sound is detected, wyze camera captures video anytime 
 Customize motion detection zones to where you want the camera to be alerted when motion or sound is captured and you can completely make this feature off if you want.
 
 24 hour vidoe Recording and has 32 micro sd card
+
 
 
 
@@ -108,6 +111,8 @@ Live view to check what is your house is up to anytime.
 Easily setup and put it a flat surface or mount it to the wall.
 
 
+
+
 ## Ring Vidoe Doorbell 
     
   <br>
@@ -137,6 +142,8 @@ Get voice assistant anytime as it works with alexa
 Even when Night and dark ring video Doorbell will give you high quality vidoe as it has Night vision feature 
 Know when some one is in your door without even pressing the ring bell  with advanced motion detection of ring Doorbell .
 Storing up to 60 days recorded videos so you can review or check if messed anything and share if want.
+
+
 
 
 ## Kasa Indoor 
