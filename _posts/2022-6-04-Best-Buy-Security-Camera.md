@@ -11,7 +11,7 @@ permalink: Best-vlogging-camera
 
 <a href="https://amzn.to/3M6McPT">
 
-<img src="" alt=" Passonic lumix dc-zs70k camera">
+<img src="public/Blinkmini.jpg" alt=" Blink mini home security camera">
 
  
 
