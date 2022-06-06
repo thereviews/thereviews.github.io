@@ -7,7 +7,7 @@ permalink: Best-vlogging-camera
 
 ## Blink Mini
 
-<br>
+
 <br>
 <div>
 
@@ -48,12 +48,12 @@ Blink Video Doorbell to be notified anyone who pushes video doorbelll on the rea
 You will get with on Blink camera with mounting cable to put on the camera, USB cable to connect any device  you want and power adapter.
 
 <br>
-<br>
+
 
 
 ## Wyze Cam V3
 
-<br>
+
 <br>
 <div>
 
@@ -80,13 +80,13 @@ Customize motion detection zones to where you want the camera to be alerted when
 
 24 hour vidoe Recording and has 32 micro sd card
 
-<br>
+
 <br>
 
 
 ## Ring Indoor Cam
   
-  <br>
+  
   <br>
   <div>
 
@@ -113,13 +113,13 @@ Connecting multiple ring indoor cam in one app to see all your entire house and 
 Live view to check what is your house is up to anytime.
 Easily setup and put it a flat surface or mount it to the wall.
 
-<br>
+
 <br>
 
 
 ## Ring Vidoe Doorbell 
     
-  <br>
+  
   <br>
   <div>
 
@@ -153,7 +153,7 @@ Storing up to 60 days recorded videos so you can review or check if messed anyth
 
 ## Kasa Indoor 
       
-  <br>
+  
   <br>
   <div>
 
