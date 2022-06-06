@@ -11,7 +11,7 @@ permalink: Best-vlogging-camera
 <br>
 <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="https://amzn.to/3NXrzXi">
 
 <img src="public/Blinkmini.jpg" alt=" Blink mini home security camera">
 
