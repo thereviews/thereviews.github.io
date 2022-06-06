@@ -50,12 +50,63 @@ Customize motion detection zones to where you want the camera to be alerted when
 
 ### Ring Indoor Cam
 Ring indoor cam is a home security with HD video quality that lets you keep an eye on your home and lets you see hear and speak anyone in your home from your phone.
+
+
 Ring protect a special feature lets check and review recorded videos and save or share if you like. 
 Privacy control with control center dashboard gives you the ability to add and remove authorised clients and devices easily. 
+
+
 Compatible with alexa and echo so when ring indoor cam detects motion your echo device will make announcement.
 Connecting multiple ring indoor cam in one app to see all your entire house and monitor it.
+
+
 Live view to check what is your house is up to anytime.
 Easily setup and put it a flat surface or mount it to the wall.
+
+
+## Ring Vidoe Doorbell 
+
+Ring vidoe Doorbell  is one of the best security cameras as it is a security camera  with high quality HD video and Doorbell at the same time
+
+
+ With 24/7 power to keep an eye on your home anytime 
+Notification: be notified on your phone any time some one presses your doorbell then you see, hear and speak your visitors and anywhere right from your phone
+
+
+Live view buttom gives you the ability to see what is happening in front of your door 
+Get voice assistant anytime as it works with alexa 
+
+
+Even when Night and dark ring video Doorbell will give you high quality vidoe as it has Night vision feature 
+Know when some one is in your door without even pressing the ring bell  with advanced motion detection of ring Doorbell .
+Storing up to 60 days recorded videos so you can review or check if messed anything and share if want.
+
+
+## Kasa Indoor 
+
+Kasa indoor is smart camera for both indoor and outdoor which has  a tone of features .
+Scanning the home and detecting any movement and tracking it to the sight and stores the recording in the app so you can take a look any time.
+
+Smart actions feature will let you connect kasa camera and other devices so you controll all in one app
+
+Recieve alerts anytime and view live footage of your house day or night with high quality video 
+With Night vision mode which able to detect motion 30ft away at night.
+
+Setting up is pretty easy and three steps only 
+Two way communication allows you to interact Live with your loved ones at home while anywhere .
+Enjoy HD quality video of your home while away.
+
+
+ kasa  will get record and store video footages in the local sd cards which able to store up to 64gb
+With Kasa you will get the ability to turn light on when detected motion.
+Supports alexa and  Google assistant so you can get live view of your home on command just ask google or alexa.
+
+
+
+
+
+
+
 
 
 
