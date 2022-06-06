@@ -48,7 +48,7 @@ Blink Video Doorbell to be notified anyone who pushes video doorbelll on the rea
 You will get with on Blink camera with mounting cable to put on the camera, USB cable to connect any device  you want and power adapter.
 
 <br>
-
+<br>
 
 
 ## Wyze Cam V3
@@ -82,7 +82,7 @@ Customize motion detection zones to where you want the camera to be alerted when
 
 
 <br>
-
+<br>
 
 ## Ring Indoor Cam
   
@@ -115,7 +115,7 @@ Easily setup and put it a flat surface or mount it to the wall.
 
 
 <br>
-
+<br>
 
 ## Ring Vidoe Doorbell 
     
