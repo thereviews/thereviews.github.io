@@ -7,6 +7,8 @@ permalink: Best-vlogging-camera
 
 ## Blink Mini
 
+<br>
+<br>
 <div>
 
 <a href="https://amzn.to/3M6McPT">
@@ -72,8 +74,11 @@ Customize motion detection zones to where you want the camera to be alerted when
 24 hour vidoe Recording and has 32 micro sd card
 
 
-### Ring Indoor Cam
+
+## Ring Indoor Cam
   
+  <br>
+  <br>
   <div>
 
 <a href="https://amzn.to/3M6McPT">
