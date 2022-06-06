@@ -143,7 +143,7 @@ Storing up to 60 days recorded videos so you can review or check if messed anyth
   <br>
   <div>
 
-<a href="https://amzn.to/3M6McPT">
+<a href="https://amzn.to/3NUJz4y">
 
 <img src="public/Kasa.jpg" alt=" Kasa indoor home security camera">
 
