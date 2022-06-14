@@ -1,5 +1,6 @@
 ---
-title:  "Best as seen on tv products 2021"
+title:  "Best as seen on tv products 2022"
+description: " Take a look at our list of the best performing as seen on tv products 2022"
 date:   2021-11-26
 permalink: Best-as-seen-ontv
 ---
