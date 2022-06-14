@@ -7,7 +7,7 @@ permalink: Whatsapp-Iwatch
 
 
 
-![whatsaapp on apple watch](/public/WhatsApp.webp)
+![whatsapp on apple watch](/public/Whatsapp.webp)
 
 
 Use full whatsapp on your apple watch for free which means you can chat, send and play audio and videos 
