@@ -14,7 +14,8 @@ permalink: Tiktok-viral-trick
 Tiktok is one of the most popular platform in the world it has one billion active users every day , it gains millions of followers.
 Becoming popular on tiktok considered a wish in many people today we will take a look in one of the best steps to take in order to gain popularity on tiktok
 
-![person using tiktok](public/Tiktok.jpg)
+<img src="/public/Tiktok.jpg" width="300" height="150">
+
 
 ### Inventing simple combination of dance moves
 
