@@ -1,5 +1,5 @@
 ---
-title:  "Whatsapp Watch"
+title:  "Whatsapp Iwatch"
 description: " Get full whatsapp on your wrist apple watch"
 date:   2022-06-14
 permalink: Whatsapp-Iwatch
