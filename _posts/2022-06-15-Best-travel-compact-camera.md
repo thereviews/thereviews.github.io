@@ -1,3 +1,10 @@
+---
+title:  " Best Travel Compact Camera"
+description: "You won't find a more compact travel camera for a better price than the Nikon Coolpix W100 "
+date:   2022-06-15
+permalink: Best-travel-Camera
+---
+
 
 
 You won't find a more compact travel camera for a better price than the Nikon Coolpix W100. 
