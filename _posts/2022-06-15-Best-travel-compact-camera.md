@@ -5,7 +5,7 @@ date:   2022-06-15
 permalink: Best-travel-Camera
 ---
 
-
+<img src="/public/Olympus.jpg">
 
 You won't find a more compact travel camera for a better price than the Nikon Coolpix W100. 
 
