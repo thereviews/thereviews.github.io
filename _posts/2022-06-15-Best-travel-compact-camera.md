@@ -5,6 +5,8 @@ date:   2022-06-15
 permalink: Best-travel-Camera
 ---
 
+one of the best things in travelling is that you can capture the great moments and save theme for later and that would not be possible without camera today we will give the best travel camera to take while travelling 
+
 ## Nikon Coolpix W100
 
 <img src="/public/Olympus.jpg" alt=" Nikon Coolpix W10 ">
