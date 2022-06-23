@@ -6,22 +6,113 @@ permalink: Best-vlogging-camera
 ---
 
 
+
+On this review for the best vlogging camera we will take you a journey to explore the camera for vlogging in 2022 looking at it on different angels like price performence and different skill levels so no matter which you are looking for we got you covered 
+
    
-### 1. <a href="https://amzn.to/3M6McPT">Passonic Lumix DC-ZS70K </a>
+### 1. <a href="https://amzn.to/3M6McPT">dji pocket 2K </a>
+
+5.dji pocket 2
+
+the best portable vlogging camera
+
+available on the market in 2022 we're
+
+looking at an off-road camera with a
+
+compact size excellent stabilization and
+
+top-notch photo and video quality not
+
+much has changed compared to the first
+
+generation but dji pocket 2 is improved
+
+where its predecessor lagged behind auto
+
+focus battery autonomy and microphones
+
+this model's handling is comfortable
+
+with a well responsive touch screen and
+
+some well executed movements
 
 
-Passonic lumix dc-zs70k is a small but power full camera which lets you capture best moments of your life with Passonic lumix dc-zs70k you will get the best quality 4k videos and photos capturing every detail of the scene
 
-Passonic lumix dc-zs70k has outstaning faetures which includes zooming ability which goes up to 30x to a bit closer to anything that interest you. It has the ability to detect and maintain movement and supports selfie photos so you can take 4k selfie photos 
+in to that addition
 
-Passonic lumix dc-zs70k has super customizable control ring which gives you ability to manually control the shutter, speed, and zoom and focus of the camera while shooting. 
+the fact that you now have a joystick to
 
-With Electronic view finder with eye sensor which make you see easier when using it in outdoor on sunny day,
-supports 180 degree front filip gives you ability to take 4k selfies and 4k video vlogging ability,
-and easy to take in any where because it fits in your pocket so you don’t need bag to put it in.
+control zoom or camera movement makes
 
+the device much more intuitive and if
 
+the device itself doesn't suit you you
 
+can always connect the dji pocket to
+
+your smartphone with the included
+
+adapters to use it you'll need to
+
+download the dji memo app and connect
+
+the device to usbc or lighting port on
+
+your smartphone as for the quality of
+
+shooting and photography it is very impressive
+
+ it's true that we'll not reach the
+
+levels of a more professional slr camera
+
+but we can expect quality similar to
+
+that we have with some compact cameras
+
+iphone 12 pro or samsung galaxy note 20
+
+ultra the fact that this is a camera
+
+with a clean and simple gimbal helps a
+
+lot to keep the quality solid especially
+
+in low lighting dji pocket 2 can take
+
+photos with a maximum resolution of 64
+
+the optics have also changed the viewing
+
+angle is now 93 degrees instead of 80
+
+which is crucial for selfie mode from a
+
+distance of one hand we can easily
+
+capture the whole face and many
+
+landscapes depending on the selected
+
+resolution of the photo or video we can
+
+zoom from four times to eight times also
+
+vloggers will be interested in how the
+
+device manages speech with one hand the
+
+microphone gain level is sufficient all
+
+in all it'll satisfy everyone not just
+
+vloggers it gives you better results
+
+than a smartphone and still fits in your
+
+pocket 
 
   
 <div>
@@ -38,11 +129,89 @@ and easy to take in any where because it fits in your pocket so you don’t need
 
 ### 2. <a href="https://amzn.to/37I1P16">Passonic Lumix G100</a>
 
-G100 is a light weight camera for one handed recording which gives you high quality 4k photos and videos with 180 degree rotation which enables you the ability to take selfies 
+4.the canon eos m50 mark ii the
 
-G100 lets you take video calls, video conferences and live-streams by connecting your laptop via USB cable and it is compatible with all Lumix lenses and has noticeably recording indicator to know you are recording at first glance
+best budget vlogging camera on the
 
-G100 integrates well with your phone you can send images and to your phone a push a bottom . with special audio builtin which has facial recognition technology to adjust audio for maximum quality and  has light weight tripod and come with Frame maker to make sure it competes with your social media 
+market in 2022 this model comes with
+
+several enhancements and features
+
+specifically designed for use on social
+
+media and content creation it's
+
+basically a revamped version of canon's
+
+earlier m50 mark 1. 
+
+
+the features of the
+
+mark ii remain quite similar to its
+
+predecessor with a 24.1 megapixel cmos
+
+sensor and a digic 8 image processor
+
+that allows the camera to record 4k
+
+video at 24 frames per second in short
+
+the update includes better auto focus
+
+for both photos and videos allowing you
+
+to accurately track moving subjects
+
+within the frame the device can be
+
+easily used as a webcam thanks to the
+
+free canon eos webcam utility software
+
+which comes with youtube live wireless
+
+streaming capabilities and a handy
+
+built-in timer the device is quite an
+
+interesting feature regarding the
+
+tilting screen which makes vertical
+
+video recording more intuitive and
+
+enjoyable without the need for further
+
+editing and cutting furthermore
+
+ the m50 mark ii comes with a clear hdmi output
+
+so you can record to an external voice
+
+recorder or monitor on a larger screen
+
+the rear screen is a standard 3-inch
+
+screen with 1.04 megapixels with support
+
+for touch input
+
+
+ the eos m50 has shown
+
+that this is a great camera even for
+
+some serious professional applications
+
+also if you think autofocus is key to
+
+your content then you should choose the
+
+mark ii for the listed price we are
+
+thoroughly impressed
 
 <div>
 
@@ -56,15 +225,109 @@ G100 integrates well with your phone you can send images and to your phone a pus
 
 
 ### 3. <a href="https://amzn.to/3KElfCx"> Panasonic Lumix FZ300 </a>
+3.panasonic lumix s5 
 
-Panasonic lumix fz300 is a processional high quality camera with 4k photos and videos all together.  it has all you need to began filmig and vlogging more such as
-Photo technology which Lets you shoot up to 30 frames per secondis 4k ultra and hd videos and extract them as individual photos.
+the best premium vlogging camera on the market in
 
-Zooming ability up to 24x which helps you shoot perfect photos even in low light and cloudy weather and 4k photo feature that extracts 8 mega pixel photos out of 4k videos.
+2022 a key advantage of mirrorless
 
-With high accuracy zooming abillity , full range and High speed focus any environment,
-Panasonic lumix fz300 tight seals on every joint Dail and bottom of the camera to withstand the harsh climates and can be controlled remotely with your phone after installing passonic app 
+cameras is their smaller size and
 
+lighter weight compared to the dslr
+
+models for the panasonic lumix s5 the
+
+manufacturers managed to fit everything
+
+into a body that is actually smaller
+
+than the panasonic gh5 a much smaller
+
+model with a much smaller sensor
+
+impressive by default the s5 comes with
+
+a 20 to 60 millimeter kit lens which can
+
+be folded and fits well with a small
+
+camera size at the heart of the s5 is a
+
+24.2 megapixel sensor the same one found
+
+in its sibling the s1 placing a proven
+
+sensor in this smaller cheaper case is a
+
+smart move the s5 screen is fully
+
+articulated and touch sensitive you can
+
+shoot 4k at 60p i'll bite with clipped
+
+applied or 30p without it 10 bit
+
+recording is available internally but
+
+you must restart the video after 30
+
+minutes alternatively you can record an
+
+unlimited number of clips in 8k v-log
+
+recording is also available with 14
+
+dynamic range stops also included in the
+
+mix are such cool specs as dual origin
+
+iso 4k anamorphic and timed recording
+
+the good news is that autofocus is
+
+definitely improved over the s1 series
+
+it is effective in most situations and
+
+is also decent in tracking subjects
+
+moving in a reasonably predictable way
+
+
+
+since the s5 uses the same sensor as the
+
+s1 we already knew that the picture and
+
+video quality would probably be very
+
+good the images contain a lot of detail
+
+as well as great colors and balanced
+
+exposures a set of 20 to 60 millimeter
+
+lenses is a great optic to start with
+
+because the wide angle is wider than we
+
+usually see on most lenses the video
+
+quality is also excellent with very
+
+smooth and detailed images the image
+
+quality is exceptional which is perhaps
+
+the most important thing the camera body
+
+is also well designed with a meaningless
+
+ergonomic design a very good electronic
+
+viewfinder and a very welcome fully
+
+articulated touch screen 
  
  
  <div>
@@ -79,14 +342,96 @@ Panasonic lumix fz300 tight seals on every joint Dail and bottom of the camera t
 
 
 
-### 4. <a href="https://amzn.to/3uD4get"> Canon EOS M200 </a>
+### 4. <a href="https://amzn.to/3uD4get"> sony zv1 </a>
 
- Canon EOS M200 is vlogging camera which is smal in size but has wide viriaty of features and the ability to record high quality 4k videos and take stunning photos
-It is fast accurate and has dual pixel.
+  best vlogging camera available
 
-Some of the great features of his include the ability to creative filters and special effects to images 
-Canon EOS M20 Supports Vertical camera setting as you can record any angle you like and has builtin Builtin WIFI and Bluetooth technology so you can share files and 
-GO live stream  With 180 degree you can take selfies and capture every angle.
+on the market in 2022 this model is
+
+designed to make life easier for content
+
+creators making youtube clips thanks to
+
+predefined modes preserving some details
+
+of construction and usability this is a
+
+magnificent option an outstanding
+
+picture quality combined with good sound
+
+quality this camera allows us to blur
+
+the backgrounds as much as possible by
+
+focusing the attention on the subject to
+
+your liking similarly with the same
+
+button we can focus on objects in the
+
+it's noticeable that this device is
+
+intended for content creators in terms
+
+of design and construction we're looking
+
+at a solid compact design with good
+
+ergonomics whether we hold the camera
+
+behind or in front the fact that it has
+
+a micro usb port at the moment is not so
+
+positive as a usbc port would definitely
+
+be more desirable the device also
+
+includes an hdmi port and a microphone
+
+input we like the image quality both in
+
+good lighting conditions and in backlit
+
+
+
+whatever content you create a massive
+
+three inch folding rear screen will be
+
+your perfect ally to see every shot
+
+perfectly this camera with 20 megapixels
+
+and an equivalent focal length of 24 to
+
+70 millimeters has an optical zoom which
+
+speed can be adjusted from one of the
+
+of course it allows you to record in
+
+full hd and 4k resolution and even has
+
+the sound is taken care of by the top
+
+microphone which delivers a pretty
+
+decent result in the connectivity
+
+department this camera has bluetooth and
+
+wifi connection which makes it super
+
+easy to control it from a smartphone if
+
+we're talking about autonomy it remains
+
+on about 250 photos an aspect that we
+
+believe could be improved 
+
 
  
  <div>
@@ -107,14 +452,126 @@ GO live stream  With 180 degree you can take selfies and capture every angle.
    
 ### 5. <a href="https://amzn.to/3KBdBcg"> EOS MD50 Mark || </a>
 <p>
-EOS MD50 Mark || is the best vlogging and content creation camera which gives you anything you might wish your camera to have which has the ability to record 4k videos and photos. <br>
-<br>
-EOS MD50 Mark || lets  you the to make calls and and make video conferencing from any platform You can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start. making calls and video conferencing from any platform is easy with The EOS MD50 Mark || you can do this by simply connecting  to your laptop though USB cable and downloading the free webcam utility software to start <br>
-<br>
-Go live on YouTube from your camera to easily interact your YouTube fans in real time and it comes with high quality microphone which lets you  record clear and high quality sound and it comes with Light weight tripod grip which lets you put the camera on the table or any where else while vlogging or recording. <br>
-<br>
-EOS MD50 Mark || has Detachable remote Bluetooth enabled to control your camera remotely, It has builtin WiFi and Bluetooth technology and can recording be controlled  by touching, with Dual pixel sensor which gives you best quality even in cloudy weather.
-  
+
+fujifilm xs10 puts the proven x trans image
+
+sensor and autofocus system in a new
+
+body style it is the lightest x-series
+
+camera with built-in stabilization and
+
+includes 4k shooting mode and a front
+
+screen for vloggers this product is
+
+available in addition to the fujifilm
+
+camera system and a particularly
+
+attractive option for enthusiasts the
+
+front and rear control wheels are used
+
+to control exposure
+
+
+
+ the trigger is
+
+slightly tilted forward and the on off
+
+switch surrounds it there is another
+
+control wheel on the left next to the
+
+switch that opens the pop-up flash you
+
+can go through different aspects of
+
+in-camera movies a useful tool if you
+
+want to quickly switch from one creative
+
+style to another the rear screen is more
+
+in line with premium cameras we're
+
+looking at a three inch panel with touch
+
+support and a sharp resolution of 1.04
+
+megapixels it's a variable angle style
+
+so you can turn it to the side to be
+
+facing forward up or down to take photos
+
+for more interesting angles digital
+
+in the connectivity department the xs10
+
+includes a 3.5 millimeter jack for an
+
+external microphone as well as usb-c for
+
+charging data transfer and audio
+
+headphones the micro hdmi port delivers
+
+clear 10-bit video for use with an
+
+external voice recorder in terms of
+
+speed and autofocus the sensor uses a
+
+combination of phase and contrast
+
+detection points distributed over almost
+
+the entire surface which is an advantage
+
+face and eye detection are supported for
+
+portraits and subject tracking mode is
+
+available when continuous focus is used
+
+tracking the subject is top notch when
+
+the camera is attached to the subject it
+
+does not lose its trace which is an
+
+advantage for photographers who capture
+
+sports action or unpredictable wild
+
+animals this model stands out thanks to
+
+the body image stabilization feature
+
+the sensor is mounted on a 5-axis
+
+stabilization system where image quality
+
+at higher iso ratings is on par with the best models
+
+overall this product delivers premium
+
+performance great looks and high
+
+durability at the best possible price
+
+quality ratio you wanted the best you
+
+got it thanks for watching and that's
+
+all for now i hope to see you guys in
+
+the next video till next time see you
+
+
   <div>
 
   
