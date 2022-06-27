@@ -19,7 +19,7 @@ On this review for the best vlogging camera we will take you a journey to explor
 
 ## 5. DJI POCKET 2
 
-
+<br>
    
 <a href="https://www.amazon.com/dp/B08HWCCS6S?pd_rd_i=B08HWCCS6S&pf_rd_p=8df9856b-9cff-4e77-9cb1-dc4719b9c19d&pf_rd_r=P08AST4DCDMCRV2KPHMM&pd_rd_wg=Jb2S1&pd_rd_w=2PbtK&pd_rd_r=ea67d43e-12b0-4791-8aca-24ca2e164e76&linkCode=li3&tag=18640a-20&linkId=d6d3008aa6c9933d215ebea07c3e481c&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08HWCCS6S&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08HWCCS6S" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
@@ -46,10 +46,10 @@ In low lighting dji pocket 2 can take photos with a maximum resolution of 64 the
  Althought it's true that we'll not reach the levels of a more professional slr camera but we can expect quality similar to that we have with some compact camera iphone 12 pro or samsung galaxy note 20 ultra the fact that this is a camera with a clean and simple gimbal helps a lot to keep the quality solid especially
 
 
- we can zoom from four times to eight times also vloggers will be interested in how the device manages speech with one hand the microphone gain level is sufficient all in all it'll satisfy everyone not just vloggers it gives you better results than a smartphone and still fits in your pocket 
+ We can zoom from four times to eight times also vloggers will be interested in how the device manages speech with one hand the microphone gain level is sufficient all in all it'll satisfy everyone not just vloggers it gives you better results than a smartphone and still fits in your pocket 
 
 
-A Small in size camera but powerfull in field the dji pocket 2 camera has all you need to get start on shooting and vlogging weather its clear sound high quality videos ,  photos, 90 degree selfie mode and more
+A small in size camera but powerfull in field the dji pocket 2 camera has all you need to get start on shooting and vlogging weather its clear sound high quality videos ,  photos, 90 degree selfie mode and more
 Although dji may not be suitable for profisional photographers but it will give you a good tip to explore the world of photography
 
 
@@ -58,6 +58,7 @@ Although dji may not be suitable for profisional photographers but it will give 
 
 ## 4. CANON EOS M50 MARK II
 
+<br>
 
 <a href="https://www.amazon.com/Canon-Content-Mirrorless-Vlogging-Microphone/dp/B08YP52CV4?crid=2ZJXXD0O397XU&keywords=CANON+EOS+M50+MARK+II&qid=1656316288&sprefix=canon+eos+m50+mark+ii%2Caps%2C1802&sr=8-2&linkCode=li3&tag=18640a-20&linkId=d00dc76f20f368e0e16e9fa768c5a945&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08YP52CV4&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08YP52CV4" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
@@ -86,7 +87,7 @@ The eos m50 has shown that this is a great camera even for some serious professi
 <a href="https://www.amazon.com/dp/B08FF55MV4?pd_rd_i=B08FF55MV4&pf_rd_p=7672bfb7-93b0-4322-b745-2104db09c4df&pf_rd_r=F4K6WDNH7BH27JTK788K&pd_rd_wg=K4i3n&pd_rd_w=rm8HT&pd_rd_r=dfa9e933-51cc-4341-b300-956486ab8c2c&linkCode=li3&tag=18640a-20&linkId=276ca5d705381e61e43db1c86dca5db4&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08FF55MV4&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08FF55MV4" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
-The best premium vlogging camera on the market in 2022 a key advantage of mirrorless cameras is their smaller size and lighter weight compared to the dslr models
+The best premium vlogging camera on the market, a key advantage of mirrorless cameras is their smaller size and lighter weight compared to the dslr models
 
 
  For the panasonic lumix s5 the manufacturers managed to fit everything into a body that is actually smaller than the panasonic gh5 a much smaller model with a much smaller sensor impressive by default 
@@ -120,6 +121,7 @@ articulated touch screen
 
 ### 2. SONY ZV1
 
+<br>
 
 <a href="https://www.amazon.com/Sony-Content-Creators-Vlogging-Microphone/dp/B08965JV8D?crid=3KKWMZYYMG9BG&keywords=sony+zv1&qid=1656316586&sprefix=SONY+ZV1%2Caps%2C1279&sr=8-1&linkCode=li3&tag=18640a-20&linkId=43f7827f8602879b1d7e4ea4286f3dad&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08965JV8D&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08965JV8D" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
@@ -164,6 +166,7 @@ So weather you are creating content for youtube faceboo, or taking photos to pos
    
 ## 1.  FUJIFILM XS10
 
+<br>
 
 <a href="https://www.amazon.com/Fujifilm-X-S10-Mirrorless-XF16-80mm-Kit/dp/B08KYFG4LC?keywords=FUJIFILM+XS10&qid=1656316703&sr=8-1&linkCode=li3&tag=18640a-20&linkId=d555d9294f809e2b58b1fdc15df10528&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08KYFG4LC&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08KYFG4LC" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
