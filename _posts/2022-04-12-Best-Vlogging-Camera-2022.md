@@ -201,6 +201,18 @@ In terms of speed and autofocus the sensor uses a combination of phase and contr
 This model stands out thanks to the body image stabilization feature the sensor is mounted on a 5-axis stabilization system where image quality at higher iso ratings is on par with the best models overall this product delivers premium performance great looks and high durability 
 
 
+<script type="text/javascript">
+amzn_assoc_tracking_id = "18640a-20";
+amzn_assoc_ad_mode = "manual";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_design = "enhanced_links";
+amzn_assoc_asins = "B08KYFG4LC";
+amzn_assoc_placement = "adunit";
+amzn_assoc_linkid = "a72040ec07fd3667235f6ef8808e9ddb";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
 
 
