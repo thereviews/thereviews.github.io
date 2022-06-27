@@ -115,7 +115,18 @@ as well as great colors and balanced exposures a set of 20 to ml is a graet opti
 articulated touch screen 
 
 
-
+<script type="text/javascript">
+amzn_assoc_tracking_id = "18640a-20";
+amzn_assoc_ad_mode = "manual";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_design = "enhanced_links";
+amzn_assoc_asins = "B08FF55MV4";
+amzn_assoc_placement = "adunit";
+amzn_assoc_linkid = "1330d63c029584409ee235969d85b481";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
 
 
