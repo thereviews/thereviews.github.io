@@ -19,7 +19,12 @@ On this review for the best vlogging camera we will take you a journey to explor
 
 ## 5. DJI POCKET 2
 
+
    
+<a href="https://www.amazon.com/dp/B08HWCCS6S?pd_rd_i=B08HWCCS6S&pf_rd_p=8df9856b-9cff-4e77-9cb1-dc4719b9c19d&pf_rd_r=P08AST4DCDMCRV2KPHMM&pd_rd_wg=Jb2S1&pd_rd_w=2PbtK&pd_rd_r=ea67d43e-12b0-4791-8aca-24ca2e164e76&linkCode=li3&tag=18640a-20&linkId=d6d3008aa6c9933d215ebea07c3e481c&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08HWCCS6S&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08HWCCS6S" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
+
 
 Dji pocket2 the best portable vlogging camera available on the market in 2022 we're looking at an off-road camera with a compact size excellent stabilization and
 top-notch photo and video quality 
