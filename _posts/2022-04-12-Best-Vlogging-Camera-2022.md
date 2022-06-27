@@ -82,6 +82,19 @@ The m50 mark ii comes with a clear hdmi output so you can record to an external 
 The eos m50 has shown that this is a great camera even for some serious professional applications also if you think autofocus is key to your content then you should choose the mark ii for the listed price we are thoroughly impressed.
 
 
+<script type="text/javascript">
+amzn_assoc_tracking_id = "18640a-20";
+amzn_assoc_ad_mode = "manual";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_design = "enhanced_links";
+amzn_assoc_asins = "B08YP52CV4";
+amzn_assoc_placement = "adunit";
+amzn_assoc_linkid = "98b8aeb201ca9ff995d6c9ea44095cf7";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+
 
 
 ## 3. PASSONIC LUMIX S5
