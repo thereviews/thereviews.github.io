@@ -52,7 +52,8 @@ In low lighting dji pocket 2 can take photos with a maximum resolution of 64 the
 A small in size camera but powerfull in field the dji pocket 2 camera has all you need to get start on shooting and vlogging weather its clear sound high quality videos ,  photos, 90 degree selfie mode and more
 Although dji may not be suitable for profisional photographers but it will give you a good tip to explore the world of photography
 
-
+<button class="block" style="display: block; width: 100%; border: none; background-color: blue; color: white; padding: 14px 28px; font-size: 16px; cursor: pointer; text-align: center; hover:background-color: #ddd;
+  color: black;">Block Button</button>
 
 
 
