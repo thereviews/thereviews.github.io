@@ -52,8 +52,6 @@ In low lighting dji pocket 2 can take photos with a maximum resolution of 64 the
 A small in size camera but powerfull in field the dji pocket 2 camera has all you need to get start on shooting and vlogging weather its clear sound high quality videos ,  photos, 90 degree selfie mode and more
 Although dji may not be suitable for profisional photographers but it will give you a good tip to explore the world of photography
 
-<button class="block" style="display: block; width: 100%; border: none; background-color: blue; color: white; padding: 14px 28px; font-size: 16px; cursor: pointer; text-align: center; text-color:black ">Block Button</button>
-
 
 
 <script type="text/javascript">
@@ -109,7 +107,8 @@ amzn_assoc_linkid = "98b8aeb201ca9ff995d6c9ea44095cf7";
 </script>
 <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
-
+<br>
+<br>
 
 ## 3. PASSONIC LUMIX S5
 
@@ -141,6 +140,8 @@ as well as great colors and balanced exposures a set of 20 to ml is a graet opti
  The video quality is also excellent with very smooth and detailed images the image quality is exceptional which is perhaps the most important thing the camera body is also well designed with a meaningless ergonomic design a very good electronic viewfinder and a very welcome fully
 articulated touch screen 
 
+<br>
+<br>
 
 <script type="text/javascript">
 amzn_assoc_tracking_id = "18640a-20";
@@ -193,7 +194,8 @@ In the connectivity department this camera has bluetooth and wifi connection whi
 
 So weather you are creating content for youtube faceboo, or taking photos to post on instagram this camera is for you with all the features above and more this camera will get a long your journey throught social media or profisional photographer
 
-
+<br>
+<br>
 
 <script type="text/javascript">
 amzn_assoc_tracking_id = "18640a-20";
@@ -249,6 +251,7 @@ In terms of speed and autofocus the sensor uses a combination of phase and contr
 
 This model stands out thanks to the body image stabilization feature the sensor is mounted on a 5-axis stabilization system where image quality at higher iso ratings is on par with the best models overall this product delivers premium performance great looks and high durability 
 
+<br>
 
 <script type="text/javascript">
 amzn_assoc_tracking_id = "18640a-20";
