@@ -164,6 +164,10 @@ So weather you are creating content for youtube faceboo, or taking photos to pos
    
 ## 1.  FUJIFILM XS10
 
+
+<a href="https://www.amazon.com/Fujifilm-X-S10-Mirrorless-XF16-80mm-Kit/dp/B08KYFG4LC?keywords=FUJIFILM+XS10&qid=1656316703&sr=8-1&linkCode=li3&tag=18640a-20&linkId=d555d9294f809e2b58b1fdc15df10528&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08KYFG4LC&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08KYFG4LC" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
 fujifilm xs10 puts the proven x trans image sensor and autofocus system in a new body style it is the lightest x-series camera with built-in stabilization and
 includes 4k shooting mode and a front screen for vloggers
 
