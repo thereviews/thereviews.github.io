@@ -55,6 +55,20 @@ Although dji may not be suitable for profisional photographers but it will give 
 <button class="block" style="display: block; width: 100%; border: none; background-color: blue; color: white; padding: 14px 28px; font-size: 16px; cursor: pointer; text-align: center; text-color:black ">Block Button</button>
 
 
+
+<script type="text/javascript">
+amzn_assoc_tracking_id = "18640a-20";
+amzn_assoc_ad_mode = "manual";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_design = "enhanced_links";
+amzn_assoc_asins = "B08HWCCS6S";
+amzn_assoc_placement = "adunit";
+amzn_assoc_linkid = "f72deecb1197902c88b2e592db9ac0b1";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+
 <br>
 <br>
 
