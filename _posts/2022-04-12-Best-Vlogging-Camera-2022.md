@@ -83,6 +83,9 @@ The eos m50 has shown that this is a great camera even for some serious professi
 ## 3. PASSONIC LUMIX S5
 
 
+<a href="https://www.amazon.com/dp/B08FF55MV4?pd_rd_i=B08FF55MV4&pf_rd_p=7672bfb7-93b0-4322-b745-2104db09c4df&pf_rd_r=F4K6WDNH7BH27JTK788K&pd_rd_wg=K4i3n&pd_rd_w=rm8HT&pd_rd_r=dfa9e933-51cc-4341-b300-956486ab8c2c&linkCode=li3&tag=18640a-20&linkId=276ca5d705381e61e43db1c86dca5db4&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08FF55MV4&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08FF55MV4" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
 the best premium vlogging camera on the market in 2022 a key advantage of mirrorless cameras is their smaller size and lighter weight compared to the dslr models
 
 
