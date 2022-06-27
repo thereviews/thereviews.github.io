@@ -58,6 +58,10 @@ Although dji may not be suitable for profisional photographers but it will give 
 
 ## 4. CANON EOS M50 MARK II
 
+
+<a href="https://www.amazon.com/Canon-Content-Mirrorless-Vlogging-Microphone/dp/B08YP52CV4?crid=2ZJXXD0O397XU&keywords=CANON+EOS+M50+MARK+II&qid=1656316288&sprefix=canon+eos+m50+mark+ii%2Caps%2C1802&sr=8-2&linkCode=li3&tag=18640a-20&linkId=d00dc76f20f368e0e16e9fa768c5a945&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08YP52CV4&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08YP52CV4" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
 the canon eos m50 mark ii the best budget vlogging camera on the market in 2022 this model comes with several enhancements and features specifically designed for use on social media and content creation.
  it's basically a revamped version of canon's earlier m50 mark 1 as the the features of the mark ii remain quite similar as it .
 
