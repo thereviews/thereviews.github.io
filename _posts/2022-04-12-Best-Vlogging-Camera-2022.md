@@ -140,8 +140,7 @@ as well as great colors and balanced exposures a set of 20 to ml is a graet opti
  The video quality is also excellent with very smooth and detailed images the image quality is exceptional which is perhaps the most important thing the camera body is also well designed with a meaningless ergonomic design a very good electronic viewfinder and a very welcome fully
 articulated touch screen 
 
-<br>
-<br>
+
 
 <script type="text/javascript">
 amzn_assoc_tracking_id = "18640a-20";
@@ -157,7 +156,8 @@ amzn_assoc_linkid = "1330d63c029584409ee235969d85b481";
 <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
 
-
+<br>
+<br>
 
 
 
@@ -194,8 +194,7 @@ In the connectivity department this camera has bluetooth and wifi connection whi
 
 So weather you are creating content for youtube faceboo, or taking photos to post on instagram this camera is for you with all the features above and more this camera will get a long your journey throught social media or profisional photographer
 
-<br>
-<br>
+
 
 <script type="text/javascript">
 amzn_assoc_tracking_id = "18640a-20";
@@ -212,7 +211,8 @@ amzn_assoc_linkid = "e192bafd97c4074d1a72d5ab55f8f1d6";
 
 
 
-
+<br>
+<br>
 
  
 
@@ -266,8 +266,8 @@ amzn_assoc_linkid = "a72040ec07fd3667235f6ef8808e9ddb";
 </script>
 <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
 
-
-
+<br>
+<br>
 
 
 
