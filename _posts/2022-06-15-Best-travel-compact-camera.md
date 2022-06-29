@@ -14,7 +14,7 @@ In this review you get what you need to know in order to pick the best camera on
 
 
 
-## 5. NIKON ZFC 
+## 5. NIKON Z6
 
 
 
