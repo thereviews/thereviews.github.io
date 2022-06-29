@@ -120,6 +120,8 @@ e sony's extra effort in the zv1 was to introduce a built-in microphone system t
 ## PASSONIC ZS200
 
 
+<a href="https://www.amazon.com/PANASONIC-DC-ZS200K-Megapixel-VARIO-ELMAR-Stabilization/dp/B079QYMWZX?keywords=panasonic+zs200&qid=1656496253&sr=8-1&linkCode=li3&tag=18640a-20&linkId=af3a60e1db01355de316831db2ed4741&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B079QYMWZX&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B079QYMWZX" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 
 
 the best compact travel camera available on the market in 2022 like the previous model it's equipped with a large sensor offering a resolution of 20 megapixels capable of recording 4k videos the zoom lens has been extended to telephoto range now zooming in at 15 times
@@ -168,8 +170,7 @@ the precision of the touch function is very high and therefore the use and pract
 
 
 
-
- ## OLYMPUS OM DE M10 MARK IV
+## OLYMPUS OM DE M10 MARK IV
 
 
 
@@ -241,8 +242,7 @@ the em-10 mark iv captures a significantly greater dynamic range compared to sma
 
 
 
-
- ## FUJIFILM XS-10
+## FUJIFILM XS-10
 
 
 
