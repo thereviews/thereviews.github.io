@@ -14,7 +14,7 @@ In this review you get what you need to know in order to pick the best camera on
 
 
 
-## NIKON ZFC 
+## 5. NIKON ZFC 
 
 
 
@@ -63,7 +63,7 @@ the nikon zfc is a compact 20.9 megapixel aps-c camera unlike nikon's previous m
 
 
 
-## SONY ZV1
+## 4. SONY ZV1
 
 
 
@@ -117,7 +117,7 @@ e sony's extra effort in the zv1 was to introduce a built-in microphone system t
 
 
 
-## PASSONIC ZS200
+## 3. PASSONIC ZS200
 
 
 <a href="https://www.amazon.com/PANASONIC-DC-ZS200K-Megapixel-VARIO-ELMAR-Stabilization/dp/B079QYMWZX?keywords=panasonic+zs200&qid=1656496253&sr=8-1&linkCode=li3&tag=18640a-20&linkId=af3a60e1db01355de316831db2ed4741&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B079QYMWZX&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B079QYMWZX" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -170,7 +170,7 @@ the precision of the touch function is very high and therefore the use and pract
 
 
 
-## OLYMPUS OM DE M10 MARK IV
+## 2. OLYMPUS OM DE M10 MARK IV
 
 
 <a href="https://www.amazon.com/Olympus-M-Zuiko-Digital-14-42mm-F3-5-5-6/dp/B08D5Z7BK9?crid=XZD0LQDOV2O9&keywords=olympus+om-d+e-m10+mark+iv&qid=1656496458&sprefix=Olympus+om%2Caps%2C1101&sr=8-1&linkCode=li3&tag=18640a-20&linkId=f15376d801a314b65a26aa1e3b8561de&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08D5Z7BK9&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08D5Z7BK9" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -243,7 +243,7 @@ the em-10 mark iv captures a significantly greater dynamic range compared to sma
 
 
 
-## FUJIFILM XS-10
+## 1. FUJIFILM XS-10
 
 
 <a href="https://www.amazon.com/Fujifilm-X-S10-Mirrorless-XF16-80mm-Kit/dp/B08KYFG4LC?crid=3QVFTJN3OGE2L&keywords=Fujifilm+xs10&qid=1656496664&sprefix=%2Caps%2C649&sr=8-1&linkCode=li3&tag=18640a-20&linkId=173ee5bd241b9e8270652405c4ef7b59&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08KYFG4LC&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08KYFG4LC" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
