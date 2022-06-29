@@ -14,7 +14,11 @@ In this review you get what you need to know in order to pick the best camera on
 
 
 
-## NIKON Z6
+## NIKON ZFC 
+
+
+
+<a href="https://www.amazon.com/Nikon-FX-Format-Mirrorless-Camera-Body/dp/B07GPRSYG8?keywords=nikon+z6&qid=1656494271&sr=8-1&linkCode=li3&tag=18640a-20&linkId=a9362c40ece395a24eeef4b173c0c96f&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B07GPRSYG8&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B07GPRSYG8" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
 
@@ -50,7 +54,7 @@ This model delivers the best image quality without being unnatural also there ar
 
 
 
-the nikon z6 is a compact 20.9 megapixel aps-c camera unlike nikon's previous model which took dslr and removed features in the name of its retro reconstruction the fc is not at all distracting ,  it can take full resolution photos of up to 11 frames per second and 4k video at 30fps for up to 30 minutes at a time good stuff
+the nikon zfc is a compact 20.9 megapixel aps-c camera unlike nikon's previous model which took dslr and removed features in the name of its retro reconstruction the fc is not at all distracting ,  it can take full resolution photos of up to 11 frames per second and 4k video at 30fps for up to 30 minutes at a time good stuff
 
 
 
@@ -61,6 +65,9 @@ the nikon z6 is a compact 20.9 megapixel aps-c camera unlike nikon's previous mo
 
 ## SONY ZV1
 
+
+
+<a href="https://www.amazon.com/Sony-Content-Creators-Vlogging-Microphone/dp/B08965JV8D?keywords=Sony+ZV1&qid=1656496022&sr=8-1&linkCode=li3&tag=18640a-20&linkId=bb5af4511b6e90bd3c0f2f7f8fb726d7&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08965JV8D&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08965JV8D" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
 
