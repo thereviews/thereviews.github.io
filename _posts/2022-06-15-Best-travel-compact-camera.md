@@ -14,7 +14,7 @@ In this review you get what you need to know in order to pick the best camera on
 
 
 
-## NIKON ZFC 
+## NIKON Z6
 
 
 
@@ -50,7 +50,7 @@ This model delivers the best image quality without being unnatural also there ar
 
 
 
-the nikon zfc is a compact 20.9 megapixel aps-c camera unlike nikon's previous model which took dslr and removed features in the name of its retro reconstruction the fc is not at all distracting ,  it can take full resolution photos of up to 11 frames per second and 4k video at 30fps for up to 30 minutes at a time good stuff
+the nikon z6 is a compact 20.9 megapixel aps-c camera unlike nikon's previous model which took dslr and removed features in the name of its retro reconstruction the fc is not at all distracting ,  it can take full resolution photos of up to 11 frames per second and 4k video at 30fps for up to 30 minutes at a time good stuff
 
 
 
