@@ -246,6 +246,10 @@ the em-10 mark iv captures a significantly greater dynamic range compared to sma
 ## FUJIFILM XS-10
 
 
+<a href="https://www.amazon.com/Fujifilm-X-S10-Mirrorless-XF16-80mm-Kit/dp/B08KYFG4LC?crid=3QVFTJN3OGE2L&keywords=Fujifilm+xs10&qid=1656496664&sprefix=%2Caps%2C649&sr=8-1&linkCode=li3&tag=18640a-20&linkId=173ee5bd241b9e8270652405c4ef7b59&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08KYFG4LC&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08KYFG4LC" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
+
 
 
 fujifilm xs-10 the best overall travel camera on the market this model marks a bold new step in the company'squest to make a premium camera without mid-range mirrors taking many of the advantages of its flagship fujifilm xt4 including body image stabilization and placing them in a smaller cheaper body this model has become one of the best cameras to date for beginners and photography enthusiasts
