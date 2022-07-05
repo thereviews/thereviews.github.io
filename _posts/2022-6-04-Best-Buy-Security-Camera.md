@@ -7,183 +7,211 @@ permalink: Best-security-camera
 <br>
 
 
-## Blink Mini
 
 
-<br>
-<div>
 
-<a href="https://amzn.to/3NXrzXi">
 
-<img src="public/Blinkmini.jpg" alt=" Blink mini home security camera">
+
+
+
+ ## 5. wyzecam v3 
+
+
+
+The best budget outdoor security camera on the market , wyzecam v3 marks an upgrade from the previous version sporting a fresher look more powerful hardware and a host of other Updates
+
+
+
+
+Possibly the biggest one is the ip65 rating which makes this small camera a powerhouse for indoor and outdoor use ,  another big improvement is the 1080p color night vision thanks to the f 1.6 aperture that captures twice as much light the new lens also adds a wider 130 degree field of view for an even better view of the surroundings
+
+
+
+
+The mini intruder warnings siren and magnetic bass round up all the new stuff adding up to all the existing features such as motion and sound detection 24 7 continuous recording using a micro sd card face detection google and alexa ntegration free cloud storage and local storage options
+
+
+
+
+
+The wyzecam v3 has a smoother more modern look than V2 with rounded corners and a larger lens it is still completely plastic but is now completely white except for the black lens of course the bracket has the same adjustment flexibility allowing you to rotate the camera 360 degrees and tilt it back and forth for almost any angle
+
+
+
+A new feature in v3 is the option to remove the bracket and unfortunately the cable is only six feet long which makes it difficult to install outside without adding a waterproof Extension
+
+
+
+
+
+To set up the camera open the wise app tap add device and follow the instructions it's quick and easy, the device is full of features that even the more expensive model can't offer 1080p hd video color night vision 80 decibel siren simultaneous 2a conversion and customizable motion detection zone
+
+
+However this model will only record 12 seconds for each event with a recovery period of 5 minutes between events ,  the night vision and color is impressive with good color and better clarity
+
+
+
+it's ideal for covering a small area such as a front driveway or interior driveway for the listed price we are beyond impressed
+
+
+
+
+
+ ## 4. Ring FloodLight 
+
+
+
+ records high quality video day and night while offering efficient and clear two-way communication the addition of spotlights adds an extra layer of protection to your home
+
+
+
+Although it consists of one camera and two lights the ring camera has a relatively compact mounting plate so you can mount it on the wall relatively easily the camera module itself is quite large and is
+located at the bottom of the mounting plate as it's surrounded by flood lights that emit 3000 kelvin placing the beam and the category of warm lighting making the device ideal for outdoor use both the camera and the lights can be adjusted to deliver the best possible field of view 
+
+
+
+
+The unit can withstand temperatures from negative 20 degrees celsius to 48 degrees celsius it'll be more than able to cope with changing weather conditions the device also has two level motion detection which means that it can distinguish objects from People ,  passive infrared ring sensors are more sensitive to objects such as cars and animals but you can adjust this setting to be less sensitive and only notify you when it detects people 
+
+
+
+
+with ring video doorbell 2 you can adjust the movement zones for the floodlight camera this is achieved within the app and allows you to adjus the camera areas to observe any movement
+
+
+
+ The ring floodlight camera records full hd 1080p video both when streaming live and when it detects motion and stores the footage in the cloud for future use
+
+The quality is very good the colors are natural and the movements are smooth the delivering one of the widest angles we've seen on an outdoor camera however it only has digital zoom so when you zoom in with your fingers on your smartphone the quality is significantly affected 
+
+
+At night adding two spotlights helps illuminate a good portion of the view so you can still see what's going on floodlight cam allows you to talk to any visitor to your home whether you tell them you're away or tell them where they can go
+
+
+
+
+The sound quality of the camera is pretty good and loud whenever the floodlight camera detects movement it'll send a notification to your phone so you can immediately go to the live view and see  what caused it good stuff a thumbs up from here
+
+
+
+
+
+
+ ## 3. Blink Outdoor 
+
+
+Blinks new outdoor camera is about the same size as xt2 which measures 2.8 by 2.8 by 1.2 inches but delivers a fresh scope of improvements
+the blink outdoor base station called the blink sync module 2 connects the camera to your home wi-fi network like its predecessor 
+
+
+
+The blink outdoor is weather resistant and runs on two double a lithium batteries which should last up to two years without recharging
+
+
+
+First of all the camera lens is now flat and concave not bubble like as on the xt2 we found this helped eliminate lens flare when the sun was shining directly on the camera the colors are also a bit richer at
+night with vey good details details
+
+
+
+The microphone is quite sensitive and captures all the necessary sounds either during the day or night as low-cost home security cameras the blink app offers a multitude of customization options you can create motion and privacy zones as well as adjust clip length between 5 and 60 seconds , camera sensitivity , how long the camera waits before a new recording starts and more 
+
+
+
+
+Since the camera has a thermometer you can even get readings and notifications if the temperature
+exceeds or is below a certain threshold 
+
+
+
+Note that the blink cameras cannot detect people like other security Cameras
+
+
+Blink Outdoor is quite simple offering two years of battery life on just two double a batteries it also works with the blink home monitor app which is easy to use so you can see the live view receive motion alerts 
+
+
+If you're looking for a great completely wireless weather resistant home security camera the blink outdoor camera is the right thing to do for the listed price you can't beat this one and now we say check out th
+
+
+
+
+
+## 2. Google Nest
+
+
+Google Nest Cam with some of the same features as its indoor brother provides 24 7
+security surveillance rain or sun
+
 
  
 
- </a>
 
- 
 
-</div>
+The nest outdoor camera has a 130 degree view of your surroundings while capturing 1080p video with a 3 megapixel sensor also included in the mix is an eightfold digital zoom that provides a
+surprisingly clear image through digital enhancement in the app 
 
-Blink mini is one of the best indoor security cameras you might encounter because of all features it has which we will take a look some of them
 
-Blinki mini lets you see inside your house while away with your smart phone anytime anywhere. 
 
-Blink mini lets you Set up motion detection zones so you will be alerted right in your phone when any suspicious moves tempted. 
+the manufacturer notes that at 1080p each camera can use 140 gigabytes to 380 gigabytes of bandwidth per month for uploads which is a lot even at 720p , the camera could use between 60 gigabytes and 160 gigabytes per month 
 
-Seeing anything that is happening in your house anytime as well as hearing and with speaking them , so you can take apart on family gatherings, your visitors and friends virtually. 
 
-Enhanced audio with two way audio you can hear any one in house clear and loud.
 
-With 30 day free trail you can Record and save videos and events in your Blink app 
+the app allows you to shoot in 360p 720p and 1080p so there's a lot of flexibility the nest outdoor cam also has an impressive night vision mode that provides a clear view of the same environment at night without the need for additional lighting it is able to detect any movement and will alert you
 
-Local stronge save videos and photos locay in module sync 2 so you can re watch them any time .
 
-Alexa Asisstant enabled you can tell anything you want like disarming the camera and Livestreaming on using your voice 
 
-Any one can setup the camera as it is very easy and convenient 
+If you install the nest outdoor cam in a position near or above the front door it'll act as a good tool for monitoring and communicating with visitors thanks to its two-way communication via a built-in speaker and microphone this could be especially useful for older homeowners who are struggling to get to their front door quickly ,  the camera uses push-to-talk logic so you have to press the microphone button in the app to talk to the visitor
 
-Blink Video Doorbell to be notified anyone who pushes video doorbelll on the realtime.
 
-   
+ another cool feature of the nest outdoor is the ability to make time-lapse videos here you can capture images from the camera and turn them into 30 60 or 120 second videos in
 
-You will get with on Blink camera with mounting cable to put on the camera, USB cable to connect any device  you want and power adapter.
 
-<br>
-<br>
 
+conclusion we like the quality of images for shooting both day night the alert system for detecting people and two-way engagement to talk to visitors or reject unwanted guests whether you're at home or not  
 
-## Wyze Cam V3
 
 
-<br>
-<div>
+## 1. Arlo Pro 4 Spotlight 
 
-<a href="[https://amzn.to/3M6McPT](https://amzn.to/3NlZitf)">
 
-<img src="public/Wyze.jpg" alt=" Wyze Came v3 home security camera">
+ is the best overall outdoor security camera , the arlo pro 4 spotlight camera shares many of its predecessors features and specs but doesn't need a hub to work with it is completely protected from the weather and ready to use indoors or outdoors with or without a cable with a viewing angle of 160 degrees the battery can be easily replaced and charged separately ,  
 
- 
 
- </a>
- </div>
 
-Wyze Cam v3 is a security  camera which can be used both indoor and outdoor that will make easy to keep an eye on your home while away.
 
-Wyze Cam records videos the same quality day and night as it has stratlight sensor that will record full coloured HD video at night 
 
-Wyze can be installed outdoor and indoor no matter how weather out side is wyze can handle it
+the base station of the previous arlo camera has been Abandoned , the setup process has been
+simplified so you connect the device directly to the home wi-fi router 
 
-Use it with any phone you have weather using android or ios you can install wyze
 
-Be alerted when motion or sound is detected, wyze camera captures video anytime sound or movement is detected
 
-Customize motion detection zones to where you want the camera to be alerted when motion or sound is captured and you can completely make this feature off if you want.
 
-24 hour vidoe Recording and has 32 micro sd card
 
 
-<br>
-<br>
+When it comes to video quality the 4 megapixel sensor does a fantastic job of capturing sharp details with precise colors performance is enhanced with hdr and color night vision which help reveal details that are often lost in high contrast scenes and at night when lighting becomes challenging
 
-## Ring Indoor Cam
-  
-  
-  <br>
-  <div>
 
-<a href="https://amzn.to/3Nm7rxW">
 
-<img src="public/Ringcam.jpg" alt=" Ring indoor cam home security camera">
 
- 
+ the arlo pro 4 is also compatible with the existing arlo pro system so current users can continue to use their old base station and cameras with the new model
 
- </a>
- </div>
-  
-Ring indoor cam is a home security with HD video quality that lets you keep an eye on your home and lets you see hear and speak anyone in your home from your phone.
 
 
-Ring protect a special feature lets check and review recorded videos and save or share if you like. 
-Privacy control with control center dashboard gives you the ability to add and remove authorised clients and devices easily. 
+We're looking at a weatherproof indoor and outdoor camera with two-way sound , motion detection alerts ,  night vision color ,  12 x digital zoom built in 80 decibel siren and as the name suggests a
+high power reflector
 
 
-Compatible with alexa and echo so when ring indoor cam detects motion your echo device will make announcement.
-Connecting multiple ring indoor cam in one app to see all your entire house and monitor it.
+ The arlo pro 4 lacks nothing to worry about you can add hdr video and zoom and track of course the device also offers a sharp clear 2k video up to 2560 by 1440 where you can choose between three levels in the settings which can save bandwidth the hdr function really helps to improve the details especially when there are dark and light spots in your view 
 
 
-Live view to check what is your house is up to anytime.
-Easily setup and put it a flat surface or mount it to the wall.
 
+An adjustable field of view with 160 125 or 110 degrees gives you a multitude of options one of the best features of any arlo camera is intelligence currently the best in its class the artificial intelligence alerts allow you to choose to receive notifications only about people animals vehicles or packages
 
-<br>
-<br>
 
-## Ring Vidoe Doorbell 
-    
-  
-  <br>
-  <div>
 
-<a href="https://amzn.to/3GTtzgM">
 
-<img src="public/Ringdoorbell.jpg" alt=" Ring Video Doorbell home security camera">
+If you wish or about all movements overall this device delivers premium performance at the best possible price quality ratio 
 
- 
-
- </a>
- </div>  
-
-Ring vidoe Doorbell  is one of the best security cameras as it is a security camera  with high quality HD video and Doorbell at the same time
-
-
- With 24/7 power to keep an eye on your home anytime 
-Notification: be notified on your phone any time some one presses your doorbell then you see, hear and speak your visitors and anywhere right from your phone
-
-
-Live view buttom gives you the ability to see what is happening in front of your door 
-Get voice assistant anytime as it works with alexa 
-
-
-Even when Night and dark ring video Doorbell will give you high quality vidoe as it has Night vision feature 
-Know when some one is in your door without even pressing the ring bell  with advanced motion detection of ring Doorbell .
-Storing up to 60 days recorded videos so you can review or check if messed anything and share if want.
-
-
-<br>
-<br>
-
-## Kasa Indoor 
-      
-  
-  <br>
-  <div>
-
-<a href="https://amzn.to/3NUJz4y">
-
-<img src="public/Kasa.jpg" alt=" Kasa indoor home security camera">
-
- 
-
- </a>  
- </div>    
-
-Kasa indoor is smart camera for both indoor and outdoor which has  a tone of features .
-Scanning the home and detecting any movement and tracking it to the sight and stores the recording in the app so you can take a look any time.
-
-Smart actions feature will let you connect kasa camera and other devices so you controll all in one app
-
-Recieve alerts anytime and view live footage of your house day or night with high quality video 
-With Night vision mode which able to detect motion 30ft away at night.
-
-Setting up is pretty easy and three steps only 
-Two way communication allows you to interact Live with your loved ones at home while anywhere .
-Enjoy HD quality video of your home while away.
-
-
- kasa  will get record and store video footages in the local sd cards which able to store up to 64gb
-With Kasa you will get the ability to turn light on when detected motion.
-Supports alexa and  Google assistant so you can get live view of your home on command just ask google or alexa.
 
 
 
