@@ -63,6 +63,8 @@ it's ideal for covering a small area such as a front driveway or interior drivew
  ## 4. RING FLOODLIGHT 
 
 
+<a href="https://www.amazon.com/Ring-Floodlight-Cam-Wired-Plus/dp/B08F6GPQQ7?crid=3BX7G78YQJPP3&keywords=ring+floodlight+spotlight+camera&qid=1657094670&sprefix=Ring+floodlight+splotl%2Caps%2C624&sr=8-1&linkCode=li3&tag=18640a-20&linkId=60d63351e064da84b007a70d5bf54887&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08F6GPQQ7&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08F6GPQQ7" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 
  records high quality video day and night while offering efficient and clear two-way communication the addition of spotlights adds an extra layer of protection to your home
 
