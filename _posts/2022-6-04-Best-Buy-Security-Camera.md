@@ -14,7 +14,7 @@ permalink: Best-security-camera
 
 
 
- ##  5. WYZE CAM V3
+##  5. WYZE CAM V3
 
 
 <a href="https://www.amazon.com/Vision-Indoor-Outdoor-Camera-Assistant/dp/B08R59YH7W?crid=1XDDVBGIKLIY5&keywords=wyze+v3&qid=1657094524&sprefix=wyze+v%2Caps%2C1500&sr=8-1&linkCode=li3&tag=18640a-20&linkId=dfba6fd1c964a81a0da3512188355f5d&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08R59YH7W&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08R59YH7W" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -60,7 +60,7 @@ it's ideal for covering a small area such as a front driveway or interior drivew
 
 
 
- ## 4. RING FLOODLIGHT 
+## 4. RING FLOODLIGHT 
 
 
 <a href="https://www.amazon.com/Ring-Floodlight-Cam-Wired-Plus/dp/B08F6GPQQ7?crid=3BX7G78YQJPP3&keywords=ring+floodlight+spotlight+camera&qid=1657094670&sprefix=Ring+floodlight+splotl%2Caps%2C624&sr=8-1&linkCode=li3&tag=18640a-20&linkId=60d63351e064da84b007a70d5bf54887&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08F6GPQQ7&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08F6GPQQ7" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
@@ -102,7 +102,8 @@ The sound quality of the camera is pretty good and loud whenever the floodlight 
 
 
 
- ## 3. BLINK 
+## 3. BLINK 
+
  
  <a href="https://www.amazon.com/Blink-Outdoor-Wireless-Security-Camera-2cam/dp/B086DL32R3?crid=1NNA0V6M9Z8QV&keywords=blink+outdoor+camera&qid=1657094840&sprefix=Blink%2Caps%2C827&sr=8-1&linkCode=li3&tag=18640a-20&linkId=b19151375bcb767f97e0c08349c785d7&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B086DL32R3&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B086DL32R3" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
@@ -146,6 +147,7 @@ If you're looking for a great completely wireless weather resistant home securit
 ## 2. NEST
 
 
+
 <a href="https://www.amazon.com/Nest-Security-Matters-Anywhere-Outdoor/dp/B01I3I9L8M?crid=3A30EB19NSYG3&keywords=google+nest+camera+outdoor&qid=1657094988&sprefix=Google+nest%2Caps%2C3475&sr=8-1&linkCode=li3&tag=18640a-20&linkId=e9187e34b278b1d00f3f104e224198ae&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01I3I9L8M&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B01I3I9L8M" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
@@ -183,6 +185,10 @@ conclusion we like the quality of images for shooting both day night the alert s
 
 
 ## 1. ARLO PRO 4 
+
+
+<a href="https://www.amazon.com/Arlo-Pro-Spotlight-Camera-Wire-Free/dp/B08L75YWZK?keywords=arlo+pro+4+spotlight&qid=1657095201&sr=8-1&linkCode=li3&tag=18640a-20&linkId=42fee44ea777517d54f16302136561a0&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08L75YWZK&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08L75YWZK" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
 
 
  is the best overall outdoor security camera , the arlo pro 4 spotlight camera shares many of its predecessors features and specs but doesn't need a hub to work with it is completely protected from the weather and ready to use indoors or outdoors with or without a cable with a viewing angle of 160 degrees the battery can be easily replaced and charged separately ,  
