@@ -14,7 +14,7 @@ permalink: Best-security-camera
 
 
 
- ## 5. wyzecam v3 
+ ## 5. WYZE CAM v3 
 
 
 
@@ -57,7 +57,7 @@ it's ideal for covering a small area such as a front driveway or interior drivew
 
 
 
- ## 4. Ring FloodLight 
+ ## 4. RING FLOODLIGHT 
 
 
 
@@ -97,7 +97,7 @@ The sound quality of the camera is pretty good and loud whenever the floodlight 
 
 
 
- ## 3. Blink Outdoor 
+ ## 3. BLINK 
 
 
 Blinks new outdoor camera is about the same size as xt2 which measures 2.8 by 2.8 by 1.2 inches but delivers a fresh scope of improvements
@@ -136,7 +136,7 @@ If you're looking for a great completely wireless weather resistant home securit
 
 
 
-## 2. Google Nest
+## 2. NEST
 
 
 Google Nest Cam with some of the same features as its indoor brother provides 24 7
@@ -171,7 +171,7 @@ conclusion we like the quality of images for shooting both day night the alert s
 
 
 
-## 1. Arlo Pro 4 Spotlight 
+## 1. ARLO PRO 4 
 
 
  is the best overall outdoor security camera , the arlo pro 4 spotlight camera shares many of its predecessors features and specs but doesn't need a hub to work with it is completely protected from the weather and ready to use indoors or outdoors with or without a cable with a viewing angle of 160 degrees the battery can be easily replaced and charged separately ,  
