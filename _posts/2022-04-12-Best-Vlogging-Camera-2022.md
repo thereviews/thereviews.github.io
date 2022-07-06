@@ -26,8 +26,8 @@ On this review for the best vlogging camera we will take you a journey to explor
 
 
 
-Dji pocket2 the best portable vlogging camera available on the market in 2022 we're looking at an off-road camera with a compact size excellent stabilization and
-top-notch photo and video quality 
+Dji pocket2 the best portable vlogging camera we're looking at an off-road camera with a compact size excellent stabilization and
+top-notch photo and video quality.
 
 Althought not that  much has changed compared to the first generation but dji pocket 2 is improved where its predecessor lagged behind auto
 Focus,  battery autonomy and microphones this model's handling is comfortable with a well responsive touch screen and some well executed movements
@@ -78,7 +78,7 @@ amzn_assoc_linkid = "f72deecb1197902c88b2e592db9ac0b1";
 <a href="https://www.amazon.com/Canon-Content-Mirrorless-Vlogging-Microphone/dp/B08YP52CV4?crid=2ZJXXD0O397XU&keywords=CANON+EOS+M50+MARK+II&qid=1656316288&sprefix=canon+eos+m50+mark+ii%2Caps%2C1802&sr=8-2&linkCode=li3&tag=18640a-20&linkId=d00dc76f20f368e0e16e9fa768c5a945&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08YP52CV4&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B08YP52CV4" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
-The canon eos m50 mark ii the best budget vlogging camera on the market in 2022 this model comes with several enhancements and features specifically designed for use on social media and content creation.
+The canon eos m50 mark ii comes with several enhancements and features specifically designed for use on social media and content creation.
  It's basically a revamped version of canon's earlier m50 mark 1 as the the features of the mark ii remain quite similar as it .
 
 It has predecessor with a 24.1 megapixel cmos sensor and a digic 8 image processor that allows the camera to record 4k video at 24 frames per second in short the update includes better auto focus for both photos and videos allowing you to accurately track moving subjects within the frame 
@@ -122,7 +122,7 @@ The best premium vlogging camera on the market, a key advantage of mirrorless ca
  For the panasonic lumix s5 the manufacturers managed to fit everything into a body that is actually smaller than the panasonic gh5 a much smaller model with a much smaller sensor impressive by default 
 
 
-The s5 comes with a 20 to 60 millimeter kit lens which can be folded and fits well with a small camera size at the heart of .panasonic lumix s5  
+The S5 comes with a 20 to 60 millimeter kit lens which can be folded and fits well with a small camera size at the heart of .panasonic lumix s5  
 
 The S5 is a 24.2 megapixel sensor the same one found in its sibling the s1 placing a proven sensor in this smaller cheaper case is a smart move the s5 screen is fully
 articulated and touch sensitive.
@@ -130,10 +130,10 @@ articulated and touch sensitive.
 With 10 bit recording is available internally but you must restart the video after 30 minutes alternatively you can record an unlimited number of clips in 8k v-log recording is also available with 14 dynamic range stops also included in the mix are such cool specs as dual origin iso 4k anamorphic and timed recording
 
 
-Thet autofocus is definitely improved over the s1 series it is effective in most situations and is also decent in tracking subjects moving in a reasonably predictable way
+The autofocus is definitely improved over the s1 series it is effective in most situations and is also decent in tracking subjects moving in a reasonably predictable way
 
 
-Since the s5 uses the same sensor as the s1 we already knew that the picture and video quality would probably be very good the images contain a lot of detail
+Since the S5 uses the same sensor as the s1 we already knew that the picture and video quality would probably be very good the images contain a lot of detail
 as well as great colors and balanced exposures a set of 20 to ml is a graet optic to start with because the wide angle is wider than we usually see on most lenses
 
 
@@ -250,14 +250,14 @@ The device also includes an hdmi port and builtin a microphone input also weathe
 No matter which platform you are creating content for a massive three inch folding rear screen will be your perfect ally to see every shot perfectly
 
 
-It 20 megapixels and an equivalent focal length of 24 to 70 millimeters  this camera has an optical zoom whichspeed can be adjusted from one of the of course it allows you to record in
+It 20 megapixels and an equivalent focal length of 24 to 70 millimeters  this camera has an optical zoom which the speed can be adjusted from one of the of course it allows you to record in
 full hd and 4k resolution and even has the sound is taken care of by the top microphone which delivers a pretty decent result
 
-In the connectivity department this camera has bluetooth and wifi connection which makes it super easy to control it from a smartphone if we're talking about autonomy it remains on about 250 photos an aspect that we believe could be improved 
+In the connectivity department this camera has bluetooth and wifi connection which makes it super easy to control it from a smartphone and if we're talking about autonomy it remains on about 250 photos an aspect that we believe could be improved 
 
 
 
-So weather you are creating content for youtube faceboo, or taking photos to post on instagram this camera is for you with all the features above and more this camera will get a long your journey throught social media or profisional photographer
+So weather you are creating content for youtube facebook, or taking photos to post on instagram this camera is for you with all the features above and more this camera will get a long your journey throught social media or profisional photographer
 
 
 <script type="text/javascript">
