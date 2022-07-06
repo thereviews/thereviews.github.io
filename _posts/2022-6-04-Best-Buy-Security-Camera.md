@@ -103,6 +103,8 @@ The sound quality of the camera is pretty good and loud whenever the floodlight 
 
 
  ## 3. BLINK 
+ 
+ <a href="https://www.amazon.com/Blink-Outdoor-Wireless-Security-Camera-2cam/dp/B086DL32R3?crid=1NNA0V6M9Z8QV&keywords=blink+outdoor+camera&qid=1657094840&sprefix=Blink%2Caps%2C827&sr=8-1&linkCode=li3&tag=18640a-20&linkId=b19151375bcb767f97e0c08349c785d7&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B086DL32R3&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B086DL32R3" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 
 
 Blinks new outdoor camera is about the same size as xt2 which measures 2.8 by 2.8 by 1.2 inches but delivers a fresh scope of improvements
