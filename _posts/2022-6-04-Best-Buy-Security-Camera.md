@@ -146,6 +146,10 @@ If you're looking for a great completely wireless weather resistant home securit
 ## 2. NEST
 
 
+<a href="https://www.amazon.com/Nest-Security-Matters-Anywhere-Outdoor/dp/B01I3I9L8M?crid=3A30EB19NSYG3&keywords=google+nest+camera+outdoor&qid=1657094988&sprefix=Google+nest%2Caps%2C3475&sr=8-1&linkCode=li3&tag=18640a-20&linkId=e9187e34b278b1d00f3f104e224198ae&language=en_US&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01I3I9L8M&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=18640a-20&language=en_US" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=18640a-20&language=en_US&l=li3&o=1&a=B01I3I9L8M" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+
+
 Google Nest Cam with some of the same features as its indoor brother provides 24 7
 security surveillance rain or sun
 
