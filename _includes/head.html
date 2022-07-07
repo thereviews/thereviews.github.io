@@ -13,17 +13,7 @@
   gtag('config', 'UA-210525251-1');
 </script>
 
-  <title>
-    {% if page.title == "Home" %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
-  </title>
-
-  {% if page.url and site.baseurl %}
-  <link rel="canonical" href="{{ page.url | absolute_url }}">
-  {% endif %}
+  
 
   <link rel="stylesheet" href="{{ '/public/css/poole.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
