@@ -1,5 +1,5 @@
 ---
-title:  "Best Buy Security Camera"
+title:  " Best Buy Home Security Camera "
 description: "Make your house secure withe best home security camera"
 date:   2022-06-04
 permalink: Best-security-camera
