@@ -1,5 +1,5 @@
 ---
-title:  "Android Phone With Best Camera"
+title:  "Android Phone With Camera Like Iphone"
 description: "  1.Google pixel 5 Pro: 2. Oneplus 10 Pro : 3. Samsung Galaxy 22 Ultra ......  "
 date:   2022-08-08
 permalink: Android-with-best-camera
