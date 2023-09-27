@@ -29,3 +29,5 @@ All these details above and much more we will discuss and with each every produc
  
 Thanks for visiting I think that gave you a good display on what this blog is bout.
 
+this is my other site  [https://thetechloops.com/)
+
