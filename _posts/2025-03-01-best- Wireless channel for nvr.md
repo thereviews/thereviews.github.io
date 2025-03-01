@@ -4,7 +4,7 @@ description: "
 Struggling with NVR connectivity? Find the best wireless channel to reduce interference and boost performance. Optimize your setup now!
  ......  "
 date:   2025-03-01
-permalink: Best-wireless-channel-for-nvr
+permalink: best-wireless-channel-for-nvr
 ---
 
 
