@@ -10,26 +10,88 @@ Securing your home or business is a priority, and **NVR (Network Video Recorder)
 Whether you need a **wired PoE NVR system** for stability or a **wireless NVR** for easy setup, this guide covers the **best options for every category**.  
 
 ---
-
 ## **Best NVR Security Camera Systems (2025 Picks)**  
 
-## **Best NVR Security Camera Systems (2025 Picks)**  
+<div style="overflow-x:auto; display:block; white-space: nowrap;">
 
-## **Best NVR Security Camera Systems (2025 Picks)**  
-
-<div style="overflow-x: auto; display: block; white-space: nowrap; max-width: 100%; border: 1px solid #ddd; padding: 8px;">
-
-| **Category** | **Best Pick** | **Resolution** | **Storage** | **Key Features** | **Price** |
-|-------------|--------------|--------------|-------------|----------------|--------|
-| **Best Overall NVR System** | Reolink RLK16-810B8-A | 4K | 3TB HDD | 16 channels, AI motion alerts | $959.99 |
-| **Best AI-Powered NVR** | Swann NVR-8580 | 4K | 2TB HDD | AI human & vehicle detection | $474.95 |
-| **Best Budget 4K NVR** | ANNKE H800 | 4K | 2TB HDD | Affordable, IP67 weatherproof | $191.99 |
-| **Best Smart Home NVR** | Lorex N841A82 | 4K | 2TB HDD | Works with Alexa & Google | $157.49 |
-| **Best Expandable NVR** | Amcrest NV4108E | 4K | Expandable HDD | PoE, ONVIF compatible | $157.49 |
-| **Best Wireless NVR** | Arlo Ultra 2 | 4K | Cloud | 100% wireless, AI motion alerts | $399.99 |
-| **Best Wired PoE NVR** | Hikvision DS-7608NI-I2 | 4K | 4TB HDD | Professional-grade PoE | $579.99 |
-| **Best NVR for Businesses** | Uniview NVR302-16E | 4K | Expandable | 16 channels, advanced AI analytics | $699.99 |
-
+<table style="width: 100%; border: 1px solid #ddd; border-collapse: collapse; margin-top: 20px;">
+  <thead>
+    <tr style="background-color: #f4f4f4;">
+      <th style="padding: 8px; text-align: left;">Category</th>
+      <th style="padding: 8px; text-align: left;">Best Pick</th>
+      <th style="padding: 8px; text-align: left;">Resolution</th>
+      <th style="padding: 8px; text-align: left;">Storage</th>
+      <th style="padding: 8px; text-align: left;">Key Features</th>
+      <th style="padding: 8px; text-align: left;">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 8px; border-top: 1px solid #ddd;">Best Overall NVR System</td>
+      <td style="padding: 8px;">Reolink RLK16-810B8-A</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">3TB HDD</td>
+      <td style="padding: 8px;">16 channels, AI motion alerts</td>
+      <td style="padding: 8px;">$959.99</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best AI-Powered NVR</td>
+      <td style="padding: 8px;">Swann NVR-8580</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">2TB HDD</td>
+      <td style="padding: 8px;">AI human & vehicle detection</td>
+      <td style="padding: 8px;">$474.95</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best Budget 4K NVR</td>
+      <td style="padding: 8px;">ANNKE H800</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">2TB HDD</td>
+      <td style="padding: 8px;">Affordable, IP67 weatherproof</td>
+      <td style="padding: 8px;">$191.99</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best Smart Home NVR</td>
+      <td style="padding: 8px;">Lorex N841A82</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">2TB HDD</td>
+      <td style="padding: 8px;">Works with Alexa & Google</td>
+      <td style="padding: 8px;">$157.49</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best Expandable NVR</td>
+      <td style="padding: 8px;">Amcrest NV4108E</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">Expandable HDD</td>
+      <td style="padding: 8px;">PoE, ONVIF compatible</td>
+      <td style="padding: 8px;">$157.49</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best Wireless NVR</td>
+      <td style="padding: 8px;">Arlo Ultra 2</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">Cloud</td>
+      <td style="padding: 8px;">100% wireless, AI motion alerts</td>
+      <td style="padding: 8px;">$399.99</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best Wired PoE NVR</td>
+      <td style="padding: 8px;">Hikvision DS-7608NI-I2</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">4TB HDD</td>
+      <td style="padding: 8px;">Professional-grade PoE</td>
+      <td style="padding: 8px;">$579.99</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px;">Best NVR for Businesses</td>
+      <td style="padding: 8px;">Uniview NVR302-16E</td>
+      <td style="padding: 8px;">4K</td>
+      <td style="padding: 8px;">Expandable</td>
+      <td style="padding: 8px;">16 channels, advanced AI analytics</td>
+      <td style="padding: 8px;">$699.99</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 ---
 
