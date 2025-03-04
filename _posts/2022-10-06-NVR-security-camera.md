@@ -19,7 +19,7 @@ Whether you need a **wired PoE NVR system** for stability or a **wireless NVR** 
     <tr style="background-color: #f4f4f4;">
       <th style="padding: 8px;">Best Pick</th>
       <th style="padding: 8px;">Resolution</th>
-      <th style="padding: 8px;">**Storage**</th>
+      <th style="padding: 8px;">Storage</th>
       <th style="padding: 8px;">Price</th>
     </tr>
   </thead>
