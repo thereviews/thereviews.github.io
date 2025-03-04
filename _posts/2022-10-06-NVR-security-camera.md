@@ -13,7 +13,11 @@ Whether you need a **wired PoE NVR system** for stability or a **wireless NVR** 
 
 ## **Best NVR Security Camera Systems (2025 Picks)**  
 
-<div style="overflow-x: auto; white-space: nowrap;">
+## **Best NVR Security Camera Systems (2025 Picks)**  
+
+## **Best NVR Security Camera Systems (2025 Picks)**  
+
+<div style="overflow-x: auto; display: block; white-space: nowrap; max-width: 100%; border: 1px solid #ddd; padding: 8px;">
 
 | **Category** | **Best Pick** | **Resolution** | **Storage** | **Key Features** | **Price** |
 |-------------|--------------|--------------|-------------|----------------|--------|
