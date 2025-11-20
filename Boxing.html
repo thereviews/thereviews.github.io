@@ -57,6 +57,7 @@
     border:0; background:#007bff; 
     color:#fff; font-weight:600;
   }
+  
 </style>
   
 </head>
@@ -195,6 +196,8 @@
     // canvas fullscreen over video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
+    video.setAttribute("playsinline", "true");
+    video.style.transform = "scaleX(-1)";
   }
 
   // load detector (MoveNet singlepose lightning)
