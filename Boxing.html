@@ -1,66 +1,30 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Browser Boxing Trainer (MoveNet)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    body { margin:0; font-family:system-ui, Arial; background:#111; color:#eee; display:flex; flex-direction:column; align-items:center; }
-    #wrap { position:relative; width:100%; max-width:800px; }
-    video, canvas { width:100%; height:auto; border-radius:12px; background:#000; }
-    #hud { position:absolute; left:12px; top:12px; color:#fff; background:rgba(0,0,0,0.45); padding:8px;border-radius:8px; }
-    #controls { margin:12px 0; display:flex; gap:8px; }
-    button { padding:8px 12px; border-radius:8px; border:0; background:#2b8cff; color:#fff; font-weight:600; }
-    .stat { font-size:18px; margin-bottom:6px; }
-    #debug { font-size:12px; opacity:0.9; color:#ddd; }
-  </style>
-</head>
-<body>
-  <h2 style="margin:12px 0 6px">Browser Boxing Trainer — Front Camera</h2>
-  <div id="wrap">
-    <video id="video" autoplay playsinline muted></video>
-    <canvas id="overlay"></canvas>
-    <div id="hud">
-      <div class="stat">Jabs (Left): <span id="jabs">0</span></div>
-      <div class="stat">Crosses (Right): <span id="crosses">0</span></div>
-      <div id="debug">Status: <span id="status">idle</span></div>
-    </div>
-  </div>
-
-  <div id="controls">
-    <button id="startBtn">Start</button>
-    <button id="stopBtn" disabled>Stop</button>
-    <button id="resetBtn">Reset</button>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
-
-  <script>
-  // Simple boxer trainer using MoveNet via TF.js
-  (async ()=> {
-    const video = document.getElementById('video');
-    const overlay = document.getElementById('overlay');
-    const ctx = overlay.getContext('2d');
-    const jabsEl = document.getElementById('jabs');
-    const crossesEl = document.getElementById('crosses');
-    const statusEl = document.getElementById('status');
-    const startBtn = document.getElementById('startBtn');
-    const stopBtn = document.getElementById('stopBtn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    // state
-    let detector = null;
-    let running = false;
-    let rafId = null;
-    let jabs = 0, crosses = 0;
-    let prevLeftDist = null, prevRightDist = null;
-    let lastLeftPunchAt = 0, lastRightPunchAt = 0;
-    const punchCooldown = 400; // ms to avoid double counting
-    const speedThreshold = 0.03; // delta increase threshold (tweakable)
-
-    // Audio beep (WebAudio)
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (video.srcObject) {
+        const tracks = video.srcObject.getTracks();
+        tracks.forEach(t => t.stop());
+        video.srcObject = null;
+      }
+    });
+    resetBtn.addEventListener('click', ()=>{
+      jabs = 0; crosses = 0;
+      jabsEl.textContent = jabs; crossesEl.textContent = crosses;
+      prevLeftDist = prevRightDist = null;
+    });
+    // Auto-resize canvas on window resize
+    window.addEventListener('resize', () => {
+      if (video.videoWidth) {
+        overlay.width = video.videoWidth;
+        overlay.height = video.videoHeight;
+      }
+    });
+    // Hint: If the user interacts with the page first, resume audio context for beep
+    document.addEventListener('click', ()=> {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }, {once:true});
+    statusEl.textContent = 'ready';
+  })();
+  </script>
+</body>
+</html>    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function beep() {
       const o = audioCtx.createOscillator();
       const g = audioCtx.createGain();
