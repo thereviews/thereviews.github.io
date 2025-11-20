@@ -1,40 +1,521 @@
-      if (video.srcObject) {
-        const tracks = video.srcObject.getTracks();
-        tracks.forEach(t => t.stop());
-        video.srcObject = null;
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>AI Boxing Coach — Selfie (Portrait)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root { --bg:#0b0b0f; --panel:rgba(0,0,0,0.55); --accent:#2b8cff; --ok:#4caf50; --warn:#ffb74d; --bad:#ff5252; color-scheme: dark; }
+  body{ margin:0; background:var(--bg); color:#eee; font-family:system-ui,Arial; display:flex; flex-direction:column; align-items:center; gap:8px; padding:8px; }
+  #wrap{ position:relative; width:360px; max-width:calc(100vw - 20px); border-radius:12px; overflow:hidden; background:#000; }
+  video, canvas{ width:100%; height:auto; display:block; }
+  #hud{ position:absolute; left:8px; top:8px; background:var(--panel); padding:8px; border-radius:8px; font-size:13px; width:calc(100% - 16px); box-sizing:border-box; }
+  .row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .stat{ font-weight:700; }
+  #controls{ display:flex; gap:8px; margin-top:6px; flex-wrap:wrap; }
+  button{ background:var(--accent); color:#fff; border:0; padding:8px 10px; border-radius:8px; font-weight:700; }
+  button.secondary{ background:#444; }
+  #feedback{ margin-top:6px; min-height:28px; font-weight:700; font-size:15px; text-align:center; }
+  #summary{ width:360px; max-width:calc(100vw - 20px); background:var(--panel); padding:8px; border-radius:8px; font-size:13px; display:none; }
+  .target{ position:absolute; border-radius:50%; border:2px dashed rgba(255,255,255,0.2); pointer-events:none;}
+  small{ opacity:0.8; }
+</style>
+</head>
+<body>
+  <h3 style="margin:0">AI Boxing Coach — Selfie (Portrait)</h3>
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+
+    <div id="hud">
+      <div class="row">
+        <div><span class="stat">Jabs</span> <span id="jabs">0</span>  • <span class="stat">Crosses</span> <span id="crosses">0</span></div>
+        <div><span class="stat">Hooks</span> <span id="hooks">0</span> • <span class="stat">Uppercut</span> <span id="uppercuts">0</span></div>
+      </div>
+      <div class="row">
+        <div><small>Guard %</small> <span id="guardPercent">0%</span></div>
+        <div><small>Chin exposed</small> <span id="chinPct">0%</span></div>
+      </div>
+      <div class="row">
+        <div><small>Fastest (m/s)</small> <span id="fastest">0</span></div>
+        <div><small>Power est.</small> <span id="power">0</span></div>
+      </div>
+      <div id="debug"><small>Status: <span id="status">idle</span></small></div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" class="secondary" disabled>Stop</button>
+    <button id="resetBtn" class="secondary">Reset</button>
+    <button id="calBtn" class="secondary">Calibrate (Stand)</button>
+    <button id="summaryBtn" class="secondary">Show Summary</button>
+  </div>
+
+  <div id="feedback"></div>
+
+  <div id="summary">
+    <div><b>Session summary</b></div>
+    <div id="sumContent"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+
+<script>
+(async ()=> {
+  // Elements
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('overlay');
+  const ctx = canvas.getContext('2d');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const calBtn = document.getElementById('calBtn');
+  const summaryBtn = document.getElementById('summaryBtn');
+  const statusEl = document.getElementById('status');
+  const feedbackEl = document.getElementById('feedback');
+
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const hooksEl = document.getElementById('hooks');
+  const uppercutsEl = document.getElementById('uppercuts');
+  const guardPctEl = document.getElementById('guardPercent');
+  const chinPctEl = document.getElementById('chinPct');
+  const fastestEl = document.getElementById('fastest');
+  const powerEl = document.getElementById('power');
+  const summaryEl = document.getElementById('summary');
+  const sumContent = document.getElementById('sumContent');
+
+  // State
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let stream = null;
+
+  // counts
+  let jabs=0, crosses=0, hooks=0, uppercuts=0;
+  let frameCount = 0;
+  let guardFrames = 0; // frames where both hands near face
+  let chinExposedFrames = 0;
+  let startTime = 0;
+
+  // prev positions for velocity
+  let prevLeft = null, prevRight = null, prevNose = null;
+  let prevShoulderAngle = null;
+
+  // thresholds (tweakable)
+  const punchCooldown = 300; // ms
+  const speedThreshold = 0.035; // normalized delta per frame
+  const hookAngleThreshold = 0.45; // angle change for hook detection
+  const uppercutYThreshold = 0.02; // upward delta for uppercut
+  const guardDistThreshold = 0.18; // how close wrist must be to chin/shoulder to count as guard
+  const chinExposedThreshold = 0.22; // distance wrist->nose too large => exposed
+  const rotationPowerFactor = 1.2; // multiplier for rotation contribution to power
+
+  // last punch times
+  let lastLeftAt = 0, lastRightAt = 0;
+
+  // speech
+  const synth = window.speechSynthesis;
+
+  // helper: speak short
+  function speak(s) {
+    // try to avoid queueing too many; cancel if loud
+    if (!synth) return;
+    if (synth.speaking) {
+      // quick heuristics: don't interrupt super quick phrases
+    }
+    const ut = new SpeechSynthesisUtterance(s);
+    ut.rate = 1.05;
+    ut.pitch = 1;
+    synth.speak(ut);
+  }
+
+  // beep
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep() {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = 1000;
+    g.gain.value = 0.0001;
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.12);
+    o.stop(audioCtx.currentTime + 0.13);
+  }
+
+  // start camera (selfie)
+  async function startCamera() {
+    const constraints = { audio:false, video:{ facingMode:"user", width:{ideal:720}, height:{ideal:1280} } };
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = stream;
+    await new Promise(r => video.onloadedmetadata = r);
+    // canvas fullscreen over video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+  }
+
+  // load detector (MoveNet singlepose lightning)
+  async function loadDetector() {
+    statusEl.textContent = 'loading model...';
+    const model = poseDetection.SupportedModels.MoveNet;
+    const detectorConfig = {
+      modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+      enableSmoothing: true
+    };
+    detector = await poseDetection.createDetector(model, detectorConfig);
+    statusEl.textContent = 'model loaded';
+  }
+
+  // utilities: angle between 2D points
+  function angleBetween(a,b) {
+    return Math.atan2(b.y - a.y, b.x - a.x);
+  }
+  function dist(a,b) { return Math.hypot(a.x-b.x, a.y-b.y); }
+  function now() { return performance.now(); }
+
+  // detect punches & other signals from keypoints
+  function analyzePose(kpMap) {
+    // required keys: left_wrist, right_wrist, left_shoulder, right_shoulder, nose, left_hip, right_hip
+    const lw = kpMap['left_wrist'], rw = kpMap['right_wrist'];
+    const ls = kpMap['left_shoulder'], rs = kpMap['right_shoulder'];
+    const nose = kpMap['nose'];
+    const lHip = kpMap['left_hip'], rHip = kpMap['right_hip'];
+
+    // compute center shoulder/hip
+    const shoulderCenter = { x:(ls.x+rs.x)/2, y:(ls.y+rs.y)/2 };
+    const hipCenter = { x:(lHip.x+rHip.x)/2, y:(lHip.y+rHip.y)/2 };
+
+    // velocities (normalized coords)
+    // flipHorizontal is on when estimator runs; our coords are normalized 0..1
+    let leftVel = {x:0,y:0}, rightVel={x:0,y:0};
+    if (prevLeft) { leftVel = { x: lw.x - prevLeft.x, y: lw.y - prevLeft.y }; }
+    if (prevRight) { rightVel = { x: rw.x - prevRight.x, y: rw.y - prevRight.y }; }
+
+    // wrist distance from shoulder/face
+    const leftToShoulder = dist(lw, ls);
+    const rightToShoulder = dist(rw, rs);
+    const leftToNose = dist(lw, nose);
+    const rightToNose = dist(rw, nose);
+
+    // guard check: both wrists are close to shoulder/nose vertically (hands near face)
+    const leftGuard = (leftToShoulder < guardDistThreshold) || (leftToNose < guardDistThreshold);
+    const rightGuard = (rightToShoulder < guardDistThreshold) || (rightToNose < guardDistThreshold);
+    const bothGuard = leftGuard && rightGuard;
+
+    // chin exposed: both wrists are far from nose
+    const chinExposed = (leftToNose > chinExposedThreshold) && (rightToNose > chinExposedThreshold);
+
+    // head movement detection (nose velocity)
+    let headVel = {x:0,y:0};
+    if (prevNose) headVel = { x: nose.x - prevNose.x, y: nose.y - prevNose.y };
+
+    // torso rotation (angle between shoulders and hips)
+    const shoulderAngle = angleBetween(ls, rs); // orientation
+    const hipAngle = angleBetween(lHip, rHip);
+    const rotation = Math.abs(shoulderAngle - hipAngle); // how twisted
+    // normalize rotation to 0..pi
+    const rotNorm = Math.min(Math.PI, rotation) / Math.PI;
+
+    // Speed magnitude
+    const leftSpeed = Math.hypot(leftVel.x, leftVel.y);
+    const rightSpeed = Math.hypot(rightVel.x, rightVel.y);
+
+    // Power estimate: speed * rotation factor (rough proxy)
+    const leftPower = leftSpeed * (1 + rotNorm*rotationPowerFactor);
+    const rightPower = rightSpeed * (1 + rotNorm*rotationPowerFactor);
+
+    // classify punch events by outward motion and direction
+    const events = [];
+    const timestamp = now();
+
+    // detect left punch (outward: increase distance left wrist -> shoulder)
+    if (prevLeft) {
+      const prevDist = dist(prevLeft, ls);
+      const currDist = leftToShoulder;
+      const delta = currDist - prevDist;
+      if (delta > speedThreshold && (timestamp - lastLeftAt) > punchCooldown) {
+        // direction: if y decreases (arm upward) maybe uppercut; if large lateral => hook
+        if (Math.abs(leftVel.y) < 0.04 && Math.abs(leftVel.x) > 0.04 && Math.abs(leftVel.x) > Math.abs(leftVel.y)) {
+          // lateral strong -> hook
+          hooks++;
+          hooksEl.textContent = hooks;
+          events.push({type:'hook', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        } else if (leftVel.y < -uppercutYThreshold) {
+          // upward motion -> uppercut
+          uppercuts++;
+          uppercutsEl.textContent = uppercuts;
+          events.push({type:'uppercut', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        } else {
+          // straight outward -> jab/cross depending on shoulder rotation and power
+          jabs++;
+          jabsEl.textContent = jabs;
+          events.push({type:'jab', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        }
       }
-    });
-    resetBtn.addEventListener('click', ()=>{
-      jabs = 0; crosses = 0;
-      jabsEl.textContent = jabs; crossesEl.textContent = crosses;
-      prevLeftDist = prevRightDist = null;
-    });
-    // Auto-resize canvas on window resize
-    window.addEventListener('resize', () => {
-      if (video.videoWidth) {
-        overlay.width = video.videoWidth;
-        overlay.height = video.videoHeight;
+    }
+
+    // detect right punch
+    if (prevRight) {
+      const prevDistR = dist(prevRight, rs);
+      const currDistR = rightToShoulder;
+      const deltaR = currDistR - prevDistR;
+      if (deltaR > speedThreshold && (timestamp - lastRightAt) > punchCooldown) {
+        if (Math.abs(rightVel.y) < 0.04 && Math.abs(rightVel.x) > 0.04 && Math.abs(rightVel.x) > Math.abs(rightVel.y)) {
+          hooks++;
+          hooksEl.textContent = hooks;
+          events.push({type:'hook', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        } else if (rightVel.y < -uppercutYThreshold) {
+          uppercuts++;
+          uppercutsEl.textContent = uppercuts;
+          events.push({type:'uppercut', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        } else {
+          crosses++;
+          crossesEl.textContent = crosses;
+          events.push({type:'cross', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        }
       }
-    });
-    // Hint: If the user interacts with the page first, resume audio context for beep
-    document.addEventListener('click', ()=> {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-    }, {once:true});
-    statusEl.textContent = 'ready';
-  })();
-  </script>
+    }
+
+    // combo detection: simple sequence window approach
+    detectCombos(events);
+
+    // guard stats
+    frameCount++;
+    if (bothGuard) guardFrames++;
+    if (chinExposed) chinExposedFrames++;
+
+    // head movement cues
+    const headSpeed = Math.hypot(headVel.x, headVel.y);
+    // provide feedback if no head movement for long while but punching
+    if (headSpeed < 0.001 && (jabs+crosses+hooks+uppercuts) > 4 && (Math.random() < 0.02)) {
+      giveFeedback("Move your head!");
+    }
+
+    // if chin is exposed frequently -> warn
+    if (chinExposed && Math.random() < 0.22) {
+      giveFeedback("Chin exposed — hands up!");
+    }
+
+    // draw debug visual
+    drawOverlay(kpMap, {bothGuard, chinExposed, leftSpeed, rightSpeed, leftPower, rightPower, shoulderCenter, hipCenter});
+
+    // update prevs
+    prevLeft = {x: lw.x, y: lw.y};
+    prevRight = {x: rw.x, y: rw.y};
+    prevNose = {x: nose.x, y: nose.y};
+    prevShoulderAngle = shoulderAngle;
+
+    // return a small object for UI updates
+    return {leftSpeed, rightSpeed, leftPower, rightPower, guard: bothGuard, chinExposed, headSpeed, rotNorm};
+  }
+
+  // simple combo detector
+  let comboWindow = []; // recent events in last 700 ms
+  function detectCombos(events) {
+    const nowts = now();
+    // remove old
+    comboWindow = comboWindow.filter(e => nowts - e.t <= 700);
+    for (const ev of events) {
+      comboWindow.push({ type: ev.type, t: nowts });
+    }
+    // check sequences
+    const seq = comboWindow.map(e => e.type).join(',');
+    // basic patterns
+    if (/jab,?cross/.test(seq)) {
+      giveFeedback("Nice 1-2!");
+    }
+    if (/jab,?cross,?hook/.test(seq)) {
+      giveFeedback("Good 1-2-3!");
+    }
+  }
+
+  // show feedback text and optionally speak
+  let lastFeedbackAt = 0;
+  function giveFeedback(text, speakIt=true) {
+    const t = now();
+    // rate limit
+    if (t - lastFeedbackAt < 700) return;
+    lastFeedbackAt = t;
+    feedbackEl.textContent = text;
+    feedbackEl.style.opacity = 1;
+    setTimeout(()=> feedbackEl.style.opacity = 0.85, 50);
+    // speak
+    if (speakIt) speak(text);
+    // beep small
+    beep();
+  }
+
+  // draw overlay - skeleton + highlights
+  function drawOverlay(kpMap, meta) {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    // keypoints
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,200,255,0.9)';
+    for (const k of Object.values(kpMap)) {
+      if (k.score > 0.35) {
+        ctx.beginPath();
+        ctx.arc(k.x * w, k.y * h, 6, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+
+    // guard and chin highlight
+    ctx.save();
+    if (meta.chinExposed) {
+      ctx.strokeStyle = 'rgba(255,80,80,0.95)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(8,8,w-16,h-16);
+    } else if (meta.guard) {
+      ctx.strokeStyle = 'rgba(80,255,120,0.9)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(8,8,w-16,h-16);
+    }
+    ctx.restore();
+
+    // speed/power overlay
+    ctx.save();
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.font = '14px system-ui';
+    ctx.fillText(`Lspd:${(meta.leftSpeed||0).toFixed(3)} Rspd:${(meta.rightSpeed||0).toFixed(3)}`, 10, h - 28);
+    ctx.fillText(`Lpwr:${(meta.leftPower||0).toFixed(3)} Rpwr:${(meta.rightPower||0).toFixed(3)}`, 10, h - 10);
+    ctx.restore();
+  }
+
+  // main loop
+  async function runFrame() {
+    if (!running) return;
+    if (!detector) return;
+    try {
+      const poses = await detector.estimatePoses(video, { flipHorizontal:true });
+      if (poses && poses.length > 0) {
+        const pts = poses[0].keypoints;
+        // create map by name with normalized coords (pose-detection uses x,y 0..1 or pixels depending - here it's normalized)
+        const kpMap = {};
+        for (const k of pts) {
+          kpMap[k.name] = { x: k.x, y: k.y, score: k.score };
+        }
+        const res = analyzePose(kpMap);
+        // update UI numbers
+        fastestEl.textContent = Math.max(Number(fastestEl.textContent)||0, (res.leftSpeed||0).toFixed(3), (res.rightSpeed||0).toFixed(3));
+        powerEl.textContent = Math.max(Number(powerEl.textContent)||0, (res.leftPower||0).toFixed(3), (res.rightPower||0).toFixed(3));
+        guardPctEl.textContent = Math.round((guardFrames/frameCount||0)*100) + '%';
+        chinPctEl.textContent = Math.round((chinExposedFrames/frameCount||0)*100) + '%';
+      } else {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+    } catch (err) {
+      console.error('estimation error', err);
+      statusEl.textContent = 'error';
+    }
+    raf = requestAnimationFrame(runFrame);
+  }
+
+  // controls
+  startBtn.onclick = async () => {
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    resetBtn.disabled = false;
+    statusEl.textContent = 'starting camera...';
+    try {
+      await startCamera();
+    } catch (e) {
+      alert('Camera error: '+ (e.message || e));
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      return;
+    }
+    if (!detector) await loadDetector();
+    running = true;
+    startTime = Date.now();
+    statusEl.textContent = 'running';
+    runFrame();
+    // resume audio context on first user gesture if required
+    document.addEventListener('click', ()=> { if (audioCtx.state === 'suspended') audioCtx.resume(); }, {once:true});
+  };
+
+  stopBtn.onclick = () => {
+    running = false;
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    statusEl.textContent = 'stopped';
+    if (raf) cancelAnimationFrame(raf);
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach(t => t.stop());
+      stream = null;
+    }
+  };
+
+  resetBtn.onclick = () => {
+    jabs = crosses = hooks = uppercuts = 0;
+    jabsEl.textContent = 0; crossesEl.textContent=0; hooksEl.textContent=0; uppercutsEl.textContent=0;
+    frameCount = guardFrames = chinExposedFrames = 0;
+    prevLeft = prevRight = prevNose = null;
+    feedbackEl.textContent = '';
+    fastestEl.textContent = '0';
+    powerEl.textContent = '0';
+    summaryEl.style.display = 'none';
+  };
+
+  calBtn.onclick = () => {
+    // quick simple calibration: ask user to stand naturally and press calibrate -> compute guardDistThreshold adaptively
+    giveFeedback("Calibrating — stand relaxed under camera");
+    setTimeout(()=> {
+      // use current wrist-to-nose distances to adapt thresholds if we have prev positions
+      if (prevLeft && prevRight && prevNose) {
+        // compute avg dist
+        const avgLeft = dist(prevLeft, prevNose);
+        const avgRight = dist(prevRight, prevNose);
+        const avg = (avgLeft + avgRight) / 2;
+        // set guard threshold to slightly larger than avg * 1.4
+        // keep it constrained
+        // since coords are normalized, typical avg might be ~0.12-0.18 depending on framing
+        const newGuard = Math.max(0.10, Math.min(0.28, avg * 1.4));
+        // update threshold (note: this is per-session)
+        window.guardDistThreshold = newGuard; // not used directly in analyze, but let user know
+        giveFeedback("Calibration done");
+        // show in debug
+        console.log('calibrated guardDistThreshold ->', newGuard);
+      } else {
+        giveFeedback("Stand in frame for a second and try again");
+      }
+    }, 900);
+  };
+
+  summaryBtn.onclick = () => {
+    const duration = Math.round((Date.now() - startTime)/1000) || 0;
+    const guardPct = Math.round((guardFrames/frameCount||0)*100);
+    const chinPct = Math.round((chinExposedFrames/frameCount||0)*100);
+    sumContent.innerHTML = `
+      <div>Duration: ${duration}s</div>
+      <div>Jabs: ${jabs} • Crosses: ${crosses} • Hooks: ${hooks} • Uppercuts: ${uppercuts}</div>
+      <div>Guard on time: ${guardPct}%</div>
+      <div>Chin exposed time: ${chinPct}%</div>
+      <div>Fastest speed observed: ${fastestEl.textContent}</div>
+      <div>Max power est: ${powerEl.textContent}</div>
+    `;
+    summaryEl.style.display = 'block';
+  };
+
+  // init ready
+  statusEl.textContent = 'ready';
+})();
+</script>
 </body>
-</html>    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function beep() {
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = 'sine';
-      o.frequency.value = 880;
-      g.gain.value = 0.0001;
-      o.connect(g); g.connect(audioCtx.destination);
-      o.start();
-      g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.14);
+                                            </html>      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.14);
       o.stop(audioCtx.currentTime + 0.15);
     }
 
