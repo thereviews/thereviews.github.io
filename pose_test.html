@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pose Landmark Test</title>
+<style>
+  body{
+    margin:0; background:#000; display:flex; justify-content:center; align-items:center; height:100vh;
+    font-family:Arial; color:white;
+  }
+  video, canvas{
+    position:absolute; width:100vw; height:100vh; object-fit:cover; transform:scaleX(-1);
+  }
+  #msg{
+    position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.5);
+    padding:6px 10px; border-radius:5px; font-size:14px;
+  }
+</style>
+</head>
+<body>
+
+<video id="cam" autoplay playsinline muted></video>
+<canvas id="cvs"></canvas>
+<div id="msg">Loading model...</div>
+
+<!-- MediaPipe -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/pose.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js"></script>
+
+<script>
+(async ()=>{
+  const video = document.getElementById('cam');
+  const canvas = document.getElementById('cvs');
+  const ctx = canvas.getContext('2d');
+  const msg = document.getElementById('msg');
+
+  const pose = new Pose.Pose({
+    locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/${file}`
+  });
+
+  pose.setOptions({
+    modelComplexity:0,   // LITE model (optimized for A04e)
+    selfieMode:true,
+    smoothLandmarks:true,
+    minDetectionConfidence:0.55,
+    minTrackingConfidence:0.55
+  });
+
+  pose.onResults(res=>{
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    ctx.save();
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(res.image,0,0,canvas.width,canvas.height);
+
+    if(res.poseLandmarks){
+      drawConnectors(ctx,res.poseLandmarks,Pose.POSE_CONNECTIONS,{color:'#00FFFF',lineWidth:3});
+      drawLandmarks(ctx,res.poseLandmarks,{color:'#FF00FF',radius:4});
+      msg.textContent = "Tracking... Move your arms!";
+      msg.style.background="rgba(0,150,0,0.7)";
+    } else {
+      msg.textContent = "Stand in frame!";
+      msg.style.background="rgba(150,0,0,0.7)";
+    }
+
+    ctx.restore();
+  });
+
+  // Camera Init
+  const stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:"user" } });
+  video.srcObject = stream;
+
+  await new Promise(r=>video.onloadedmetadata=r);
+
+  const camera = new Camera(video,{
+    onFrame: async ()=>{ await pose.send({image:video}); },
+    width: video.videoWidth, height: video.videoHeight
+  });
+
+  camera.start();
+
+})();
+</script>
+</body>
+</html>
