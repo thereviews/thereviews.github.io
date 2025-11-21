@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camera Test</title>
+<style>
+  body{
+    margin:0; background:#000; display:flex; justify-content:center; align-items:center; height:100vh;
+    font-family:Arial; color:white;
+  }
+  video{
+    width:100vw; height:100vh; object-fit:cover; transform:scaleX(-1);
+  }
+  #msg{
+    position:absolute; top:10px; left:10px; background:rgba(255,0,0,0.6);
+    padding:6px 10px; border-radius:5px; font-size:14px;
+  }
+</style>
+</head>
+<body>
+
+<video id="cam" autoplay playsinline></video>
+<div id="msg">Requesting camera...</div>
+
+<script>
+(async ()=>{
+  const video = document.getElementById('cam');
+  const msg = document.getElementById('msg');
+
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" }, 
+      audio:false
+    });
+    video.srcObject = stream;
+    msg.textContent = "Camera ON";
+    msg.style.background="rgba(0,255,0,0.6)";
+  }catch(e){
+    msg.innerHTML = "Camera ERROR:<br>" + e.message + "<br><br>Try:<br>- Chrome<br>- Allow permission";
+  }
+})();
+</script>
+
+</body>
+</html>
