@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Boxing Debug — BlazePose (Lite)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{margin:0;background:#000;color:#fff;font-family:system-ui,Arial;display:flex;flex-direction:column;align-items:center;}
+    h3{margin:8px 0;}
+    #wrap{position:relative;width:100vw;max-width:460px;height:78vh;border-radius:10px;overflow:hidden;background:#000;}
+    video, canvas{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+    #hud{position:absolute;top:6px;left:6px;right:6px;background:rgba(0,0,0,0.45);padding:6px;border-radius:8px;font-size:13px;display:flex;justify-content:space-between;}
+    #log{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(0,0,0,0.6);padding:6px;border-radius:8px;font-size:12px;max-height:110px;overflow:auto;}
+    #controls{margin:10px 0;display:flex;gap:8px;}
+    button{padding:8px 12px;border-radius:8px;border:0;background:#007bff;color:#fff;font-weight:700;}
+    .alert{position:absolute;left:50%;transform:translateX(-50%);bottom:60px;background:rgba(255,60,60,0.9);padding:8px 14px;border-radius:8px;font-weight:800;display:none;}
+  </style>
+</head>
+<body>
+  <h3>Boxing Debug — BlazePose (Lite)</h3>
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="canvas"></canvas>
+
+    <div id="hud">
+      <div>Jabs: <span id="jabs">0</span></div>
+      <div>Crosses: <span id="crosses">0</span></div>
+      <div>Detected: <span id="detCount">0</span></div>
+      <div>Status: <span id="status">idle</span></div>
+    </div>
+
+    <div id="log">Console log will appear here.</div>
+    <div id="alert" class="alert">Hands up!</div>
+  </div>
+
+  <div id="controls">
+    <button id="start">Start</button>
+    <button id="stop" disabled>Stop</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <!-- MediaPipe Pose -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/pose.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+
+  <script>
+  (async ()=>{
+
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const jabsEl = document.getElementById('jabs');
+    const crossesEl = document.getElementById('crosses');
+    const detCountEl = document.getElementById('detCount');
+    const statusEl = document.getElementById('status');
+    const logEl = document.getElementById('log');
+    const alertEl = document.getElementById('alert');
+
+    const startBtn = document.getElementById('start');
+    const stopBtn = document.getElementById('stop');
+    const resetBtn = document.getElementById('reset');
+
+    // debug logger (append)
+    function dbg(msg){
+      console.log(msg);
+      logEl.innerText = msg + "\n" + logEl.innerText;
+    }
+
+    // simple voice (rate-limited)
+    let lastSpeak = 0;
+    function speak(text){
+      const now = Date.now();
+      if(now - lastSpeak < 700) return; // rate-limit
+      lastSpeak = now;
+      const ut = new SpeechSynthesisUtterance(text);
+      ut.rate = 1.05;
+      ut.pitch = 1;
+      speechSynthesis.speak(ut);
+    }
+
+    // detection state
+    let jabs=0, crosses=0;
+    let running=false;
+    let camera = null;
+
+    // prev distances for punch detection
+    let prevLeftDist = null, prevRightDist = null;
+    let lastLeftAt = 0, lastRightAt = 0;
+    const punchCooldown = 300; // ms
+    const deltaThreshold = 0.035; // tweakable; higher = needs stronger movement
+
+    // create Pose (BlazePose Lite)
+    const pose = new Pose.Pose({
+      locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/${f}`
+    });
+
+    pose.setOptions({
+      modelComplexity: 0,        // LITE
+      smoothLandmarks: true,
+      enableSegmentation: false,
+      minDetectionConfidence: 0.45,
+      minTrackingConfidence: 0.45
+    });
+
+    pose.onResults(onResults);
+
+    function drawPoints(landmarks){
+      if(!landmarks) return;
+      ctx.save();
+      const w = canvas.width, h = canvas.height;
+      for(let i=0;i<landmarks.length;i++){
+        const lm = landmarks[i];
+        if(!lm) continue;
+        // only draw confident points (z exists but not normalized; we use presence)
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(0,200,255,0.95)';
+        ctx.arc(lm.x * w, lm.y * h, 6, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    // analyze pose for boxing events
+    function analyze(landmarks){
+      if(!landmarks) return 0;
+      // landmarks index: (MediaPipe BlazePose)
+      // 0 nose, 11 left_shoulder, 12 right_shoulder, 15 left_wrist, 16 right_wrist
+      const nose = landmarks[0];
+      const leftShoulder = landmarks[11];
+      const rightShoulder = landmarks[12];
+      const leftWrist = landmarks[15];
+      const rightWrist = landmarks[16];
+
+      // count detected landmarks
+      let count = 0;
+      [nose,leftShoulder,rightShoulder,leftWrist,rightWrist].forEach(x=>{ if(x && !isNaN(x.x)) count++; });
+
+      // Guard check: wrists too low compared to nose -> warn
+      if(nose && leftWrist && rightWrist){
+        const leftLow = leftWrist.y > nose.y + 0.06;
+        const rightLow = rightWrist.y > nose.y + 0.06;
+        if(leftLow || rightLow){
+          alertEl.style.display = 'block';
+          speak("Hands up!");
+        } else {
+          alertEl.style.display = 'none';
+        }
+      }
+
+      // Punch detection by distance wrist -> shoulder (normalized coords)
+      const now = Date.now();
+      if(leftWrist && leftShoulder){
+        const d = Math.hypot(leftWrist.x - leftShoulder.x, leftWrist.y - leftShoulder.y);
+        if(prevLeftDist !== null){
+          const delta = d - prevLeftDist;
+          if(delta > deltaThreshold && (now - lastLeftAt) > punchCooldown){
+            jabs++;
+            jabsEl.innerText = jabs;
+            lastLeftAt = now;
+            speak("Jab");
+            dbg("Detected left jab (delta=" + delta.toFixed(3) + ")");
+          }
+        }
+        prevLeftDist = d;
+      } else prevLeftDist = null;
+
+      if(rightWrist && rightShoulder){
+        const d2 = Math.hypot(rightWrist.x - rightShoulder.x, rightWrist.y - rightShoulder.y);
+        if(prevRightDist !== null){
+          const delta2 = d2 - prevRightDist;
+          if(delta2 > deltaThreshold && (now - lastRightAt) > punchCooldown){
+            crosses++;
+            crossesEl.innerText = crosses;
+            lastRightAt = now;
+            speak("Cross");
+            dbg("Detected right cross (delta=" + delta2.toFixed(3) + ")");
+          }
+        }
+        prevRightDist = d2;
+      } else prevRightDist = null;
+
+      return count;
+    }
+
+    function onResults(results){
+      try{
+        // draw camera frame
+        ctx.save();
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if(results.image) ctx.drawImage(results.image,0,0,canvas.width,canvas.height);
+        ctx.restore();
+
+        const landmarks = results.poseLandmarks;
+        const detCount = analyze(landmarks);
+        detCountEl.innerText = detCount;
+        drawPoints(landmarks);
+
+      } catch(err){
+        dbg("onResults ERROR: " + err);
+        console.error(err);
+      }
+    }
+
+    // Start button handler
+    startBtn.onclick = async ()=>{
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      statusEl.innerText = 'starting camera...';
+      dbg("Requesting camera permission...");
+
+      try{
+        const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:"user", width:{ideal:720}, height:{ideal:1280}}, audio:false});
+        video.srcObject = stream;
+        video.style.transform = "scaleX(-1)"; // mirror selfie
+        await new Promise(r=>video.onloadedmetadata=r);
+
+        // set canvas size to video size
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // Camera helper from MediaPipe; call pose.send each frame
+        camera = new Camera(video, {
+          onFrame: async () => {
+            try{
+              await pose.send({image: video});
+            }catch(e){
+              // frame send error
+              dbg("pose.send error: " + e);
+            }
+          },
+          width: video.videoWidth,
+          height: video.videoHeight
+        });
+
+        camera.start();
+        running = true;
+        statusEl.innerText = 'running';
+        dbg("Camera started. Video size: " + video.videoWidth + "x" + video.videoHeight);
+      } catch(e){
+        dbg("Camera start failed: " + e);
+        statusEl.innerText = 'camera error';
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    };
+
+    stopBtn.onclick = ()=>{
+      if(camera) camera.stop();
+      const s = video.srcObject;
+      if(s) s.getTracks().forEach(t=>t.stop());
+      running = false;
+      statusEl.innerText = 'stopped';
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      dbg("Stopped. Cleared camera.");
+    };
+
+    resetBtn.onclick = ()=>{
+      jabs = crosses = 0;
+      jabsEl.innerText = jabs; crossesEl.innerText = crosses;
+      prevLeftDist = prevRightDist = null;
+      dbg("Counters reset.");
+    };
+
+    // initial logs
+    dbg("Ready. Press Start.");
+    statusEl.innerText = 'ready';
+
+  })();
+  </script>
+</body>
+</html>
