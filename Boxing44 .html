@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Boxing Trainer</title>
+
+<style>
+body { margin:0; font-family:Arial;background:#000;color:#fff;text-align:center; }
+#wrapper { position:relative; max-width:800px; margin:auto; }
+video, canvas { width:100%; border-radius:10px; background:#000; }
+#hud { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); padding:8px 12px;border-radius:8px;font-size:18px; }
+button{padding:10px 16px;margin:6px;border-radius:8px;border:0;background:#2b8cff;color:#fff;font-weight:bold;}
+</style>
+</head>
+
+<body>
+<h2>AI Boxing Trainer — Experimental</h2>
+
+<div id="wrapper">
+  <video id="video" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+  <div id="hud">
+    Jabs: <span id="jabs">0</span><br>
+    Crosses: <span id="crosses">0</span><br>
+    <span id="status">Loading...</span>
+  </div>
+</div>
+
+<button id="start">Start</button>
+<button id="stop" disabled>Stop</button>
+<button id="reset">Reset</button>
+
+<!-- 🔥 Correct Working Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.13.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@4.1.1"></script>
+
+<script>
+(async()=>{
+  const v = document.getElementById('video');
+  const c = document.getElementById('overlay');
+  const ctx = c.getContext('2d');
+  const jabEl = document.getElementById('jabs');
+  const crossEl = document.getElementById('crosses');
+  const statusEl = document.getElementById('status');
+  const startBtn = document.getElementById('start');
+  const stopBtn = document.getElementById('stop');
+  const resetBtn = document.getElementById('reset');
+
+  tf.env().set('WEBGL_CPU_FORWARD', false);
+  await tf.setBackend('webgl');
+
+  let detector, running=false, jabs=0, crosses=0;
+  let prevL=null, prevR=null;
+
+  async function startCam(){
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video:{ facingMode:'user', width:{ideal:720}, height:{ideal:720}}, audio:false
+    });
+    v.srcObject=stream;
+    await v.play();
+    c.width=v.videoWidth; c.height=v.videoHeight;
+  }
+
+  async function loadModel(){
+    statusEl.textContent='Loading Model...';
+    detector = await poseDetection.createDetector(
+      poseDetection.SupportedModels.MoveNet,{
+        modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER,
+        enableSmoothing:true
+      }
+    );
+    statusEl.textContent='Ready';
+  }
+
+  function draw(kp){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle='cyan';
+    kp.forEach(p=>{
+      if(p.score>0.4){
+        ctx.beginPath();
+        ctx.arc(p.x*c.width,p.y*c.height,6,0,6.28);
+        ctx.fill();
+      }
+    });
+  }
+
+  function runLoop(){
+    if(!running) return;
+    detector.estimatePoses(v,{flipHorizontal:true}).then(res=>{
+      if(res.length>0){
+        const k=res[0].keypoints;
+        draw(k);
+
+        const Lw=k[9], Rw=k[10], Ls=k[5], Rs=k[6];
+        if(Lw&&Ls&&Lw.score>0.4){
+          let d=Math.hypot(Lw.x-Ls.x,Lw.y-Ls.y);
+          if(prevL!=null && d-prevL>0.03){ jabs++; jabEl.textContent=jabs; }
+          prevL=d;
+        }
+        if(Rw&&Rs&&Rw.score>0.4){
+          let d=Math.hypot(Rw.x-Rs.x,Rw.y-Rs.y);
+          if(prevR!=null && d-prevR>0.03){ crosses++; crossEl.textContent=crosses; }
+          prevR=d;
+        }
+      }
+    });
+    requestAnimationFrame(runLoop);
+  }
+
+  startBtn.onclick= async()=>{
+    startBtn.disabled=true; stopBtn.disabled=false;
+    await startCam(); await loadModel();
+    running=true; statusEl.textContent='Running';
+    runLoop();
+  };
+  stopBtn.onclick=()=>{ running=false; stopBtn.disabled=true; startBtn.disabled=false; }
+  resetBtn.onclick=()=>{ jabs=crosses=0; jabEl.textContent=crossEl.textContent=0;}
+
+})();
+</script>
+</body>
+</html>
