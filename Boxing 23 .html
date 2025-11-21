@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Browser Boxing Trainer (MoveNet)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { margin:0; font-family:system-ui, Arial; background:#111; color:#eee; display:flex; flex-direction:column; align-items:center; }
+    #wrap { position:relative; width:100%; max-width:800px; }
+    video, canvas { width:100%; height:auto; border-radius:12px; background:#000; }
+    #hud { position:absolute; left:12px; top:12px; color:#fff; background:rgba(0,0,0,0.45); padding:8px;border-radius:8px; }
+    #controls { margin:12px 0; display:flex; gap:8px; }
+    button { padding:8px 12px; border-radius:8px; border:0; background:#2b8cff; color:#fff; font-weight:600; }
+    .stat { font-size:18px; margin-bottom:6px; }
+    #debug { font-size:12px; opacity:0.9; color:#ddd; }
+  </style>
+</head>
+<body>
+  <h2 style="margin:12px 0 6px">Browser Boxing Trainer — Front Camera</h2>
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+    <div id="hud">
+      <div class="stat">Jabs (Left): <span id="jabs">0</span></div>
+      <div class="stat">Crosses (Right): <span id="crosses">0</span></div>
+      <div id="debug">Status: <span id="status">ready</span></div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+
+  <script>
+  (async ()=> {
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+    const ctx = overlay.getContext('2d');
+    const jabsEl = document.getElementById('jabs');
+    const crossesEl = document.getElementById('crosses');
+    const statusEl = document.getElementById('status');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let detector = null, running = false, rafId = null;
+    let jabs = 0, crosses = 0;
+    let prevLeftDist = null, prevRightDist = null;
+    let lastLeftPunchAt = 0, lastRightPunchAt = 0;
+
+    const speedThreshold = 0.03;
+    const cooldown = 350;
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep() {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.value = 0.0001;
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.14);
+      o.stop(audioCtx.currentTime + 0.15);
+    }
+
+    async function startCamera() {
+      const constraints = { audio:false, video:{ facingMode:"user", width:{ideal:1280}, height:{ideal:720} }};
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = stream;
+      await new Promise(r => video.onloadedmetadata = r);
+      overlay.width = video.videoWidth;
+      overlay.height = video.videoHeight;
+    }
+
+    async function loadDetector() {
+      statusEl.textContent = 'loading model...';
+      detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, {
+        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+        enableSmoothing:true
+      });
+      statusEl.textContent = 'model loaded';
+    }
+
+    function drawKeypoints(kp) {
+      ctx.clearRect(0,0,overlay.width,overlay.height);
+      ctx.fillStyle = 'rgba(0,200,255,0.9)';
+      ctx.strokeStyle = 'rgba(0,200,255,0.9)';
+      ctx.lineWidth = 2;
+
+      for (const p of kp) {
+        if (p.score > 0.3) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 6,0,Math.PI*2);
+          ctx.fill();
+        }
+      }
+    }
+
+    function now(){return performance.now();}
+
+    async function runFrame(){
+      if(!running || !detector) return;
+      const poses = await detector.estimatePoses(video,{flipHorizontal:true});
+      if (poses && poses.length>0){
+        const kp = poses[0].keypoints;
+        drawKeypoints(kp);
+
+        // FIXED landmark referencing (indexes)
+        const LW = kp[15], RW = kp[16]; // wrists
+        const LS = kp[11], RS = kp[12]; // shoulders
+
+        if (LW && LS && LW.score>0.3 && LS.score>0.3){
+          const distL = Math.hypot(LW.x-LS.x, LW.y-LS.y);
+          if (prevLeftDist != null){
+            const d = distL - prevLeftDist;
+            if (d > speedThreshold && now()-lastLeftPunchAt > cooldown){
+              jabs++; jabsEl.textContent = jabs; lastLeftPunchAt = now(); beep();
+            }
+          }
+          prevLeftDist = distL;
+        }
+
+        if (RW && RS && RW.score>0.3 && RS.score>0.3){
+          const distR = Math.hypot(RW.x-RS.x, RW.y-RS.y);
+          if (prevRightDist != null){
+            const d2 = distR - prevRightDist;
+            if (d2 > speedThreshold && now()-lastRightPunchAt > cooldown){
+              crosses++; crossesEl.textContent = crosses; lastRightPunchAt = now(); beep();
+            }
+          }
+          prevRightDist = distR;
+        }
+      }
+
+      rafId = requestAnimationFrame(runFrame);
+    }
+
+    startBtn.addEventListener('click', async ()=>{
+      startBtn.disabled = true; stopBtn.disabled = false;
+      statusEl.textContent = 'starting camera...';
+      try { await startCamera(); }
+      catch(e){ alert("Camera error: "+e.message); startBtn.disabled=false; stopBtn.disabled=true; return; }
+
+      if(!detector) await loadDetector();
+      running = true; statusEl.textContent = 'running'; runFrame();
+    });
+
+    stopBtn.addEventListener('click', ()=>{
+      running = false; startBtn.disabled = false; stopBtn.disabled = true; statusEl.textContent='stopped';
+      if (rafId) cancelAnimationFrame(rafId);
+      if (video.srcObject){
+        video.srcObject.getTracks().forEach(t=>t.stop());
+        video.srcObject=null;
+      }
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      jabs=0; crosses=0;
+      jabsEl.textContent = jabs; crossesEl.textContent=crosses;
+      prevLeftDist=null; prevRightDist=null;
+    });
+
+    document.addEventListener('click', ()=>{ if(audioCtx.state==='suspended') audioCtx.resume(); }, {once:true});
+  })();
+  </script>
+</body>
+</html>
