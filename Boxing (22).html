@@ -561,157 +561,17 @@
 })();
 </script>
 </body>
-  <script>
-                                            </html>      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.14);
-      o.stop(audioCtx.currentTime + 0.15);
-    }
-
-    // Start camera (front)
-    async function startCamera() {
-      // prefer front camera
-      const constraints = { audio:false, video: { facingMode: "user", width: { ideal: 1280 }, height:{ ideal: 720 } } };
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      video.srcObject = stream;
-      await new Promise(r => video.onloadedmetadata = r);
-      overlay.width = video.videoWidth;
-      overlay.height = video.videoHeight;
-    }
-
-    // Load MoveNet Lightning model via pose-detection API
-    async function loadDetector() {
-      statusEl.textContent = 'loading model...';
-      const model = poseDetection.SupportedModels.MoveNet;
-      const detectorConfig = {
-        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
-        enableSmoothing: true
-      };
-      detector = await poseDetection.createDetector(model, detectorConfig);
-      statusEl.textContent = 'model loaded';
-    }
-
-    function drawKeypoints(keypoints) {
-      ctx.clearRect(0,0,overlay.width,overlay.height);
-      ctx.strokeStyle = 'rgba(0,200,255,0.9)';
-      ctx.lineWidth = 2;
-      for (const kp of keypoints) {
-        if (kp.score > 0.3) {
-          ctx.beginPath();
-          ctx.arc(kp.x * overlay.width, kp.y * overlay.height, 6,0,Math.PI*2);
-          ctx.fillStyle = 'rgba(0,200,255,0.9)';
-          ctx.fill();
-        }
-      }
-    }
-
-    function now() { return (new Date()).getTime(); }
-
-    // main loop
-    async function runFrame() {
-      if (!running) return;
-      if (!detector) return;
-      const poses = await detector.estimatePoses(video, {flipHorizontal: true});
-      if (poses && poses.length > 0) {
-        const kp = poses[0].keypoints.reduce((m,k)=>{m[k.name]=k; return m;},{});
-        drawKeypoints(Object.values(kp));
-
-        // required points
-        const leftW = kp['left_wrist'], rightW = kp['right_wrist'];
-        const leftS = kp['left_shoulder'], rightS = kp['right_shoulder'];
-
-        // check confidence
-        if (leftW && leftS && leftW.score>0.3 && leftS.score>0.3) {
-          // normalized distance wrist->shoulder
-          const dxL = leftW.x - leftS.x;
-          const dyL = leftW.y - leftS.y;
-          const distL = Math.hypot(dxL, dyL); // in normalized coords (0..1)
-          if (prevLeftDist != null) {
-            const delta = distL - prevLeftDist;
-            // detect quick outward move (increase in distance)
-            if (delta > speedThreshold && now() - lastLeftPunchAt > punchCooldown) {
-              jabs++; jabsEl.textContent = jabs; lastLeftPunchAt = now(); beep();
-            }
-          }
-          prevLeftDist = distL;
-        } else {
-          prevLeftDist = null;
-        }
-
-        if (rightW && rightS && rightW.score>0.3 && rightS.score>0.3) {
-          const dxR = rightW.x - rightS.x;
-          const dyR = rightW.y - rightS.y;
-          const distR = Math.hypot(dxR, dyR);
-          if (prevRightDist != null) {
-            const deltaR = distR - prevRightDist;
-            if (deltaR > speedThreshold && now() - lastRightPunchAt > punchCooldown) {
-              crosses++; crossesEl.textContent = crosses; lastRightPunchAt = now(); beep();
-            }
-          }
-          prevRightDist = distR;
-        } else {
-          prevRightDist = null;
-        }
-      } else {
-        ctx.clearRect(0,0,overlay.width,overlay.height);
-      }
-
-      rafId = requestAnimationFrame(runFrame);
-    }
-
-    // Controls
-    startBtn.addEventListener('click', async ()=>{
-      startBtn.disabled = true;
-      stopBtn.disabled = false;
-      resetBtn.disabled = false;
-      statusEl.textContent = 'starting camera...';
-      try {
-        await startCamera();
-      } catch (e) {
-        alert("Camera error: " + e.message + "\nMake sure the page is allowed to use the camera.");
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
-        return;
-      }
-      if (!detector) await loadDetector();
-      running = true;
-      statusEl.textContent = 'running';
-      runFrame();
-    });
-
-    stopBtn.addEventListener('click', ()=>{
-      running = false;
-      startBtn.disabled = false;
-      stopBtn.disabled = true;
-      statusEl.textContent = 'stopped';
-      if (rafId) cancelAnimationFrame(rafId);
-      // stop camera tracks
-      if (video.srcObject) {
-        const tracks = video.srcObject.getTracks();
-        tracks.forEach(t => t.stop());
-        video.srcObject = null;
-      }
-    });
-
-    resetBtn.addEventListener('click', ()=>{
-      jabs = 0; crosses = 0;
-      jabsEl.textContent = jabs; crossesEl.textContent = crosses;
-      prevLeftDist = prevRightDist = null;
-    });
-
-    // Auto-resize canvas on window resize
-    window.addEventListener('resize', () => {
-      if (video.videoWidth) {
-        overlay.width = video.videoWidth;
-        overlay.height = video.videoHeight;
-      }
-    });
-
-    // Hint: If the user interacts with the page first, resume audio context for beep
-    document.addEventListener('click', ()=> {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-    }, {once:true});
-
-    statusEl.textContent = 'ready';
-  })();
-  </script>
-</body>
-                                       </html>
+  
+                                            </html>  
+                                              
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
