@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>AI Boxing Trainer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  body{margin:0;background:#111;color:#eee;font-family:system-ui;display:flex;flex-direction:column;align-items:center}
+  #wrap{position:relative;max-width:800px;width:100%}
+  video,canvas{width:100%;border-radius:12px;background:#000}
+  #hud{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.55);padding:10px 12px;border-radius:8px;font-size:17px}
+  button{padding:8px 14px;border:0;border-radius:8px;background:#3b99ff;color:#fff;font-weight:600;margin:8px 4px}
+</style>
+
+<!-- === FIXED CDN LINKS === -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@3.6.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+
+<script>
+  tf.setBackend('webgl');   // <-- important for Samsung A04e!
+</script>
+</head>
+
+<body>
+  <h2 style="margin:8px 0;">AI Boxing Trainer 🥊</h2>
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+
+    <div id="hud">
+      <div>🥊 Jabs (Left): <span id="jabs">0</span></div>
+      <div>💥 Crosses (Right): <span id="crosses">0</span></div>
+      <div>Status: <span id="status">ready</span></div>
+    </div>
+  </div>
+
+  <div>
+      <button id="startBtn">Start</button>
+      <button id="stopBtn" disabled>Stop</button>
+      <button id="resetBtn">Reset</button>
+  </div>
+
+<script>
+(async ()=>{
+  const video=document.getElementById('video');
+  const canvas=document.getElementById('overlay');
+  const ctx=canvas.getContext('2d');
+
+  const jabsEl=document.getElementById('jabs');
+  const crossesEl=document.getElementById('crosses');
+  const statusEl=document.getElementById('status');
+  const startBtn=document.getElementById('startBtn');
+  const stopBtn=document.getElementById('stopBtn');
+  const resetBtn=document.getElementById('resetBtn');
+
+  let detector=null, running=false, rafId=null;
+  let jabs=0, crosses=0;
+  let prevL=null, prevR=null;
+  let lastL=0, lastR=0;
+  const cooldown=350;
+  const speedThreshold = 0.015;  // <-- more sensitive for low camera
+
+  // IMPORTANT: more reliable beep for Android
+  const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  function beep(){
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+    o.type="square"; o.frequency.value=850;
+    g.gain.value=0.15; o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime+0.12);
+  }
+
+  async function startCamera(){
+    const stream=await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:"user",width:{ideal:640},height:{ideal:480}}, audio:false
+    });
+    video.srcObject=stream;
+    await new Promise(res=> video.onloadedmetadata=res);
+    canvas.width=video.videoWidth;
+    canvas.height=video.videoHeight;
+  }
+
+  async function loadModel(){
+    statusEl.textContent="loading model...";
+    detector=await poseDetection.createDetector(
+      poseDetection.SupportedModels.MoveNet,
+      {modelType:'lightning'}
+    );
+    statusEl.textContent="model loaded";
+  }
+
+  function drawKeypoints(kp){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="rgba(0,255,200,0.9)";
+    ctx.strokeStyle="rgba(0,255,200,0.9)";
+    ctx.lineWidth=4;
+
+    kp.forEach(p=>{
+      if(p.score>0.45){
+        const x=p.x*canvas.width, y=p.y*canvas.height;
+        ctx.beginPath(); ctx.arc(x,y,10,0,Math.PI*2); ctx.fill();
+      }
+    });
+  }
+
+  function now(){return performance.now();}
+
+  async function runFrame(){
+    if(!running) return;
+    const poses=await detector.estimatePoses(video,{flipHorizontal:true});
+    if(poses.length>0){
+      const kps=poses[0].keypoints;
+      drawKeypoints(kps);
+
+      const Lw=kps.find(x=>x.name==="left_wrist");
+      const Rw=kps.find(x=>x.name==="right_wrist");
+      const Ls=kps.find(x=>x.name==="left_shoulder");
+      const Rs=kps.find(x=>x.name==="right_shoulder");
+
+      if(Lw&&Ls&&Lw.score>0.45&&Ls.score>0.45){
+        const d=Math.hypot(Lw.x-Ls.x,Lw.y-Ls.y);
+        if(prevL!==null && d-prevL>speedThreshold && now()-lastL>cooldown){
+          jabs++; jabsEl.textContent=jabs; lastL=now(); beep();
+        }
+        prevL=d;
+      }
+      if(Rw&&Rs&&Rw.score>0.45&&Rs.score>0.45){
+        const d=Math.hypot(Rw.x-Rs.x,Rw.y-Rs.y);
+        if(prevR!==null && d-prevR>speedThreshold && now()-lastR>cooldown){
+          crosses++; crossesEl.textContent=crosses; lastR=now(); beep();
+        }
+        prevR=d;
+      }
+    }
+    rafId=requestAnimationFrame(runFrame);
+  }
+
+  startBtn.onclick=async()=>{
+    startBtn.disabled=true; stopBtn.disabled=false;
+    await startCamera();
+    if(!detector) await loadModel();
+    running=true; statusEl.textContent="running"; runFrame();
+  };
+
+  stopBtn.onclick=()=>{
+    running=false; startBtn.disabled=false; stopBtn.disabled=true;
+    if(rafId) cancelAnimationFrame(rafId);
+    if(video.srcObject) video.srcObject.getTracks().forEach(t=>t.stop());
+    statusEl.textContent="stopped";
+  };
+
+  resetBtn.onclick=()=>{
+    jabs=0; crosses=0;
+    jabsEl.textContent=jabs; crossesEl.textContent=crosses;
+    prevL=prevR=null;
+  };
+
+  document.addEventListener('click',()=> audioCtx.resume(), {once:true});
+})();
+</script>
+</body>
+</html>
