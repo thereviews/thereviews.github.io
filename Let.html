@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Browser Boxing Trainer (MoveNet)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { margin:0; font-family:system-ui, Arial; background:#111; color:#eee; display:flex; flex-direction:column; align-items:center; }
+    #wrap { position:relative; width:100%; max-width:800px; }
+    video, canvas { width:100%; height:auto; border-radius:12px; background:#000; }
+    #hud { position:absolute; left:12px; top:12px; color:#fff; background:rgba(0,0,0,0.45); padding:8px;border-radius:8px; }
+    #controls { margin:12px 0; display:flex; gap:8px; }
+    button { padding:8px 12px; border-radius:8px; border:0; background:#2b8cff; color:#fff; font-weight:600; }
+    .stat { font-size:18px; margin-bottom:6px; }
+    #debug { font-size:12px; opacity:0.9; color:#ddd; }
+  </style>
+</head>
+<body>
+  <h2 style="margin:12px 0 6px">Browser Boxing Trainer — Front Camera</h2>
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+    <div id="hud">
+      <div class="stat">Jabs (Left): <span id="jabs">0</span></div>
+      <div class="stat">Crosses (Right): <span id="crosses">0</span></div>
+      <div id="debug">Status: <span id="status">idle</span></div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <!-- CORRECT CDN LINKS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@4.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.15.0"></script>
+
+  <script>
+  (async ()=>{
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+    const ctx = overlay.getContext('2d');
+    const jabsEl = document.getElementById('jabs');
+    const crossesEl = document.getElementById('crosses');
+    const statusEl = document.getElementById('status');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let detector = null;
+    let running = false;
+    let rafId = null;
+    let jabs = 0, crosses = 0;
+    let prevLeftDist = null, prevRightDist = null;
+    let lastLeftPunchAt = 0, lastRightPunchAt = 0;
+
+    // REALISTIC SPEED (STRONG THRESHOLDS)
+    const punchCooldown = 350; 
+    const speedThreshold = 0.055;
+
+    // Beep
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep() {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine';
+      o.frequency.value = 880;
+      g.gain.value = 0.0001;
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start();
+      g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.14);
+      o.stop(audioCtx.currentTime + 0.15);
+    }
+
+    async function startCamera() {
+      const constraints = { audio:false, video: { facingMode:"user", width:{ideal:720}, height:{ideal:1280} } };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      video.srcObject = stream;
+      await new Promise(r => video.onloadedmetadata = r);
+      overlay.width = video.videoWidth;
+      overlay.height = video.videoHeight;
+    }
+
+    async function loadDetector() {
+      statusEl.textContent = 'loading model...';
+      const model = poseDetection.SupportedModels.MoveNet;
+      detector = await poseDetection.createDetector(model, {
+        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+        enableSmoothing:true
+      });
+      statusEl.textContent = 'model loaded';
+    }
+
+    // DRAW + FIX scaling
+    function drawKeypoints(keypoints) {
+      ctx.clearRect(0,0,overlay.width,overlay.height);
+      ctx.fillStyle = 'rgba(0,255,255,0.9)';
+      keypoints.forEach(k=>{
+        if (k.score>0.35) {
+          ctx.beginPath();
+          ctx.arc(k.x, k.y, 6, 0, Math.PI*2);
+          ctx.fill();
+        }
+      });
+    }
+
+    function dist(a,b){ return Math.hypot(a.x - b.x, a.y - b.y); }
+    function now(){ return (new Date()).getTime(); }
+
+    async function runFrame() {
+      if (!running || !detector) return;
+      const poses = await detector.estimatePoses(video, {flipHorizontal:true});
+      if (poses && poses.length>0) {
+        const kp=poses[0].keypoints;
+        drawKeypoints(kp);
+
+        const leftW = kp.find(x=>x.name==='left_wrist');
+        const rightW = kp.find(x=>x.name==='right_wrist');
+        const leftS = kp.find(x=>x.name==='left_shoulder');
+        const rightS = kp.find(x=>x.name==='right_shoulder');
+
+        if (leftW?.score>0.35 && leftS?.score>0.35) {
+          const d = dist(leftW,leftS) / overlay.height;
+          if (prevLeftDist!=null && d-prevLeftDist > speedThreshold && now()-lastLeftPunchAt > punchCooldown){
+            jabs++; jabsEl.textContent=jabs; lastLeftPunchAt=now(); beep();
+          }
+          prevLeftDist=d;
+        } else prevLeftDist=null;
+
+        if (rightW?.score>0.35 && rightS?.score>0.35) {
+          const d = dist(rightW,rightS) / overlay.height;
+          if (prevRightDist!=null && d-prevRightDist > speedThreshold && now()-lastRightPunchAt > punchCooldown){
+            crosses++; crossesEl.textContent=crosses; lastRightPunchAt=now(); beep();
+          }
+          prevRightDist=d;
+        } else prevRightDist=null;
+      }
+      rafId=requestAnimationFrame(runFrame);
+    }
+
+    startBtn.addEventListener('click', async ()=>{
+      startBtn.disabled=true; stopBtn.disabled=false;
+      statusEl.textContent='starting camera...';
+      await startCamera();
+      if (!detector) await loadDetector();
+      running=true; statusEl.textContent='running';
+      runFrame();
+    });
+
+    stopBtn.addEventListener('click', ()=>{
+      running=false; startBtn.disabled=false; stopBtn.disabled=true;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (video.srcObject) video.srcObject.getTracks().forEach(t=>t.stop());
+      statusEl.textContent='stopped';
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      jabs=0; crosses=0;
+      jabsEl.textContent=jabs; crossesEl.textContent=crosses;
+      prevLeftDist=prevRightDist=null;
+    });
+
+    document.addEventListener('click', ()=> { if(audioCtx.state==='suspended') audioCtx.resume(); }, {once:true});
+    statusEl.textContent='ready';
+  })();
+  </script>
+</body>
+</html>
