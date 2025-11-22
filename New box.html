@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Browser Boxing Trainer (BlazePose)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { margin:0; font-family:system-ui, Arial; background:#111; color:#eee; display:flex; flex-direction:column; align-items:center; }
+  #wrap { position:relative; width:100%; max-width:800px; }
+  video, canvas { width:100%; height:auto; border-radius:12px; background:#000; transform:scaleX(-1); }
+  #hud { position:absolute; left:12px; top:12px; color:#fff; background:rgba(0,0,0,0.45); padding:8px;border-radius:8px; }
+  #controls { margin:12px 0; display:flex; gap:8px; }
+  button { padding:8px 12px; border-radius:8px; border:0; background:#2b8cff; color:#fff; font-weight:600; }
+  .stat { font-size:18px; margin-bottom:6px; }
+  #debug { font-size:12px; opacity:0.9; color:#ddd; }
+</style>
+</head>
+<body>
+
+<h2 style="margin:12px 0 6px">Browser Boxing Trainer — Front Camera</h2>
+<div id="wrap">
+  <video id="video" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+  <div id="hud">
+    <div class="stat">Jabs (Left): <span id="jabs">0</span></div>
+    <div class="stat">Crosses (Right): <span id="crosses">0</span></div>
+    <div id="debug">Status: <span id="status">idle</span></div>
+  </div>
+</div>
+
+<div id="controls">
+  <button id="startBtn">Start</button>
+  <button id="stopBtn" disabled>Stop</button>
+  <button id="resetBtn">Reset</button>
+</div>
+
+<!-- Mediapipe BlazePose Lite Runtime -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/pose.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
+<script>
+(async ()=> {
+  const video = document.getElementById('video');
+  const overlay = document.getElementById('overlay');
+  const ctx = overlay.getContext('2d');
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const statusEl = document.getElementById('status');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  let running = false;
+  let jabs = 0, crosses = 0;
+  let prevLeft=null, prevRight=null;
+  let lastLeftPunch=0, lastRightPunch=0;
+
+  const speedThreshold = 0.03;
+  const cooldown = 350;
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep(){
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type='sine'; osc.frequency.value=880;
+    gain.gain.value=0.0001;
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.15);
+    osc.stop(audioCtx.currentTime + 0.16);
+  }
+
+  // Setup BlazePose
+  const pose = new Pose.Pose({
+    locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/${file}`
+  });
+
+  pose.setOptions({
+    modelComplexity: 0,  // LITE model = faster
+    selfieMode: true,
+    smoothLandmarks: true,
+    minDetectionConfidence: 0.45,
+    minTrackingConfidence: 0.45
+  });
+
+  pose.onResults(results=>{
+    if(!running) return;
+
+    const W = video.videoWidth, H = video.videoHeight;
+    overlay.width = W; overlay.height = H;
+
+    ctx.save();
+    ctx.clearRect(0,0,W,H);
+    ctx.drawImage(results.image,0,0,W,H);
+
+    if(results.poseLandmarks){
+      // Draw landmarks
+      const utils = new DrawingUtils(ctx);
+      utils.drawLandmarks(results.poseLandmarks,{radius:5,color:"#00FFFF"});
+      utils.drawConnectors(results.poseLandmarks, Pose.POSE_CONNECTIONS, {color:"#FF00FF", lineWidth:3});
+      statusEl.textContent="running";
+
+      // Normalized punch logic
+      const Lw=results.poseLandmarks[15], Rw=results.poseLandmarks[16];
+      const Ls=results.poseLandmarks[11], Rs=results.poseLandmarks[12];
+
+      const S = Math.min(W,H);
+      if(Lw && Ls){
+        const dx=(Lw.x*S - Ls.x*S)/S;
+        const dy=(Lw.y*S - Ls.y*S)/S;
+        const d=Math.hypot(dx,dy);
+        if(prevLeft!=null && (d-prevLeft)>speedThreshold && (performance.now()-lastLeftPunch)>cooldown){
+          jabs++; jabsEl.textContent=jabs; lastLeftPunch=performance.now(); beep();
+        }
+        prevLeft=d;
+      }
+
+      if(Rw && Rs){
+        const dx=(Rw.x*S - Rs.x*S)/S;
+        const dy=(Rw.y*S - Rs.y*S)/S;
+        const d=Math.hypot(dx,dy);
+        if(prevRight!=null && (d-prevRight)>speedThreshold && (performance.now()-lastRightPunch)>cooldown){
+          crosses++; crossesEl.textContent=crosses; lastRightPunch=performance.now(); beep();
+        }
+        prevRight=d;
+      }
+
+    } else {
+      statusEl.textContent="stand in frame";
+    }
+
+    ctx.restore();
+  });
+
+  // Camera start
+  async function startCamera(){
+    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}});
+    video.srcObject = stream;
+    await new Promise(r=>video.onloadedmetadata=r);
+    const camera = new Camera(video, {onFrame: async ()=>{await pose.send({image:video});}});
+    camera.start();
+  }
+
+  // Control buttons
+  startBtn.addEventListener("click", async()=>{
+    startBtn.disabled=true; stopBtn.disabled=false;
+    statusEl.textContent="starting camera...";
+    await startCamera();
+    running=true; statusEl.textContent="running";
+  });
+
+  stopBtn.addEventListener("click",()=>{
+    running=false; startBtn.disabled=false; stopBtn.disabled=true;
+    statusEl.textContent="stopped";
+    if(video.srcObject){
+      video.srcObject.getTracks().forEach(t=>t.stop());
+      video.srcObject=null;
+    }
+  });
+
+  resetBtn.addEventListener("click",()=>{
+    jabs=0; crosses=0; jabsEl.textContent=0; crossesEl.textContent=0;
+    prevLeft=null; prevRight=null;
+  });
+
+  document.addEventListener("click",()=>{ if(audioCtx.state==="suspended") audioCtx.resume(); },{once:true});
+})();
+</script>
+</body>
+</html>
