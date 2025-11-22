@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BlazePose Detection Test</title>
+<style>
+  body{margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;}
+  video,canvas{
+    position:absolute;width:100vw;height:100vh;object-fit:cover;
+    transform:scaleX(-1); /* selfie mirror */
+    background:#000;
+  }
+  #msg{
+    position:absolute;top:10px;left:10px;padding:6px 10px;border-radius:5px;
+    background:rgba(0,0,0,0.5);color:#fff;font-family:Arial;font-size:14px;
+  }
+</style>
+</head>
+<body>
+
+<video id="cam" autoplay playsinline muted></video>
+<canvas id="cvs"></canvas>
+<div id="msg">Loading...</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/pose.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js"></script>
+
+<script>
+(async ()=>{
+  const video = document.getElementById("cam");
+  const canvas = document.getElementById("cvs");
+  const ctx = canvas.getContext("2d");
+  const msg = document.getElementById("msg");
+
+  // BlazePose Lite
+  const pose = new Pose.Pose({
+    locateFile:file=>`https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5/${file}`
+  });
+
+  pose.setOptions({
+    modelComplexity:0,   // Lite model = fastest
+    selfieMode:true,
+    smoothLandmarks:true,
+    minDetectionConfidence:0.45,
+    minTrackingConfidence:0.45
+  });
+
+  pose.onResults(res=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(res.image,0,0,canvas.width,canvas.height);
+
+    if(res.poseLandmarks){
+      const utils = new DrawingUtils(ctx);
+      utils.drawLandmarks(res.poseLandmarks,{radius:4,color:"#00FFFF"});
+      utils.drawConnectors(res.poseLandmarks, Pose.POSE_CONNECTIONS,{color:"#FF0077",lineWidth:3});
+      msg.textContent="Tracking...";
+      msg.style.background="rgba(0,150,0,0.6)";
+    } else {
+      msg.textContent="No detection";
+      msg.style.background="rgba(150,0,0,0.6)";
+    }
+  });
+
+  // Camera
+  const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}});
+  video.srcObject = stream;
+  await new Promise(r => video.onloadedmetadata = r);
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  new Camera(video,{onFrame:async()=>{await pose.send({image:video});}}).start();
+})();
+</script>
+
+</body>
+</html>
