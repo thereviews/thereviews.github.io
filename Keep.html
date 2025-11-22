@@ -1,0 +1,335 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>AI Boxing Coach (Single File)</title>
+  <style>
+    :root{--bg:#0b1020;--card:#0f1724;--accent:#06b6d4;--muted:#94a3b8;color-scheme:dark}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#061020);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    .wrap{max-width:1100px;margin:18px auto;padding:18px;display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:12px;box-shadow:0 6px 24px rgba(2,6,23,0.6)}
+    #videoWrap{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:10px}
+    video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+    canvas.overlay{position:absolute;inset:0;pointer-events:none}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{background:var(--accent);border:none;color:#001;padding:8px 12px;border-radius:8px;font-weight:600}
+    .muted{color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .stat{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px}
+    h1{margin:6px 0 0 0;font-size:18px}
+    p.small{margin:2px 0 0 0;font-size:12px}
+    .big{font-size:28px;font-weight:700}
+    .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{padding:6px 8px;background:rgba(255,255,255,0.02);border-radius:999px;font-weight:600}
+    footer{grid-column:1/-1;margin-top:12px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="main">
+      <h1>AI Boxing Coach</h1>
+      <p class="small muted">Uses your phone front camera + TensorFlow MoveNet to estimate punches and simple boxing metrics.</p><div id="videoWrap" style="margin-top:12px">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="overlay" class="overlay"></canvas>
+  </div>
+
+  <div class="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+    <div class="chip" id="status">Idle</div>
+    <div class="chip" id="cameraInfo">Front camera</div>
+  </div>
+
+  <div style="margin-top:12px" class="legend">
+    <div class="chip">Punches: <span id="pCount">0</span></div>
+    <div class="chip">Power: <span id="power">0</span></div>
+    <div class="chip">Speed: <span id="spd">0</span> px/s</div>
+    <div class="chip">Accuracy: <span id="acc">0%</span></div>
+    <div class="chip">Chin Exposed: <span id="chin">No</span></div>
+    <div class="chip">Guard: <span id="guard">Up</span></div>
+  </div>
+</div>
+
+<div class="card" id="side">
+  <h1>Live metrics</h1>
+  <div class="stats" style="margin-top:8px">
+    <div class="stat">
+      <div class="muted">Total punches</div>
+      <div class="big" id="pCountBig">0</div>
+    </div>
+    <div class="stat">
+      <div class="muted">Punches landed (target zone)</div>
+      <div class="big" id="landedBig">0</div>
+    </div>
+    <div class="stat">
+      <div class="muted">Avg power</div>
+      <div class="big" id="avgPower">0</div>
+    </div>
+    <div class="stat">
+      <div class="muted">Avg speed</div>
+      <div class="big" id="avgSpeed">0</div>
+    </div>
+  </div>
+
+  <h1 style="margin-top:12px">How detection works</h1>
+  <p class="small muted">This is a simple, robust approximation: it detects body keypoints, tracks wrist motion and extension, counts a punch when a wrist moves fast and extends forward. Accuracy uses an on-screen target box (you can tap to reposition).</p>
+
+  <h1 style="margin-top:8px">Controls</h1>
+  <p class="small muted">Start — turns on camera and model. Stop — stops detection. Tap the overlay to move the target zone. Works best in good light.</p>
+</div>
+
+<footer class="card">Save this file as <code>ai-boxing-coach.html</code> and open in mobile browser. Allow camera when prompted.</footer>
+
+  </div><script type="module">
+// Single-file AI Boxing Coach using TensorFlow MoveNet (pose-detection)
+// Notes:
+// - This is an on-device frontend demo. Accuracy is approximate and for training/feedback use only.
+// - You can tune thresholds below (VELOCITY_THRESHOLD, EXTENSION_THRESHOLD, etc.)
+
+import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js';
+import * as poseDetection from 'https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@0.0.7/dist/pose-detection.min.js';
+// If versions change, update the URLs. The script imports should work on modern browsers.
+
+const video = document.getElementById('video');
+const overlay = document.getElementById('overlay');
+const ctx = overlay.getContext('2d');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const statusChip = document.getElementById('status');
+
+const pCountEl = document.getElementById('pCount');
+const pCountBig = document.getElementById('pCountBig');
+const landedBig = document.getElementById('landedBig');
+const avgPowerEl = document.getElementById('avgPower');
+const avgSpeedEl = document.getElementById('avgSpeed');
+const powerEl = document.getElementById('power');
+const spdEl = document.getElementById('spd');
+const accEl = document.getElementById('acc');
+const chinEl = document.getElementById('chin');
+const guardEl = document.getElementById('guard');
+
+let detector = null;
+let running = false;
+let lastTime = performance.now();
+let lastKeypoints = null;
+
+// Simple target zone in normalized coordinates (center front)
+let target = {x: 0.5, y: 0.45, w: 0.2, h: 0.2};
+
+// Counters and rolling stats
+let totalPunches = 0, landed = 0, powerSum = 0, speedSum = 0;
+
+// Thresholds (tweak for your phone/camera)
+const VELOCITY_THRESHOLD = 350; // px/s - when wrist is moving fast
+const EXTENSION_THRESHOLD = 0.12; // normalized distance from shoulder to wrist to be considered extended
+const TARGET_VELOCITY_MIN = 400; // px/s to consider a 'landing' on the target
+
+startBtn.onclick = start;
+stopBtn.onclick = stop;
+
+overlay.addEventListener('click', (e)=>{
+  // reposition target zone where user taps
+  const rect = overlay.getBoundingClientRect();
+  const nx = (e.clientX - rect.left)/rect.width;
+  const ny = (e.clientY - rect.top)/rect.height;
+  target.x = nx; target.y = ny;
+});
+
+async function initDetector(){
+  status('Loading model...');
+  // create MoveNet detector
+  detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, {
+    modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING
+  });
+  status('Model loaded');
+}
+
+async function start(){
+  if(running) return;
+  running = true; startBtn.disabled = true; stopBtn.disabled = false;
+  status('Requesting camera...');
+
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}}, audio:false});
+    video.srcObject = stream;
+    await video.play();
+    resizeCanvas();
+    await initDetector();
+    lastTime = performance.now();
+    status('Detecting');
+    detectLoop();
+  }catch(err){
+    console.error(err); status('Camera error: ' + err.message);
+    running = false; startBtn.disabled=false; stopBtn.disabled=true;
+  }
+}
+
+function stop(){
+  running = false; startBtn.disabled=false; stopBtn.disabled=true; status('Stopped');
+  // stop camera tracks
+  const s = video.srcObject; if(s){ s.getTracks().forEach(t=>t.stop()); video.srcObject = null; }
+}
+
+function status(txt){ statusChip.textContent = txt; }
+
+function resizeCanvas(){
+  overlay.width = video.clientWidth; overlay.height = video.clientHeight;
+}
+
+window.addEventListener('resize', ()=>{ if(video.srcObject) resizeCanvas(); });
+
+function keypointByName(kps,name){
+  return kps.find(k=>k.name && k.name.toLowerCase()===name.toLowerCase()) || null;
+}
+
+function normPointToPixel(p, width, height){ return {x: p.x * width, y: p.y * height}; }
+
+async function detectLoop(){
+  if(!running) return;
+  const now = performance.now();
+  const dt = (now - lastTime)/1000; // seconds
+  lastTime = now;
+
+  if(detector && video.readyState >= 2){
+    const poses = await detector.estimatePoses(video, {flipHorizontal:true});
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+    drawTarget();
+    if(poses && poses.length){
+      const pose = poses[0];
+      drawPose(pose);
+      processPose(pose, dt);
+    }
+  }
+  requestAnimationFrame(detectLoop);
+}
+
+function drawTarget(){
+  const w = overlay.width * target.w;
+  const h = overlay.height * target.h;
+  const x = overlay.width * (target.x - target.w/2);
+  const y = overlay.height * (target.y - target.h/2);
+  ctx.save();
+  ctx.strokeStyle = 'rgba(6,182,212,0.9)'; ctx.lineWidth = 2; ctx.setLineDash([6,6]);
+  ctx.strokeRect(x,y,w,h);
+  ctx.fillStyle = 'rgba(6,182,212,0.06)'; ctx.fillRect(x,y,w,h);
+  ctx.restore();
+}
+
+function drawPose(pose){
+  const w = overlay.width, h = overlay.height;
+  ctx.save(); ctx.lineWidth=2; ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.fillStyle='rgba(255,255,255,0.9)';
+  // draw keypoints
+  for(const kp of pose.keypoints){
+    if(kp.score>0.3){
+      const x = kp.x * w, y = kp.y * h;
+      ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2); ctx.fill();
+    }
+  }
+  // simple connections (sparse)
+  const pairs = [['left_shoulder','left_elbow'],['left_elbow','left_wrist'],['right_shoulder','right_elbow'],['right_elbow','right_wrist'],['left_shoulder','right_shoulder'],['left_hip','right_hip']];
+  for(const [a,b] of pairs){
+    const ka = pose.keypoints.find(k=>k.name===a); const kb = pose.keypoints.find(k=>k.name===b);
+    if(ka && kb && ka.score>0.3 && kb.score>0.3){
+      ctx.beginPath(); ctx.moveTo(ka.x*w,ka.y*h); ctx.lineTo(kb.x*w,kb.y*h); ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+function processPose(pose, dt){
+  const w = overlay.width, h = overlay.height;
+  // required keypoints
+  const leftW = pose.keypoints.find(k=>k.name==='left_wrist');
+  const rightW = pose.keypoints.find(k=>k.name==='right_wrist');
+  const leftS = pose.keypoints.find(k=>k.name==='left_shoulder');
+  const rightS = pose.keypoints.find(k=>k.name==='right_shoulder');
+  const nose = pose.keypoints.find(k=>k.name==='nose');
+
+  if(!(leftW && rightW && leftS && rightS && nose)) return;
+
+  // convert to pixel coords
+  const lw = {x:leftW.x*w, y:leftW.y*h, score:leftW.score};
+  const rw = {x:rightW.x*w, y:rightW.y*h, score:rightW.score};
+  const ls = {x:leftS.x*w, y:leftS.y*h};
+  const rs = {x:rightS.x*w, y:rightS.y*h};
+  const noseP = {x:nose.x*w, y:nose.y*h};
+
+  // compute wrist velocities (px/s)
+  let lv = 0, rv = 0;
+  if(lastKeypoints){
+    const lastL = lastKeypoints.leftW, lastR = lastKeypoints.rightW, lastT = lastKeypoints.t;
+    const dtLocal = (performance.now() - lastT)/1000;
+    if(lastL){ lv = Math.hypot(lw.x-lastL.x, lw.y-lastL.y)/Math.max(0.001,dtLocal); }
+    if(lastR){ rv = Math.hypot(rw.x-lastR.x, rw.y-lastR.y)/Math.max(0.001,dtLocal); }
+  }
+
+  // detect extension: normalized distance from shoulder to wrist
+  const lShoulder = ls, rShoulder = rs;
+  const lExt = Math.hypot(lw.x-lShoulder.x, lw.y-lShoulder.y) / Math.hypot(w, h);
+  const rExt = Math.hypot(rw.x-rShoulder.x, rw.y-rShoulder.y) / Math.hypot(w, h);
+
+  // determine forward direction: on mirrored (flipHorizontal=true) video, forward is decreasing x for right hand? we approximate by comparing wrist x to shoulder x
+  const lForward = (lw.x < lShoulder.x - 5); // left wrist in front of left shoulder
+  const rForward = (rw.x > rShoulder.x + 5); // right wrist in front of right shoulder (mirrored)
+
+  // check for punch event
+  // a punch is when velocity exceeds threshold and extension is large and moving forward
+  let lPunch=false, rPunch=false;
+  if(lv > VELOCITY_THRESHOLD && lExt > EXTENSION_THRESHOLD && lForward) lPunch = true;
+  if(rv > VELOCITY_THRESHOLD && rExt > EXTENSION_THRESHOLD && rForward) rPunch = true;
+
+  if(lPunch || rPunch){
+    // increment once per frame while condition holds; to avoid multiple counts for same punch, you can set a cooldown
+    // simple cooldown per hand
+    const now = performance.now();
+    if(!lastKeypoints) lastKeypoints = {};
+    if(lPunch){
+      if(!lastKeypoints.lCooldown || now - lastKeypoints.lCooldown > 300){
+        totalPunches++; lastKeypoints.lCooldown = now; checkLanding(lw, lv);
+      }
+    }
+    if(rPunch){
+      if(!lastKeypoints.rCooldown || now - lastKeypoints.rCooldown > 300){
+        totalPunches++; lastKeypoints.rCooldown = now; checkLanding(rw, rv);
+      }
+    }
+  }
+
+  // chin exposed: nose y is below (greater than) midpoint between shoulders by a small margin
+  const shouldersMidY = (ls.y + rs.y)/2;
+  const chinExposed = noseP.y > shouldersMidY + 15; // if nose lower than shoulders (i.e., chin forward/down)
+
+  // guard: average wrist y should be above shoulder y - if hands drop below shoulders, guard down
+  const avgWristY = (lw.y + rw.y)/2;
+  const avgShoulderY = (ls.y + rs.y)/2;
+  const guardUp = avgWristY < avgShoulderY + 20;
+
+  // update rolling stats
+  powerSum += Math.max(lv, rv); // crude
+  speedSum += (lv+rv)/2;
+
+  // update UI
+  pCountEl.textContent = totalPunches;
+  pCountBig.textContent = totalPunches;
+  avgPowerEl.textContent = Math.round(powerSum / Math.max(1,totalPunches));
+  avgSpeedEl.textContent = Math.round(speedSum / Math.max(1,totalPunches));
+  powerEl.textContent = Math.round(Math.max(lv,rv));
+  spdEl.textContent = Math.round((lv+rv)/2);
+  chinEl.textContent = chinExposed ? 'Yes' : 'No';
+  guardEl.textContent = guardUp ? 'Up' : 'Down';
+
+  // store last keypoints
+  lastKeypoints = {leftW:lw,rightW:rw,t:performance.now(),lCooldown:lastKeypoints?.lCooldown,rCooldown:lastKeypoints?.rCooldown};
+}
+
+function checkLanding(wrist, velocity){
+  // determine if wrist enters target zone
+  const x = wrist.x/overlay.width; const y = wrist.y/overlay.height;
+  const inTarget = Math.abs(x - target.x) < target.w/2 && Math.abs(y - target.y) < target.h/2;
+  if(inTarget && velocity > TARGET_VELOCITY_MIN){ landed++; landedBig.textContent = landed; accEl.textContent = Math.round(100 * landed / Math.max(1,totalPunches)) + '%'; }
+}
+
+</script></body>
+</html>
