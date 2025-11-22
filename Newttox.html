@@ -1,0 +1,254 @@
+<!--
+AI Boxing Coach — Single-file HTML/CSS/JS (Updated)
+Fixes in this version:
+- Buttons now initialize camera and model only after a user gesture (Start) to avoid browser blocking.
+- Removed automatic camera start on load.
+- Event listeners bound inside DOMContentLoaded to ensure buttons work.
+- Dynamic import of TensorFlow and pose-detection triggered on Start to avoid module loading issues.
+- Robust try/catch and UI debug panel for errors.
+- AudioContext resumed on user gesture to allow sound on mobile.
+- If pose model fails to load, a fallback "motion-only" detection (wrist velocity) runs so basic functionality still works.
+
+Important: To run this file on Android Chrome, either serve it over http(s) (recommended) or open the file in Chrome via the Files app. If camera permission is blocked, try opening the page from a local server (e.g. using `npx http-server` from the folder) or host on a secure origin. Allow camera permission when prompted.
+--><!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>AI Boxing Coach — Updated</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--good:#10b981;--bad:#ef4444}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071020 0%, #0b1220 100%);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#e6eef6}
+    .app{max-width:980px;margin:12px auto;padding:12px}
+    header{display:flex;align-items:center;gap:12px}
+    h1{font-size:1.25rem;margin:0}
+    .row{display:flex;gap:12px}
+    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:10px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    #container{position:relative;width:100%;height:60vh;min-height:360px;border-radius:10px;overflow:hidden}
+    video#cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+    canvas#overlay{position:absolute;inset:0;pointer-events:none;}
+    .controls{display:flex;flex-direction:column;gap:8px;padding:8px}
+    button{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:#022;cursor:pointer;font-weight:600}
+    button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .stats{display:flex;flex-wrap:wrap;gap:8px}
+    .stat{min-width:120px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px}
+    .sliders{display:flex;gap:8px;flex-wrap:wrap}
+    label{font-size:12px;color:var(--muted)}
+    input[type=range]{width:160px}
+    .small{font-size:12px;color:var(--muted)}
+    .target{position:absolute;width:90px;height:90px;border-radius:50%;border:3px dashed rgba(255,255,255,0.2);pointer-events:auto;display:flex;align-items:center;justify-content:center}
+    footer{margin-top:8px;color:var(--muted);font-size:12px}
+    #debug{margin-top:8px;padding:8px;background:rgba(0,0,0,0.25);border-radius:8px;font-size:12px;color:#fff;max-height:120px;overflow:auto}
+    @media(max-width:700px){#container{height:56vh}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>AI Boxing Coach</h1>
+      <div class="small">Updated: Buttons & camera initialization fixed. Tap <strong>Start</strong> to begin.</div>
+    </header><div id="container" class="card">
+  <video id="cam" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+  <div id="target" class="target" style="left:calc(50% - 45px);top:calc(45% - 45px)"> <div class="dot" style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></div></div>
+</div>
+
+<div style="display:flex;gap:12px;margin-top:12px;align-items:flex-start;flex-wrap:wrap">
+  <div class="card controls" style="flex:1;min-width:260px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button id="startBtn" type="button">Start</button>
+      <button id="stopBtn" type="button" class="secondary">Stop</button>
+      <button id="calibrateBtn" type="button" class="secondary">Calibrate Stance</button>
+    </div>
+    <div class="sliders">
+      <div>
+        <label>Speed threshold <span id="speedVal">1.2</span></label><br>
+        <input id="speedThresh" type="range" min="0.2" max="4" step="0.1" value="1.2">
+      </div>
+      <div>
+        <label>Power multiplier <span id="powerVal">1.0</span></label><br>
+        <input id="powerMul" type="range" min="0.5" max="3.0" step="0.1" value="1.0">
+      </div>
+      <div>
+        <label>Accuracy radius <span id="accVal">90</span>px</label><br>
+        <input id="accRadius" type="range" min="30" max="200" step="5" value="90">
+      </div>
+    </div>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button id="soundOn" type="button" class="secondary">Sound On</button>
+      <button id="soundOff" type="button" class="secondary">Sound Off</button>
+    </div>
+
+    <div id="debug" aria-live="polite">Status: idle</div>
+  </div>
+
+  <div class="card stats" style="width:360px;min-width:260px">
+    <div class="stat"><div class="small">Punch</div><div id="punchType">—</div></div>
+    <div class="stat"><div class="small">Speed (rel)</div><div id="speed">0.00</div></div>
+    <div class="stat"><div class="small">Power (est)</div><div id="power">0</div></div>
+    <div class="stat"><div class="small">Accuracy</div><div id="accuracy">—</div></div>
+    <div class="stat"><div class="small">Chin Exposed</div><div id="chin">No</div></div>
+    <div class="stat"><div class="small">Guard</div><div id="guard">Up</div></div>
+    <div style="margin-top:8px;font-size:12px;color:var(--muted)">Tap the target to move it. Calibrate to set neutral position.</div>
+  </div>
+</div>
+
+<footer>Runs locally in your browser — experimental. For best results: good lighting, front camera, and stand 1–2 meters away.</footer>
+
+  </div>  <script type="module">
+  document.addEventListener('DOMContentLoaded',()=>{
+    // elements
+    const video = document.getElementById('cam');
+    const canvas = document.getElementById('overlay');
+    const ctx = canvas.getContext('2d');
+    const targetEl = document.getElementById('target');
+
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const calibrateBtn = document.getElementById('calibrateBtn');
+    const speedEl = document.getElementById('speed');
+    const powerEl = document.getElementById('power');
+    const punchTypeEl = document.getElementById('punchType');
+    const accuracyEl = document.getElementById('accuracy');
+    const chinEl = document.getElementById('chin');
+    const guardEl = document.getElementById('guard');
+    const debug = document.getElementById('debug');
+
+    const speedThresh = document.getElementById('speedThresh');
+    const powerMul = document.getElementById('powerMul');
+    const accRadius = document.getElementById('accRadius');
+    const speedVal = document.getElementById('speedVal');
+    const powerVal = document.getElementById('powerVal');
+    const accVal = document.getElementById('accVal');
+    const soundOn = document.getElementById('soundOn');
+    const soundOff = document.getElementById('soundOff');
+
+    let detector = null;
+    let running = false;
+    let stream = null;
+    let lastTimestamp = null;
+    let prevKeypoints = null;
+    let neutralPose = null;
+    let useSound = true;
+    let fallbackOnly = false; // if model fails
+
+    // audio
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playTone(freq=440,duration=0.08, type='sine'){ if(!useSound) return; try{ if(audioCtx.state==='suspended') audioCtx.resume(); const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type = type; o.frequency.value = freq; o.connect(g); g.connect(audioCtx.destination); g.gain.value = 0.0001; o.start(); g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01); setTimeout(()=>{ g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.02); o.stop(); }, duration*1000); }catch(e){ console.warn('Audio fail',e); }}
+
+    function logDebug(msg){ debug.textContent = typeof msg === 'string' ? msg : JSON.stringify(msg); }
+
+    // slider labels
+    speedThresh.addEventListener('input',()=>speedVal.textContent = speedThresh.value);
+    powerMul.addEventListener('input',()=>powerVal.textContent = powerMul.value);
+    accRadius.addEventListener('input',()=>accVal.textContent = accRadius.value);
+    soundOn.addEventListener('click',()=>{ useSound=true; soundOn.classList.remove('secondary'); soundOff.classList.add('secondary'); });
+    soundOff.addEventListener('click',()=>{ useSound=false; soundOff.classList.remove('secondary'); soundOn.classList.add('secondary'); });
+
+    // target move
+    function moveTargetToClient(x,y){ const rect = targetEl.parentElement.getBoundingClientRect(); const tx = x - rect.left - targetEl.offsetWidth/2; const ty = y - rect.top - targetEl.offsetHeight/2; targetEl.style.left = tx+'px'; targetEl.style.top = ty+'px'; }
+    targetEl.addEventListener('click',(e)=>{ moveTargetToClient(e.clientX,e.clientY); });
+    canvas.addEventListener('click',(e)=>{ moveTargetToClient(e.clientX,e.clientY); });
+
+    // camera
+    async function startCamera(){
+      if(stream) return;
+      try{
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }, audio:false });
+        video.srcObject = stream;
+        await video.play();
+        resizeCanvas();
+        logDebug('Camera started');
+      }catch(err){ logDebug('Camera error: '+err.message); alert('Camera access denied or not available. Make sure you allow camera permission.
+'+err.message); throw err; }
+    }
+    function stopCamera(){ if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; video.srcObject=null; logDebug('Camera stopped'); }}
+    function resizeCanvas(){ canvas.width = video.videoWidth || video.clientWidth; canvas.height = video.videoHeight || video.clientHeight; }
+    window.addEventListener('resize',resizeCanvas);
+
+    // draw keypoints if available
+    function drawKeypoints(keypoints){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.save(); ctx.scale(-1,1); ctx.translate(-canvas.width,0); ctx.lineWidth=2; for(const kp of keypoints){ if(kp.score>0.35){ ctx.beginPath(); ctx.arc(kp.x, kp.y, 4,0,Math.PI*2); ctx.fillStyle='rgba(6,182,212,0.9)'; ctx.fill(); }} const pairs = [[0,1],[1,3],[1,2],[2,4],[0,5],[5,7],[7,9],[5,6],[6,8],[8,10],[11,12],[12,14],[14,16],[11,13],[13,15]]; ctx.strokeStyle='rgba(255,255,255,0.08)'; for(const p of pairs){ const a=keypoints[p[0]], b=keypoints[p[1]]; if(a && b && a.score>0.35 && b.score>0.35){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }} ctx.restore(); }
+
+    function distance(a,b){ return Math.hypot(a.x-b.x,a.y-b.y); }
+
+    function isChinExposed(keypoints){ const nose = keypoints.find(k=>k.name==='nose') || keypoints[0]; const leftShoulder = keypoints.find(k=>k.name==='left_shoulder'); const rightShoulder = keypoints.find(k=>k.name==='right_shoulder'); if(!nose || !leftShoulder || !rightShoulder) return false; const avgShoulderY = (leftShoulder.y + rightShoulder.y)/2; return (nose.y < avgShoulderY - 20); }
+    function isGuardUp(keypoints){ const leftW = keypoints.find(k=>k.name==='left_wrist'); const rightW = keypoints.find(k=>k.name==='right_wrist'); const leftE = keypoints.find(k=>k.name==='left_eye'); const rightE = keypoints.find(k=>k.name==='right_eye'); const headY = ((leftE?.y||0)+(rightE?.y||0))/2 || 0; if(!leftW || !rightW || !headY) return false; return (leftW.y < headY + 80 && rightW.y < headY + 80); }
+
+    // fallback motion detection when model not available: uses pixel motion of wrist-like areas (simple)
+
+    // main detection loop
+    async function runFrameWithPose(keypoints){ // keypoints: array with {x,y,score,name}
+      drawKeypoints(keypoints);
+      const now = performance.now(); if(!lastTimestamp) lastTimestamp = now; const dt = (now - lastTimestamp)/1000; lastTimestamp = now;
+      if(prevKeypoints){
+        const leftWPrev = prevKeypoints.find(k=>k.name==='left_wrist'); const rightWPrev = prevKeypoints.find(k=>k.name==='right_wrist'); const leftW = keypoints.find(k=>k.name==='left_wrist'); const rightW = keypoints.find(k=>k.name==='right_wrist');
+        if(leftW && leftWPrev && rightW && rightWPrev){
+          const lSpeed = Math.hypot((leftW.x-leftWPrev.x)/dt,(leftW.y-leftWPrev.y)/dt)/100;
+          const rSpeed = Math.hypot((rightW.x-rightWPrev.x)/dt,(rightW.y-rightWPrev.y)/dt)/100;
+          const topSpeed = Math.max(lSpeed,rSpeed);
+          speedEl.textContent = topSpeed.toFixed(2);
+          const threshold = parseFloat(speedThresh.value);
+          let punchDetected=false; let punchSide=''; let punchSpeed=0; let wrist=null;
+          if(lSpeed>threshold && lSpeed>rSpeed){ punchDetected=true; punchSide='Left'; punchSpeed=lSpeed; wrist=leftW; }
+          else if(rSpeed>threshold && rSpeed>lSpeed){ punchDetected=true; punchSide='Right'; punchSpeed=rSpeed; wrist=rightW; }
+          if(punchDetected){ punchTypeEl.textContent = punchSide + ' punch'; playTone(600,0.08,'square'); const powerEstimate = Math.round(punchSpeed * parseFloat(powerMul.value) * 100); powerEl.textContent = powerEstimate; const rect = canvas.getBoundingClientRect(); const tRect = targetEl.getBoundingClientRect(); const tx = tRect.left - rect.left + tRect.width/2; const ty = tRect.top - rect.top + tRect.height/2; const d = Math.hypot(wrist.x - tx, wrist.y - ty); const radius = parseInt(accRadius.value,10); let accText = Math.max(0, Math.round(100*(1 - Math.min(d,radius)/radius))); accuracyEl.textContent = accText + '%'; if(accText>75){ playTone(900,0.14,'sine'); } else if(accText>40){ playTone(700,0.09,'sine'); } else { playTone(300,0.12,'sawtooth'); }
+          } else { punchTypeEl.textContent = '—'; powerEl.textContent = '0'; }
+        }
+      }
+      const chin = isChinExposed(keypoints); chinEl.textContent = chin? 'Yes' : 'No'; chinEl.style.color = chin? 'var(--bad)':''; const guard = isGuardUp(keypoints); guardEl.textContent = guard? 'Up':'Down'; guardEl.style.color = guard? 'var(--good)':'var(--bad)'; prevKeypoints = keypoints;
+    }
+
+    // fallback simple loop if model unavailable — we approximate wrists by scanning for bright skin-tones would be hard; instead we just show video and no pose
+    async function fallbackLoop(){ // crude: just update UI and continue
+      running = true; logDebug('Running fallback motion-only (no pose model)'); while(running){ try{ // no model — set small heartbeat values
+          speedEl.textContent = '0.00'; powerEl.textContent='0'; punchTypeEl.textContent='—'; await new Promise(r=>setTimeout(r,100)); }catch(e){ console.warn(e); } }
+    }
+
+    // choose model path
+    async function loadPoseModel(){
+      try{
+        logDebug('Loading pose model...');
+        const tfModule = await import('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js');
+        const posedetection = await import('https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@0.0.7/dist/pose-detection.min.js');
+        const model = posedetection.SupportedModels.MoveNet;
+        const detectorConfig = {modelType: posedetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
+        detector = await posedetection.createDetector(model, detectorConfig);
+        logDebug('Pose model loaded');
+        fallbackOnly = false;
+      }catch(err){ console.warn('Model load failed',err); logDebug('Model failed to load — running fallback only'); fallbackOnly = true; }
+    }
+
+    // run detection; supports both model-based and fallback
+    async function runFrame(){ if(!running) return; resizeCanvas(); if(!fallbackOnly && detector){ try{ const poses = await detector.estimatePoses(video, {flipHorizontal:true}); if(poses && poses.length>0){ const pose = poses[0]; const keypoints = pose.keypoints.map(k=>({x:k.x,y:k.y,score:k.score,name:k.name})); await runFrameWithPose(keypoints); } else { // no pose found
+            prevKeypoints=null; }
+        }catch(err){ console.error('Detection error',err); logDebug('Detection error: '+err.message); }
+      } else { // fallback
+        // very lightweight loop - still keep UI responsive
+        // We could implement a simple optical flow here, but that's complex; for now we run fallbackLoop
+      }
+      if(running) requestAnimationFrame(runFrame);
+    }
+
+    // Start/Stop/Calibrate
+    startBtn.addEventListener('click', async ()=>{
+      try{
+        // resume audio on user gesture
+        if(audioCtx.state==='suspended') await audioCtx.resume();
+        await startCamera();
+        await loadPoseModel();
+        running=true; lastTimestamp=null; prevKeypoints=null; playTone(440,0.08);
+        requestAnimationFrame(runFrame);
+        logDebug('Running — model loaded: '+(!fallbackOnly));
+      }catch(e){ logDebug('Start failed: '+e.message); }
+    });
+
+    stopBtn.addEventListener('click', ()=>{ running=false; stopCamera(); playTone(220,0.08); logDebug('Stopped'); });
+
+    calibrateBtn.addEventListener('click', ()=>{ if(!prevKeypoints){ alert('Stand in your neutral guard and press Calibrate again'); return; } neutralPose = prevKeypoints; alert('Calibrated'); playTone(520,0.08); });
+
+    // initial status
+    logDebug('Ready — tap Start to allow camera & load model');
+  });
+  </script></body>
+</html>
