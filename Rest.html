@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AI Boxing Assistant — Patched</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial; margin: 12px; background:#0f172a; color: #e6eef8; }
+    #container { display:flex; gap:12px; align-items:flex-start; }
+    #videoWrap { position: relative; width: 640px; max-width: 80vw; }
+    video, canvas { display:block; width:100%; height:auto; border-radius:8px; background:#000; }
+    #controls { display:flex; flex-direction:column; gap:8px; margin-left:8px; min-width:220px; }
+    .btn { padding:8px 12px; border-radius:6px; border: none; cursor:pointer; background:#2563eb; color:white; font-weight:600; }
+    .btn.secondary { background:#334155; }
+    .stat { background:#0b1220; padding:8px; border-radius:8px; margin-bottom:6px; }
+    small { color:#94a3b8; }
+    pre { background:#051125; padding:8px; border-radius:6px; overflow:auto; max-height:200px; }
+  </style>
+</head>
+<body>
+  <h1>AI Boxing Assistant — Patched (MoveNet Lightning)</h1>
+  <div id="container">
+    <div id="videoWrap">
+      <video id="video" playsinline autoplay muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+
+    <div id="controls">
+      <div class="stat"><strong>Left Punches:</strong> <span id="leftCount">0</span></div>
+      <div class="stat"><strong>Right Punches:</strong> <span id="rightCount">0</span></div>
+      <div class="stat"><strong>Model status:</strong> <span id="modelStatus">idle</span></div>
+      <button id="startBtn" class="btn">Start</button>
+      <button id="calBtn" class="btn secondary">Calibrate Guard (current pose)</button>
+      <button id="resetBtn" class="btn secondary">Reset Counts</button>
+
+      <div style="margin-top:8px;">
+        <small>Hints:</small>
+        <ul>
+          <li><small>Allow camera access and stand ~1–2m from camera.</small></li>
+          <li><small>Raise hands to your usual guard during calibration and press Calibrate.</small></li>
+        </ul>
+      </div>
+
+      <details>
+        <summary>Debug console</summary>
+        <pre id="debug"></pre>
+      </details>
+    </div>
+  </div>
+
+  <!-- TensorFlow / MoveNet -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@0.0.7/dist/pose-detection.js"></script>
+
+  <script>
+  (async () => {
+    // UI
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('overlay');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startBtn');
+    const calBtn = document.getElementById('calBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const leftCountEl = document.getElementById('leftCount');
+    const rightCountEl = document.getElementById('rightCount');
+    const modelStatusEl = document.getElementById('modelStatus');
+    const debugEl = document.getElementById('debug');
+
+    // Detection & thresholds (make adjustable)
+    let detector = null;
+    let running = false;
+
+    // thresholds are in normalized coordinate space (0..1)
+    let guardDistThreshold = 0.18;      // distance between wrists/shoulders to consider "guard"
+    let chinExposedThreshold = 0.22;    // not used heavily here but kept
+    const punchCooldown = 300;          // ms between counting same-side punches
+    const speedThreshold = 0.035;       // normalized units per frame for "fast" motion (tweakable)
+
+    // state
+    let prevLeft = null, prevRight = null, prevNose = null;
+    let prevTime = performance.now();
+    let leftPunchCount = 0, rightPunchCount = 0;
+    let leftLastPunchAt = 0, rightLastPunchAt = 0;
+
+    // helper for robust keypoint name mapping
+    function kpName(k) {
+      return k.name || k.part || k.label || k.label || null;
+    }
+
+    // wait for camera
+    async function setupCamera() {
+      if (navigator.mediaDevices?.getUserMedia == null) throw new Error('getUserMedia not supported');
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
+      video.srcObject = stream;
+      return new Promise((resolve) => {
+        video.onloadedmetadata = () => {
+          // set canvas size to video
+          canvas.width = video.videoWidth || 640;
+          canvas.height = video.videoHeight || 480;
+          resolve();
+        };
+      });
+    }
+
+    // create MoveNet detector (MoveNet Lightning)
+    async function createDetector() {
+      modelStatusEl.textContent = 'loading model...';
+      // using pose-detection createDetector API
+      const model = poseDetection.SupportedModels.MoveNet;
+      const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING };
+      detector = await poseDetection.createDetector(model, detectorConfig);
+      modelStatusEl.textContent = 'model loaded (MoveNet lightning)';
+    }
+
+    // utility: normalize keypoints into 0..1 space and map by canonical names
+    function buildKpMap(pose) {
+      const pts = pose.keypoints || [];
+      const vw = video.videoWidth || canvas.width || 1;
+      const vh = video.videoHeight || canvas.height || 1;
+      const map = {};
+      for (const k of pts) {
+        const name = kpName(k);
+        if (!name) continue;
+        // MoveNet often returns pixel coords when given a video element. Normalize to 0..1
+        const rawX = (typeof k.x === 'number') ? k.x : (k.x || 0);
+        const rawY = (typeof k.y === 'number') ? k.y : (k.y || 0);
+        const x = (rawX / vw);
+        const y = (rawY / vh);
+        const score = (k.score !== undefined) ? k.score : (k.score === undefined && k.probability !== undefined ? k.probability : 0);
+        map[name.toLowerCase()] = { x, y, score, rawX, rawY };
+      }
+      return map;
+    }
+
+    // analyze pose: returns an object with speed/punch detection info. Side: left/right wrists are used.
+    function analyzePose(kp) {
+      // required keypoints
+      const required = ['left_wrist','right_wrist','left_shoulder','right_shoulder','nose'];
+      for (const r of required) {
+        if (!kp[r] || (kp[r].score || 0) < 0.15) {
+          // not enough confidence -> reset prevs (so no huge deltas next good frame)
+          if (kp.left_wrist) prevLeft = {x: kp.left_wrist.x, y: kp.left_wrist.y};
+          if (kp.right_wrist) prevRight = {x: kp.right_wrist.x, y: kp.right_wrist.y};
+          if (kp.nose) prevNose = {x: kp.nose.x, y: kp.nose.y};
+          return { ok:false };
+        }
+      }
+
+      // compute speeds (norm per ms with frame dt)
+      const now = performance.now();
+      const dt = Math.max(1, now - prevTime); // ms
+      prevTime = now;
+
+      // initialize prev positions if null (first good frame)
+      if (!prevLeft) prevLeft = { x: kp.left_wrist.x, y: kp.left_wrist.y };
+      if (!prevRight) prevRight = { x: kp.right_wrist.x, y: kp.right_wrist.y };
+      if (!prevNose) prevNose = { x: kp.nose.x, y: kp.nose.y };
+
+      const leftDx = kp.left_wrist.x - prevLeft.x;
+      const leftDy = kp.left_wrist.y - prevLeft.y;
+      const rightDx = kp.right_wrist.x - prevRight.x;
+      const rightDy = kp.right_wrist.y - prevRight.y;
+      const noseDx = kp.nose.x - prevNose.x;
+      const noseDy = kp.nose.y - prevNose.y;
+
+      // Euclidean distance per ms (normalized)
+      const leftSpeed = Math.sqrt(leftDx*leftDx + leftDy*leftDy) / dt;
+      const rightSpeed = Math.sqrt(rightDx*rightDx + rightDy*rightDy) / dt;
+      const headSpeed = Math.sqrt(noseDx*noseDx + noseDy*noseDy) / dt;
+
+      // guard detection: use distance between wrists normalized
+      const wristDist = Math.sqrt(Math.pow(kp.left_wrist.x - kp.right_wrist.x,2) + Math.pow(kp.left_wrist.y - kp.right_wrist.y,2));
+      const guard = wristDist < guardDistThreshold;
+
+      // simple punch detection: if wrist speed exceeds threshold and is moving forward relative to shoulder/nose
+      // determine relative forward motion by comparing wrist y (assuming camera upright); we also allow large speed regardless
+      // Note: left/right forward/backwards on camera may vary; this is a heuristic.
+      let leftPunch = false, rightPunch = false;
+
+      const nowTs = Date.now();
+      if (leftSpeed > speedThreshold && (nowTs - leftLastPunchAt) > punchCooldown) {
+        // check forward from shoulder to wrist: distance from shoulder in x,y decreased or wrist moved away from guard
+        const leftShoulder = kp.left_shoulder;
+        const prevToShoulder = Math.sqrt(Math.pow(prevLeft.x - leftShoulder.x,2) + Math.pow(prevLeft.y - leftShoulder.y,2));
+        const curToShoulder = Math.sqrt(Math.pow(kp.left_wrist.x - leftShoulder.x,2) + Math.pow(kp.left_wrist.y - leftShoulder.y,2));
+        if (curToShoulder > prevToShoulder || leftSpeed > speedThreshold*3) {
+          leftPunch = true;
+          leftLastPunchAt = nowTs;
+        }
+      }
+      if (rightSpeed > speedThreshold && (nowTs - rightLastPunchAt) > punchCooldown) {
+        const rightShoulder = kp.right_shoulder;
+        const prevToShoulder = Math.sqrt(Math.pow(prevRight.x - rightShoulder.x,2) + Math.pow(prevRight.y - rightShoulder.y,2));
+        const curToShoulder = Math.sqrt(Math.pow(kp.right_wrist.x - rightShoulder.x,2) + Math.pow(kp.right_wrist.y - rightShoulder.y,2));
+        if (curToShoulder > prevToShoulder || rightSpeed > speedThreshold*3) {
+          rightPunch = true;
+          rightLastPunchAt = nowTs;
+        }
+      }
+
+      // update prevs
+      prevLeft = { x: kp.left_wrist.x, y: kp.left_wrist.y };
+      prevRight = { x: kp.right_wrist.x, y: kp.right_wrist.y };
+      prevNose = { x: kp.nose.x, y: kp.nose.y };
+
+      return {
+        ok: true,
+        leftSpeed, rightSpeed, headSpeed,
+        leftPunch, rightPunch,
+        guard, wristDist
+      };
+    }
+
+    // drawing overlay
+    function drawOverlay(kp, info) {
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+      // draw semi-transparent background
+      ctx.fillStyle = 'rgba(0,0,0,0)';
+      ctx.fillRect(0,0,w,h);
+
+      // draw keypoints
+      ctx.lineWidth = 2;
+      for (const [name, p] of Object.entries(kp)) {
+        if (!p) continue;
+        const px = p.x * w, py = p.y * h;
+        const s = p.score || 0;
+        // circle
+        ctx.beginPath();
+        ctx.arc(px, py, Math.max(3, 8 * s), 0, Math.PI*2);
+        ctx.fillStyle = `rgba(99,102,241,${Math.max(0.2, s)})`;
+        ctx.fill();
+        // label
+        ctx.font = '10px system-ui';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fillText(name.replace('_',' '), px + 6, py - 6);
+      }
+
+      // draw guard indicator and wrist distance
+      if (info) {
+        ctx.fillStyle = info.guard ? 'rgba(16,185,129,0.18)' : 'rgba(220,38,38,0.18)';
+        ctx.strokeStyle = info.guard ? 'rgba(16,185,129,0.6)' : 'rgba(220,38,38,0.6)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // a rectangle in upper-left showing guard status
+        ctx.rect(6, 6, 150, 34);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '12px system-ui';
+        ctx.fillText(`Guard: ${info.guard ? 'ON' : 'OFF'}`, 14, 26);
+        ctx.fillText(`Wrist dist: ${ (info.wristDist || 0).toFixed(3) }`, 92, 26);
+      }
+    }
+
+    // main loop
+    async function runFrame() {
+      if (!running || !detector) return;
+      try {
+        const poses = await detector.estimatePoses(video, { maxPoses: 1, flipHorizontal: true });
+        if (!poses || poses.length === 0) {
+          // nothing detected this frame
+          requestAnimationFrame(runFrame);
+          return;
+        }
+
+        const pose = poses[0];
+        const kpMap = buildKpMap(pose);
+
+        // debug: show a small sample in debug panel
+        const sample = {
+          lw: kpMap.left_wrist ? `${kpMap.left_wrist.x.toFixed(3)},${kpMap.left_wrist.y.toFixed(3)} @${kpMap.left_wrist.score.toFixed(2)}` : 'n/a',
+          rw: kpMap.right_wrist ? `${kpMap.right_wrist.x.toFixed(3)},${kpMap.right_wrist.y.toFixed(3)} @${kpMap.right_wrist.score.toFixed(2)}` : 'n/a',
+          vw: video.videoWidth + 'x' + video.videoHeight
+        };
+        debugEl.textContent = JSON.stringify(sample, null, 2);
+
+        const info = analyzePose(kpMap);
+        if (info.ok) {
+          if (info.leftPunch) {
+            leftPunchCount++;
+            leftCountEl.textContent = leftPunchCount;
+            console.log('LEFT punch registered', info.leftSpeed);
+          }
+          if (info.rightPunch) {
+            rightPunchCount++;
+            rightCountEl.textContent = rightPunchCount;
+            console.log('RIGHT punch registered', info.rightSpeed);
+          }
+        }
+
+        drawOverlay(kpMap, info);
+      } catch (err) {
+        console.error('runFrame error', err);
+      } finally {
+        // schedule next
+        requestAnimationFrame(runFrame);
+      }
+    }
+
+    // buttons
+    startBtn.addEventListener('click', async () => {
+      if (!running) {
+        try {
+          startBtn.disabled = true;
+          startBtn.textContent = 'Starting...';
+          await setupCamera().catch(err => { throw err; });
+          if (!detector) await createDetector();
+          running = true;
+          startBtn.textContent = 'Running';
+          startBtn.disabled = false;
+          modelStatusEl.textContent = 'running';
+          // reset time baseline
+          prevTime = performance.now();
+          requestAnimationFrame(runFrame);
+        } catch (err) {
+          console.error('start error', err);
+          alert('Error starting camera/model: ' + (err.message || err));
+          startBtn.disabled = false;
+          startBtn.textContent = 'Start';
+        }
+      } else {
+        // toggle off
+        running = false;
+        startBtn.textContent = 'Start';
+        modelStatusEl.textContent = 'stopped';
