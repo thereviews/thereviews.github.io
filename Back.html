@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <meta charset="utf-8" />
+  <title>AI Boxing - Rear Cam & Flash</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family: monospace;
+      background:#111; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:480px;
+      height:85vh;
+      background:#000;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    /* Rear camera doesn't need mirroring */
+    canvas { 
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    video { display: none; } 
+
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      padding:10px;
+      box-sizing:border-box;
+      background: rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    .row { display: flex; justify-content: space-between; font-size: 18px; margin-bottom: 5px;}
+    .stat-val { color: #0f0; font-weight: bold; font-size: 24px; }
+    .label { color: #ccc; font-size: 14px; }
+
+    #status {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      color: yellow;
+      background: #000;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
+
+    #controls {
+      margin-top:10px;
+      display:flex; gap:10px;
+    }
+    button { 
+      padding:15px 25px; border-radius:8px; 
+      border:2px solid #333; background:#222; 
+      color:#fff; font-weight:bold; font-size: 16px;
+    }
+    button:active { background: #444; }
+    
+    /* Highlight the flash button when on */
+    .flash-on {
+        background: #ffeb3b !important;
+        color: #000 !important;
+        border-color: #ffeb3b !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="wrap">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="output"></canvas>
+    
+    <div id="hud">
+      <div class="row">
+        <div>
+           <div class="label">JABS (L)</div>
+           <div class="stat-val" id="jabs">0</div>
+        </div>
+        <div>
+           <div class="label">CROSS (R)</div>
+           <div class="stat-val" id="crosses">0</div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="label" style="width:100%; text-align:center; margin-top:5px; color:#fff">
+            REAR CAMERA MODE
+         </div>
+      </div>
+    </div>
+    
+    <div id="status">Waiting for Start...</div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">START CAMERA</button>
+    <button id="flashBtn" style="display:none;">⚡ FLASH</button>
+  </div>
+
+<script>
+(async ()=> {
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  const statusEl = document.getElementById('status');
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const flashBtn = document.getElementById('flashBtn');
+
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let track = null; // Video track for flashlight control
+  let flashOn = false;
+  
+  // Logic
+  let jabs=0, crosses=0;
+  let prevLeft=null, prevRight=null;
+  let lastPunchTime = 0;
+
+  // Sound
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep(f=600) {
+    if(audioCtx.state==='suspended') audioCtx.resume();
+    const o=audioCtx.createOscillator();
+    const g=audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.frequency.value=f; g.gain.value=0.1;
+    o.start(); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.1); o.stop(audioCtx.currentTime+0.1);
+  }
+
+  async function start() {
+    statusEl.textContent = "Loading Rear Camera...";
+    
+    try {
+        // 1. Request Rear Camera ('environment')
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: false,
+          video: { 
+              facingMode: 'environment', // BACK CAMERA
+              width: {ideal: 640}, 
+              height: {ideal: 480} 
+          }
+        });
+        video.srcObject = stream;
+        
+        // 2. Get Video Track for Flashlight
+        track = stream.getVideoTracks()[0];
+        
+        // 3. Check for Flashlight support
+        const capabilities = track.getCapabilities ? track.getCapabilities() : {};
+        if (capabilities.torch) {
+            flashBtn.style.display = 'block';
+            statusEl.textContent = "Camera Loaded. Flash Supported.";
+        } else {
+            statusEl.textContent = "Camera Loaded. (No Web Flash Support)";
+        }
+        
+        await new Promise(r => video.onloadedmetadata = r);
+        video.play();
+        
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        
+        // 4. Load AI
+        statusEl.textContent = "Loading AI...";
+        await tf.ready();
+        detector = await poseDetection.createDetector(
+          poseDetection.SupportedModels.MoveNet,
+          { modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING }
+        );
+        
+        statusEl.textContent = "Ready! Stand Back.";
+        running = true;
+        loop();
+        
+    } catch(e) {
+        alert("Camera Error: " + e.message);
+        statusEl.textContent = "Error: " + e.message;
+    }
+  }
+  
+  // Flash Toggle Logic
+  flashBtn.onclick = async () => {
+      if(!track) return;
+      flashOn = !flashOn;
+      try {
+          await track.applyConstraints({
+              advanced: [{ torch: flashOn }]
+          });
+          flashBtn.classList.toggle('flash-on', flashOn);
+      } catch(e) {
+          statusEl.textContent = "Flash Error: " + e.message;
+      }
+  };
+
+  async function loop() {
+    if(!running) return;
+
+    // A. Draw Video (No Mirroring!)
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // B. Detect
+    let poses = null;
+    try {
+       // flipHorizontal: FALSE for rear camera
+       poses = await detector.estimatePoses(video, {flipHorizontal: false});
+    } catch(e) {}
+
+    if (poses && poses.length > 0) {
+       const p = poses[0];
+       if (p.score > 0.2) {
+           statusEl.textContent = `Tracking (Score: ${Math.round(p.score*100)}%)`;
+           drawSkeleton(p.keypoints);
+           analyze(p.keypoints);
+       } else {
+           statusEl.textContent = "Pose detected but low confidence";
+       }
+    } else {
+       statusEl.textContent = "Searching...";
+    }
+
+    raf = requestAnimationFrame(loop);
+  }
+
+  function analyze(kps) {
+     const get = (n) => kps.find(k => k.name===n);
+     const lw = get('left_wrist');
+     const rw = get('right_wrist');
+     const ls = get('left_shoulder');
+     
+     if(!lw || !rw || !ls) return;
+     if(lw.score < 0.2 || rw.score < 0.2) return;
+
+     const now = Date.now();
+     if (now - lastPunchTime < 300) return; 
+
+     const w = canvas.width; const h = canvas.height;
+     const l = {x: lw.x/w, y: lw.y/h};
+     const r = {x: rw.x/w, y: rw.y/h};
+
+     // Note: Logic is reversed because we are NOT mirrored anymore
+     // Left on screen is actually Left hand now.
+     
+     if(prevLeft) {
+        const speed = Math.hypot(l.x - prevLeft.x, l.y - prevLeft.y);
+        if(speed > 0.05) {
+             jabs++;
+             jabsEl.innerText = jabs;
+             lastPunchTime = now;
+             beep(800);
+             ctx.fillStyle = 'rgba(0,255,0,0.3)';
+             ctx.fillRect(0,0,w,h);
+        }
+     }
+     
+     if(prevRight) {
+        const speed = Math.hypot(r.x - prevRight.x, r.y - prevRight.y);
+        if(speed > 0.05) {
+             crosses++;
+             crossesEl.innerText = crosses;
+             lastPunchTime = now;
+             beep(600);
+             ctx.fillStyle = 'rgba(0,255,0,0.3)';
+             ctx.fillRect(0,0,w,h);
+        }
+     }
+
+     prevLeft = l;
+     prevRight = r;
+  }
+
+  function drawSkeleton(kps) {
+     const edges = {
+         'left_shoulder': 'right_shoulder',
+         'left_shoulder': 'left_elbow',
+         'left_elbow': 'left_wrist',
+         'right_shoulder': 'right_elbow',
+         'right_elbow': 'right_wrist'
+     };
+     
+     ctx.lineWidth = 4;
+     ctx.strokeStyle = '#00ff00'; 
+
+     for (const [start, end] of Object.entries(edges)) {
+        const p1 = kps.find(k => k.name === start);
+        const p2 = kps.find(k => k.name === end);
+        
+        if (p1 && p2 && p1.score > 0.2 && p2.score > 0.2) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+        }
+     }
+
+     ctx.fillStyle = 'red';
+     kps.forEach(k => {
+        if(k.score > 0.2) {
+            ctx.beginPath();
+            ctx.arc(k.x, k.y, 6, 0, Math.PI*2);
+            ctx.fill();
+        }
+     });
+  }
+
+  document.getElementById('startBtn').onclick = () => {
+     document.getElementById('startBtn').style.display='none';
+     start();
+  };
+
+})();
+</script>
+</body>
+</html>
