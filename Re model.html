@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <meta charset="utf-8" />
+  <title>AI Boxing - Visualizer Mode</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family: monospace;
+      background:#111; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:480px;
+      height:85vh;
+      background:#000;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    /* Force canvas to fill the wrapper */
+    canvas { 
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    video { display: none; } /* Hide raw video, we draw it on canvas */
+
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      padding:10px;
+      box-sizing:border-box;
+      background: rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    .row { display: flex; justify-content: space-between; font-size: 18px; margin-bottom: 5px;}
+    .stat-val { color: #0f0; font-weight: bold; font-size: 24px; }
+    .label { color: #ccc; font-size: 14px; }
+
+    #status {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      color: yellow;
+      background: #000;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
+
+    #controls {
+      margin-top:10px;
+      display:flex; gap:10px;
+    }
+    button { 
+      padding:15px 30px; border-radius:8px; 
+      border:2px solid #333; background:#222; 
+      color:#fff; font-weight:bold; font-size: 16px;
+    }
+    button:active { background: #444; }
+  </style>
+</head>
+<body>
+
+  <div id="wrap">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="output"></canvas>
+    
+    <div id="hud">
+      <div class="row">
+        <div>
+           <div class="label">JABS (L)</div>
+           <div class="stat-val" id="jabs">0</div>
+        </div>
+        <div>
+           <div class="label">CROSS (R)</div>
+           <div class="stat-val" id="crosses">0</div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="label" style="width:100%; text-align:center; margin-top:5px; color:#fff">
+            SKELETON VISUALIZER
+         </div>
+      </div>
+    </div>
+    
+    <div id="status">Waiting for Start...</div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">START CAMERA</button>
+  </div>
+
+<script>
+(async ()=> {
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  const statusEl = document.getElementById('status');
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+
+  let detector = null;
+  let running = false;
+  let raf = null;
+  
+  // Logic
+  let jabs=0, crosses=0;
+  let prevLeft=null, prevRight=null;
+  let lastPunchTime = 0;
+
+  // Sound
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep(f=600) {
+    if(audioCtx.state==='suspended') audioCtx.resume();
+    const o=audioCtx.createOscillator();
+    const g=audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.frequency.value=f; g.gain.value=0.1;
+    o.start(); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.1); o.stop(audioCtx.currentTime+0.1);
+  }
+
+  async function start() {
+    statusEl.textContent = "Loading Camera...";
+    
+    // 1. Setup Camera with standard resolution
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: { facingMode: 'user', width: {ideal: 480}, height: {ideal: 640} }
+    });
+    video.srcObject = stream;
+    
+    // 2. Wait for video to actually play to get size
+    await new Promise(r => video.onloadedmetadata = r);
+    video.play();
+    
+    // 3. Set Canvas Size to match Video (Crucial fix)
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    statusEl.textContent = `Camera: ${canvas.width}x${canvas.height}. Loading AI...`;
+
+    // 4. Load AI
+    await tf.ready();
+    detector = await poseDetection.createDetector(
+      poseDetection.SupportedModels.MoveNet,
+      { modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING }
+    );
+    
+    statusEl.textContent = "AI Ready. Step Back.";
+    running = true;
+    loop();
+  }
+
+  async function loop() {
+    if(!running) return;
+
+    // A. Draw Video
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // B. Detect
+    let poses = null;
+    try {
+       // flipHorizontal: true because it's a selfie camera
+       poses = await detector.estimatePoses(video, {flipHorizontal: true});
+    } catch(e) {
+       statusEl.textContent = "AI Error: " + e.message;
+    }
+
+    if (poses && poses.length > 0) {
+       const p = poses[0];
+       // We accept low score (0.2) to help in "ok" lighting
+       if (p.score > 0.2) {
+           statusEl.textContent = `Tracking (Score: ${Math.round(p.score*100)}%)`;
+           drawSkeleton(p.keypoints);
+           analyze(p.keypoints);
+       } else {
+           statusEl.textContent = "Pose detected but low confidence (Stand back?)";
+       }
+    } else {
+       statusEl.textContent = "Looking for body...";
+    }
+
+    raf = requestAnimationFrame(loop);
+  }
+
+  function analyze(kps) {
+     // Helper
+     const get = (n) => kps.find(k => k.name===n);
+     const lw = get('left_wrist');
+     const rw = get('right_wrist');
+     const ls = get('left_shoulder');
+     
+     // Need wrists and shoulder to count punches
+     if(!lw || !rw || !ls) return;
+     if(lw.score < 0.2 || rw.score < 0.2) return;
+
+     const now = Date.now();
+     if (now - lastPunchTime < 300) return; // Cooldown
+
+     // Normalize X/Y
+     const w = canvas.width; const h = canvas.height;
+     const l = {x: lw.x/w, y: lw.y/h};
+     const r = {x: rw.x/w, y: rw.y/h};
+
+     // Velocity Check
+     if(prevLeft) {
+        const speed = Math.hypot(l.x - prevLeft.x, l.y - prevLeft.y);
+        // If speed > 0.05 (fast) and arm is extending
+        if(speed > 0.05) {
+             jabs++;
+             jabsEl.innerText = jabs;
+             lastPunchTime = now;
+             beep(800);
+             // Flash screen
+             ctx.fillStyle = 'rgba(0,255,0,0.3)';
+             ctx.fillRect(0,0,w,h);
+        }
+     }
+     
+     if(prevRight) {
+        const speed = Math.hypot(r.x - prevRight.x, r.y - prevRight.y);
+        if(speed > 0.05) {
+             crosses++;
+             crossesEl.innerText = crosses;
+             lastPunchTime = now;
+             beep(600);
+             ctx.fillStyle = 'rgba(0,255,0,0.3)';
+             ctx.fillRect(0,0,w,h);
+        }
+     }
+
+     prevLeft = l;
+     prevRight = r;
+  }
+
+  function drawSkeleton(kps) {
+     // Draw Lines
+     const edges = {
+         'left_shoulder': 'right_shoulder',
+         'left_shoulder': 'left_elbow',
+         'left_elbow': 'left_wrist',
+         'right_shoulder': 'right_elbow',
+         'right_elbow': 'right_wrist'
+     };
+     
+     ctx.lineWidth = 4;
+     ctx.strokeStyle = '#00ff00'; // GREEN SKELETON
+
+     for (const [start, end] of Object.entries(edges)) {
+        const p1 = kps.find(k => k.name === start);
+        const p2 = kps.find(k => k.name === end);
+        
+        if (p1 && p2 && p1.score > 0.2 && p2.score > 0.2) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+        }
+     }
+
+     // Draw Dots
+     ctx.fillStyle = 'red';
+     kps.forEach(k => {
+        if(k.score > 0.2) {
+            ctx.beginPath();
+            ctx.arc(k.x, k.y, 6, 0, Math.PI*2);
+            ctx.fill();
+        }
+     });
+  }
+
+  document.getElementById('startBtn').onclick = () => {
+     document.getElementById('startBtn').style.display='none';
+     start();
+  };
+
+})();
+</script>
+</body>
+</html>
