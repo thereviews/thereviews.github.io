@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Motion Boxing (Night Mode)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { margin:0; background:#000; color:#0f0; font-family:monospace; overflow:hidden; display:flex; flex-direction:column; align-items:center; }
+    
+    #wrapper {
+        position: relative;
+        width: 100vw;
+        max-width: 450px;
+        height: 70vh;
+        border: 2px solid #333;
+        margin-top: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    video { display: none; } /* We don't show the raw video */
+    
+    canvas {
+        width: 100%;
+        height: 100%;
+        transform: scaleX(-1); /* Mirror effect */
+        filter: contrast(200%) brightness(150%); /* NIGHT VISION HACK */
+    }
+
+    #hud {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .zone {
+        width: 40%;
+        height: 100%;
+        border: 2px dashed rgba(255,255,255,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .counter { font-size: 60px; font-weight: bold; text-shadow: 0 0 10px #000; }
+    .label { font-size: 20px; background: #000; padding: 2px 5px; }
+
+    #controls { margin-top: 20px; display:flex; gap:10px; }
+    button { padding: 15px 30px; font-size: 18px; font-weight:bold; background: #007bff; color: white; border: none; border-radius: 5px; }
+    #sensitivity { margin-top: 10px; color: #fff; }
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="output"></canvas>
+    
+    <div id="hud">
+        <div class="zone" id="leftZone">
+            <div class="counter" id="leftCount">0</div>
+            <div class="label">LEFT</div>
+        </div>
+        <div class="zone" id="rightZone">
+            <div class="counter" id="rightCount">0</div>
+            <div class="label">RIGHT</div>
+        </div>
+    </div>
+</div>
+
+<div id="controls">
+    <button id="startBtn">START</button>
+    <button id="resetBtn" style="background:#444">RESET</button>
+</div>
+<div id="sensitivity">Sensitivity: Medium</div>
+
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('output');
+    const ctx = canvas.getContext('2d');
+    const leftCountEl = document.getElementById('leftCount');
+    const rightCountEl = document.getElementById('rightCount');
+
+    let running = false;
+    let prevFrame = null;
+    let leftPunches = 0;
+    let rightPunches = 0;
+    
+    // Cooldowns to prevent one punch counting as 50
+    let lastLeftTime = 0;
+    let lastRightTime = 0;
+    const cooldown = 400; // ms between punches
+
+    // Audio
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq) {
+        if(audioCtx.state === 'suspended') audioCtx.resume();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        o.frequency.value = freq;
+        g.gain.value = 0.1;
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
+        o.stop(audioCtx.currentTime + 0.1);
+    }
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: false,
+                video: { facingMode: 'user', width: {ideal: 320}, height: {ideal: 240} } // Low res is FASTER for motion
+            });
+            video.srcObject = stream;
+            await new Promise(r => video.onloadedmetadata = r);
+            video.play();
+            
+            // Set canvas to match low-res video for processing speed
+            canvas.width = 320;
+            canvas.height = 240;
+            
+            running = true;
+            processFrame();
+        } catch(e) {
+            alert("Camera Error: " + e);
+        }
+    }
+
+    function processFrame() {
+        if (!running) return;
+
+        // 1. Draw current video frame to canvas
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // 2. Get pixel data
+        const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = frame.data;
+        const len = data.length;
+
+        // 3. Motion Detection Logic
+        let leftMotion = 0;
+        let rightMotion = 0;
+        const midX = canvas.width / 2;
+
+        if (prevFrame) {
+            // Loop through pixels (Step by 4 to save CPU)
+            for (let i = 0; i < len; i += 16) { 
+                // Simple Grayscale difference
+                // i = r, i+1 = g, i+2 = b
+                const r = Math.abs(data[i] - prevFrame[i]);
+                const g = Math.abs(data[i+1] - prevFrame[i+1]);
+                const b = Math.abs(data[i+2] - prevFrame[i+2]);
+                
+                // If pixel changed significantly
+                if (r+g+b > 100) { 
+                    // Calculate X position of this pixel
+                    const pixelIndex = i / 4;
+                    const x = pixelIndex % canvas.width;
+                    const y = Math.floor(pixelIndex / canvas.width);
+
+                    // Ignore very top (ceiling) and very bottom (floor) to reduce noise
+                    if (y > 40 && y < 200) {
+                        if (x < midX) {
+                            rightMotion++; // Mirrored: Left on screen is Right hand
+                        } else {
+                            leftMotion++;  // Mirrored
+                        }
+                    }
+                    
+                    // Visual Debug: Turn moving pixels Green
+                    data[i+1] = 255; 
+                }
+            }
+        }
+
+        // 4. Trigger Punches
+        const now = Date.now();
+        const threshold = 150; // How many pixels must move to count a punch
+
+        if (leftMotion > threshold && (now - lastLeftTime > cooldown)) {
+            leftPunches++;
+            leftCountEl.innerText = leftPunches;
+            lastLeftTime = now;
+            beep(600);
+            leftCountEl.style.color = 'yellow';
+            setTimeout(() => leftCountEl.style.color = '#0f0', 200);
+        }
+
+        if (rightMotion > threshold && (now - lastRightTime > cooldown)) {
+            rightPunches++;
+            rightCountEl.innerText = rightPunches;
+            lastRightTime = now;
+            beep(800);
+            rightCountEl.style.color = 'yellow';
+            setTimeout(() => rightCountEl.style.color = '#0f0', 200);
+        }
+
+        // 5. Save current frame for next comparison
+        // We clone the data, otherwise it's just a reference
+        prevFrame = new Uint8ClampedArray(data);
+        
+        // 6. Put the "Green Motion" image back so user sees what is happening
+        ctx.putImageData(frame, 0, 0);
+
+        requestAnimationFrame(processFrame);
+    }
+
+    document.getElementById('startBtn').onclick = () => {
+        document.getElementById('startBtn').style.display = 'none';
+        startCamera();
+    };
+
+    document.getElementById('resetBtn').onclick = () => {
+        leftPunches = 0; rightPunches = 0;
+        leftCountEl.innerText = 0; rightCountEl.innerText = 0;
+    };
+
+</script>
+</body>
+</html>
