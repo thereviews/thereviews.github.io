@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <meta charset="utf-8" />
+  <title>AI Boxing - Visualizer (Fixed)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family: monospace;
+      background:#111; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:480px;
+      height:85vh;
+      background:#000;
+      margin-top: 5px;
+      overflow: hidden;
+      border: 2px solid #333;
+    }
+    /* Ensure video and canvas match size exactly */
+    canvas { 
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    video { display: none; } /* Hide raw video */
+
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      padding:15px;
+      box-sizing:border-box;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      pointer-events: none;
+    }
+    .row { display: flex; justify-content: space-between; font-size: 18px; margin-bottom: 5px;}
+    .stat-val { color: #0f0; font-weight: bold; font-size: 32px; text-shadow: 0 0 5px #0f0; }
+    .label { color: #ccc; font-size: 14px; font-weight: bold;}
+
+    #status {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      color: #ffeb3b;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+    }
+
+    #controls {
+      margin-top:15px;
+      display:flex; gap:15px;
+    }
+    button { 
+      padding:15px 30px; border-radius:30px; 
+      border:none; background:#007bff; 
+      color:#fff; font-weight:bold; font-size: 16px;
+      box-shadow: 0 4px 15px rgba(0,123,255,0.4);
+    }
+    button:active { transform: scale(0.98); }
+    
+    .flash-on { background: #ffeb3b !important; color: #000 !important; }
+  </style>
+</head>
+<body>
+
+  <div id="wrap">
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="output"></canvas>
+    
+    <div id="hud">
+      <div class="row">
+        <div style="text-align:center">
+           <div class="label">LEFT JAB</div>
+           <div class="stat-val" id="jabs">0</div>
+        </div>
+        <div style="text-align:center">
+           <div class="label">RIGHT CROSS</div>
+           <div class="stat-val" id="crosses">0</div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="status">Ready to Start</div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">START CAM</button>
+    <button id="flashBtn" style="display:none; background:#333;">⚡ FLASH</button>
+  </div>
+
+<script>
+(async ()=> {
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  const statusEl = document.getElementById('status');
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const flashBtn = document.getElementById('flashBtn');
+
+  let detector = null;
+  let running = false;
+  let track = null;
+  let flashOn = false;
+  
+  // Stats
+  let jabs=0, crosses=0;
+  let prevLeft=null, prevRight=null;
+  let lastPunchTime = 0;
+
+  // Audio
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep(f=600) {
+    if(audioCtx.state==='suspended') audioCtx.resume();
+    const o=audioCtx.createOscillator();
+    const g=audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.frequency.value=f; g.gain.value=0.1;
+    o.start(); g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.1); o.stop(audioCtx.currentTime+0.1);
+  }
+
+  async function start() {
+    statusEl.textContent = "Starting Camera...";
+    
+    try {
+        // Use REAR camera for better quality
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: false,
+          video: { facingMode: 'environment', width: {ideal: 640}, height: {ideal: 480} }
+        });
+        video.srcObject = stream;
+        
+        // Setup Flashlight
+        track = stream.getVideoTracks()[0];
+        const caps = track.getCapabilities ? track.getCapabilities() : {};
+        if (caps.torch) flashBtn.style.display = 'block';
+        
+        // Wait for video to be ready
+        await new Promise(r => video.onloadedmetadata = r);
+        video.play();
+        
+        // Force Canvas to match Video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        
+        statusEl.textContent = "Loading AI Model...";
+        await tf.ready();
+        detector = await poseDetection.createDetector(
+          poseDetection.SupportedModels.MoveNet,
+          { modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING }
+        );
+        
+        statusEl.textContent = "Active. Step back.";
+        running = true;
+        loop();
+        
+    } catch(e) {
+        statusEl.textContent = "Error: " + e.message;
+        alert("Camera failed: " + e.message);
+    }
+  }
+
+  // Flash Button
+  flashBtn.onclick = async () => {
+      if(!track) return;
+      flashOn = !flashOn;
+      await track.applyConstraints({ advanced: [{ torch: flashOn }] });
+      flashBtn.classList.toggle('flash-on', flashOn);
+  };
+
+  async function loop() {
+    if(!running) return;
+
+    // 1. Draw Camera Feed
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // 2. AI Detection
+    let poses = null;
+    try {
+       // flipHorizontal: false (Rear Camera)
+       poses = await detector.estimatePoses(video, {flipHorizontal: false});
+    } catch(e) {}
+
+    // 3. Visualization & Logic
+    if (poses && poses.length > 0) {
+       const p = poses[0];
+       
+       // Force Draw - Even if score is low
+       drawSkeleton(p.keypoints);
+       
+       if (p.score > 0.25) {
+           statusEl.textContent = "Tracking Active";
+           statusEl.style.color = "#0f0";
+           analyze(p.keypoints);
+       } else {
+           statusEl.textContent = "Low Confidence (Add Light)";
+           statusEl.style.color = "yellow";
+       }
+    } else {
+       statusEl.textContent = "Scanning...";
+       statusEl.style.color = "white";
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  function analyze(kps) {
+     const get = (n) => kps.find(k => k.name===n);
+     const lw = get('left_wrist');
+     const rw = get('right_wrist');
+     const ls = get('left_shoulder');
+     
+     // Relaxed Check: We need wrists, but we DON'T check for nose anymore
+     if(!lw || !rw || !ls) return;
+     if(lw.score < 0.2 || rw.score < 0.2) return;
+
+     const now = Date.now();
+     if (now - lastPunchTime < 250) return; // Fast cooldown
+
+     // Normalize
+     const w = canvas.width; const h = canvas.height;
+     const l = {x: lw.x/w, y: lw.y/h};
+     const r = {x: rw.x/w, y: rw.y/h};
+     
+     // Logic (Reverse logic for rear camera view)
+     if(prevLeft) {
+        const dist = Math.hypot(l.x - prevLeft.x, l.y - prevLeft.y);
+        // If hand moves fast
+        if(dist > 0.05) {
+             jabs++;
+             jabsEl.innerText = jabs;
+             lastPunchTime = now;
+             beep(800);
+             flashScreen();
+        }
+     }
+     
+     if(prevRight) {
+        const dist = Math.hypot(r.x - prevRight.x, r.y - prevRight.y);
+        if(dist > 0.05) {
+             crosses++;
+             crossesEl.innerText = crosses;
+             lastPunchTime = now;
+             beep(600);
+             flashScreen();
+        }
+     }
+
+     prevLeft = l;
+     prevRight = r;
+  }
+
+  function flashScreen() {
+      ctx.fillStyle = 'rgba(0,255,0,0.3)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+  }
+
+  function drawSkeleton(kps) {
+     // Always draw connections if they exist, regardless of score
+     const edges = {
+         'left_shoulder': 'right_shoulder',
+         'left_shoulder': 'left_elbow', 'left_elbow': 'left_wrist',
+         'right_shoulder': 'right_elbow', 'right_elbow': 'right_wrist'
+     };
+     
+     ctx.lineWidth = 4;
+     ctx.strokeStyle = '#00ff00'; 
+
+     for (const [start, end] of Object.entries(edges)) {
+        const p1 = kps.find(k => k.name === start);
+        const p2 = kps.find(k => k.name === end);
+        // Very low threshold for drawing so you can see what it's trying to do
+        if (p1 && p2 && p1.score > 0.15 && p2.score > 0.15) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+        }
+     }
+     
+     // Draw Joints
+     ctx.fillStyle = 'red';
+     kps.forEach(k => {
+        if(k.score > 0.15) {
+            ctx.beginPath();
+            ctx.arc(k.x, k.y, 6, 0, Math.PI*2);
+            ctx.fill();
+        }
+     });
+  }
+
+  document.getElementById('startBtn').onclick = () => {
+     document.getElementById('startBtn').style.display='none';
+     start();
+  };
+
+})();
+</script>
+</body>
+</html>
