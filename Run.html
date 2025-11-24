@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Boxing Coach — Selfie (Portrait)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family:system-ui, Arial;
+      background:#0a0a0a; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+      overflow:hidden;
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:450px;   
+      height:75vh;       
+      background:#000;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    video, canvas { 
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover;
+    }
+
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      background:rgba(0,0,0,0.35);
+      padding:6px 10px;
+      font-size:12px;
+      box-sizing:border-box;
+    }
+    .stat { 
+      padding:2px 4px;
+      color:#0ff; font-weight:600;
+    }
+
+    #controls {
+      margin-top:10px;
+      display:flex; gap:6px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    button { 
+      padding:8px 12px; border-radius:8px; 
+      border:0; background:#007bff; 
+      color:#fff; font-weight:600;
+      cursor: pointer;
+    }
+    #feedback {
+      margin-top:10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-align: center;
+      min-height: 24px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    #summary {
+      display:none;
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%, -50%);
+      background:rgba(20,20,20,0.95);
+      border:1px solid #444;
+      padding:20px;
+      border-radius:8px;
+      z-index:10;
+      text-align:center;
+      min-width: 200px;
+    }
+    .secondary {
+      background: #444;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="margin:10px 0 5px 0">AI Boxing Coach — Selfie</h3>
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+
+    <div id="hud">
+      <div class="row">
+        <div><span class="stat">Jabs</span> <span id="jabs">0</span>  • <span class="stat">Crosses</span> <span id="crosses">0</span></div>
+        <div><span class="stat">Hooks</span> <span id="hooks">0</span> • <span class="stat">Uppercut</span> <span id="uppercuts">0</span></div>
+      </div>
+      <div class="row">
+        <div><small>Guard %</small> <span id="guardPercent">0%</span></div>
+        <div><small>Chin exposed</small> <span id="chinPct">0%</span></div>
+      </div>
+      <div class="row">
+        <div><small>Fastest (m/s)</small> <span id="fastest">0</span></div>
+        <div><small>Power est.</small> <span id="power">0</span></div>
+      </div>
+      <div id="debug"><small>Status: <span id="status">idle</span></small></div>
+    </div>
+    
+    <div id="summary">
+      <h4 style="margin-top:0">Session Summary</h4>
+      <div id="sumContent" style="margin-bottom:15px; text-align:left; line-height:1.6;"></div>
+      <button onclick="document.getElementById('summary').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" class="secondary" disabled>Stop</button>
+    <button id="resetBtn" class="secondary">Reset</button>
+    <button id="calBtn" class="secondary">Calibrate (Stand)</button>
+    <button id="summaryBtn" class="secondary">Show Summary</button>
+  </div>
+
+  <div id="feedback"></div>
+
+<script>
+(async ()=> {
+  // Elements
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('overlay');
+  const ctx = canvas.getContext('2d');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const calBtn = document.getElementById('calBtn');
+  const summaryBtn = document.getElementById('summaryBtn');
+  const statusEl = document.getElementById('status');
+  const feedbackEl = document.getElementById('feedback');
+
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const hooksEl = document.getElementById('hooks');
+  const uppercutsEl = document.getElementById('uppercuts');
+  const guardPctEl = document.getElementById('guardPercent');
+  const chinPctEl = document.getElementById('chinPct');
+  const fastestEl = document.getElementById('fastest');
+  const powerEl = document.getElementById('power');
+  const summaryEl = document.getElementById('summary');
+  const sumContent = document.getElementById('sumContent');
+
+  // State
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let stream = null;
+
+  // counts
+  let jabs=0, crosses=0, hooks=0, uppercuts=0;
+  let frameCount = 0;
+  let guardFrames = 0; 
+  let chinExposedFrames = 0;
+  let startTime = 0;
+
+  // prev positions for velocity
+  let prevLeft = null, prevRight = null, prevNose = null;
+  let prevShoulderAngle = null;
+
+  // thresholds (tweakable)
+  const punchCooldown = 300; // ms
+  const speedThreshold = 0.035; 
+  const hookAngleThreshold = 0.45; 
+  const uppercutYThreshold = 0.02; 
+  let guardDistThreshold = 0.18; 
+  const chinExposedThreshold = 0.22; 
+  const rotationPowerFactor = 1.2; 
+
+  // last punch times
+  let lastLeftAt = 0, lastRightAt = 0;
+
+  // speech
+  const synth = window.speechSynthesis;
+
+  function speak(s) {
+    if (!synth) return;
+    if (synth.speaking) {
+        // simplistic check
+    }
+    const ut = new SpeechSynthesisUtterance(s);
+    ut.rate = 1.05;
+    ut.pitch = 1;
+    synth.speak(ut);
+  }
+
+  // beep
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = 1000;
+    g.gain.value = 0.0001;
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.12);
+    o.stop(audioCtx.currentTime + 0.13);
+  }
+
+  // start camera (selfie)
+  async function startCamera() {
+    const constraints = { 
+      audio: false, 
+      video: { 
+        facingMode: "user", 
+        width: { ideal: 640 }, 
+        height: { ideal: 480 } 
+      } 
+    };
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = stream;
+    
+    return new Promise((resolve) => {
+      video.onloadedmetadata = () => {
+        video.play();
+        
+        // FIX 2: Explicitly set video width/height to match the stream
+        // MoveNet needs these attributes to be present on the HTML element
+        video.width = video.videoWidth;
+        video.height = video.videoHeight;
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        video.setAttribute("playsinline", "true");
+        
+        // CSS mirror
+        video.style.transform = "scaleX(-1)";
+        resolve();
+      };
+    });
+  }
+
+  // load detector (MoveNet singlepose lightning)
+  async function loadDetector() {
+    statusEl.textContent = 'loading model...';
+    
+    // Wait for TF to be ready
+    await tf.ready();
+    
+    const model = poseDetection.SupportedModels.MoveNet;
+    const detectorConfig = {
+      modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+      enableSmoothing: true
+    };
+    detector = await poseDetection.createDetector(model, detectorConfig);
+    statusEl.textContent = 'model loaded';
+  }
+
+  // utilities
+  function angleBetween(a,b) { return Math.atan2(b.y - a.y, b.x - a.x); }
+  function dist(a,b) { return Math.hypot(a.x-b.x, a.y-b.y); }
+  function now() { return performance.now(); }
+
+  function analyzePose(kpMap) {
+    const lw = kpMap['left_wrist'];
+    const rw = kpMap['right_wrist'];
+    const ls = kpMap['left_shoulder'];
+    const rs = kpMap['right_shoulder'];
+    const nose = kpMap['nose'];
+    const lHip = kpMap['left_hip'];
+    const rHip = kpMap['right_hip'];
+
+    if (!lw || !rw || !ls || !rs || !nose) return {};
+
+    const shoulderCenter = { x:(ls.x+rs.x)/2, y:(ls.y+rs.y)/2 };
+    const hipCenter = (lHip && rHip) ? { x:(lHip.x+rHip.x)/2, y:(lHip.y+rHip.y)/2 } : null;
+
+    let leftVel = {x:0,y:0}, rightVel={x:0,y:0};
+    if (prevLeft) { leftVel = { x: lw.x - prevLeft.x, y: lw.y - prevLeft.y }; }
+    if (prevRight) { rightVel = { x: rw.x - prevRight.x, y: rw.y - prevRight.y }; }
+
+    const leftToShoulder = dist(lw, ls);
+    const rightToShoulder = dist(rw, rs);
+    const leftToNose = dist(lw, nose);
+    const rightToNose = dist(rw, nose);
+
+    const leftGuard = (leftToShoulder < guardDistThreshold) || (leftToNose < guardDistThreshold);
+    const rightGuard = (rightToShoulder < guardDistThreshold) || (rightToNose < guardDistThreshold);
+    const bothGuard = leftGuard && rightGuard;
+
+    const chinExposed = (leftToNose > chinExposedThreshold) && (rightToNose > chinExposedThreshold);
+
+    let headVel = {x:0,y:0};
+    if (prevNose) headVel = { x: nose.x - prevNose.x, y: nose.y - prevNose.y };
+
+    let rotNorm = 0;
+    let shoulderAngle = 0;
+    if (lHip && rHip) {
+      shoulderAngle = angleBetween(ls, rs); 
+      const hipAngle = angleBetween(lHip, rHip);
+      const rotation = Math.abs(shoulderAngle - hipAngle);
+      rotNorm = Math.min(Math.PI, rotation) / Math.PI;
+    }
+
+    const leftSpeed = Math.hypot(leftVel.x, leftVel.y);
+    const rightSpeed = Math.hypot(rightVel.x, rightVel.y);
+
+    const leftPower = leftSpeed * (1 + rotNorm*rotationPowerFactor);
+    const rightPower = rightSpeed * (1 + rotNorm*rotationPowerFactor);
+
+    const events = [];
+    const timestamp = now();
+
+    // Left Punch
+    if (prevLeft) {
+      const prevDist = dist(prevLeft, ls);
+      const currDist = leftToShoulder;
+      const delta = currDist - prevDist;
+      if (delta > speedThreshold && (timestamp - lastLeftAt) > punchCooldown) {
+        if (Math.abs(leftVel.y) < 0.04 && Math.abs(leftVel.x) > 0.04 && Math.abs(leftVel.x) > Math.abs(leftVel.y)) {
+          hooks++;
+          hooksEl.textContent = hooks;
+          events.push({type:'hook', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        } else if (leftVel.y < -uppercutYThreshold) {
+          uppercuts++;
+          uppercutsEl.textContent = uppercuts;
+          events.push({type:'uppercut', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        } else {
+          jabs++;
+          jabsEl.textContent = jabs;
+          events.push({type:'jab', side:'left', power:leftPower});
+          lastLeftAt = timestamp;
+        }
+      }
+    }
+
+    // Right Punch
+    if (prevRight) {
+      const prevDistR = dist(prevRight, rs);
+      const currDistR = rightToShoulder;
+      const deltaR = currDistR - prevDistR;
+      if (deltaR > speedThreshold && (timestamp - lastRightAt) > punchCooldown) {
+        if (Math.abs(rightVel.y) < 0.04 && Math.abs(rightVel.x) > 0.04 && Math.abs(rightVel.x) > Math.abs(rightVel.y)) {
+          hooks++;
+          hooksEl.textContent = hooks;
+          events.push({type:'hook', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        } else if (rightVel.y < -uppercutYThreshold) {
+          uppercuts++;
+          uppercutsEl.textContent = uppercuts;
+          events.push({type:'uppercut', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        } else {
+          crosses++;
+          crossesEl.textContent = crosses;
+          events.push({type:'cross', side:'right', power:rightPower});
+          lastRightAt = timestamp;
+        }
+      }
+    }
+
+    detectCombos(events);
+
+    frameCount++;
+    if (bothGuard) guardFrames++;
+    if (chinExposed) chinExposedFrames++;
+
+    const headSpeed = Math.hypot(headVel.x, headVel.y);
+    if (headSpeed < 0.001 && (jabs+crosses+hooks+uppercuts) > 4 && (Math.random() < 0.02)) {
+      giveFeedback("Move your head!");
+    }
+
+    if (chinExposed && Math.random() < 0.01) { 
+      giveFeedback("Hands up!");
+    }
+
+    drawOverlay(kpMap, {bothGuard, chinExposed, leftSpeed, rightSpeed, leftPower, rightPower, shoulderCenter, hipCenter});
+
+    prevLeft = {x: lw.x, y: lw.y};
+    prevRight = {x: rw.x, y: rw.y};
+    prevNose = {x: nose.x, y: nose.y};
+    prevShoulderAngle = shoulderAngle;
+
+    return {leftSpeed, rightSpeed, leftPower, rightPower, guard: bothGuard, chinExposed, headSpeed, rotNorm};
+  }
+
+  let comboWindow = [];
+  function detectCombos(events) {
+    const nowts = now();
+    comboWindow = comboWindow.filter(e => nowts - e.t <= 700);
+    for (const ev of events) {
+      comboWindow.push({ type: ev.type, t: nowts });
+    }
+    const seq = comboWindow.map(e => e.type).join(',');
+    if (/jab,?cross/.test(seq)) {
+      giveFeedback("Nice 1-2!");
+      comboWindow = []; 
+    }
+    else if (/jab,?cross,?hook/.test(seq)) {
+      giveFeedback("Good 1-2-3!");
+      comboWindow = [];
+    }
+  }
+
+  let lastFeedbackAt = 0;
+  function giveFeedback(text, speakIt=true) {
+    const t = now();
+    if (t - lastFeedbackAt < 1000) return;
+    lastFeedbackAt = t;
+    feedbackEl.textContent = text;
+    feedbackEl.style.opacity = 1;
+    setTimeout(()=> feedbackEl.style.opacity = 0, 1500);
+    if (speakIt) speak(text);
+    beep();
+  }
+
+  function drawOverlay(kpMap, meta) {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,255,255,0.8)';
+    for (const k of Object.values(kpMap)) {
+      if (k.score > 0.3) {
+        ctx.beginPath();
+        ctx.arc(k.x * w, k.y * h, 6, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+
+    ctx.save();
+    if (meta.chinExposed) {
+      ctx.strokeStyle = 'rgba(255,80,80,0.8)';
+      ctx.lineWidth = 5;
+      ctx.strokeRect(10,10,w-20,h-20);
+    } else if (meta.bothGuard) {
+      ctx.strokeStyle = 'rgba(0,255,100,0.6)';
+      ctx.lineWidth = 5;
+      ctx.strokeRect(10,10,w-20,h-20);
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.font = '12px monospace';
+    ctx.fillText(`Lspd:${(meta.leftSpeed||0).toFixed(3)}`, 10, h - 40);
+    ctx.fillText(`Rspd:${(meta.rightSpeed||0).toFixed(3)}`, 10, h - 25);
+    ctx.restore();
+  }
+
+  async function runFrame() {
+    if (!running) return;
+    if (!detector) return;
+    try {
+      const poses = await detector.estimatePoses(video, {
