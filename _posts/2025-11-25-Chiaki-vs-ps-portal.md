@@ -33,7 +33,7 @@ Some handheld devices
 
 It doesn’t require a Sony subscription and usually offers more device flexibility and customization.
 
-👍 Pros
+ Pros
 
 100% free
 
@@ -44,7 +44,7 @@ Customizable streaming settings
 Can work even after Sony updates (community fixes fast)
 
 
-👎 Cons
+Cons
 
 Setup can be technical
 
@@ -60,7 +60,7 @@ No guaranteed support (community only)
 
 PlayStation Portal is Sony’s official handheld device only for remote play. It streams your PS5 to its built-in screen — you can’t install games on it, you can’t cloud game, and it must always connect to your PS5.
 
-👍 Pros
+ Pros
 
 Official, simple setup
 
@@ -69,7 +69,7 @@ DualSense features built in (adaptive triggers, haptics)
 Great screen quality
 
 
-👎 Cons
+Cons
 
 Works only with PS5
 
