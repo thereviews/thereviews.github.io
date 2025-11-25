@@ -1,0 +1,835 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Boxing Coach — Drill Mode & Technique Scoring</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family:system-ui, Arial;
+      background:#0a0a0a; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+      overflow:hidden;
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:450px;   
+      height:75vh;       
+      background:#000;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    video, canvas { 
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover;
+    }
+
+    #hiddenCanvas {
+        display: none; 
+    }
+
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      background:rgba(0,0,0,0.35);
+      padding:6px 10px;
+      font-size:12px;
+      box-sizing:border-box;
+      z-index: 5;
+    }
+    .stat { 
+      padding:2px 4px;
+      color:#0ff; font-weight:600;
+    }
+    
+    /* NEW COMMAND PANEL */
+    #drillCommand {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #000;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 8px;
+        z-index: 10;
+        min-width: 150px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s, background 0.3s;
+    }
+    
+    /* NEW DEBUG PANEL STYLE */
+    #debug {
+      width: 100%;
+      padding-top: 5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 10px;
+    }
+    #debug span {
+        margin-right: 10px;
+    }
+    #status.error {
+        color: #ff6b6b; 
+        font-weight: bold;
+    }
+
+    #controls {
+      margin-top:10px;
+      display:flex; gap:6px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    button { 
+      padding:8px 12px; border-radius:8px; 
+      border:0; background:#007bff; 
+      color:#fff; font-weight:600;
+      cursor: pointer;
+    }
+    #feedback {
+      margin-top:10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-align: center;
+      min-height: 24px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .secondary {
+      background: #444;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="margin:10px 0 5px 0">AI Boxing Coach — Drill Mode</h3>
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+    <canvas id="hiddenCanvas"></canvas>
+
+    <div id="hud">
+      <div class="row">
+        <div><span class="stat">Jabs</span> <span id="jabs">0</span>  • <span class="stat">Crosses</span> <span id="crosses">0</span></div>
+        <div><span class="stat">Hooks</span> <span id="hooks">0</span> • <span class="stat">Uppercut</span> <span id="uppercuts">0</span></div>
+      </div>
+      <div class="row">
+        <div><small>Guard %</small> <span id="guardPercent">0%</span></div>
+        <div><small>Technique</small> <span id="techniqueScore">0%</span></div>
+      </div>
+      <div class="row">
+        <div><small>Fastest (m/s)</small> <span id="fastest">0</span></div>
+        <div><small>Power est.</small> <span id="power">0</span></div>
+      </div>
+      
+      <div id="debug">
+          <small>Status: <span id="status">idle</span></small>
+          <br/>
+          <span>Latency: <b id="latency">0ms</b></span>
+          <span>Max Score: <b id="confidence">0.0</b></span>
+          <span>Resolution: <b id="res">0x0</b></span>
+      </div>
+    </div>
+    
+    <div id="drillCommand"></div>
+    
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" class="secondary" disabled>Stop</button>
+    <button id="resetBtn" class="secondary">Reset</button>
+    <button id="drillBtn">Start Drill</button> </div>
+
+  <div id="feedback"></div>
+
+<script>
+(async ()=> {
+  // Elements
+  const video = document.getElementById('video');
+  const overlayCanvas = document.getElementById('overlay');
+  const overlayCtx = overlayCanvas.getContext('2d');
+  const hiddenCanvas = document.getElementById('hiddenCanvas');
+  const hiddenCtx = hiddenCanvas.getContext('2d');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const drillBtn = document.getElementById('drillBtn'); // New button
+  const statusEl = document.getElementById('status');
+  const feedbackEl = document.getElementById('feedback');
+  const drillCommandEl = document.getElementById('drillCommand'); // New element
+  
+  // New Debug Elements
+  const latencyEl = document.getElementById('latency');
+  const confidenceEl = document.getElementById('confidence');
+  const resEl = document.getElementById('res');
+
+  const jabsEl = document.getElementById('jabs');
+  const crossesEl = document.getElementById('crosses');
+  const hooksEl = document.getElementById('hooks');
+  const uppercutsEl = document.getElementById('uppercuts');
+  const guardPctEl = document.getElementById('guardPercent');
+  const techniqueEl = document.getElementById('techniqueScore'); // Replaced chinPctEl
+  const fastestEl = document.getElementById('fastest');
+  const powerEl = document.getElementById('power');
+
+  // State
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let stream = null;
+  let lastFeedbackAt = 0;
+  
+  let jabs=0, crosses=0, hooks=0, uppercuts=0;
+  let frameCount = 0;
+  let guardFrames = 0; 
+  let goodTechniqueFrames = 0; // NEW: Track frames with good technique
+  let startTime = 0;
+
+  let prevLeft = null, prevRight = null, prevNose = null, prevLHip = null, prevRHip = null;
+
+  // thresholds (tweakable)
+  const punchCooldown = 300; 
+  const speedThreshold = 0.035; 
+  const uppercutYThreshold = 0.02; 
+  let guardDistThreshold = 0.18; 
+  const rotationPowerFactor = 1.2; 
+  const VISUAL_SCORE_THRESHOLD = 0.05; 
+  const ROTATION_THRESHOLD_RAD = 0.35; // ~20 degrees hip rotation for technique score
+  const SLIP_THRESHOLD_X = 0.01; // X-axis movement relative to hips
+  const DRILL_TIMEOUT = 3000; // 3 seconds to complete a command
+
+  let lastLeftAt = 0, lastRightAt = 0;
+  
+  // Drill Mode State
+  let drillActive = false;
+  let expectedAction = null;
+  let drillTimer = null;
+
+  // Drill Command List (Focus on simple action/defense combos)
+  const COMMANDS = [
+    { name: "JAB", type: "punch", hand: "left" },
+    { name: "CROSS", type: "punch", hand: "right" },
+    { name: "HOOK", type: "punch", hand: "hook" },
+    { name: "UPPERCUT", type: "punch", hand: "uppercut" },
+    { name: "SLIP RIGHT", type: "defense", defense: "slip_right" },
+    { name: "SLIP LEFT", type: "defense", defense: "slip_left" },
+    // Later: { name: "JAB + CROSS", type: "combo", sequence: ["JAB", "CROSS"] }
+  ];
+
+
+  // speech and audio functions (omitted for brevity)
+  const synth = window.speechSynthesis;
+  function speak(s) {
+    if (!synth) return;
+    const ut = new SpeechSynthesisUtterance(s);
+    ut.rate = 1.05; ut.pitch = 1;
+    synth.speak(ut);
+  }
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function beep() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = 1000;
+    g.gain.value = 0.0001; o.connect(g); g.connect(audioCtx.destination);
+    o.start();
+    g.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.12);
+    o.stop(audioCtx.currentTime + 0.13);
+  }
+  function giveFeedback(text, speakIt=true, style='yellow') {
+    const t = now();
+    // Allow immediate feedback for drill success/failure
+    if (t - lastFeedbackAt < 1000 && !drillActive) return;
+    lastFeedbackAt = t;
+    feedbackEl.textContent = text;
+    feedbackEl.style.opacity = 1;
+    // Set color based on style
+    if(style === 'success') feedbackEl.style.color = '#00ff7f';
+    else if(style === 'fail') feedbackEl.style.color = '#ff6b6b';
+    else feedbackEl.style.color = '#ffeb3b';
+
+    setTimeout(()=> feedbackEl.style.opacity = 0, 1500);
+    if (speakIt) speak(text);
+    beep();
+  }
+
+  // Drill Manager Logic (Feature 0, 5)
+  function startDrillMode() {
+    if (!running) {
+        giveFeedback("Please press start camera first.", false, 'fail');
+        return;
+    }
+    drillActive = true;
+    drillBtn.disabled = true;
+    startBtn.disabled = true;
+    giveFeedback("Drill mode activated. Get ready!", true, 'success');
+    setTimeout(issueCommand, 2000);
+  }
+
+  function issueCommand() {
+    if (!drillActive) return;
+
+    // Pick a random command
+    const command = COMMANDS[Math.floor(Math.random() * COMMANDS.length)];
+    expectedAction = command;
+
+    drillCommandEl.textContent = command.name;
+    drillCommandEl.style.opacity = 1;
+    drillCommandEl.style.background = 'rgba(255, 255, 255, 0.9)';
+    
+    speak(command.name);
+
+    // Set a timeout for the drill
+    if (drillTimer) clearTimeout(drillTimer);
+    drillTimer = setTimeout(() => {
+        if (drillActive && expectedAction) {
+            checkDrillSuccess(null); // Failure due to timeout
+        }
+    }, DRILL_TIMEOUT);
+  }
+
+  // Handles both Punch and Defense actions
+  function checkDrillSuccess(detectedAction, actionMeta) {
+    if (!drillActive || !expectedAction) return;
+    
+    clearTimeout(drillTimer);
+    
+    // Success Check
+    let isSuccess = false;
+    let feedback = "";
+    let score = actionMeta ? actionMeta.techniqueScore * 100 : 0;
+    
+    if (detectedAction) {
+        if (expectedAction.type === 'punch') {
+            const handMatch = (expectedAction.hand === 'left' && detectedAction === 'jab') || 
+                              (expectedAction.hand === 'right' && detectedAction === 'cross') ||
+                              (expectedAction.hand === 'hook' && detectedAction === 'hook') ||
+                              (expectedAction.hand === 'uppercut' && detectedAction === 'uppercut');
+
+            if (handMatch) {
+                isSuccess = true;
+                feedback = `Nice ${expectedAction.name}! ${score.toFixed(0)}% Technique.`;
+            }
+        } else if (expectedAction.type === 'defense') {
+            if (expectedAction.defense === detectedAction) {
+                isSuccess = true;
+                feedback = `Got the ${expectedAction.name.toLowerCase()}! Well done.`;
+            }
+        }
+    }
+    
+    // Failure Check (Action didn't match or timeout)
+    if (!isSuccess) {
+        // Only give failure feedback if an action was attempted or timeout occurred
+        if (detectedAction || detectedAction === null) {
+            feedback = detectedAction === null 
+                ? "Too slow! Try again." 
+                : `Wrong move! I asked for a ${expectedAction.name}.`;
+            giveFeedback(feedback, true, 'fail');
+            
+            // Re-issue the same command
+            expectedAction = null; 
+            setTimeout(issueCommand, 1500); 
+            return; // Skip success routine
+        } else {
+            // Keep waiting for an action if not timeout
+            return;
+        }
+    }
+
+    // Success Routine
+    giveFeedback(feedback, true, 'success');
+    
+    // Visual feedback for success
+    drillCommandEl.textContent = '✅ SUCCESS!';
+    drillCommandEl.style.background = '#00ff7f';
+    expectedAction = null;
+
+    // Issue next command after a short delay
+    setTimeout(issueCommand, 1500); 
+  }
+
+  // start camera and loadDetector functions remain unchanged from previous step
+
+  async function startCamera() {
+    // ... (unchanged) ...
+    const constraints = { 
+      audio: false, 
+      video: { 
+        facingMode: "user", 
+        width: { ideal: 320 }, 
+        height: { ideal: 240 } 
+      } 
+    };
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
+    video.srcObject = stream;
+    
+    return new Promise((resolve) => {
+      video.onloadedmetadata = () => {
+        video.play();
+        
+        video.width = video.videoWidth;
+        video.height = video.videoHeight;
+        overlayCanvas.width = video.videoWidth;
+        overlayCanvas.height = video.videoHeight;
+        hiddenCanvas.width = video.videoWidth;
+        hiddenCanvas.height = video.videoHeight;
+        
+        resEl.textContent = `${video.videoWidth}x${video.videoHeight}`;
+
+        video.setAttribute("playsinline", "true");
+        video.style.transform = "scaleX(-1)"; 
+        resolve();
+      };
+    });
+  }
+
+  async function loadDetector() {
+    statusEl.textContent = 'loading model (1/3: initializing TFJS dependencies)...';
+    statusEl.classList.remove('error'); 
+    
+    if (!window.tf || !window.tf.Tensor) {
+        statusEl.textContent = 'LOAD FAILED: Core TensorFlow.js dependency (Tensor) is missing.';
+        statusEl.classList.add('error');
+        return;
+    }
+    
+    const model = poseDetection.SupportedModels.BlazePose;
+    const detectorConfig = {
+      runtime: 'mediapipe', 
+      modelType: 'lite', 
+      enableSmoothing: true,
+      solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/pose',
+    };
+    
+    statusEl.textContent = 'loading model (2/3: setting up MediaPipe detector)...';
+
+    try {
+        detector = await poseDetection.createDetector(model, detectorConfig);
+        statusEl.textContent = 'model loaded (BlazePose/MediaPipe Lite)';
+    } catch (e) {
+        statusEl.textContent = `LOAD FAILED: ${e.name || 'Error'}: ${e.message || 'Unknown error details'}`;
+        statusEl.classList.add('error'); 
+        
+        console.error('Detector creation error:', e);
+        feedbackEl.textContent = `CRASH: ${e.message || 'Unknown'}`;
+        feedbackEl.style.opacity = 1;
+    }
+  }
+
+
+  // utilities
+  function dist(a,b) { return Math.hypot(a.x-b.x, a.y-b.y); }
+  function now() { return performance.now(); }
+  
+  // NEW: Calculates rotation score (Feature 1)
+  function calculateRotation(ls, rs, lHip, rHip) {
+    if (!ls || !rs || !lHip || !rHip) return 0;
+    
+    // 1. Calculate the angle of the shoulder line and hip line
+    const shoulderAngle = Math.atan2(rs.y - ls.y, rs.x - ls.x);
+    const hipAngle = Math.atan2(rHip.y - lHip.y, rHip.x - lHip.x);
+    
+    // 2. The difference in angle represents rotation
+    let rotation = Math.abs(shoulderAngle - hipAngle);
+
+    // Normalize rotation angle to be between 0 and PI
+    if (rotation > Math.PI) rotation = 2 * Math.PI - rotation;
+    
+    // Normalize to 0-1, 1 being max rotation (PI)
+    let rotNorm = Math.min(rotation, Math.PI / 2) / (Math.PI / 2);
+
+    // Score: Check if rotation passes a minimum threshold
+    return (rotation > ROTATION_THRESHOLD_RAD) ? rotNorm : 0;
+  }
+  
+  // NEW: Checks for slipping movement (Feature 2)
+  function checkSlip(nose, lHip, rHip, prevNose, prevLHip, prevRHip) {
+      if (!nose || !lHip || !rHip || !prevNose || !prevLHip || !prevRHip) return null;
+
+      // Use the midpoint of the hips as the torso center
+      const hipMidX = (lHip.x + rHip.x) / 2;
+      const prevHipMidX = (prevLHip.x + prevRHip.x) / 2;
+      
+      // Calculate movement of the head (nose) relative to the body (hip center)
+      const relativeNoseMoveX = (nose.x - hipMidX) - (prevNose.x - prevHipMidX);
+      
+      // Use hip distance as normalization factor (body size)
+      const bodyWidth = dist(lHip, rHip);
+      const normalizedMoveX = relativeNoseMoveX / bodyWidth;
+      
+      if (normalizedMoveX > SLIP_THRESHOLD_X) {
+          return 'slip_right'; // Head moves right
+      } else if (normalizedMoveX < -SLIP_THRESHOLD_X) {
+          return 'slip_left'; // Head moves left
+      }
+      return null;
+  }
+
+  function analyzePose(kpMap) {
+    const lw = kpMap['left_wrist'];
+    const rw = kpMap['right_wrist'];
+    const ls = kpMap['left_shoulder'];
+    const rs = kpMap['right_shoulder'];
+    const nose = kpMap['nose'];
+    const lHip = kpMap['left_hip'];
+    const rHip = kpMap['right_hip'];
+    const lElbow = kpMap['left_elbow'];
+    const rElbow = kpMap['right_elbow'];
+
+
+    // Only proceed if critical points are present (shoulders/wrists/nose)
+    if (!lw || !rw || !ls || !rs || !nose) return {};
+
+    const normalizedKpMap = {
+        // ... (keypoint mapping remains) ...
+    };
+    
+    // Velocity calculation remains
+    let leftVel = {x:0,y:0}, rightVel={x:0,y:0};
+    if (prevLeft) { leftVel = { x: lw.x - prevLeft.x, y: lw.y - prevLeft.y }; }
+    if (prevRight) { rightVel = { x: rw.x - prevRight.x, y: rw.y - prevRight.y }; }
+
+    const leftToShoulder = dist(lw, ls);
+    const rightToShoulder = dist(rw, rs);
+    const leftToNose = dist(lw, nose);
+    const rightToNose = dist(rw, nose);
+
+    // Guard calculation remains
+    const bothGuard = (leftToShoulder < guardDistThreshold) && (rightToShoulder < guardDistThreshold);
+    
+    // Technique Score (Feature 1)
+    const rotationScore = calculateRotation(ls, rs, lHip, rHip);
+    const techniqueScore = rotationScore; // Currently only based on rotation
+
+    const leftSpeed = Math.hypot(leftVel.x, leftVel.y);
+    const rightSpeed = Math.hypot(rightVel.x, rightVel.y);
+    const leftPower = leftSpeed * (1 + rotationScore*rotationPowerFactor);
+    const rightPower = rightSpeed * (1 + rotationScore*rotationPowerFactor);
+
+    let detectedAction = null;
+    const timestamp = now();
+
+    // Defense Detection (Feature 2)
+    const slipType = checkSlip(nose, lHip, rHip, prevNose, prevLHip, prevRHip);
+    if (slipType) {
+        detectedAction = slipType;
+    }
+    
+    // Punch detection logic (Simplified from movement-based to check for expected action)
+    if (!drillActive || expectedAction.type === 'punch') {
+        
+        // Left Punch Check (Jab/Hook/Uppercut)
+        if (prevLeft) {
+            const prevDist = dist(prevLeft, ls);
+            const currDist = leftToShoulder;
+            const delta = currDist - prevDist;
+            if (delta > speedThreshold && (timestamp - lastLeftAt) > punchCooldown) {
+                if (Math.abs(leftVel.y) < 0.04 && Math.abs(leftVel.x) > 0.04) { detectedAction = 'hook'; hooks++; hooksEl.textContent = hooks; }
+                else if (leftVel.y < -uppercutYThreshold) { detectedAction = 'uppercut'; uppercuts++; uppercutsEl.textContent = uppercuts; }
+                else { detectedAction = 'jab'; jabs++; jabsEl.textContent = jabs; }
+                lastLeftAt = timestamp;
+            }
+        }
+        
+        // Right Punch Check (Cross/Hook/Uppercut)
+        if (prevRight) {
+            const prevDistR = dist(prevRight, rs);
+            const currDistR = rightToShoulder;
+            const deltaR = currDistR - prevDistR;
+            if (deltaR > speedThreshold && (timestamp - lastRightAt) > punchCooldown) {
+                if (Math.abs(rightVel.y) < 0.04 && Math.abs(rightVel.x) > 0.04) { detectedAction = 'hook'; hooks++; hooksEl.textContent = hooks; }
+                else if (rightVel.y < -uppercutYThreshold) { detectedAction = 'uppercut'; uppercuts++; uppercutsEl.textContent = uppercuts; }
+                else { detectedAction = 'cross'; crosses++; crossesEl.textContent = crosses; }
+                lastRightAt = timestamp;
+            }
+        }
+    }
+    
+    // Drill Mode Check (Feature 5)
+    if (drillActive && expectedAction) {
+        if (expectedAction.type === 'punch' && (detectedAction === 'jab' || detectedAction === 'cross' || detectedAction === 'hook' || detectedAction === 'uppercut')) {
+            // Check success and pass meta for technique score
+            checkDrillSuccess(detectedAction, { techniqueScore });
+        } else if (expectedAction.type === 'defense' && (detectedAction === 'slip_left' || detectedAction === 'slip_right')) {
+            // Check success
+            checkDrillSuccess(detectedAction);
+        }
+    }
+
+
+    drawOverlay(kpMap, {bothGuard, rotationScore, leftSpeed, rightSpeed, leftPower, rightPower});
+
+    // Update previous keypoints for velocity/slip calculation
+    if(lw) prevLeft = {x: lw.x, y: lw.y};
+    if(rw) prevRight = {x: rw.x, y: rw.y};
+    if(nose) prevNose = {x: nose.x, y: nose.y};
+    if(lHip) prevLHip = {x: lHip.x, y: lHip.y};
+    if(rHip) prevRHip = {x: rHip.x, y: rHip.y};
+    
+
+    return {leftSpeed, rightSpeed, leftPower, rightPower, guard: bothGuard, techniqueScore};
+  }
+
+  function drawOverlay(kpMap, meta) {
+    // ... (drawOverlay logic remains, using meta.rotationScore for visual feedback) ...
+    const w = overlayCanvas.width, h = overlayCanvas.height;
+    overlayCtx.clearRect(0,0,w,h);
+
+    const keypointConnectionsMap = [
+      ['left_shoulder', 'right_shoulder'], ['left_shoulder', 'left_elbow'],
+      ['right_shoulder', 'right_elbow'], ['left_elbow', 'left_wrist'],
+      ['right_elbow', 'right_wrist'], ['left_shoulder', 'left_hip'],
+      ['right_shoulder', 'right_hip'], ['left_hip', 'right_hip'],
+      ['left_hip', 'left_knee'], ['right_hip', 'right_knee'],
+      ['left_knee', 'left_ankle'], ['right_knee', 'right_ankle'],
+    ];
+
+    overlayCtx.save();
+    overlayCtx.strokeStyle = 'rgba(0,255,255,0.7)';
+    overlayCtx.lineWidth = 2;
+    
+    // Draw connections (skeleton)
+    for (const [p1Name, p2Name] of keypointConnectionsMap) {
+      const p1 = kpMap[p1Name];
+      const p2 = kpMap[p2Name];
+      if (p1 && p2 && p1.score > VISUAL_SCORE_THRESHOLD && p2.score > VISUAL_SCORE_THRESHOLD) {
+        overlayCtx.beginPath();
+        overlayCtx.moveTo(p1.x * w, p1.y * h);
+        overlayCtx.lineTo(p2.x * w, p2.y * h);
+        overlayCtx.stroke();
+      }
+    }
+    
+    // Draw keypoints (joints)
+    overlayCtx.fillStyle = 'rgba(0,255,255,0.8)';
+    for (const k of Object.values(kpMap)) {
+      if (k && k.score > VISUAL_SCORE_THRESHOLD) {
+        overlayCtx.beginPath();
+        overlayCtx.arc(k.x * w, k.y * h, 6, 0, Math.PI*2);
+        overlayCtx.fill();
+      }
+    }
+    overlayCtx.restore();
+
+    // Guard/Rotation visual feedback 
+    overlayCtx.save();
+    if (meta.rotationScore > 0.5) { // Visual cue for good rotation
+      overlayCtx.strokeStyle = 'rgba(0,255,100,0.6)';
+      overlayCtx.lineWidth = 5;
+      overlayCtx.strokeRect(10,10,w-20,h-20);
+    } else if (meta.bothGuard) {
+      overlayCtx.strokeStyle = 'rgba(255,165,0,0.6)'; // Orange for guard
+      overlayCtx.lineWidth = 5;
+      overlayCtx.strokeRect(10,10,w-20,h-20);
+    }
+    overlayCtx.restore();
+  }
+  
+
+  async function runFrame() {
+    if (!running) return;
+    if (!detector) {
+        statusEl.textContent = 'Detector not initialized. Press Start.';
+        statusEl.classList.add('error');
+        return;
+    }
+    
+    const vw = video.videoWidth;
+    const vh = video.videoHeight;
+    const start = now();
+    
+    try {
+      hiddenCtx.save();
+      hiddenCtx.scale(-1, 1);
+      hiddenCtx.drawImage(video, -vw, 0, vw, vh);
+      hiddenCtx.restore();
+
+      const poses = await detector.estimatePoses(hiddenCanvas, { flipHorizontal: false });
+      
+      const end = now();
+      const numericalLatency = end - start;
+      const latencyStr = numericalLatency.toFixed(0);
+      latencyEl.textContent = `${latencyStr}ms`;
+      
+      let maxScore = '0.0'; 
+
+      if (numericalLatency > 0) {
+          const fps = 1000 / numericalLatency;
+          statusEl.textContent = `running (FPS: ${fps.toFixed(1)} | Poses: ${poses.length})`;
+      } else {
+          statusEl.textContent = `running (Poses: ${poses.length})`;
+      }
+      statusEl.classList.remove('error'); 
+
+      if (poses && poses.length > 0) {
+        const primaryPose = poses[0];
+        
+        if (typeof primaryPose.score === 'number') {
+            maxScore = primaryPose.score.toFixed(2);
+        }
+
+        const pts = primaryPose.keypoints.reduce((map, k) => {
+            map[k.name] = k;
+            return map;
+        }, {});
+        
+        if (vw > 0 && vh > 0) {
+            const kpMap = {};
+            for (const k of Object.values(pts)) {
+              if (typeof k.x === 'number' && typeof k.y === 'number') {
+                kpMap[k.name] = { x: k.x / vw, y: k.y / vh, score: k.score };
+              }
+            }
+            const res = analyzePose(kpMap);
+            
+            // update UI numbers
+            frameCount++;
+            guardFrames += res.guard ? 1 : 0;
+            goodTechniqueFrames += res.techniqueScore > 0.5 ? 1 : 0; // Count good technique frames
+            fastestEl.textContent = Math.max(Number(fastestEl.textContent)||0, (res.leftSpeed||0).toFixed(3), (res.rightSpeed||0).toFixed(3));
+            powerEl.textContent = Math.max(Number(powerEl.textContent)||0, (res.leftPower||0).toFixed(3), (res.rightPower||0).toFixed(3));
+            guardPctEl.textContent = Math.round((guardFrames/frameCount||0)*100) + '%';
+            techniqueEl.textContent = Math.round((res.techniqueScore||0)*100) + '%'; // Display real-time technique score
+        }
+      } else {
+        overlayCtx.clearRect(0,0,overlayCanvas.width,overlayCanvas.height);
+      }
+      
+      confidenceEl.textContent = maxScore;
+      
+    } catch (err) {
+      console.error('estimation error', err);
+      statusEl.textContent = `CRASH: ${err.message || 'Unknown Error'}`;
+      statusEl.classList.add('error');
+      feedbackEl.textContent = `CRASH: ${err.message || 'Unknown Error'}`;
+      feedbackEl.style.opacity = 1;
+      running = false; 
+    }
+    
+    if (running) {
+        raf = requestAnimationFrame(runFrame);
+    }
+  }
+
+  // controls (start/stop/reset/drill)
+  startBtn.onclick = async () => {
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    resetBtn.disabled = false;
+    drillBtn.disabled = false;
+    statusEl.textContent = 'starting camera (asking for 320x240)...';
+    statusEl.classList.remove('error');
+    try {
+      await startCamera();
+    } catch (e) {
+      alert('Camera error. Ensure camera permissions are granted. Error: '+ (e.message || e));
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      drillBtn.disabled = true;
+      statusEl.textContent = 'Camera failed to start.';
+      statusEl.classList.add('error');
+      return;
+    }
+    if (!detector) await loadDetector();
+    if (statusEl.classList.contains('error')) { 
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        drillBtn.disabled = true;
+        return; 
+    }
+    running = true;
+    startTime = Date.now();
+    video.play();
+    runFrame();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  };
+
+  stopBtn.onclick = () => {
+    running = false;
+    drillActive = false; // Stop drill mode
+    if (drillTimer) clearTimeout(drillTimer);
+    expectedAction = null;
+    drillCommandEl.style.opacity = 0;
+    
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    drillBtn.disabled = false;
+    statusEl.textContent = 'stopped';
+    statusEl.classList.remove('error');
+    if (raf) cancelAnimationFrame(raf);
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach(t => t.stop());
+      stream = null;
+    }
+  };
+
+  resetBtn.onclick = () => {
+    jabs = crosses = hooks = uppercuts = 0;
+    jabsEl.textContent = 0; crossesEl.textContent=0; hooksEl.textContent=0; uppercutsEl.textContent=0;
+    frameCount = guardFrames = goodTechniqueFrames = 0;
+    prevLeft = prevRight = prevNose = prevLHip = prevRHip = null;
+    feedbackEl.textContent = '';
+    fastestEl.textContent = '0';
+    powerEl.textContent = '0';
+    guardPctEl.textContent = '0%';
+    techniqueEl.textContent = '0%';
+    
+    if(drillActive) {
+        // Stop and restart the drill mode
+        drillActive = false;
+        if (drillTimer) clearTimeout(drillTimer);
+        expectedAction = null;
+        drillCommandEl.textContent = '';
+        drillCommandEl.style.opacity = 0;
+        setTimeout(startDrillMode, 500);
+    }
+  };
+  
+  drillBtn.onclick = () => {
+    if (drillActive) {
+        drillActive = false;
+        if (drillTimer) clearTimeout(drillTimer);
+        expectedAction = null;
+        drillCommandEl.textContent = 'Drill Mode OFF';
+        drillCommandEl.style.opacity = 1;
+        setTimeout(() => drillCommandEl.style.opacity = 0, 1000);
+        drillBtn.textContent = 'Start Drill';
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+    } else {
+        startDrillMode();
+        drillBtn.textContent = 'Stop Drill';
+    }
+  }
+  // init ready
+  statusEl.textContent = 'ready';
+})();
+</script>
+</body>
+</html>
