@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Boxing Coach — Drill & Live Test Modes</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family:system-ui, Arial;
+      background:#0a0a0a; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+      overflow:hidden;
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:450px;   
+      height:75vh;       
+      background:#000;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    video, canvas { 
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover;
+    }
+    #hiddenCanvas {
+        display: none; 
+    }
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      background:rgba(0,0,0,0.35);
+      padding:6px 10px;
+      font-size:12px;
+      box-sizing:border-box;
+      z-index: 5;
+    }
+    .stat { 
+      padding:2px 4px;
+      color:#0ff; font-weight:600;
+    }
+    
+    /* COMMAND PANEL */
+    #drillCommand {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 25px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 12px;
+        z-index: 10;
+        min-width: 200px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s, background 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    
+    /* LIVE TEST ANIMATION */
+    #liveTestAttack {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: white;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        z-index: 10;
+        opacity: 0;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    /* END OF LIVE TEST STATE COLORS */
+    .hit { background: red !important; }
+    .slipped { background: #00ff7f !important; }
+
+    #debug {
+      width: 100%;
+      padding-top: 5px;
+      margin-top: 5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 10px;
+    }
+    #debug span {
+        margin-right: 10px;
+    }
+
+    /* FIX: Control container CSS to ensure visibility */
+    #controls {
+      margin-top:10px;
+      display:flex; 
+      gap:8px;
+      flex-direction: column; /* Stack vertically for better mobile view */
+      align-items: center; /* Center items in the column */
+      width: 100%;
+      max-width: 450px;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .control-row {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    button, select { 
+      padding:10px 15px; border-radius:10px; 
+      border:none; 
+      font-weight:700;
+      cursor: pointer;
+      box-shadow: 0 4px #00000033;
+      transition: all 0.1s ease-out;
+      flex-grow: 1; /* Allow buttons to expand in the row */
+      min-width: 100px;
+    }
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px #00000033;
+    }
+    
+    #startBtn { background: #007bff; color:#fff; }
+    #stopBtn, #resetBtn { background: #444; color:#fff; }
+    #startDrillBtn, #drillSelector { background: #00b0ff; color:#000; }
+    #startTestBtn { background: #ff7043; color:#000; }
+    #drillSelector { flex-grow: 2; } /* Make the dropdown wider */
+
+    button:disabled, select:disabled {
+      opacity: 0.5;
+      cursor: default;
+      box-shadow: none;
+    }
+    
+    #feedback {
+      margin-top:10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      min-height: 24px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="margin:10px 0 5px 0">AI Boxing Coach</h3>
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+    <canvas id="hiddenCanvas"></canvas>
+    <div id="liveTestAttack"></div>
+
+    <div id="hud">
+      <div class="row">
+        <div><span class="stat">PUNCHES</span> <span id="punches">0</span></div>
+      </div>
+      
+      <div id="debug">
+          <small>Status: <span id="status">idle</span></small>
+          <br/>
+          <span>Latency: <b id="latency">0ms</b></span>
+          <span>Max Score: <b id="confidence">0.0</b></span>
+          <span>Mode: <b id="modeStatus">IDLE</b></span>
+      </div>
+    </div>
+    
+    <div id="drillCommand"></div>
+    
+  </div>
+
+  <div id="controls">
+    <div class="control-row">
+        <button id="startBtn">1. Start Camera</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="resetBtn">Reset Counts</button>
+    </div>
+    
+    <hr style="width:100%; border:0; margin:5px 0;">
+    
+    <div class="control-row">
+        <select id="drillSelector" disabled></select>
+        <button id="startDrillBtn" disabled>2. Start Drill</button>
+    </div>
+    
+    <hr style="width:100%; border:0; margin:5px 0;">
+    
+    <div class="control-row">
+        <button id="startTestBtn" disabled>3. Live Test (Sparring)</button>
+    </div>
+  </div>
+
+  <div id="feedback"></div>
+
+<script>
+(async ()=> {
+  // Elements
+  const video = document.getElementById('video');
+  const overlayCanvas = document.getElementById('overlay');
+  const overlayCtx = overlayCanvas.getContext('2d');
+  const hiddenCanvas = document.getElementById('hiddenCanvas');
+  const hiddenCtx = hiddenCanvas.getContext('2d');
+  
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const drillSelector = document.getElementById('drillSelector');
+  const startDrillBtn = document.getElementById('startDrillBtn');
+  const startTestBtn = document.getElementById('startTestBtn');
+  
+  const statusEl = document.getElementById('status');
+  const feedbackEl = document.getElementById('feedback');
+  const drillCommandEl = document.getElementById('drillCommand'); 
+  const liveTestAttackEl = document.getElementById('liveTestAttack');
+  
+  // HUD elements
+  const latencyEl = document.getElementById('latency');
+  const confidenceEl = document.getElementById('confidence');
+  const modeStatusEl = document.getElementById('modeStatus');
+  const punchesEl = document.getElementById('punches');
+
+  // State
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let stream = null;
+  let punches = 0; 
+
+  // Mode State
+  const MODES = { IDLE: 'IDLE', DRILL: 'DRILL', LIVE_TEST: 'LIVE_TEST' };
+  let currentMode = MODES.IDLE;
+  let confidenceOK = false;
+  const MIN_CONFIDENCE_THRESHOLD = 0.70; 
+
+  // Combo/Attempt State
+  let requiredSequence = [];
+  let currentStepIndex = 0;
+  let attempts = 0;
+  const MAX_ATTEMPTS = 10;
+  let drillScores = []; 
+  let testResults = []; 
+  
+  // Timers and Attack State
+  let comboStartTime = 0;
+  let attackWindowActive = false;
+  let attackHit = false;
+  let attackTimeout = null;
+  const LIVE_TEST_ATTACK_TIME_MS = 600; 
+  const LIVE_TEST_WAIT_MS = 2000; 
+  
+  // Previous keypoints for velocity/detection
+  let prevLeft = null, prevRight = null, prevNose = null, prevLHip = null, prevRHip = null;
+
+  // Punch detection thresholds (AGGRESSIVE FIX FOR SPEED)
+  const punchCooldown = 100; // Reduced to 100ms for faster rapid-fire
+  const speedThreshold = 0.01; // Reduced for higher sensitivity
+  const minForwardX = 0.0005; // Almost zero, focusing on any outward movement
+  const dominanceRatio = 1.0; 
+  const ROTATION_THRESHOLD_RAD = 0.30; 
+  const SLIP_THRESHOLD_X = 0.01; 
+  const PUNCH_TYPES = ['punch']; 
+
+  let lastLeftAt = 0, lastRightAt = 0;
+  
+  // Drill Command List (Defensive Combos)
+  const COMMANDS = {
+      "combo_1": { name: "1 PUNCH, SLIP LEFT", sequence: ["
