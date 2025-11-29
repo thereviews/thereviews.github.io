@@ -1,0 +1,690 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AI Boxing Coach — Drill & Live Test Modes</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  
+  <style>
+    body { 
+      margin:0; padding:0; 
+      font-family:system-ui, Arial;
+      background:#0a0a0a; color:#eee; 
+      display:flex; flex-direction:column; 
+      align-items:center; 
+      overflow-x: hidden;
+      overflow-y: auto; 
+    }
+    #wrap {
+      position:relative;
+      width:100vw; 
+      max-width:450px;   
+      max-height:60vh; 
+      height: 500px; 
+      background:#000;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    video, canvas { 
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover;
+    }
+    #hiddenCanvas {
+        display: none; 
+    }
+    #hud {
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      background:rgba(0,0,0,0.35);
+      padding:6px 10px;
+      font-size:12px;
+      box-sizing:border-box;
+      z-index: 5;
+    }
+    .stat { 
+      padding:2px 4px;
+      color:#0ff; font-weight:600;
+    }
+    #drillCommand {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 25px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 12px;
+        z-index: 10;
+        min-width: 200px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s, background 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    #liveTestAttack {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: white;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        z-index: 10;
+        opacity: 0;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    .hit { background: red !important; }
+    .slipped { background: #00ff7f !important; }
+
+    #debug {
+      width: 100%;
+      padding-top: 5px;
+      margin-top: 5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 10px;
+    }
+    #debug span {
+        margin-right: 10px;
+    }
+
+    #controls {
+      margin-top:10px;
+      display:flex; gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+      max-width: 450px;
+      padding: 0 10px;
+    }
+    button, select { 
+      padding:10px 15px; border-radius:10px; 
+      border:none; 
+      font-weight:700;
+      cursor: pointer;
+      box-shadow: 0 4px #00000033;
+      transition: all 0.1s ease-out;
+    }
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px #00000033;
+    }
+    
+    #startBtn { background: #007bff; color:#fff; }
+    #stopBtn, #resetBtn { background: #444; color:#fff; }
+    #startDrillBtn, #drillSelector { background: #00b0ff; color:#000; }
+    #startTestBtn { background: #ff7043; color:#000; }
+
+    button:disabled, select:disabled {
+      opacity: 0.5;
+      cursor: default;
+      box-shadow: none;
+    }
+    
+    #feedback {
+      margin-top:10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      min-height: 24px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    #errorLog {
+        width: 100%;
+        max-width: 450px;
+        margin-top: 10px; 
+        margin-bottom: 20px;
+        background: #1e1e1e;
+        border: 1px solid #ff4444;
+        padding: 10px;
+        font-size: 10px;
+        color: #ffaaaa;
+        max-height: 80px; 
+        overflow-y: scroll;
+        box-sizing: border-box;
+    }
+    #errorLog h4 {
+        margin: 0 0 5px 0;
+        color: #ff4444;
+    }
+    
+    #pendingStatus {
+        min-height: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #ffeb3b;
+        margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="margin:10px 0 0 0">AI Boxing Coach 🥊 (MoveNet Lightning)</h3>
+  <div id="pendingStatus"></div> 
+
+  <div id="wrap">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="overlay"></canvas>
+    <canvas id="hiddenCanvas"></canvas>
+    <div id="liveTestAttack"></div>
+
+    <div id="hud">
+      <div class="row">
+        <div><span class="stat">PUNCHES</span> <span id="punches">0</span></div>
+      </div>
+      
+      <div id="debug">
+          <small>Status: <span id="status">idle</span></small>
+          <br/>
+          <span>Latency: <b id="latency">0ms</b></span>
+          <span>Max Score: <b id="confidence">0.0</b></span> 
+          <span>Mode: <b id="modeStatus">IDLE</b></span>
+          <br/>
+          <span>Nose: <b id="nosePos">0.0, 0.0</b></span>
+      </div>
+    </div>
+    
+    <div id="drillCommand"></div>
+    
+  </div>
+
+  <div id="controls">
+    <button id="startBtn">1. Start Camera</button>
+    <button id="stopBtn" disabled>Stop</button>
+    <button id="resetBtn">Reset Counts</button>
+    
+    <hr style="width:100%; border:0; margin:5px 0;">
+    
+    <select id="drillSelector" disabled></select>
+    <button id="startDrillBtn" disabled>2. Start Drill</sutton>
+    
+    <hr style="width:100%; border:0; margin:5px 0;">
+    
+    <button id="startTestBtn" disabled>3. Live Test (Sparring)</button>
+  </div>
+
+  <div id="feedback"></div>
+  
+  <div id="errorLog">
+      <h4>JavaScript Error Log (for Debugging)</h4>
+      <pre id="errorLogContent">No errors logged.</pre>
+  </div>
+
+<script>
+(async ()=> {
+  // Elements
+  const video = document.getElementById('video');
+  const overlayCanvas = document.getElementById('overlay');
+  const overlayCtx = overlayCanvas.getContext('2d');
+  const hiddenCanvas = document.getElementById('hiddenCanvas');
+  const hiddenCtx = hiddenCanvas.getContext('2d');
+  
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const drillSelector = document.getElementById('drillSelector');
+  const startDrillBtn = document.getElementById('startDrillBtn');
+  const startTestBtn = document.getElementById('startTestBtn');
+  
+  const statusEl = document.getElementById('status');
+  const feedbackEl = document.getElementById('feedback');
+  const drillCommandEl = document.getElementById('drillCommand'); 
+  const liveTestAttackEl = document.getElementById('liveTestAttack');
+  const errorLogContentEl = document.getElementById('errorLogContent');
+  const pendingStatusEl = document.getElementById('pendingStatus'); 
+  const nosePosEl = document.getElementById('nosePos'); 
+
+  // HUD elements
+  const latencyEl = document.getElementById('latency');
+  const confidenceEl = document.getElementById('confidence');
+  const modeStatusEl = document.getElementById('modeStatus');
+  const punchesEl = document.getElementById('punches');
+
+  // State
+  let detector = null;
+  let running = false;
+  let raf = null;
+  let stream = null;
+  let punches = 0; 
+
+  // Mode State
+  const MODES = { IDLE: 'IDLE', DRILL: 'DRILL', LIVE_TEST: 'LIVE_TEST', PENDING: 'PENDING' };
+  let currentMode = MODES.IDLE;
+  let pendingMode = null; 
+  let confidenceOK = false;
+  const MIN_CONFIDENCE_THRESHOLD = 0.70; 
+
+  // Combo/Attempt State
+  let requiredSequence = [];
+  let currentStepIndex = 0;
+  let attempts = 0;
+  const MAX_ATTEMPTS = 10;
+  let drillScores = []; 
+  
+  // Live Test State
+  let testResults = []; 
+  let attackWindowActive = false;
+  let attackHit = false;
+  let attackTimeout = null;
+  let requiredDefense = null;
+  const LIVE_TEST_ATTACK_TIME_MS = 600;
+  const LIVE_TEST_WAIT_MS = 2000;
+  
+  // Previous keypoints for velocity/detection
+  let prevLeft = null, prevRight = null, prevNose = null, prevLHip = null, prevRHip = null;
+
+  // Punch detection thresholds 
+  const punchCooldown = 300; 
+  const speedThreshold = 0.025; 
+  const minForwardX = 0.005; 
+  
+  const ROTATION_THRESHOLD_RAD = 0.30; 
+  const SLIP_THRESHOLD_X = 0.01; 
+
+  let lastLeftAt = 0, lastRightAt = 0;
+  
+  // Drill Command List (Defensive Combos)
+  const COMMANDS = {
+      "combo_1": { name: "SLIP LEFT, PUNCH (Counter Cross)", sequence: ["slip_left", "punch"] },
+      "combo_2": { name: "SLIP RIGHT, PUNCH (Counter Jab)", sequence: ["slip_right", "punch"] },
+      "combo_3": { name: "SLIP LEFT, PUNCH, PUNCH", sequence: ["slip_left", "punch", "punch"] }, 
+      "combo_4": { name: "SLIP RIGHT, PUNCH, PUNCH", sequence: ["slip_right", "punch", "punch"] }, 
+      "combo_5": { name: "SLIP LEFT, SLIP RIGHT, PUNCH", sequence: ["slip_left", "slip_right", "punch"] }, 
+      "combo_6": { name: "PUNCH, SLIP LEFT, PUNCH", sequence: ["punch", "slip_left", "punch"] }, 
+  };
+
+  // --- Debugging / Error Logging ---
+  function logError(message, source) {
+      const now = new Date().toLocaleTimeString();
+      const entry = `[${now}] [${source}] ${message}`;
+      
+      console.error(entry);
+      errorLogContentEl.textContent = entry + '\n' + errorLogContentEl.textContent;
+      if (errorLogContentEl.textContent.length > 2000) {
+          errorLogContentEl.textContent = errorLogContentEl.textContent.substring(0, 1500) + '\n... [TRUNCATED]';
+      }
+      if (errorLogContentEl.textContent.includes('No errors logged.')) {
+           errorLogContentEl.textContent = entry;
+      }
+  }
+  window.onerror = function(message, source, lineno, colno, error) {
+      logError(`Global: ${message} (Line ${lineno})`, 'WINDOW_ERROR');
+      return true;
+  };
+  
+  // --- Audio Functions (omitted for brevity) ---
+  const synth = window.speechSynthesis;
+  function speak(s) {
+    if (!synth) return;
+    try {
+        const ut = new SpeechSynthesisUtterance(s);
+        ut.rate = 1.05; ut.pitch = 1;
+        synth.speak(ut);
+    } catch(e) {
+        logError(e.message, 'Speech');
+    }
+  }
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function successBeep() { /* ... */ }
+  function failBeep() { /* ... */ }
+  function readyBeep() { /* ... */ }
+  let lastFeedbackAt = 0;
+  function giveFeedback(text, speakIt=false, style='yellow') {
+    const t = now();
+    if (t - lastFeedbackAt < 1000 && currentMode === MODES.IDLE) return;
+    lastFeedbackAt = t;
+    feedbackEl.textContent = text;
+    feedbackEl.style.opacity = 1;
+    
+    if(style === 'success') feedbackEl.style.color = '#00ff7f';
+    else if(style === 'fail') feedbackEl.style.color = '#ff6b6b';
+    else if(style === 'wait') feedbackEl.style.color = '#a0a0a0'; 
+    else feedbackEl.style.color = '#ffeb3b';
+
+    setTimeout(()=> feedbackEl.style.opacity = 0, 2000);
+    if (speakIt) speak(text);
+  }
+  // Simplified beeps (only implementation of successBeep included for context)
+  function successBeep() { 
+    try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const o = audioCtx.createOscillator();
+        o.type = 'triangle'; o.frequency.value = 1000;
+        o.connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime + 0.1);
+    } catch(e) { logError(e.message, 'Audio'); }
+  }
+  function failBeep() { /* ... */ }
+  function readyBeep() { /* ... */ }
+
+  // --- Mode Management (omitted for brevity) ---
+  function startMode(mode) { /* ... */ }
+  function startModeExecution() { /* ... */ }
+  function stopMode() { /* ... */ }
+  function issueCommand() { /* ... */ }
+  function startLiveTestAttack() { /* ... */ }
+  function checkTestComplete(result) { /* ... */ }
+  function handleDetectedAction(detectedAction, actionMeta) { /* ... */ }
+  function checkComboComplete(success) { /* ... */ }
+  
+  // --- Core Pose Analysis (omitted for brevity) ---
+  function analyzePose(kpMap) {
+    try {
+        const lw = kpMap['left_wrist'];
+        const rw = kpMap['right_wrist'];
+        const ls = kpMap['left_shoulder'];
+        const rs = kpMap['right_shoulder'];
+        const nose = kpMap['nose'];
+        const lHip = kpMap['left_hip'];
+        const rHip = kpMap['right_hip'];
+
+        if (!lw || !rw || !ls || !rs || !nose) return {};
+        
+        let leftVel = {x:0,y:0}, rightVel={x:0,y:0};
+        if (prevLeft) { leftVel = { x: lw.x - prevLeft.x, y: lw.y - prevLeft.y }; }
+        if (prevRight) { rightVel = { x: rw.x - prevRight.x, y: rw.y - prevRight.y }; }
+
+        const rotationScore = calculateRotation(ls, rs, lHip, rHip);
+        const techniqueScore = rotationScore;
+        
+        let detectedAction = null;
+        const timestamp = now();
+        let actionMeta = { techniqueScore: techniqueScore };
+        
+        const slipType = checkSlip(nose, lHip, rHip, prevNose, prevLHip, prevRHip);
+        if (slipType && (timestamp - lastLeftAt) > punchCooldown) { 
+            detectedAction = slipType;
+        }
+        
+        // ... Punch detection logic ...
+        if (!detectedAction) {
+            let leftPunch = false, rightPunch = false;
+            // ... (Punch checks using speedThreshold and minForwardX) ...
+            
+            if (leftPunch || rightPunch) {
+                punches++;
+                punchesEl.textContent = punches;
+                detectedAction = 'punch';
+            }
+        }
+        
+        if (detectedAction) {
+            handleDetectedAction(detectedAction, actionMeta);
+        }
+
+        drawOverlay(kpMap, {rotationScore});
+
+        if(lw) prevLeft = {x: lw.x, y: lw.y};
+        if(rw) prevRight = {x: rw.x, y: rw.y};
+        if(nose) prevNose = {x: nose.x, y: nose.y};
+        if(lHip) prevLHip = {x: lHip.x, y: lHip.y};
+        if(rHip) prevRHip = {x: rHip.x, y: rHip.y};
+        
+        return {techniqueScore};
+
+    } catch (e) {
+        logError(e.message, 'AnalyzePose');
+        return {};
+    }
+  }
+  
+  // --- Utility Functions (omitted for brevity) ---
+  function dist(a,b) { return Math.hypot(a.x-b.x, a.y-b.y); }
+  function now() { return performance.now(); }
+  function calculateRotation(ls, rs, lHip, rHip) { /* ... */ return 0; }
+  function checkSlip(nose, lHip, rHip, prevNose, prevLHip, prevRHip) { /* ... */ return null; }
+  
+  function drawOverlay(kpMap, meta) { 
+    try {
+        const w = overlayCanvas.width, h = overlayCanvas.height;
+        overlayCtx.clearRect(0,0,w,h);
+        const VISUAL_SCORE_THRESHOLD = 0.00; 
+        
+        // FIX: Flip the overlay canvas context to match the mirrored video feed
+        overlayCtx.save();
+        overlayCtx.scale(-1, 1);
+        overlayCtx.translate(-w, 0); 
+        
+        // COMPLETED SKELETON DEFINITION (All 17 keypoints connected)
+        const keypointConnectionsMap = [
+          ['left_shoulder', 'right_shoulder'], ['left_shoulder', 'left_elbow'],
+          ['right_shoulder', 'right_elbow'], ['left_elbow', 'left_wrist'],
+          ['right_elbow', 'right_wrist'], ['left_shoulder', 'left_hip'],
+          ['right_shoulder', 'right_hip'], ['left_hip', 'right_hip'],
+          ['left_hip', 'left_knee'], ['left_knee', 'left_ankle'],
+          ['right_hip', 'right_knee'], ['right_knee', 'right_ankle'],
+          ['nose', 'left_eye'], ['nose', 'right_eye'], 
+          ['left_eye', 'left_ear'], ['right_eye', 'right_ear']
+        ];
+        
+        overlayCtx.strokeStyle = 'rgba(0,255,255,0.7)';
+        overlayCtx.lineWidth = 2;
+        for (const [p1Name, p2Name] of keypointConnectionsMap) {
+          const p1 = kpMap[p1Name];
+          const p2 = kpMap[p2Name];
+          // Ensure both points are found and have a score above threshold (0.0 means draw if present)
+          if (p1 && p2 && p1.score > VISUAL_SCORE_THRESHOLD && p2.score > VISUAL_SCORE_THRESHOLD) {
+            overlayCtx.beginPath();
+            overlayCtx.moveTo(p1.x * w, p1.y * h); 
+            overlayCtx.lineTo(p2.x * w, p2.y * h);
+            overlayCtx.stroke();
+          }
+        }
+        overlayCtx.fillStyle = 'rgba(0,255,255,0.8)';
+        for (const k of Object.values(kpMap)) {
+          if (k && k.score > VISUAL_SCORE_THRESHOLD) {
+            overlayCtx.beginPath();
+            overlayCtx.arc(k.x * w, k.y * h, 6, 0, Math.PI*2);
+            overlayCtx.fill();
+          }
+        }
+        if (meta.rotationScore > 0.5) { 
+          overlayCtx.strokeStyle = `rgba(255,255,0, ${meta.rotationScore})`;
+          overlayCtx.lineWidth = 5;
+          overlayCtx.strokeRect(10,10,w-20,h-20);
+        }
+        
+        overlayCtx.restore(); 
+    } catch (e) {
+        logError(e.message, 'DrawOverlay');
+    }
+  }
+
+  // --- Initialization and Run Loop ---
+  async function loadDetector() { 
+    statusEl.textContent = 'loading MoveNet Lightning...';
+    try {
+        // We will try switching to the CPU backend if WebGL is giving trouble on some older/mobile devices.
+        // If this still fails, please uncomment the line below and comment the tf.setBackend('webgl') one.
+        // await tf.setBackend('cpu');
+        await tf.setBackend('webgl'); 
+        
+        const model = poseDetection.SupportedModels.MoveNet;
+        const detectorConfig = {
+          modelType: 'SinglePose.Lightning', 
+          // New: Set model to run on a larger image size (320x320) which can help with distant poses,
+          // though it increases latency slightly.
+          inputResolution: { width: 320, height: 320 }, 
+        };
+        detector = await poseDetection.createDetector(model, detectorConfig);
+        statusEl.textContent = 'model loaded (MoveNet)';
+    } catch (e) {
+        logError(`Model Load Failed: ${e.message}`, 'Init');
+        statusEl.textContent = `LOAD FAILED: ${e.message || 'Unknown error'}`;
+    }
+  }
+
+  async function startCamera() { 
+    const constraints = { 
+      audio: false, 
+      video: { facingMode: "user", width: { ideal: 320 }, height: { ideal: 240 } } 
+    };
+    try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        return new Promise((resolve) => {
+            video.onloadedmetadata = () => {
+                video.play();
+                video.width = video.videoWidth;
+                video.height = video.videoHeight;
+                overlayCanvas.width = video.videoWidth;
+                overlayCanvas.height = video.videoHeight;
+                hiddenCanvas.width = video.videoWidth;
+                hiddenCanvas.height = video.videoHeight;
+                video.setAttribute("playsinline", "true");
+                video.style.transform = "scaleX(-1)"; 
+                resolve();
+            };
+        });
+    } catch (e) {
+        logError(`Camera Start Failed: ${e.message}`, 'Camera');
+        throw e;
+    }
+  }
+
+  async function runFrame() {
+    if (!running) return;
+    if (!detector) { statusEl.textContent = 'Detector not initialized.'; return; }
+    
+    const vw = video.videoWidth; const vh = video.videoHeight;
+    const start = now();
+    let maxScore = 0.0;
+    
+    try {
+      hiddenCtx.save();
+      hiddenCtx.scale(-1, 1);
+      hiddenCtx.drawImage(video, -vw, 0, vw, vh);
+      hiddenCtx.restore();
+      const poses = await detector.estimatePoses(hiddenCanvas, { flipHorizontal: false });
+      const end = now();
+      const numericalLatency = end - start;
+      latencyEl.textContent = `${numericalLatency.toFixed(0)}ms`;
+
+      statusEl.textContent = `running (FPS: ${(1000 / numericalLatency).toFixed(1)})`;
+
+      if (poses && poses.length > 0) {
+        const primaryPose = poses[0];
+        
+        // 1. Calculate Confidence
+        if (primaryPose.keypoints) {
+            const totalScore = primaryPose.keypoints.reduce((sum, k) => sum + k.score, 0);
+            maxScore = totalScore / primaryPose.keypoints.length;
+            if (primaryPose.score && primaryPose.score > maxScore) maxScore = primaryPose.score;
+            
+            if (maxScore >= MIN_CONFIDENCE_THRESHOLD && !confidenceOK) {
+                confidenceOK = true;
+                if (currentMode === MODES.IDLE) { 
+                    speak("Confidence is good. Select your mode!");
+                }
+                if (currentMode === MODES.PENDING) { 
+                    readyBeep();
+                    startModeExecution(); 
+                }
+            } else if (maxScore < MIN_CONFIDENCE_THRESHOLD && confidenceOK) {
+                confidenceOK = false;
+                if (currentMode !== MODES.PENDING && currentMode !== MODES.IDLE) {
+                    stopMode(); 
+                    giveFeedback("Confidence lost. Mode stopped.", true, 'fail');
+                }
+            }
+        }
+        
+        // 2. Map & Normalize Keypoints
+        const pts = primaryPose.keypoints.reduce((map, k) => { map[k.name] = k; return map; }, {});
+        const kpMap = {};
+        for (const k of Object.values(pts)) {
+            // Only normalize if coordinates are valid numbers
+            if (typeof k.x === 'number' && typeof k.y === 'number') {
+                kpMap[k.name] = { x: k.x / vw, y: k.y / vh, score: k.score };
+            }
+        }
+        
+        // 3. Update Nose Debug Status
+        const nose = kpMap['nose'];
+        const noseRaw = pts['nose'];
+
+        if (nose) {
+            // FOUND & VALID: Print Normalized Coordinates
+            nosePosEl.textContent = `${nose.x.toFixed(2)}, ${nose.y.toFixed(2)}`;
+        } else if (noseRaw) {
+            // FOUND RAW, BUT INVALID/SKIPPED: Print Raw Pixel Coords & Score
+            nosePosEl.textContent = `Raw: ${noseRaw.x.toFixed(0)}, ${noseRaw.y.toFixed(0)} (Score: ${noseRaw.score.toFixed(2)})`;
+        } else {
+            // NOT FOUND: Missing Keypoint
+            nosePosEl.textContent = 'MISSING KEYPOINT'; 
+        }
+        
+        // 4. Analyze & Draw
+        analyzePose(kpMap);
+
+      } else {
+        // No poses detected
+        overlayCtx.clearRect(0,0,overlayCanvas.width,overlayCanvas.height);
+        if(confidenceOK) confidenceOK = false;
+        nosePosEl.textContent = 'N/A'; // Clear debug when no pose is found
+      }
+      
+      confidenceEl.textContent = maxScore.toFixed(2);
+      
+    } catch (err) {
+      logError(err.message, 'RunFrame');
+      statusEl.textContent = `CRASH: ${err.message || 'Unknown Error'}`;
+      running = false; 
+    }
+    
+    // ... Control state updates ...
+    const isDrillActive = currentMode === MODES.DRILL || currentMode === MODES.PENDING && pendingMode === MODES.DRILL;
+    const isTestActive = currentMode === MODES.LIVE_TEST || currentMode === MODES.PENDING && pendingMode === MODES.LIVE_TEST;
+
+    startDrillBtn.disabled = !running || isTestActive;
+    drillSelector.disabled = !running || isTestActive;
+    startTestBtn.disabled = !running || isDrillActive;
+
+    if (running) {
+        raf = requestAnimationFrame(runFrame);
+    }
+  }
+
+  // --- Initial Setup and Event Handlers (omitted for brevity) ---
+  
+  function populateDrillSelector() { /* ... */ }
+  populateDrillSelector();
+  
+  // Controls
+  startBtn.onclick = async () => { 
+    startBtn.disabled = true; stopBtn.disabled = false; resetBtn.disabled = false;
+    statusEl.textContent = 'starting camera...';
+    try { await startCamera(); } catch (e) {
+      giveFeedback('Camera error. Ensure permissions are granted.', false, 'fail');
+      startBtn.disabled = false; stopBtn.disabled = true; return;
+    }
+    if (!detector) await loadDetector();
+    if (statusEl.textContent.includes('FAILED')) { startBtn.disabled = false; stopBtn.disabled = true; return; }
+    running = true; confidenceOK = false; 
+    giveFeedback("Adjust your distance until confidence is good.", false, 'wait');
+    video.play(); runFrame();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  };
+
+  stopBtn.onclick = () => { /* ... */ };
+  resetBtn.onclick = () => { /* ... */ };
+  startDrillBtn.onclick = () => { /* ... */ };
+  startTestBtn.onclick = () => { /* ... */ };
+  
+  statusEl.textContent = 'ready';
+})();
+</script>
+</body>
+</html>
