@@ -413,46 +413,7 @@ permalink: NVR-security-camera
 <h3 class="wp-block-heading"><strong>Comparison Table</strong></h3>
 <!-- /wp:heading -->
 
-<style>
-.responsive-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 16px;
-}
-.responsive-table thead {
-  background: #f5f5f5;
-}
-.responsive-table th, 
-.responsive-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-@media (max-width: 768px) {
-  .responsive-table thead {
-    display: none;
-  }
-  .responsive-table tr {
-    display: block;
-    margin-bottom: 15px;
-    border: 1px solid #eee;
-    padding: 10px;
-  }
-  .responsive-table td {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 5px;
-    border: none;
-    border-bottom: 1px solid #eee;
-  }
-  .responsive-table td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    color: #333;
-  }
-}
-</style>
+
 
 <table class="responsive-table">
   <thead>
@@ -502,11 +463,57 @@ permalink: NVR-security-camera
       <td data-label="Product">Hikvision 8-Channel</td>
       <td data-label="Price">Mid-high</td>
       <td data-label="Resolution">4K</td>
-      <td data-label="Key Feature">Enterprise tools</td>
-      <td data-label="Storage">Expandable</td>
-      <td data-label="Best For">Businesses</td>
-    </tr>
-  </tbody>
+      <td data-label="Key <table class="responsive-table">
+<thead>
+<tr>
+  <th>Model</th>
+  <th>Price</th>
+  <th>Resolution</th>
+  <th>Key Feature</th>
+  <th>Storage</th>
+  <th>Best For</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+  <td data-label="Model">Swann 4K NVR</td>
+  <td data-label="Price">High</td>
+  <td data-label="Resolution">4K</td>
+  <td data-label="Key Feature">Face recognition</td>
+  <td data-label="Storage">2 TB</td>
+  <td data-label="Best For">Smart AI alerts</td>
+</tr>
+
+<tr>
+  <td data-label="Model">Lorex 4K Smart Deterrence</td>
+  <td data-label="Price">Mid-high</td>
+  <td data-label="Resolution">4K</td>
+  <td data-label="Key Feature">Spotlight & siren</td>
+  <td data-label="Storage">2 TB</td>
+  <td data-label="Best For">Outdoor security</td>
+</tr>
+
+<tr>
+  <td data-label="Model">Amcrest 4K NVR</td>
+  <td data-label="Price">Budget</td>
+  <td data-label="Resolution">4K</td>
+  <td data-label="Key Feature">Budget AI</td>
+  <td data-label="Storage">Up to 10 TB</td>
+  <td data-label="Best For">Affordable 4K</td>
+</tr>
+
+<tr>
+  <td data-label="Model">Hikvision 8-Channel</td>
+  <td data-label="Price">Mid-high</td>
+  <td data-label="Resolution">4K</td>
+  <td data-label="Key Feature">Enterprise tools</td>
+  <td data-label="Storage">Expandable</td>
+  <td data-label="Best For">Businesses</td>
+</tr>
+
+</tbody>
 </table>
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
