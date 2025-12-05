@@ -409,99 +409,11 @@ permalink: NVR-security-camera
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>Comparison Table</strong></h3>
-<!-- /wp:heading -->
-
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Header 1</th>
-        <th>Header 2</th>
-        <th>Header 3</th>
-        <th>Header 4</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Data 1</td>
-        <td>Data 2</td>
-        <td>Data 3</td>
-        <td>Data 4</td>
-      </tr>
-      <!-- More rows -->
-    </tbody>
-  </table>
-</div>
 
 
 
 
 
-
-
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Resolution</th>
-      <th>Key Feature</th>
-      <th>Storage</th>
-      <th>Best For</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td data-label="Product">Reolink RLK8-800B4</td>
-      <td data-label="Price">Mid-range</td>
-      <td data-label="Resolution">4K</td>
-      <td data-label="Key Feature">AI detection</td>
-      <td data-label="Storage">2 TB</td>
-      <td data-label="Best For">Best overall</td>
-    </tr>
-    <tr>
-      <td data-label="Product">Swann 4K NVR</td>
-      <td data-label="Price">High</td>
-      <td data-label="Resolution">4K</td>
-      <td data-label="Key Feature">Face recognition</td>
-      <td data-label="Storage">2 TB</td>
-      <td data-label="Best For">Smart AI alerts</td>
-    </tr>
-    <tr>
-      <td data-label="Product">Lorex 4K Smart Deterrence</td>
-      <td data-label="Price">Mid-high</td>
-      <td data-label="Resolution">4K</td>
-      <td data-label="Key Feature">Spotlight & siren</td>
-      <td data-label="Storage">2 TB</td>
-      <td data-label="Best For">Outdoor security</td>
-    </tr>
-    <tr>
-      <td data-label="Product">Amcrest 4K NVR</td>
-      <td data-label="Price">Budget</td>
-      <td data-label="Resolution">4K</td>
-      <td data-label="Key Feature">Budget AI</td>
-      <td data-label="Storage">Up to 10 TB</td>
-      <td data-label="Best For">Affordable 4K</td>
-    </tr>
-    <tr>
-      <td data-label="Product">Hikvision 8-Channel</td>
-      <td data-label="Price">Mid-high</td>
-      <td data-label="Resolution">4K</td>
-      <td data-label="Key <table class="responsive-table">
-<thead>
-<tr>
-  <th>Model</th>
-  <th>Price</th>
-  <th>Resolution</th>
-  <th>Key Feature</th>
-  <th>Storage</th>
-  <th>Best For</th>
-</tr>
-</thead>
-
-<tbody>
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
