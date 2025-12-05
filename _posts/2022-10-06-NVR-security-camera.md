@@ -413,10 +413,101 @@ permalink: NVR-security-camera
 <h3 class="wp-block-heading"><strong>Comparison Table</strong></h3>
 <!-- /wp:heading -->
 
-<!-- wp:table {"style":{"border":{"width":"3px"}}} -->
-<figure class="wp-block-table"><table class="has-fixed-layout" style="border-width:3px"><thead><tr><th>Product</th><th>Price</th><th>Resolution</th><th>Key Feature</th><th>Storage</th><th>Best For</th></tr></thead><tbody><tr><td>Reolink RLK8-800B4</td><td>Mid-range</td><td>4K</td><td>AI detection</td><td>2 TB</td><td>Best overall</td></tr><tr><td>Swann 4K NVR</td><td>High</td><td>4K</td><td>Face recognition</td><td>2 TB</td><td>Smart AI alerts</td></tr><tr><td>Lorex 4K Smart Deterrence</td><td>Mid-high</td><td>4K</td><td>Spotlight and siren</td><td>2 TB</td><td>Outdoor security</td></tr><tr><td>Amcrest 4K NVR</td><td>Budget</td><td>4K</td><td>Budget AI</td><td>Up to 10 TB</td><td>Affordable 4K</td></tr><tr><td>Hikvision 8-Channel</td><td>Mid-high</td><td>4K</td><td>Enterprise tools</td><td>Expandable</td><td>Businesses</td></tr></tbody></table></figure>
-<!-- /wp:table -->
+<style>
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+.responsive-table thead {
+  background: #f5f5f5;
+}
+.responsive-table th, 
+.responsive-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .responsive-table thead {
+    display: none;
+  }
+  .responsive-table tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    padding: 10px;
+  }
+  .responsive-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+  .responsive-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #333;
+  }
+}
+</style>
 
+<table class="responsive-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Resolution</th>
+      <th>Key Feature</th>
+      <th>Storage</th>
+      <th>Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Product">Reolink RLK8-800B4</td>
+      <td data-label="Price">Mid-range</td>
+      <td data-label="Resolution">4K</td>
+      <td data-label="Key Feature">AI detection</td>
+      <td data-label="Storage">2 TB</td>
+      <td data-label="Best For">Best overall</td>
+    </tr>
+    <tr>
+      <td data-label="Product">Swann 4K NVR</td>
+      <td data-label="Price">High</td>
+      <td data-label="Resolution">4K</td>
+      <td data-label="Key Feature">Face recognition</td>
+      <td data-label="Storage">2 TB</td>
+      <td data-label="Best For">Smart AI alerts</td>
+    </tr>
+    <tr>
+      <td data-label="Product">Lorex 4K Smart Deterrence</td>
+      <td data-label="Price">Mid-high</td>
+      <td data-label="Resolution">4K</td>
+      <td data-label="Key Feature">Spotlight & siren</td>
+      <td data-label="Storage">2 TB</td>
+      <td data-label="Best For">Outdoor security</td>
+    </tr>
+    <tr>
+      <td data-label="Product">Amcrest 4K NVR</td>
+      <td data-label="Price">Budget</td>
+      <td data-label="Resolution">4K</td>
+      <td data-label="Key Feature">Budget AI</td>
+      <td data-label="Storage">Up to 10 TB</td>
+      <td data-label="Best For">Affordable 4K</td>
+    </tr>
+    <tr>
+      <td data-label="Product">Hikvision 8-Channel</td>
+      <td data-label="Price">Mid-high</td>
+      <td data-label="Resolution">4K</td>
+      <td data-label="Key Feature">Enterprise tools</td>
+      <td data-label="Storage">Expandable</td>
+      <td data-label="Best For">Businesses</td>
+    </tr>
+  </tbody>
+</table>
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
