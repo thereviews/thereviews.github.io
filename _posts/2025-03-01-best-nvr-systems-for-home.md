@@ -15,7 +15,7 @@ permalink: best-nvr-systems-for-home
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">How to Choose the Best NVR Systems for Home</h3>
+<h3 class="wp-block-heading"><strong>How to Choose the Best NVR Systems for Home</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -543,7 +543,7 @@ permalink: best-nvr-systems-for-home
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Conclusion</h3>
+<h3 class="wp-block-heading"><strong>Conclusin</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
@@ -559,7 +559,7 @@ permalink: best-nvr-systems-for-home
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">FAQ</h3>
+<h3 class="wp-block-heading"><strong>FAQ</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:yoast/faq-block {"questions":[{"id":"faq-question-1764966111833","question":["What is the difference between NVR and DVR systems?"],"answer":["NVR uses IP cameras for better image quality, while DVR uses analog cameras and is more limited."],"jsonQuestion":"What is the difference between NVR and DVR systems?","jsonAnswer":"NVR uses IP cameras for better image quality, while DVR uses analog cameras and is more limited."},{"id":"faq-question-1764966137656","question":["Can these NVRs work with third-party cameras?"],"answer":["Most do, especially Amcrest and Hikvision, but always check ONVIF support."],"jsonQuestion":"Can these NVRs work with third-party cameras?","jsonAnswer":"Most do, especially Amcrest and Hikvision, but always check ONVIF support."},{"id":"faq-question-1764966163185","question":["How much storage is enough for a home setup?"],"answer":["For 4K recording, 2 TB usually covers 7–10 days with 4 cameras."],"jsonQuestion":"How much storage is enough for a home setup?","jsonAnswer":"For 4K recording, 2 TB usually covers 7–10 days with 4 cameras."},{"id":"faq-question-1764966201327","question":["Do these systems come with warranties?"],"answer":["Yes, most include a standard one-year warranty with optional extensions."],"jsonQuestion":"Do these systems come with warranties?","jsonAnswer":"Yes, most include a standard one-year warranty with optional extensions."}]} -->
