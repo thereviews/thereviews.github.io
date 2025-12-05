@@ -413,6 +413,32 @@ permalink: NVR-security-camera
 <h3 class="wp-block-heading"><strong>Comparison Table</strong></h3>
 <!-- /wp:heading -->
 
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+        <th>Header 4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Data 1</td>
+        <td>Data 2</td>
+        <td>Data 3</td>
+        <td>Data 4</td>
+      </tr>
+      <!-- More rows -->
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
 
 
 <table class="responsive-table">
@@ -502,18 +528,76 @@ permalink: NVR-security-camera
   <td data-label="Key Feature">Budget AI</td>
   <td data-label="Storage">Up to 10 TB</td>
   <td data-label="Best For">Affordable 4K</td>
-</tr>
+<style>
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+.responsive-table thead {
+  background: #f5f5f5;
+}
+.responsive-table th, 
+.responsive-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .responsive-table thead {
+    display: none;
+<table style="width:100%; border-collapse:collapse; font-size:16px;">
+  <thead>
+    <tr>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Model</th>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Price</th>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Resolution</th>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Key Feature</th>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Storage</th>
+      <th style="padding:12px; border:1px solid #ddd; background:#f5f5f5;">Best For</th>
+    </tr>
+  </thead>
 
-<tr>
-  <td data-label="Model">Hikvision 8-Channel</td>
-  <td data-label="Price">Mid-high</td>
-  <td data-label="Resolution">4K</td>
-  <td data-label="Key Feature">Enterprise tools</td>
-  <td data-label="Storage">Expandable</td>
-  <td data-label="Best For">Businesses</td>
-</tr>
+  <tbody>
 
-</tbody>
+    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Swann 4K NVR</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">High</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Face recognition</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">2 TB</td>
+      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Smart AI alerts</td>
+    </tr>
+
+    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Lorex 4K Smart Deterrence</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Mid-high</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Spotlight & siren</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">2 TB</td>
+      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Outdoor security</td>
+    </tr>
+
+    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Amcrest 4K NVR</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Budget</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Budget AI</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">Up to 10 TB</td>
+      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Affordable 4K</td>
+    </tr>
+
+    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Hikvision 8-Channel</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Mid-high</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Enterprise tools</td>
+      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">Expandable</td>
+      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Businesses</td>
+    </tr>
+
+  </tbody>
 </table>
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
