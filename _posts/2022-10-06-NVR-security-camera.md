@@ -563,42 +563,12 @@ permalink: NVR-security-camera
 
     <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
       <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Swann 4K NVR</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">High</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Face recognition</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">2 TB</td>
-      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Smart AI alerts</td>
-    </tr>
+<div style="overflow-x:auto; width:100%; margin:20px 0;">
+  <table style="width:100%; border-collapse:collapse; min-width:600px;">
+    <thead>
+      <tr>
+        <th style="padding:12px; border:1px solid #ddd;">Product</th>
 
-    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Lorex 4K Smart Deterrence</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Mid-high</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Spotlight & siren</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">2 TB</td>
-      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Outdoor security</td>
-    </tr>
-
-    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Amcrest 4K NVR</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Budget</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Budget AI</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">Up to 10 TB</td>
-      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Affordable 4K</td>
-    </tr>
-
-    <tr style="display:block; margin-bottom:15px; border:1px solid #eee; padding:10px;">
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Model">Hikvision 8-Channel</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Price">Mid-high</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Resolution">4K</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Key Feature">Enterprise tools</td>
-      <td style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;" data-label="Storage">Expandable</td>
-      <td style="display:flex; justify-content:space-between; padding:8px;" data-label="Best For">Businesses</td>
-    </tr>
-
-  </tbody>
-</table>
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
