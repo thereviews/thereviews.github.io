@@ -593,5 +593,4 @@ permalink: best-nvr-systems-for-home
 
 <!-- wp:paragraph -->
 <p></p>
-<!-- /wp:paragraph -->Look for cameras with **infrared (IR) night vision** or **color night vision** for better low-light visibility.
-
+<!-- /wp:paragraph -->
