@@ -53,7 +53,7 @@ permalink: Best-NVR-Poe-Camera-Systems
 <!-- /wp:separator -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">7 Best NVR PoE Camera Systems</h2>
+<h2 class="wp-block-heading">Best NVR PoE Camera Systems</h2>
 <!-- /wp:heading -->
 
 <!-- wp:heading {"level":3} -->
