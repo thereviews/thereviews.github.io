@@ -1,8 +1,8 @@
 ---
-title: "Best PoE NVR Security Camera Systems (2025) "
+title: "7 Best 8 Channel NVR Systems (2025) "
 description: "Top 7 PoE NVR camera systems for home & business. Compare 4K video, AI detection, storage, and reliability to find the best setup fast. "
 date: 2025-12-11
-permalink: Best-Poe-NVR-Security-Camera-Systems 
+permalink: 8-channel-NVR
 ---
 
 Best 8 Channel NVR Systems (2025)
