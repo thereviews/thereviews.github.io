@@ -35,7 +35,7 @@ permalink: NVR-security-camera
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><strong>Best for Busines:</strong> <a href="https://amzn.to/4pAwUXC">Hikvision 8-Channel NVR</a> </li>
+<li><strong>Best for Business:</strong> <a href="https://amzn.to/4pAwUXC">Hikvision 8-Channel NVR</a> </li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -52,7 +52,7 @@ permalink: NVR-security-camera
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">How to Choose the Best NVR Security Cameras</h3>
+<h3 class="wp-block-heading"> <strong> How to Choose the Best NVR Security Cameras </strong>Strong</h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
