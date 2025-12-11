@@ -43,7 +43,7 @@ permalink: NVR-security-camera
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><strong>Best fir Large Areas:</strong> <a href="https://amzn.to/48t5qNA">Dahua 8-Channel NVR</a></li>
+<li><strong>Best for Large Areas:</strong> <a href="https://amzn.to/48t5qNA">Dahua 8-Channel NVR</a></li>
 <!-- /wp:list-item --></ol>
 <!-- /wp:list -->
 
