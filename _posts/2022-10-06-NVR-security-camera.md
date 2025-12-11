@@ -14,7 +14,7 @@ permalink: NVR-security-camera
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">TL;DR</h3>
+<h3 class="wp-block-heading"><strong>TL;DR</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:list {"ordered":true} -->
