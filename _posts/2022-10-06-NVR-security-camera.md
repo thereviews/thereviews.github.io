@@ -35,7 +35,7 @@ permalink: NVR-security-camera
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><strong>Best for Business:</strong> <a href="https://amzn.to/4pAwUXC">Hikvision 8-Channel NVR</a> </li>
+<li><strong>Best for Businesses:</strong> <a href="https://amzn.to/4pAwUXC">Hikvision 8-Channel NVR</a> </li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
