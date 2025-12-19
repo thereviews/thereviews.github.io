@@ -45,7 +45,7 @@ permalink: best-nvr-systems-for-home
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li>Best for <strong>Full Home Coverage:</strong> <a href="https://amzn.to/4rWrebY">ZOSI 8-Channel PoE NVR</a></li>
+<li><strong> Best for Full Home Coverage:</strong> <a href="https://amzn.to/4rWrebY">ZOSI 8-Channel PoE NVR</a></li>
 <!-- /wp:list-item --></ol>
 <!-- /wp:list -->
 
