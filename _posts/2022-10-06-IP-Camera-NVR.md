@@ -14,7 +14,7 @@ permalink: IP-Camera-NVR
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">TL;DR <strong>- Best IP Camera NVRs </strong></h3>
+<h3 class="wp-block-heading"> <Strong>TL;DR - Best IP Camera NVRs </strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:list {"ordered":true} -->
