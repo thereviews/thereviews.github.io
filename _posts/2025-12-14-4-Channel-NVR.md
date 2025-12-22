@@ -21,10 +21,6 @@ permalink: 4-Channel-NVR
 <h2 class="wp-block-heading">TL;DR – Best 4-Channel NVR Systems</h2>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p>Here’s a quick look at the top picks for 4-channel NVR security:</p>
-<!-- /wp:paragraph -->
-
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
 <li><strong>Best Overall:</strong> <strong><a href="https://amzn.to/48Z1Xq9">Reolink RLK4-800B4</a></strong> <strong>-</strong> <strong>Best blend of quality, smart features, and ease of setup</strong></li>
