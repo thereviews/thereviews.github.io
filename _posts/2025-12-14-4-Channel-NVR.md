@@ -18,7 +18,7 @@ permalink: 4-Channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">TL;DR – Best 4-Channel NVR Systems</h2>
+<h2 class="wp-block-heading"> <Strong>TL;DR – Best 4-Channel NVR Systems </Strong>Strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:list -->
