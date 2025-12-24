@@ -173,7 +173,7 @@ permalink: IP-Camera-NVR
 <!-- /wp:separator -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">1. Amcrest 8-Channel IP Camera NVR (Best Overall)</h2>
+<h2 class="wp-block-heading"> <Strong>1. Amcrest 8-Channel IP Camera NVR (Best Overall) </Strong></h2>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
