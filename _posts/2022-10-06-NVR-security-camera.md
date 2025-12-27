@@ -6,6 +6,7 @@ permalink: NVR-security-camera
 ---
 
 
+
 <!-- wp:paragraph -->
 <p>For reliable <a href="http://Thereviews.github.io/best-nvr-systems-for-home">home</a> or business surveillance, a dedicated <a href="http://thereviews.github.io/best-wireless-channel-for-nvr">NVR</a> (Network Video Recorder) system remains the best choice. Unlike cloud-only cameras, NVRs record locally, deliver higher bitrates, and continue operating even during internet outages.</p>
 <!-- /wp:paragraph -->
@@ -667,10 +668,6 @@ permalink: NVR-security-camera
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
 <li>Resolution: 4K</li>
-<!-- /wp:list-item -->
-
-<!-- wp:list-item -->
-<li>Cameras: 8 PoE</li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
