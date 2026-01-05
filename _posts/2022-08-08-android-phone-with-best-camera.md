@@ -5,6 +5,17 @@ date:   2022-08-08
 permalink: Android-with-best-camera
 ---
 
+<!-- Full-width Bootstrap Button -->
+<a href="https://affiliate-link.com" 
+   class="btn btn-primary btn-lg w-100" 
+   target="_blank" 
+   rel="nofollow noopener">
+  Buy Now
+</a>
+
+
+
+
 
 
 
