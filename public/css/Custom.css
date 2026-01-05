@@ -30,3 +30,26 @@
     display: block !important;
 }
 </style>
+
+
+
+/* Fix buttons affected by Poole's global <a> styles */
+a.btn,
+a.btn-primary,
+a.btn-lg,
+a.wp-block-button__link {
+  color: #fff !important;               /* Button text color */
+  background-color: #007bff !important; /* Bootstrap primary color */
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.25rem !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+  text-align: center;
+  width: 100%; /* Full-width example */
+}
+
+a.btn:hover,
+a.wp-block-button__link:hover {
+  background-color: #0056b3 !important;
+  text-decoration: none !important;
+}
