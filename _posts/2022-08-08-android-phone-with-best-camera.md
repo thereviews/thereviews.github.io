@@ -11,6 +11,19 @@ permalink: Android-with-best-camera
 </div>
 
 
+<div class="d-flex align-items-center gap-3 mb-2">
+  <img src="IMAGE_LINK" width="70" class="rounded">
+  <span class="fs-5 fw-semibold">Product Name</span>
+</div>
+
+<div class="d-grid gap-2 my-3">
+  <a href="AFFILIATE_LINK" class="btn btn-primary btn-lg w-100 fw-bold" target="_blank" rel="nofollow noopener">
+    Check it on Amazon
+  </a>
+</div>
+
+
+
 
 
 
