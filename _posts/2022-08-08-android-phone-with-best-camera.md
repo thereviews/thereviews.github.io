@@ -4,14 +4,11 @@ description: "  1.Google pixel 5 Pro: 2. Oneplus 10 Pro : 3. Samsung Galaxy 22 U
 date:   2022-08-08
 permalink: Android-with-best-camera
 ---
-
-<!-- Full-width Bootstrap Button -->
-<a href="https://affiliate-link.com" 
-   class="btn btn-primary btn-lg w-100" 
-   target="_blank" 
-   rel="nofollow noopener">
-  Buy Now
-</a>
+<div class="d-grid gap-2">
+  <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
+    Buy Now
+  </a>
+</div>
 
 
 
