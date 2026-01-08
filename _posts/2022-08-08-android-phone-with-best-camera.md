@@ -5,6 +5,51 @@ date:   2022-08-08
 permalink: Android-with-best-camera
 ---
 
+<!-- Product 1 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4aZqkp2" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- Product 2 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4950jlE" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- Product 3 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4astnG6" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- Product 4 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/3MNSw4r" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- Product 5 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4pe5ANW" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- Product 6 -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/3YClB5d" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+
+
+
 
 
 <table class="table align-middle">
