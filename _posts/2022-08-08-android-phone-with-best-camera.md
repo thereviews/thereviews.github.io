@@ -6,6 +6,7 @@ permalink: Android-with-best-camera
 ---
 
 
+
 <table class="table align-middle">
   <thead>
     <tr>
@@ -15,67 +16,60 @@ permalink: Android-with-best-camera
     </tr>
   </thead>
   <tbody>
-
     <tr>
       <td>Amcrest NV4108-A2</td>
       <td>Best Overall ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
     <tr>
       <td>Hikvision DS-7608NI-M2/8P</td>
-      <td>Professional high-MP systems</td>
+      <td>Professional high-MP ONVIF systems</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
     <tr>
       <td>Hikvision DS-7604NI-Q1/4P</td>
-      <td>Compact smart ONVIF setup</td>
+      <td>Compact smart ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
     <tr>
       <td>TP-Link VIGI NVR1008H</td>
-      <td>Simple home deployment</td>
+      <td>Simple home ONVIF deployments</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
     <tr>
       <td>Uniview NVR301-04X</td>
-      <td>Enterprise alternative</td>
+      <td>Enterprise alternative (RTSP + ONVIF)</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
     <tr>
       <td>Blue Iris</td>
-      <td>Scalable software NVR</td>
+      <td>Most scalable software ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm px-3" target="_blank" rel="nofollow noopener">
+        <a href="https://affiliate-link.com" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
           Check Price on Amazon
         </a>
       </td>
     </tr>
-
   </tbody>
 </table>
 
