@@ -5,6 +5,84 @@ date:   2022-08-08
 permalink: Android-with-best-camera
 ---
 
+<table class="table table-bordered align-middle text-center">
+  <thead>
+    <tr>
+      <th>NVR Model</th>
+      <th>Best For</th>
+      <th>Highlights</th>
+      <th>See Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amcrest NV4108-A2</td>
+      <td>Best Overall Mixed Setup</td>
+      <td>8-ch 4K, ONVIF S/T, H.265, 10TB support, mobile QR setup</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Hikvision DS-7608NI-M2/8P</td>
+      <td>Professional High-MP Systems</td>
+      <td>128 Mbps ingest, up to 32MP/8K, 8 PoE, full ONVIF, expandable HDD</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Hikvision DS-7604NI-Q1/4P</td>
+      <td>Small 4-Cam Smart PoE</td>
+      <td>4K HDMI + VGA, H.265+, 8TB, VCA alerts, Motion 2.0</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>TP-Link VIGI NVR1008H</td>
+      <td>Simple Home PoE</td>
+      <td>8 PoE, 5MP, 10TB, H.265+, 4-cam playback, app control</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Uniview NVR301-04X</td>
+      <td>Enterprise 4-Cam Flex</td>
+      <td>ONVIF S/G/T + RTSP, Ultra 265/H.265/H.264, 8TB, cloud upgrade</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Blue Iris (Software)</td>
+      <td>Max Scalability</td>
+      <td>64 cams, full ONVIF S/T/G, PC storage, automation rules</td>
+      <td>
+        <div class="d-grid">
+          <a href="#" class="btn btn-primary btn-lg">Check Price on Amazon</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
 
 <table class="table table-bordered align-middle">
   <thead>
