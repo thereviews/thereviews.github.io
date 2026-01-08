@@ -4,68 +4,81 @@ description: "  1.Google pixel 5 Pro: 2. Oneplus 10 Pro : 3. Samsung Galaxy 22 U
 date:   2022-08-08
 permalink: Android-with-best-camera
 ---
-<!-- TL;DR Summary Table for Affiliate NVR Post -->
-<table class="table table-bordered align-middle">
+
+
+<table class="table align-middle">
   <thead>
     <tr>
-      <th>Product Name</th>
+      <th>Product</th>
       <th>Best For</th>
-      <th>See Price on Amazon</th>
+      <th>See Price</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Amcrest NV4108-A2</td>
-      <td>Best overall ONVIF NVR</td>
+      <td>Best Overall ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
     <tr>
       <td>Hikvision DS-7608NI-M2/8P</td>
       <td>Professional high-MP ONVIF systems</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
     <tr>
       <td>Hikvision DS-7604NI-Q1/4P</td>
-      <td>Compact smart ONVIF setup</td>
+      <td>Compact smart ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
     <tr>
       <td>TP-Link VIGI NVR1008H</td>
       <td>Simple home ONVIF deployments</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
     <tr>
       <td>Uniview NVR301-04X</td>
-      <td>Enterprise alternative (ONVIF + RTSP)</td>
+      <td>Enterprise alternative (RTSP + ONVIF)</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
     <tr>
-      <td>Blue Iris Software</td>
+      <td>Blue Iris</td>
       <td>Most scalable software ONVIF NVR</td>
       <td>
-        <a href="https://affiliate-link.com" class="btn btn-primary btn-lg w-100" target="_blank" rel="nofollow noopener">
-          See Price
-        </a>
+        <div class="d-grid">
+          <a href="https://affiliate-link.com" class="btn btn-primary btn-lg" target="_blank" rel="nofollow noopener">
+            Check Price on Amazon
+          </a>
+        </div>
       </td>
     </tr>
   </tbody>
