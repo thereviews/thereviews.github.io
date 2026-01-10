@@ -6,11 +6,6 @@ date: 2025-12-31
 permalink: 8-channel-NVR
 ---
 
-
-<!-- wp:separator -->
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-<!-- /wp:separator -->
-
 <!-- wp:paragraph -->
 <p>An 8-channel NVR is the backbone of any scalable IP camera surveillance system, especially for homes, offices, and small commercial sites that need multiple cameras running 24/7. The best 8-channel NVRs deliver high resolutions (up to 4K/8K), PoE convenience on many models, cross-brand camera compatibility, remote access, and flexible local storage using efficient codecs like H.265+. This guide reviews the most reliable 8-channel NVR recorders to help you choose the right one based on ecosystem support, smart detection, bandwidth handling, and overall value.</p>
 <!-- /wp:paragraph -->
@@ -20,12 +15,80 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>TL;DR (Quick Summary)</strong></h3>
+<h3 class="wp-block-heading"><strong>TL;DR: Best 8 Channel NVRs</strong></h3>
 <!-- /wp:heading -->
 
-<!-- wp:table -->
-<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>NVR Model</th><th>Best For</th></tr></thead><tbody><tr><td><strong><a href="https://amzn.to/4pnGbl1">RLN8-410</a></strong></td><td><strong>Best overall</strong></td></tr><tr><td><strong><a href="https://amzn.to/4jtF8yE">DS-7608NXI-K2/8P</a></strong></td><td><strong>Best 8-channel NVR for smart detection</strong></td></tr><tr><td><strong><a href="https://m.media-amazon.com/images/I/61xD2i5DjFL._AC_SL1500_.jpg">PNA-808-S</a></strong></td><td><strong>Best for business reliability </strong></td></tr><tr><td><strong><a href="https://amzn.to/4szRw4i">NVR1108PK-P8</a></strong></td><td><strong>Best PoE Convenience and  long-range cabling</strong></td></tr><tr><td><strong><a href="https://amzn.to/4pVfQvD">EN108P08C-2T</a></strong></td><td><strong>Best value with 2TB storage pre-installed</strong></td></tr><tr><td><strong><a href="https://amzn.to/3YiSKmw">PG108H-8P</a></strong></td><td><strong>Best budget NVR for smart detection</strong></td></tr></tbody></table></figure>
-<!-- /wp:table -->
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:html -->
+<table class="table align-middle">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Best For</th>
+      <th>See Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reolink RLN8-410</td>
+      <td>Best overall 8-channel NVR</td>
+      <td>
+        <a href="https://amzn.to/4pnGbl1" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>Hikvision DS-7608NXI-K2/8P</td>
+      <td>Best 8-channel NVR for smart detection</td>
+      <td>
+        <a href="https://amzn.to/4jtF8yE" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>ONWOTE PNA-808-S</td>
+      <td>Best for business reliability</td>
+      <td>
+        <a href="https://amzn.to/4bt4WbX" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>Seculink NVR1108PK-P8</td>
+      <td>Best PoE convenience & long-range cabling</td>
+      <td>
+        <a href="https://amzn.to/4szRw4i" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>INNOSECU EN108P08C-2T</td>
+      <td>Best value with 2TB storage pre-installed</td>
+      <td>
+        <a href="https://amzn.to/4pVfQvD" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>VIKVIZ PG108H-8P</td>
+      <td>Best budget NVR for smart detection</td>
+      <td>
+        <a href="https://amzn.to/3YiSKmw" class="btn btn-primary btn-sm" target="_blank" rel="nofollow noopener">
+          Check Price on Amazon
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -35,9 +98,43 @@ permalink: 8-channel-NVR
 <h2 class="wp-block-heading"><strong>How to Choose 8-Channel NVR</strong></h2>
 <!-- /wp:heading -->
 
-<!-- wp:table -->
-<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Feature</th><th>What to Look For</th></tr></thead><tbody><tr><td><strong>PoE Ports</strong></td><td>Built-in PoE gives cleaner installation (power + data in one cable) and fewer points of failure</td></tr><tr><td><strong>Resolution Support</strong></td><td>4K (8MP) minimum for crisp footage; 8K (32MP) support if you want future-proofing</td></tr><tr><td><strong>Incoming Bandwidth (Mbps)</strong></td><td>Higher bandwidth (80–128Mbps+) ensures stable recording when using multiple high-bitrate cameras</td></tr><tr><td><strong>Protocols (ONVIF/RTSP/Proprietary)</strong></td><td>ONVIF/RTSP allows mixed-brand IP cameras; proprietary NVRs lock you into one brand</td></tr><tr><td><strong>Compression Codec</strong></td><td>H.265+ or Ultra H.265 reduces storage use by up to 75% while keeping image clarity high</td></tr><tr><td><strong>HDD Bays &amp; Max Capacity</strong></td><td>2× SATA bays with 16–32TB total is ideal for long retention or redundancy; 1 bay works for basic setups</td></tr><tr><td><strong>Remote App &amp; Software</strong></td><td>Look for mobile/desktop clients that are stable, fast, and subscription-free</td></tr><tr><td><strong>24/7 Recording Stability</strong></td><td>Hardware NVRs should handle continuous recording without overheating or dropped frames</td></tr><tr><td><strong>Display Outputs</strong></td><td>HDMI + VGA simultaneous output helps if you plan to monitor on multiple screens</td></tr></tbody></table></figure>
-<!-- /wp:table -->
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>PoE Ports</strong> – Built-in PoE allows cleaner installation by delivering power and data through one Ethernet cable, reducing clutter and failure points.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Resolution Support</strong> – Look for at least <strong>4K (8MP)</strong> support for sharp footage; <strong>8K (32MP)</strong> support is ideal if you want future-proofing.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Incoming Bandwidth (Mbps)</strong> – Higher bandwidth (<strong>80–128 Mbps or more</strong>) ensures stable recording when multiple high-bitrate cameras are connected.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Protocols (ONVIF / RTSP / Proprietary)</strong> – ONVIF/RTSP compatibility lets you use mixed-brand IP cameras, while proprietary systems lock you into one brand.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Compression Codec</strong> – <strong>H.265+ or Ultra H.265</strong> significantly reduces storage usage (up to ~75%) while maintaining image quality.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>HDD Bays &amp; Maximum Capacity</strong> – Dual SATA bays with <strong>16–32TB total capacity</strong> are ideal for long retention or redundancy; a single bay works for basic setups.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Remote App &amp; Software</strong> – Choose an NVR with stable, fast mobile and desktop apps that don’t require paid subscriptions.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>24/7 Recording Stability</strong> – A good hardware NVR should handle continuous recording without overheating or dropping frames.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Display Outputs</strong> – <strong>HDMI + VGA simultaneous output</strong> is useful if you plan to monitor footage on more than one screen.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -47,8 +144,12 @@ permalink: 8-channel-NVR
 <h2 class="wp-block-heading"><strong>Best 8 Channel NVRs</strong></h2>
 <!-- /wp:heading -->
 
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>1. RLN8‑410 8‑Channel PoE NVR (Best Overall)</strong></h3>
+<h3 class="wp-block-heading"><strong>1. Reolink RLN8‑410 8‑Channel PoE NVR (Best Overall)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -64,7 +165,7 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:paragraph -->
-<p>For users invested in the Reolink ecosystem, the <strong>RLN8‑410</strong> delivers a seamless, high-quality 8-camera setup with easy plug-and-play installation. Perfect for homes or small businesses, it supports 4K and high-resolution cameras with intelligent features like human/vehicle/animal detection when paired with Reolink IP cameras.</p>
+<p>For users invested in the Reolink ecosystem, the <strong>Reolink RLN8‑410</strong> delivers a seamless, high-quality 8-camera setup with easy plug-and-play installation. Perfect for homes or small businesses, it supports 4K and high-resolution cameras with intelligent features like human/vehicle/animal detection when paired with Reolink IP cameras.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -146,19 +247,23 @@ permalink: 8-channel-NVR
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>The <strong>RLN8‑410</strong> is ideal for <strong>Reolink users who want a reliable, high-resolution 8-channel NVR with smart detection and easy setup</strong>, offering excellent value for a complete security system.</p>
+<p>The <strong>Reolink RLN8‑410</strong> is ideal for <strong>Reolink users who want a reliable, high-resolution 8-channel NVR with smart detection and easy setup</strong>, offering excellent value for a complete security system.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://amzn.to/4pnGbl1">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4pnGbl1" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>2. DS-7608NXI-K2/8P 8-Channel PoE 4K NVR (Best Smart Detection)</strong></h3>
+<h3 class="wp-block-heading"><strong>2. Hikvision DS-7608NXI-K2/8P 8-Channel PoE 4K NVR (Best Smart Detection)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -174,7 +279,7 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:paragraph -->
-<p>If you want an 8-channel NVR that actually feels <strong>future-proof</strong>, the <strong>DS-7608NXI-K2/8P</strong> brings the heat. It supports 4K recording, advanced camera analytics, and rock-solid PoE connectivity, making it a favorite for installers, smart-home builders, and small commercial sites. The interface isn’t flashy, but the performance is dependable — which is what really matters in a security system you’ll run 24/7.</p>
+<p>If you want an 8-channel NVR that actually feels <strong>future-proof</strong>, the <strong>Hikvision DS-7608NXI-K2/8P</strong> brings the heat. It supports 4K recording, advanced camera analytics, and rock-solid PoE connectivity, making it a favorite for installers, smart-home builders, and small commercial sites. The interface isn’t flashy, but the performance is dependable — which is what really matters in a security system you’ll run 24/7.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -284,19 +389,23 @@ permalink: 8-channel-NVR
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>If you want <strong>sharp 4K recording + smarter motion alerts + clean PoE setup</strong>, this one earns its spot as a top pick.</p>
+<p>If you want <strong>sharp 4K recording, smarter motion alerts, clean PoE setup</strong>, this one earns its spot as a top pick.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://amzn.to/4jtF8yE">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4jtF8yE" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>3. PNA-808-S 8-Channel 4K NVR (Best for Business Reliability)</strong></h3>
+<h3 class="wp-block-heading"><strong>3. ONWOTE PNA-808-S 8-Channel 4K NVR (Best for Business Reliability)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -312,7 +421,7 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:paragraph -->
-<p>Built with <strong>small businesses and commercial users</strong> in mind, the<strong> PNA-808-808-S</strong> is a no-nonsense 8-channel NVR that focuses on recording stability, smooth streaming, and long-term durability. It supports up to 4K/8 MP cameras and uses smart dual-stream tech to keep your live view smooth even when your network gets messy. There’s no built-in AI here, but if reliability is your #1 requirement, this one delivers.</p>
+<p>Built with <strong>small businesses and commercial users</strong> in mind, the <strong>ONWOTE PNA-808-808-S</strong> is a 8-channel NVR that focuses on recording stability, smooth streaming, and long-term durability. It supports up to 4K/8 MP cameras and uses smart dual-stream tech to keep your live view smooth even when your network gets messy. There’s no built-in AI here, but if reliability is your #1 requirement, this one delivers.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -321,7 +430,7 @@ permalink: 8-channel-NVR
 
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
-<li><strong>Channels:</strong> 8 IP camera input (PoE not built-in — cameras powered separately)</li>
+<li><strong>Channels:</strong> 8 IP camera input (PoE not built-in, cameras powered separately)</li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -397,7 +506,7 @@ permalink: 8-channel-NVR
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li>No native AI processing — smart features depend on camera model</li>
+<li>No native AI processing, smart features depend on camera model</li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
@@ -405,16 +514,20 @@ permalink: 8-channel-NVR
 <p>If you’re building a <strong>stable 4K 8-camera system for business or long-term home use</strong>, this NVR is a strong backbone to rely on.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://m.media-amazon.com/images/I/61xD2i5DjFL._AC_SL1500_.jpg">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4bt4WbX" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>4. NVR1108PK-P8 8-Channel PoE NVR (Best PoE Convenience and Long-Range Support)</strong></h3>
+<h3 class="wp-block-heading"><strong>4. Seculink NVR1108PK-P8 8-Channel PoE NVR (Best PoE Convenience and Long-Range Support)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -516,19 +629,24 @@ permalink: 8-channel-NVR
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>The NVR1108PK-P8 is an excellent pick if you want <strong>simple PoE setup, long cable reach, and reliable 8 MP recording</strong> without complexity — great for homes, shops, and small offices alike.</p>
+<p>The Seculink NVR1108PK-P8 is an excellent pick if you want <strong>simple PoE setup, long cable reach, and reliable 8 MP recording</strong> without complexity, great for homes, shops, and small offices alike.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://amzn.to/4szRw4i">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4szRw4i" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><strong>5. EN108P08C-2T 8-Channel 4K PoE NVR (Best Value w/ Pre-Installed 2TB Storage)</strong></h3>
+<h3 class="wp-block-heading"><strong>5. INNOSECU EN108P08C-2T 8-Channel 4K PoE NVR (Best Value w/ Pre-Installed 2TB Storage)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -544,7 +662,7 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:paragraph -->
-<p>The <strong>EN108P08C-2T</strong> is a great choice if you want <strong>solid 4K multi-camera recording with storage already included</strong> out of the box. With 8 built-in PoE ports and a 2TB HDD pre-installed, it delivers a true plug-and-play experience without needing to purchase or install a drive separately. It also supports 8MP recording, remote access, and smart playback, making it a strong all-around pick for budget-conscious home and small-business users.</p>
+<p>The <strong>INNOSECU EN108P08C-2T</strong> is a great choice if you want <strong>solid 4K multi-camera recording with storage already included</strong> out of the box. With 8 built-in PoE ports and a 2TB HDD pre-installed, it delivers a true plug-and-play experience without needing to purchase or install a drive separately. It also supports 8MP recording, remote access, and smart playback, making it a strong all-around pick for budget-conscious home and small-business users.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -654,19 +772,23 @@ permalink: 8-channel-NVR
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>The EN108P08C-2T is an excellent pick if you want <strong>built-in PoE, 4K support, and included storage at a wallet-friendly price</strong>. Perfect for users who want <strong>simplicity + reliability without extra add-ons</strong>.</p>
+<p>The INNOSECU EN108P08C-2T is an excellent pick if you want <strong>built-in PoE, 4K support, and included storage at a wallet-friendly price</strong>. Perfect for users who want <strong>simplicity + reliability without extra add-ons</strong>.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://amzn.to/4pVfQvD">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/4pVfQvD" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
 <!-- /wp:separator -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">6. PG108H-8P 8-Channel 4K PoE NVR (Best Smart Detection on a Budget)</h3>
+<h3 class="wp-block-heading"><strong>6. VIKVIZ PG108H-8P 8-Channel 4K PoE NVR (Best Smart Detection on a Budget)</strong></h3>
 <!-- /wp:heading -->
 
 <!-- wp:separator -->
@@ -682,7 +804,7 @@ permalink: 8-channel-NVR
 <!-- /wp:separator -->
 
 <!-- wp:paragraph -->
-<p>The <strong>PG108H-8P</strong> is a strong budget-friendly 8-channel NVR that delivers <strong>4K recording, built-in PoE, and reliable smart motion alerts</strong> for people and vehicles. It works best with VIKVIZ cameras, includes efficient H.265+ compression, and supports remote viewing via a free app and desktop client. If you want a <strong>simple, powerful system without subscriptions</strong>, this one punches above its price class.</p>
+<p>The <strong>VIKVIZ PG108H-8P</strong> is a strong budget-friendly 8-channel NVR that delivers <strong>4K recording, built-in PoE, and reliable smart motion alerts</strong> for people and vehicles. It works best with VIKVIZ cameras, includes efficient H.265+ compression, and supports remote viewing via a free app and desktop client. If you want a <strong>simple, powerful system without subscriptions</strong>, this one punches above its price class.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -792,12 +914,16 @@ permalink: 8-channel-NVR
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>The <strong>PG108H-8P</strong> is ideal if you want <strong>4K clarity + smart motion alerts + built-in PoE</strong> without overspending. Great for home users and small offices that want <strong>reliable detection and easy remote access on a budget</strong>.</p>
+<p>The <strong>VIKVIZ PG108H-8P</strong> is ideal if you want <strong>4K clarity + smart motion alerts + built-in PoE</strong> without overspending. Great for home users and small offices that want <strong>reliable detection and easy remote access on a budget</strong>.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><strong><a href="https://amzn.to/3YiSKmw">Check Price on Amazon</a></strong></p>
-<!-- /wp:paragraph -->
+<!-- wp:html -->
+<div class="d-flex justify-content-center my-2">
+  <a href="https://amzn.to/3YiSKmw" class="btn btn-primary" style="width:70%;" target="_blank" rel="nofollow noopener">
+    Check Price on Amazon
+  </a>
+</div>
+<!-- /wp:html -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
