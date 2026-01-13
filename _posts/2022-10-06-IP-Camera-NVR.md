@@ -1,7 +1,7 @@
 ---
 title: "7 Best IP Camera NVRs (2026) – 4K, ONVIF, PoE & Mixed-brand Compatibility"
 description: "
-Compare the 7 best IP camera NVRs of 2025 for home and business. See top 4K NVRs with ONVIF support, PoE and mixed-brand compatibility."
+Compare the 7 best IP camera NVRs of 2026 for home and business. See top 4K NVRs with ONVIF support, PoE and mixed-brand compatibility."
 date: 2026-01-13
 permalink: IP-Camera-NVR
 ---
