@@ -724,10 +724,6 @@ permalink: IP-Camera-NVR
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:paragraph -->
-<p>Blue Iris turns a Windows PC into a powerful, flexible NVR capable of handling up to 64 cameras, with advanced automation and third-party AI plugin support.</p>
-<!-- /wp:paragraph -->
-
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading"><strong>Why We Like It</strong></h4>
 <!-- /wp:heading -->
