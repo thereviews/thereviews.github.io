@@ -14,4 +14,4 @@ https://thereviews.github.io/32-NVR-Channel
 thereviews.github.io/64-Channel-NVR
 https://thereviews.github.io/128-Channel-NVR
 https://thereviews.github.io/Cheap-NVR
-https://thereviews.github.io/NVR-Hard-Disks
+https://thereviews.github.io/NVR-Hard-Drives
