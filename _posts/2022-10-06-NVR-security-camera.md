@@ -5,8 +5,6 @@ date: 2026-01-12
 permalink: NVR-security-camera
 ---
 
-
-
 <!-- wp:paragraph -->
 <p>Choosing the right <a href="https://thereviews.github.io/NVR-Recorder">NVR</a> (Network Video Recorder) can feel overwhelming, especially with buzzwords like 4K, PoE, <a href="https://thereviews.github.io/AI-NVR">AI</a> detection, and <a href="https://thereviews.github.io/ONVIF-NVR">ONVIF</a> everywhere.</p>
 <!-- /wp:paragraph -->
@@ -117,7 +115,7 @@ permalink: NVR-security-camera
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li>Look for <strong>expandable HDD support</strong> if you want longer retention</li>
+<li>Look for <strong>expandable <a href="http://thereviews.github.io/NVR-Hard-Drives">HDD</a> support</strong> if you want longer retention</li>
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
