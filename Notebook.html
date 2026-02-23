@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Notebook</title>
+<style>
+  body {
+      font-family: 'Patrick Hand', cursive, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  h1 {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  .notebook {
+      width: 650px;
+  }
+
+  .page {
+      background-color: #fff8dc;
+      border: 1px solid #ccc;
+      border-left: 8px solid #ff6347; /* notebook binding */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 30px 20px;
+      margin-bottom: 20px;
+      min-height: 800px;
+      position: relative;
+      background-image: linear-gradient(to bottom, transparent 95%, #dcdcdc 95%);
+      background-size: 100% 24px;
+      overflow: hidden;
+  }
+
+  .page .header, .page .footer {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      color: #555;
+  }
+
+  .page .header {
+      top: 10px;
+  }
+
+  .page .footer {
+      bottom: 10px;
+  }
+
+  .note {
+      width: 100%;
+      height: 100%;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      outline: none;
+  }
+
+  .controls {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+  }
+
+  button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #ff6347;
+      color: white;
+      transition: background 0.2s;
+  }
+
+  button:hover {
+      background-color: #e5533d;
+  }
+</style>
+</head>
+<body>
+
+<h1>My Web Notebook</h1>
+
+<div class="controls">
+  <button onclick="addPage()">Add New Page</button>
+</div>
+
+<div class="notebook" id="notebook">
+  <!-- Pages will go here -->
+</div>
+
+<script>
+  let pageCount = 0;
+
+  function addPage() {
+      pageCount++;
+      const notebook = document.getElementById('notebook');
+
+      const page = document.createElement('div');
+      page.className = 'page';
+
+      // Header
+      const header = document.createElement('div');
+      header.className = 'header';
+      const date = new Date().toLocaleDateString();
+      header.textContent = `Page ${pageCount} - ${date}`;
+      page.appendChild(header);
+
+      // Editable note area
+      const note = document.createElement('div');
+      note.className = 'note';
+      note.contentEditable = "true";
+      note.textContent = "Write your notes here...";
+      page.appendChild(note);
+
+      // Footer
+      const footer = document.createElement('div');
+      footer.className = 'footer';
+      footer.textContent = `Page ${pageCount}`;
+      page.appendChild(footer);
+
+      notebook.appendChild(page);
+      note.focus();
+  }
+
+  // Add first page automatically
+  addPage();
+</script>
+
+</body>
+</html>
