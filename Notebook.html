@@ -3,137 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Notebook</title>
+<title>Personal Goal & Moment Notebook</title>
 <style>
+  /* Basic Styles */
   body {
       font-family: 'Patrick Hand', cursive, sans-serif;
       background-color: #f0f0f0;
       margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 0;
   }
 
   h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin: 20px 0;
   }
 
-  .notebook {
-      width: 650px;
-  }
-
-  .page {
-      background-color: #fff8dc;
-      border: 1px solid #ccc;
-      border-left: 8px solid #ff6347; /* notebook binding */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 30px 20px;
-      margin-bottom: 20px;
-      min-height: 800px;
-      position: relative;
-      background-image: linear-gradient(to bottom, transparent 95%, #dcdcdc 95%);
-      background-size: 100% 24px;
-      overflow: hidden;
-  }
-
-  .page .header, .page .footer {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
-      color: #555;
-  }
-
-  .page .header {
-      top: 10px;
-  }
-
-  .page .footer {
-      bottom: 10px;
-  }
-
-  .note {
-      width: 100%;
-      height: 100%;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      outline: none;
-  }
-
-  .controls {
-      margin-bottom: 20px;
+  .tabs {
       display: flex;
+      justify-content: center;
       gap: 10px;
+      margin-bottom: 20px;
+  }
+
+  .tabs button {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff6347;
+      color: white;
+      font-weight: bold;
+      transition: 0.2s;
+  }
+
+  .tabs button.active {
+      background-color: #e5533d;
+  }
+
+  .notebook-container {
+      display: flex;
       justify-content: center;
   }
 
-  button {
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: #ff6347;
-      color: white;
-      transition: background 0.2s;
+  .notebook {
+      width: 700px;
   }
 
-  button:hover {
-      background-color: #e5533d;
+  /* Documentation Page */
+  .doc-page, .plan-page {
+      display: none;
   }
+
+  .card {
+      background-color: #fff8dc;
+      border-left: 8px solid #ff6347;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+  }
+
+  .card h3 {
+      margin: 0 0 10px 0;
+  }
+
+  .card .date {
+      font-size: 0.9em;
+      color: #555;
+  }
+
+  .card .edited {
+      font-size: 0.8em;
+      color: #999;
+  }
+
+  .card textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 16px;
+  }
+
+  .card input[type="file"] {
+      margin-top: 5px;
+  }
+
+  /* Planning Page */
+  .question-card {
+      background-color: #d0f0f0;
+      border-left: 8px solid #4da6ff;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .question-card h4 {
+      margin: 0 0 10px 0;
+  }
+
+  .score-input {
+      width: 60px;
+  }
+
+  .score-label {
+      display: inline-block;
+      width: 60px;
+  }
+
+  .summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+  }
+
+  button.add-entry {
+      background-color: #4CAF50;
+      margin-bottom: 20px;
+  }
+
+  button.calculate {
+      background-color: #ff6347;
+  }
+
 </style>
 </head>
 <body>
 
-<h1>My Web Notebook</h1>
+<h1>My Personal Notebook</h1>
 
-<div class="controls">
-  <button onclick="addPage()">Add New Page</button>
+<div class="tabs">
+  <button class="active" onclick="showTab('doc')">Documentation</button>
+  <button onclick="showTab('plan')">Planning</button>
 </div>
 
-<div class="notebook" id="notebook">
-  <!-- Pages will go here -->
+<div class="notebook-container">
+  <div class="notebook">
+
+    <!-- Documentation Page -->
+    <div id="doc" class="doc-page">
+      <button class="add-entry" onclick="addDocEntry()">Add New Entry</button>
+      <div id="doc-entries"></div>
+    </div>
+
+    <!-- Planning Page -->
+    <div id="plan" class="plan-page">
+      <button class="add-entry" onclick="addPlanEntry()">Add New Plan</button>
+      <div id="plan-entries"></div>
+      <button class="calculate" onclick="calculateScores()">Calculate Reality Scores</button>
+      <div class="summary" id="plan-summary"></div>
+    </div>
+
+  </div>
 </div>
 
 <script>
-  let pageCount = 0;
+  // --- Tabs ---
+  function showTab(tab) {
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.doc-page, .plan-page').forEach(page => page.style.display = 'none');
 
-  function addPage() {
-      pageCount++;
-      const notebook = document.getElementById('notebook');
-
-      const page = document.createElement('div');
-      page.className = 'page';
-
-      // Header
-      const header = document.createElement('div');
-      header.className = 'header';
-      const date = new Date().toLocaleDateString();
-      header.textContent = `Page ${pageCount} - ${date}`;
-      page.appendChild(header);
-
-      // Editable note area
-      const note = document.createElement('div');
-      note.className = 'note';
-      note.contentEditable = "true";
-      note.textContent = "Write your notes here...";
-      page.appendChild(note);
-
-      // Footer
-      const footer = document.createElement('div');
-      footer.className = 'footer';
-      footer.textContent = `Page ${pageCount}`;
-      page.appendChild(footer);
-
-      notebook.appendChild(page);
-      note.focus();
+      if(tab === 'doc') {
+          document.getElementById('doc').style.display = 'block';
+          document.querySelector('.tabs button:nth-child(1)').classList.add('active');
+      } else {
+          document.getElementById('plan').style.display = 'block';
+          document.querySelector('.tabs button:nth-child(2)').classList.add('active');
+      }
   }
 
-  // Add first page automatically
-  addPage();
-</script>
+  showTab('doc');
 
+  // --- Documentation Entries ---
+  let docEntries = [];
+
+  function addDocEntry() {
+      const container = document.getElementById('doc-entries');
+      const now = new Date();
+      const dateStr = now.toLocaleDateString();
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.date = dateStr;
+      card.dataset.edited = '';
+
+      card.innerHTML = `
+          <h3>Entry</h3>
+          <div class="date">Date: ${dateStr}</div>
+          <div class="edited"></div>
+          <textarea placeholder="Write your thoughts or moments..."></textarea>
+          <input type="file" accept="image/*" onchange="previewImage(event, this)">
+          <div class="image-preview"></div>
+      `;
+      container.prepend(card);
+
+      docEntries.push(card);
+  }
+
+  function previewImage(event, input) {
+      const reader = new FileReader();
+      reader.onload = function(){
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.style.maxWidth = '100%';
+          input.nextElementSibling.innerHTML = '';
+          input.nextElementSibling.appendChild(img);
+      }
+      if(input.files[0]) reader.readAsDataURL(input.files[0]);
+
+      // mark as edited
+      const card = input.closest('.card');
+      const editedDiv = card.querySelector('.edited');
+      const now = new Date();
+      editedDiv.textContent = 'Edited: ' + now.toLocaleDateString();
+      card.dataset.edited = now.toISOString();
+  }
+
+  // --- Planning Entries ---
+  const questions = [
+      "How satisfied are you with where you are?",
+      "How aligned is your current life with your main goals?",
+      "How balanced is your work-life situation?",
+      "How satisfied are you with your personal growth or learning progress?",
+      "How happy are you with your relationships or social interactions?",
+      "How healthy and energetic do you feel right now?",
+      "How focused are you on achieving your priorities?",
+      "How satisfied are you with your financial situation or resource management?",
+      "How confident do you feel in handling challenges or stress?",
+      "Overall, how happy are you with this quarter's journey so far?"
+  ];
+
+  function addPlanEntry() {
+      const container = document.getElementById('plan-entries');
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      questions.forEach((q,i) => {
+          const qCard = document.createElement('div');
+          qCard.className = 'question-card';
+          qCard.innerHTML = `
+              <h4>Q${i+1}: ${q}</h4>
+              <label class="score-label">Now:</label>
+              <input type="number" class="score-input now" min="0" max="10" placeholder="0-10">
+              <input type="text" class="note-now" placeholder="Note">
+              <br>
+              <label class="score-label">Then:</label>
+              <input type="number" class="score-input then" min="0" max="10" placeholder="0-10">
+              <input type="text" class="note-then" placeholder="Note">
+              <br>
+              <label class="score-label">Reality:</label>
+              <input type="number" class="score-input reality" min="0" max="10" placeholder="0-10">
+              <input type="text" class="note-reality" placeholder="Note">
+          `;
+          card.appendChild(qCard);
+      });
+
+      container.prepend(card);
+  }
+
+  function calculateScores() {
+      const allCards = document.querySelectorAll('#plan-entries .card');
+      let totalDiff = 0;
+      let count = 0;
+
+      allCards.forEach(card => {
+          card.querySelectorAll('.question-card').forEach(qCard => {
+              const then = parseFloat(qCard.querySelector('.then').value) || 0;
+              const reality = parseFloat(qCard.querySelector('.reality').value) || 0;
+              const diff = Math.min(Math.max(reality / (then || 1) * 10, 0), 10);
+              totalDiff += diff;
+              count++;
+          });
+      });
+
+      const avgScore = count ? (totalDiff / count).toFixed(2) : 0;
+      document.getElementById('plan-summary').textContent = "Performance Score: " + avgScore + " / 10";
+  }
+
+</script>
 </body>
-</html>
+  </html>
