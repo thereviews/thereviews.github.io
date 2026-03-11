@@ -659,3 +659,26 @@ border-bottom:1px solid #eee;
 .wp-block-table tr:hover{
 background:#fafafa;
   }
+
+
+
+
+
+
+/* buttons */
+
+.btn-primary{
+background:#ff6a00;
+border:none;
+padding:14px 22px;
+border-radius:10px;
+font-weight:600;
+font-size:16px;
+transition:all .2s ease;
+}
+
+.btn-primary:hover{
+background:#e75d00;
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
