@@ -629,3 +629,33 @@ border-radius:12px;
 box-shadow:0 8px 24px rgba(0,0,0,0.08);
 margin:20px 0;
 }
+
+
+
+
+
+
+/* TLDR */
+
+
+.wp-block-table table{
+width:100%;
+border-collapse:collapse;
+margin:25px 0;
+font-size:16px;
+}
+
+.wp-block-table th{
+background:#f6f8fb;
+padding:14px;
+font-weight:600;
+}
+
+.wp-block-table td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+.wp-block-table tr:hover{
+background:#fafafa;
+  }
