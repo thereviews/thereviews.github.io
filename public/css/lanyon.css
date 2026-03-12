@@ -716,3 +716,11 @@ h4{
 font-size:20px;
 color:#333;
   }
+
+
+
+/* Content Width */
+
+.container{
+max-width:820px;
+}
