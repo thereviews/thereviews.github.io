@@ -682,3 +682,18 @@ background:#e75d00;
 transform:translateY(-2px);
 box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
+
+
+
+
+/* Pros and Cons */
+
+
+.wp-block-list{
+padding-left:20px;
+margin:15px 0;
+}
+
+.wp-block-list li{
+margin-bottom:8px;
+}
