@@ -697,3 +697,22 @@ margin:15px 0;
 .wp-block-list li{
 margin-bottom:8px;
 }
+
+
+
+/* Headings */
+
+  h2{
+font-size:30px;
+border-bottom:2px solid #f1f1f1;
+padding-bottom:8px;
+}
+
+h3{
+font-size:24px;
+}
+
+h4{
+font-size:20px;
+color:#333;
+  }
