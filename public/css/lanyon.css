@@ -667,18 +667,18 @@ background:#fafafa;
 
 /* buttons */
 
-.btn-primary{
-background:#ff6a00;
-border:none;
-padding:14px 22px;
-border-radius:10px;
-font-weight:600;
-font-size:16px;
+.btn.btn-primary{
+background:#ff6a00 !important;
+border:none !important;
+padding:14px 22px !important;
+border-radius:10px !important;
+font-weight:600 !important;
+font-size:16px !important;
 transition:all .2s ease;
 }
 
-.btn-primary:hover{
-background:#e75d00;
+.btn.btn-primary:hover{
+background:#e75d00 !important;
 transform:translateY(-2px);
 box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
