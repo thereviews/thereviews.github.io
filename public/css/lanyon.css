@@ -761,3 +761,17 @@ img{
 max-width:100%;
 height:auto;
 }
+
+
+
+  /* Add Post Meta (Author + Date + Reading Time) */
+
+.post-meta{
+font-size:14px;
+color:#777;
+margin-bottom:15px;
+}
+
+.post-meta span{
+margin-right:10px;
+}
