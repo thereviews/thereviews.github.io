@@ -881,3 +881,52 @@ height:auto;
     scrollbar-width: thin;
     scrollbar-color: #888 #f1f1f1;
 }
+
+
+
+
+
+
+
+/* --- COMPACT SCROLLABLE TABLES --- */
+
+/* 1. The Container: Only scroll if the table is NATURALLY wider than the screen */
+.wp-block-table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1.5rem;
+    scrollbar-gutter: stable; /* Keeps scrollbar from jumping */
+}
+
+/* 2. The Table: Shrink to fit the text instead of pushing out */
+.wp-block-table table {
+    width: auto !important;       /* FIX: Prevents stretching beyond text */
+    min-width: 0 !important;      /* FIX: Removes the forced 600px/100% stretch */
+    margin-left: 0 !important;    /* Keeps it aligned to the left like your text */
+    table-layout: auto !important; 
+    border-collapse: collapse;
+}
+
+/* 3. The Cells: Tighter padding and no forced wrapping */
+.wp-block-table th, 
+.wp-block-table td {
+    white-space: nowrap;         /* Keeps "Product" and "Price" on one line */
+    padding: 10px 12px !important;
+    vertical-align: middle;
+    border: 1px solid #333 !important; /* Matches your dark theme better */
+}
+
+/* 4. Column Specifics: Allow only the "Advantage" column to wrap if long */
+.wp-block-table td:nth-child(3) {
+    white-space: normal !important; 
+    min-width: 150px;
+    max-width: 300px;
+}
+
+/* --- KEEP YOUR BUTTON CODE BELOW THIS --- */
+.wp-block-table td a[href*="amazon.to"],
+.wp-block-table td a[href*="amzn.to"] {
+    /* ... your orange button code here ... */
+}
