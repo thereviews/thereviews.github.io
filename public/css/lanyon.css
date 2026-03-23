@@ -813,3 +813,33 @@ height:auto;
   }
                                 }
 
+
+
+
+
+/* buttons */
+
+
+
+
+/* Target only the Amazon links in your table */
+.wp-block-table td a[href*="amzn.to"], 
+.wp-block-table td a[href*="amazon.to"] {
+    display: block;                  /* Makes the whole button clickable */
+    background-color: #FF9900;       /* Amazon Orange */
+    color: #000 !important;          /* Black text for high contrast */
+    padding: 10px 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;                 /* Slightly smaller to fit mobile */
+    text-decoration: none !important;
+    border-bottom: 2px solid #CC7A00; /* Subtle 3D effect */
+    min-width: 100px;                /* Keeps the button a consistent size */
+}
+
+/* Add a hover/tap effect */
+.wp-block-table td a[href*="amzn.to"]:active {
+    background-color: #e68a00;
+    transform: translateY(1px);      /* Button "press" feel */
+}
