@@ -763,15 +763,3 @@ height:auto;
 }
 
 
-/* read time */
-
-
-.post-meta {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 15px;
-}
-
-.post-meta span {
-  margin-right: 10px;
-}
