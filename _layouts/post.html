@@ -5,14 +5,6 @@ layout: default
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
-
-  
-<div class="post-meta">
-  <span>By <strong>Aden Ahmed</strong></span>
-  <span>• {{ page.date | date: "%B %d, %Y" }}</span>
-  <span>• <span id="reading-time"></span> min read</span>
-</div>
-
   
  {{ content }}
 </div>
