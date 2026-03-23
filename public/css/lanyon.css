@@ -843,3 +843,41 @@ height:auto;
     background-color: #e68a00;
     transform: translateY(1px);      /* Button "press" feel */
 }
+
+
+
+
+
+/* 1. Force the scrollbar area to always take up space */
+.wp-block-table {
+    scrollbar-gutter: stable; /* Prevents layout jump */
+    padding-bottom: 10px;    /* Gives the scrollbar breathing room */
+}
+
+/* 2. Style the Scrollbar for Chrome, Safari, and Samsung Browser */
+.wp-block-table::-webkit-scrollbar {
+    height: 8px;              /* Height of the horizontal bar */
+    display: block !important; /* Force it to show */
+}
+
+.wp-block-table::-webkit-scrollbar-track {
+    background: #f1f1f1;      /* The empty part of the bar */
+    border-radius: 10px;
+}
+
+.wp-block-table::-webkit-scrollbar-thumb {
+    background: #888;         /* The moving "indicator" part */
+    border-radius: 10px;
+    border: 2px solid #f1f1f1; /* Creates padding around the thumb */
+}
+
+/* 3. Make the indicator darker/visible when sliding */
+.wp-block-table::-webkit-scrollbar-thumb:active {
+    background: #555; 
+}
+
+/* 4. Firefox support */
+.wp-block-table {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
