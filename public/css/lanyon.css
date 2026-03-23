@@ -763,3 +763,33 @@ height:auto;
 }
 
 
+
+
+
+
+  /* table */
+
+
+/* 1. Fix the WordPress Figure Wrapper */
+.wp-block-table {
+  margin: 0 0 1rem 0 !important;
+  width: 100% !important;
+  overflow-x: auto !important; /* This creates the scrollbar */
+  display: block !important;
+}
+
+/* 2. Overwrite the "Fixed Layout" from WordPress */
+.wp-block-table table.has-fixed-layout {
+  table-layout: auto !important; /* Allows columns to adjust */
+  min-width: 600px !important;   /* Ensures it doesn't get TOO squished */
+  width: 100% !important;
+}
+
+/* 3. Style the table cells for better mobile reading */
+.wp-block-table td, 
+.wp-block-table th {
+  padding: 10px !important;
+  border: 1px solid #eee !important;
+  font-size: 14px; /* Slightly smaller for mobile density */
+    }
+
