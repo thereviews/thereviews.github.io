@@ -794,6 +794,7 @@ figure.wp-block-table table tbody tr td a[href*="amzn.to"] {
     padding: 12px 20px !important;
     margin-top: 10px !important;
     min-width: 150px !important;
+    margin-bottom: 5px !important;
     
     /* Text Styles */
     font-weight: 700 !important;
