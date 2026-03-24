@@ -779,68 +779,40 @@ height:auto;
 
 
 
+/* --- TABLE-ONLY AMAZON BUTTONS --- */
 
-/* --- AUTOMATIC AMAZON BUTTONS --- */
-
-/* Targets the 'Check Price' links inside your table */
+/* Targets links ONLY if they are inside a table and go to Amazon */
 .wp-block-table td a[href*="amazon.to"], 
 .wp-block-table td a[href*="amzn.to"] {
     display: inline-block !important;
-    background-color: #FF9900 !important; /* Amazon Orange */
-    color: #000 !important;               /* High contrast black text */
-    padding: 6px 16px;
-    margin-top: 8px;                     /* Gap between name and button */
-    border-radius: 25px;                  /* Pill shape from your screenshot */
-    font-weight: bold;
-    font-size: 11px;
+    background-color: #FF9900 !important; /* The bright orange from your screenshot */
+    color: #000000 !important;            /* High-contrast black text */
+    padding: 8px 16px !important;
+    margin-top: 10px !important;
+    border-radius: 25px !important;       /* The rounded pill shape */
+    
+    /* Text styling */
+    font-weight: bold !important;
+    font-size: 13px !important;
     text-decoration: none !important;
-    text-align: center;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
-    white-space: nowrap;                 /* Prevents button text from breaking */
+    text-align: center !important;
+    line-height: 1.2 !important;
+    
+    /* Depth & Polish */
+    border: none !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
+    transition: transform 0.1s ease, background-color 0.2s ease;
 }
 
-/* Button "Press" effect for mobile UX */
-.wp-block-table td a[href*="amazon.to"]:active {
+/* Hover/Press effect specifically for the table button */
+.wp-block-table td a[href*="amazon.to"]:active,
+.wp-block-table td a[href*="amzn.to"]:active {
     background-color: #e68a00 !important;
-    transform: scale(0.96);
+    transform: scale(0.95) !important; /* Visual "click" feel */
 }
 
-/* --- TABLE CLEANUP & MOBILE FIT --- */
-
-/* Prevents the table from stretching beyond the text */
-.wp-block-table table {
-    width: auto !important;
-    min-width: 0 !important;
-    margin-left: 0 !important;
-    border-collapse: collapse;
+/* Optional: Subtle border for the button to make it pop more */
+.wp-block-table td a[href*="amazon.to"] {
+    border: 1px solid #cc7a00 !important;
 }
-
-/* Styling the cells */
-.wp-block-table td {
-    vertical-align: top !important;
-    padding: 12px 10px !important;
-    border-bottom: 1px solid #333 !important; /* Clean dark-mode lines */
-}
-
-/* Ensure the first column is wide enough for the button name */
-.wp-block-table td:first-child {
-    min-width: 155px;
-}
-
-/* Allow the "Advantage" text to wrap so the table stays narrow */
-.wp-block-table td:nth-child(2),
-.wp-block-table td:nth-child(3) {
-    white-space: normal !important;
-    font-size: 13px;
-}
-
-/* Force horizontal scroll ONLY if the screen is super small */
-.wp-block-table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-                               }
 
