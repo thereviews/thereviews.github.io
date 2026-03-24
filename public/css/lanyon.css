@@ -773,43 +773,42 @@ height:auto;
 
 
 
-  */  table link */
+  /*  table link */
 
 
 
 /* --- BRUTE FORCE AMAZON BUTTONS --- */
 
-/* Extremely specific selector to force the theme to show the button */
-figure.wp-block-table table tbody tr td a[href*="amazon.to"], 
-figure.wp-block-table table tbody tr td a[href*="amzn.to"] {
-    /* Create the Box */
+/* --- TABLE AMAZON BUTTONS --- */
+
+/* Targets links ONLY if they are inside a table and go to Amazon */
+.wp-block-table td a[href*="amazon.to"], 
+.wp-block-table td a[href*="amzn.to"],
+.wp-block-table td a[href*="amazon.com"] {
     display: inline-block !important;
     background-color: #FF9900 !important; /* Amazon Orange */
-    padding: 10px 20px !important;
-    margin-top: 12px !important;
-    
-    /* Text Styles */
     color: #000000 !important;            /* Force Black Text */
-    font-weight: 800 !important;          /* Extra Bold */
-    font-size: 14px !important;
+    padding: 8px 16px !important;
+    margin-top: 10px !important;
+    border-radius: 25px !important;       /* Pill shape */
+    
+    /* Text styling */
+    font-weight: bold !important;
+    font-size: 13px !important;
     text-decoration: none !important;
     text-align: center !important;
-    line-height: 1 !important;
+    line-height: 1.2 !important;
     
-    /* Shape and Shadow */
-    border-radius: 50px !important;       /* Perfect Pill Shape */
-    border: 2px solid #cc7a00 !important; /* Darker orange border */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
-    
-    /* Smooth Transition */
-    transition: all 0.2s ease-in-out !important;
+    /* Depth & Polish */
+    border: 1px solid #cc7a00 !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2) !important;
+    transition: transform 0.1s ease, background-color 0.2s ease !important;
     cursor: pointer !important;
 }
 
-/* Hover/Press Effect */
-figure.wp-block-table table tbody tr td a[href*="amzn.to"]:hover,
-figure.wp-block-table table tbody tr td a[href*="amzn.to"]:active {
+/* Hover/Press effect */
+.wp-block-table td a[href*="amazon.to"]:active,
+.wp-block-table td a[href*="amzn.to"]:active {
     background-color: #e68a00 !important;
-    transform: translateY(-2px) !important; /* Slight float effect */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.4) !important;
+    transform: scale(0.95) !important;
 }
