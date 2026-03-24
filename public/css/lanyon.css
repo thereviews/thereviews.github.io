@@ -765,3 +765,82 @@ height:auto;
 
 
 
+
+
+
+
+
+
+
+
+  */  table link */
+
+
+
+
+
+
+/* --- AUTOMATIC AMAZON BUTTONS --- */
+
+/* Targets the 'Check Price' links inside your table */
+.wp-block-table td a[href*="amazon.to"], 
+.wp-block-table td a[href*="amzn.to"] {
+    display: inline-block !important;
+    background-color: #FF9900 !important; /* Amazon Orange */
+    color: #000 !important;               /* High contrast black text */
+    padding: 6px 16px;
+    margin-top: 8px;                     /* Gap between name and button */
+    border-radius: 25px;                  /* Pill shape from your screenshot */
+    font-weight: bold;
+    font-size: 11px;
+    text-decoration: none !important;
+    text-align: center;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    white-space: nowrap;                 /* Prevents button text from breaking */
+}
+
+/* Button "Press" effect for mobile UX */
+.wp-block-table td a[href*="amazon.to"]:active {
+    background-color: #e68a00 !important;
+    transform: scale(0.96);
+}
+
+/* --- TABLE CLEANUP & MOBILE FIT --- */
+
+/* Prevents the table from stretching beyond the text */
+.wp-block-table table {
+    width: auto !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    border-collapse: collapse;
+}
+
+/* Styling the cells */
+.wp-block-table td {
+    vertical-align: top !important;
+    padding: 12px 10px !important;
+    border-bottom: 1px solid #333 !important; /* Clean dark-mode lines */
+}
+
+/* Ensure the first column is wide enough for the button name */
+.wp-block-table td:first-child {
+    min-width: 155px;
+}
+
+/* Allow the "Advantage" text to wrap so the table stays narrow */
+.wp-block-table td:nth-child(2),
+.wp-block-table td:nth-child(3) {
+    white-space: normal !important;
+    font-size: 13px;
+}
+
+/* Force horizontal scroll ONLY if the screen is super small */
+.wp-block-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+                               }
+
