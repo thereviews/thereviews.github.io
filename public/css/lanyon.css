@@ -777,38 +777,41 @@ height:auto;
 
 
 
-/* --- RECTANGULAR AMAZON BUTTONS (Reference Style) --- */
+/* --- MATCHING SAMPLE BUTTON STYLE --- */
 
 figure.wp-block-table table tbody tr td a[href*="amazon.to"], 
 figure.wp-block-table table tbody tr td a[href*="amzn.to"] {
     display: inline-block !important;
-    background-color: #FF9900 !important; /* Amazon Orange */
-    color: #000000 !important;            /* Black text */
     
-    /* THE FIX: Subtle rounding (not a pill) */
+    /* THE COLOR FIX: Matches your sample reddish-orange */
+    background-color: #ff6a00 !important; 
+    color: #ffffff !important;            /* White text to match sample */
+    
+    /* THE SHAPE FIX: Soft rectangle corners */
     border-radius: 5px !important; 
     
-    /* Padding & Size to match reference */
+    /* Sizing & Spacing */
     padding: 12px 20px !important;
-    margin-top: 12px !important;
-    min-width: 140px !important;
+    margin-top: 10px !important;
+    min-width: 150px !important;
     
-    /* Text Styling */
+    /* Text Styles */
     font-weight: 700 !important;
     font-size: 14px !important;
     text-decoration: none !important;
     text-align: center !important;
     line-height: 1 !important;
     
-    /* Subtle Depth */
-    border: 1px solid #e68a00 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    /* Depth & Border */
+    border: 1px solid #e65f00 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
     transition: all 0.2s ease !important;
 }
 
-/* Hover/Tap effect */
-figure.wp-block-table table tbody tr td a[href*="amazon.to"]:active {
-    background-color: #e68a00 !important;
+/* Active/Press effect */
+figure.wp-block-table table tbody tr td a[href*="amazon.to"]:active,
+figure.wp-block-table table tbody tr td a[href*="amzn.to"]:active {
+    background-color: #e65f00 !important;
     transform: translateY(1px) !important;
     box-shadow: none !important;
-}
+  }
