@@ -10,19 +10,6 @@ permalink: ONVIF-Cameras
 <p>ONVIF cameras are the foundation of flexible, brand-independent surveillance systems. Instead of being locked into one ecosystem, they allow you to mix cameras, <a href="https://thereviews.github.io/ONVIF-NVR">NVRs</a>, and software across brands.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:separator -->
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-<!-- /wp:separator -->
-
-<!-- wp:quote -->
-<blockquote class="wp-block-quote"><!-- wp:paragraph -->
-<p><strong>If you’re choosing cameras, check our full guide on <a href="https://thereviews.github.io/ONVIF-Cameras">Best ONVIF Cameras</a> for compatible 4K PoE models with AI detection.</strong></p>
-<!-- /wp:paragraph --></blockquote>
-<!-- /wp:quote -->
-
-<!-- wp:separator -->
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-<!-- /wp:separator -->
 
 <!-- wp:paragraph -->
 <p>This guide is for homeowners and small-to-medium businesses who want PoE cameras with ONVIF compatibility for custom NVR setups (no subscriptions). We focus on what actually matters in real use: image quality, compatibility, reliability, and smart detection.</p>
