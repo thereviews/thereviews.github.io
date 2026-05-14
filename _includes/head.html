@@ -93,6 +93,33 @@
 
 
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"{{ page.title }}",
+  "datePublished":"{{ page.date | date_to_xmlschema }}",
+  "dateModified":"{{ page.date | date_to_xmlschema }}",
+  "author":{
+    "@type":"Organization",
+    "name":"The Reviews"
+  },
+  "publisher":{
+    "@type":"Organization",
+    "name":"The Reviews",
+    "logo":{
+      "@type":"ImageObject",
+      "url":"https://thereviews.github.io/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage":{
+    "@type":"WebPage",
+    "@id":"{{ page.url | absolute_url }}"
+  }
+}
+</script>
+  
+
 
   
 </head>
