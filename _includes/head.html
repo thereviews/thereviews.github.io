@@ -142,5 +142,27 @@
   
 
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "{{ page.title }}",
+  "itemListElement": [
+    {% for p in page.products %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.index }},
+      "name": "{{ p.name }}",
+      "url": "{{ p.url }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+
+
+
   
 </head>
