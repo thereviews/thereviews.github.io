@@ -1,5 +1,5 @@
 ---
-title: "7 Best NVR Security Camera Systems (2026) – 4K, ONVIF & AI Detection "
+title: "7 Best NVR Security Camera Systems (2026) – 4K, AI & ONVIF"
 description: "Discover the 7 best NVR security camera systems for 2026. Compare 4K, ONVIF, AI features for home, business, or outdoor security setups "
 date: 2026-07-18
 permalink: NVR-security-camera
