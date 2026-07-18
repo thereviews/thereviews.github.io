@@ -833,21 +833,20 @@ figure.wp-block-table table tbody tr td a[href*="amazon.to"]:active {
 
 .wp-block-table {
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .wp-block-table table {
   width: 100%;
-  table-layout: auto;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.wp-block-table table.has-fixed-layout {
-  table-layout: auto;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
 .wp-block-table th,
 .wp-block-table td {
   padding: 8px 5px;
   font-size: 14px;
-}
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  }
