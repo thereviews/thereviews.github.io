@@ -834,12 +834,9 @@ figure.wp-block-table table tbody tr td a[href*="amazon.to"]:active {
 .wp-block-table {
     overflow-x: auto;
     display: block;
+    -webkit-overflow-scrolling: touch;
 }
 
 .wp-block-table table {
-    min-width: 600px;
-}
-
-
-
-
+    min-width: 700px;
+  }
