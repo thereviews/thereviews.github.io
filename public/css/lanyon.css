@@ -855,34 +855,14 @@ figure.wp-block-table table tbody tr td a[href*="amazon.to"]:active {
 
 
 
-
-/* TLDR table Amazon buttons */
-
-.wp-block-table table td a[href*="amazon"],
-.wp-block-table table td a[href*="amzn"] {
-
-display:inline-flex !important;
-align-items:center;
-justify-content:center;
-
-background:#ff6a00 !important;
-color:#fff !important;
-
-height:42px !important;
-min-width:150px !important;
-
-padding:0 20px !important;
-
-border-radius:5px !important;
-border:1px solid #e65f00 !important;
-
-font-size:14px !important;
-font-weight:700 !important;
-
-line-height:1 !important;
-text-align:center !important;
-text-decoration:none !important;
-
-white-space:nowrap !important;
-box-sizing:border-box;
+.wp-block-table a {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #0d6efd;
+    color: #fff !important;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
 }
