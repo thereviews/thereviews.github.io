@@ -1,11 +1,11 @@
 ---
 layout: page
-title: About
-description: " The Reviews provides in-depth NVR reviews, surveillance guides, and expert comparisons to help you choose reliable security systems. "
+title: NVR Storage Calculator
+description: " . "
 ---
 
 
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
