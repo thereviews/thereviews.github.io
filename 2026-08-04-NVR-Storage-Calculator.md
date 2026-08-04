@@ -1,7 +1,7 @@
 ---
 layout: page
 title: NVR Storage Calculator
-description: " . "
+description: " Calculate exactly how much NVR storage you need. Estimate HDD size and recording retention based on camera count, resolution, FPS, compression (H.264/H.265), and recording mode."
 ---
 
 
