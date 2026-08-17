@@ -23,6 +23,7 @@ author:
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Custom vars
 version:             1.1.0
