@@ -2,7 +2,7 @@
 title: " 7 Best Network video Recorders (2026) – 4K, PoE, ONVIF & AI Detection "
 description: " Compare the 7 best NVR recorders of 2026 with 4K support, PoE ports & ONVIF compatibility. See which NVR is best for home or business security."
 date: 2026-01-13
-permalink: NVR-Recorder
+permalink: Network-Video-Recorder 
 ---
 
 <!-- wp:paragraph -->
