@@ -4,6 +4,7 @@ description: "
 Discover the best wireless channels for NVRs to ensure smooth video, minimal lag, and reliable home or office security "
 date:   2025-12-06
 permalink: best-wireless-channel-for-nvr
+redirect_destination: https://lenschannel.com/best-wireless-channel-for-nvr/
 ---
 
 <!-- wp:paragraph -->
