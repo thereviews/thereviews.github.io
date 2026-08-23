@@ -23,6 +23,7 @@ author:
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 
 # Custom vars
