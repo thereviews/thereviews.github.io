@@ -4,7 +4,6 @@ description: "
 Compare the 6 best IP camera NVRs of 2026 for home and business. See top 4K NVRs with ONVIF support, PoE and mixed-brand compatibility."
 date: 2026-08-20
 permalink: IP-Camera-NVR
-redirect_to: https://lenschannel.com/ip-camera-nvr/
 ---
 
 
