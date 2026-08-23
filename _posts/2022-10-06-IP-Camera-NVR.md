@@ -5,7 +5,8 @@ Compare the 6 best IP camera NVRs of 2026 for home and business. See top 4K NVRs
 date: 2026-08-20
 permalink: IP-Camera-NVR
 ---
-
+<link rel="canonical" href="https://lenschannel.com/ip-camera-nvr/" />
+<meta http-equiv="refresh" content="0; url=https://lenschannel.com/ip-camera-nvr/" />
 
 
 <!-- wp:paragraph -->
